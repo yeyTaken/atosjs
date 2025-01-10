@@ -5,9 +5,9 @@ export type GiftAmount = unknown;
 export type Gift = {
     id: string;
     isRedeemed: boolean;
-    redeemedCount: number; // Novo campo para contar os resgates
-    maxRedeem: number; // Limite de resgates
-    expiresAt?: string; // ISO 8601 Date format
+    redeemedCount: number; // Número de resgates realizados
+    maxRedeem: number; // Limite de resgates permitidos
+    expiresAt?: string; // Data de expiração em formato ISO 8601
     type?: string;
     amount?: GiftAmount;
 };
@@ -16,7 +16,7 @@ type GenerateOptions = {
     type?: string;
     amount?: GiftAmount;
     expiration?: string; // e.g., '60s', '7d', '10m', '1y'
-    maxRedeem?: number; // Novo campo para definir o número máximo de resgates
+    maxRedeem?: number; // Limite de resgates
 };
 
 type GiftManagerOptions = {
@@ -38,7 +38,7 @@ export class GiftManager {
         const newGift: Gift = {
             id: this.generateUniqueId(),
             isRedeemed: false,
-            redeemedCount: 0, // Inicialmente, 0 resgates
+            redeemedCount: 0,
             maxRedeem,
             expiresAt,
             type,
@@ -52,45 +52,36 @@ export class GiftManager {
 
     public async redeem(giftId: string): Promise<{ success: boolean }> {
         const gift = await this.db.get<Gift>(`gifts.${giftId}`);
-    
+
         if (!gift) return { success: false };
-    
-        // Verificar se o gift expirou
+
         if (gift.expiresAt && new Date(gift.expiresAt) < new Date()) {
             gift.isRedeemed = true;
             await this.db.delete(`gifts.${giftId}`);
-            return { success: false }; // Expirado
+            return { success: false };
         }
-    
-        // Verificar se o número de resgates excedeu o limite
-        if (gift.redeemedCount >= gift.maxRedeem) {
-            return { success: false }; // Excedeu o limite de resgates
+
+        if (gift.redeemedCount >= gift.maxRedeem) return { success: false };
+
+        gift.redeemedCount += 1;
+
+        if (gift.redeemedCount === gift.maxRedeem) {
+            gift.isRedeemed = true;
         }
-    
-        // Se o gift ainda não foi resgatado, marca-o como resgatado
-        if (gift.redeemedCount < gift.maxRedeem) {
-            gift.redeemedCount += 1; // Incrementa o contador de resgates
-            if (gift.redeemedCount === gift.maxRedeem) {
-                gift.isRedeemed = true; // Marca como resgatado quando atingir o limite
-            }
-        }
-    
-        await this.db.set(`gifts.${giftId}`, gift); // Atualiza o gift com o novo contador
-    
+
+        await this.db.set(`gifts.${giftId}`, gift);
         return { success: true };
     }
-    
 
     public async view(giftId: string): Promise<{ valid: boolean; type?: string; amount?: GiftAmount }> {
         const gift = await this.db.get<Gift>(`gifts.${giftId}`);
 
         if (!gift) return { valid: false };
 
-        // Verificar se o gift expirou
         if (gift.expiresAt && new Date(gift.expiresAt) < new Date()) {
             gift.isRedeemed = true;
             await this.db.delete(`gifts.${giftId}`);
-            return { valid: false }; // Expirado
+            return { valid: false };
         }
 
         return {
@@ -102,7 +93,7 @@ export class GiftManager {
 
     private calculateExpirationDate(expiration: string): string {
         const now = new Date();
-        const duration = expiration.match(/^(\d+)([smhdy])$/); // Match e.g., '7d', '10m', '1y'
+        const duration = expiration.match(/^(\d+)([smhdy])$/);
 
         if (!duration) throw new Error('Invalid expiration format. Use formats like 60s, 7d, 10m, 1y.');
 

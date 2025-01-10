@@ -31,33 +31,15 @@ describe('GiftManager', () => {
         expect(gift.amount).toEqual({ id: 1, wallet: { coins: 100, bank: true } });
     });
 
-    test('Deve gerar um gift com limite de resgates', async () => {
-        const giftId = await gm.generate({
-            type: 'coins',
-            amount: 500,
-            maxRedeem: 2, // Definindo um limite de 2 resgates
-        });
+    test('Deve respeitar o limite de resgates', async () => {
+        const giftId = await gm.generate({ type: 'coins', amount: 500, maxRedeem: 2 });
 
-        expect(giftId).toBeDefined();
+        expect(await gm.redeem(giftId)).toEqual({ success: true });
+        expect(await gm.redeem(giftId)).toEqual({ success: true });
+        expect(await gm.redeem(giftId)).toEqual({ success: false });
 
         const gift = await gm.view(giftId);
-        expect(gift.valid).toBe(true);
-        expect(gift.type).toBe('coins');
-        expect(gift.amount).toEqual(500);
-
-        // Resgatar uma vez
-        const redeemResult1 = await gm.redeem(giftId);
-        expect(redeemResult1.success).toBe(true);
-
-        const giftAfterFirstRedeem = await gm.view(giftId);
-        expect(giftAfterFirstRedeem.valid).toBe(true);
-
-        // Resgatar novamente
-        const redeemResult2 = await gm.redeem(giftId);
-        expect(redeemResult2.success).toBe(true);
-
-        const giftAfterSecondRedeem = await gm.view(giftId);
-        expect(giftAfterSecondRedeem.valid).toBe(false); // Não pode resgatar mais após 2 vezes
+        expect(gift.valid).toBe(false);
     });
 
     test('Não deve permitir mais resgates do que o limite', async () => {

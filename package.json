@@ -1,6 +1,6 @@
 {
   "name": "atosjs",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Uma biblioteca NPM escrita em TypeScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,7 +21,6 @@
     "@types/jest": "^29.0.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
-    "better-sqlite3": "^11.7.2",
     "eslint": "^8.0.0",
     "jest": "^29.0.0",
     "mongoose": "^8.9.4",
@@ -33,5 +32,9 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "better-sqlite3": "^11.7.2",
+    "quickdb": "^1.0.5"
+  }
 }

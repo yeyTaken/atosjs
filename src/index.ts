@@ -1,0 +1,1 @@
+export { GiftManager } from './atosJS/GiftManager';

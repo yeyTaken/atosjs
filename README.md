@@ -3,12 +3,11 @@
 
 ---
 
-<h1 align="center">✨ AtosJS ✨</h1>  
+<h1 align="center">🏷️ AtosJS</h1>  
 <h2 align="center">🎁 Um gerenciador de códigos simples, eficiente e poderoso para sistemas de recompensas! 🎯</h2>
 
 ---
 
-<h1 align="center">🏷️ AtosJS</h1>  
 
 AtosJS é um gerenciador de "gifts" fácil de usar, perfeito para sistemas de recompensas, promoções e outros cenários onde a geração, visualização e resgate de códigos é necessária. 🚀  
 
@@ -43,6 +42,7 @@ const giftId = await giftManager.generate({
     type: 'coins',
     amount: 500,
     expiration: '3d', // Expira em 3 dias
+    maxRedeem: 12 // pode ser usado 12 vezes
 });
 console.log(`Código gerado: ${giftId}`);
 ```
@@ -78,17 +78,8 @@ if (result.success) {
 
 - **`type`**: Tipo do gift (ex: "coins", "item").
 - **`amount`**: Valor associado ao gift.
-- **`expiration`**: Tempo de expiração, no formato `10s`, `5m`, `1d`, etc.
-
----
-
-<h2 align="center">✅ Testes</h2>  
-
-Execute os testes com:  
-
-```bash
-npm test
-```
+- **`expiration`**: Tempo de expiração, no formato `60s`, `10m`, `7d`, `1y`.
+- **`maxRedeem`**: Valor máximo de uso.
 
 ---
 
@@ -97,7 +88,6 @@ npm test
 - **Node.js**  
 - **TypeScript**  
 - **quick.db**  
-- **Jest**  
 
 ---
 

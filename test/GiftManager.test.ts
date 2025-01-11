@@ -7,7 +7,7 @@ describe('GiftManager', () => {
     beforeAll(() => {
         gm = new GiftManager({
             fileName: 'test',
-            fileType: 1
+            fileType: 2
         });
     });
 

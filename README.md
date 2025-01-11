@@ -1,4 +1,4 @@
-![npm](https://img.shields.io/npm/v/atosjs) ![license](https://img.shields.io/github/license/yeyTaken/atosjs) ![README_PT](https://img.shields.io/badge/README-PT--BR-blue?logo=github&style=flat-square&link=https://github.com/yeyTaken/atosjs/blob/main/README_PT.md) ![downloads](https://img.shields.io/npm/dt/atosjs) [![GitHub](https://img.shields.io/badge/GitHub-yeyTaken%2Fatosjs-181717?logo=github)](https://github.com/yeyTaken/atosjs)
+![npm](https://img.shields.io/npm/v/atosjs) ![license](https://img.shields.io/github/license/yeyTaken/atosjs) [![README_PT](https://img.shields.io/badge/README-PT--BR-blue?logo=github&style=flat-square)](https://github.com/yeyTaken/atosjs/blob/master/README_PT.md) ![downloads](https://img.shields.io/npm/dt/atosjs) [![GitHub](https://img.shields.io/badge/GitHub-yeyTaken%2Fatosjs-181717?logo=github)](https://github.com/yeyTaken/atosjs)
 ---
 
 <h1 align="center">🏷️ AtosJS</h1>  

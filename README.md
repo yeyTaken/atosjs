@@ -1,113 +1,129 @@
-![npm](https://img.shields.io/npm/v/atosjs) ![license](https://img.shields.io/github/license/yeyTaken/atosjs) ![downloads](https://img.shields.io/npm/dt/atosjs)  
-[![GitHub](https://img.shields.io/badge/GitHub-yeyTaken%2Fatosjs-181717?logo=github)](https://github.com/yeyTaken/atosjs)
-
+![npm](https://img.shields.io/npm/v/atosjs) ![license](https://img.shields.io/github/license/yeyTaken/atosjs) ![README_PT](https://img.shields.io/badge/README-PT--BR-blue?logo=github&style=flat-square&link=https://github.com/yeyTaken/atosjs/blob/main/README_PT.md) ![downloads](https://img.shields.io/npm/dt/atosjs) [![GitHub](https://img.shields.io/badge/GitHub-yeyTaken%2Fatosjs-181717?logo=github)](https://github.com/yeyTaken/atosjs)
 ---
 
 <h1 align="center">🏷️ AtosJS</h1>  
-<h2 align="center">🎁 Um gerenciador de códigos simples, eficiente e poderoso para sistemas de recompensas! 🎯</h2>
+<h2 align="center">🎁 A simple, efficient, and powerful code manager for reward systems! 🎯</h2>
 
 ---
 
+### 📖 About  
 
-AtosJS é um gerenciador de "gifts" fácil de usar, perfeito para sistemas de recompensas, promoções e outros cenários onde a geração, visualização e resgate de códigos é necessária. 🚀  
+**AtosJS** is an easy-to-use library designed for managing "gifts" (reward codes). It’s perfect for promotions, reward systems, and any scenario where you need to generate, view, and redeem codes effectively and efficiently. 🚀  
 
 ---
 
-<h2 align="center">📦 Instalação</h2>  
+### 📦 Installation  
 
-Adicione o AtosJS ao seu projeto com npm ou yarn:  
+Add **AtosJS** to your project using **npm** or **yarn**:  
 
 ```bash
 npm install atosjs
-# ou
+# or
 yarn add atosjs
 ```
 
 ---
 
-<h2 align="center">🛠️ Exemplos de Uso</h2>  
+### 🛠️ Usage Examples  
 
-### 1️⃣ Inicializando o AtosJS  
+#### 1️⃣ Initializing AtosJS  
 
-```typescript
+```js
+const { GiftManager } = require('atosjs');
+// or
 import { GiftManager } from 'atosjs';
 
-const giftManager = new GiftManager({ fileName: 'meuBancoDeGifts' });
-```
-
-### 2️⃣ Gerando um Gift  
-
-```typescript
-const giftId = await giftManager.generate({
-    type: 'coins',
-    amount: 500,
-    expiration: '3d', // Expira em 3 dias
-    maxRedeem: 12 // pode ser usado 12 vezes
+const gm = new GiftManager({
+    fileName: 'gift-test', // the file name to be created.
+    fileType: 2, // the type of file to be created.
 });
-console.log(`Código gerado: ${giftId}`);
+
+/** 
+ * @fileType 1 = .json
+ * @fileType 2 = .yaml
+ * @fileType != 1 or 2 = error
+*/
+
+// This will create a file named gift-test.yaml
 ```
 
-### 3️⃣ Visualizando um Gift  
+#### 2️⃣ Generating a Gift  
 
-```typescript
-const giftDetails = await giftManager.view(giftId);
+```js
+const giftId = await gm.generate({
+    type: 'coins', // gift type
+    value: 500, // reward value
+    expiration: '3d', // expires in 3 days
+    maxRedeem: 12 // can be redeemed 12 times (default: 1)
+});
+
+console.log(`Generated code: ${giftId}`);
+```
+
+#### 3️⃣ Viewing a Gift  
+
+```js
+const giftDetails = await gm.view(giftId);
 console.log(giftDetails);
-// Saída: { valid: true, type: 'coins', amount: 500 }
+// Output: { valid: true, type: 'coins', value: 500 }
 ```
 
-### 4️⃣ Resgatando um Gift  
+#### 4️⃣ Redeeming a Gift  
 
-```typescript
-const result = await giftManager.redeem(giftId);
+```js
+const result = await gm.redeem(giftId);
 if (result.success) {
-    console.log('🎉 Gift resgatado com sucesso!');
+    console.log('🎉 Gift redeemed successfully!');
 } else {
-    console.log('❌ O gift é inválido ou já foi resgatado.');
+    console.log('❌ The gift is invalid or has already been redeemed.');
 }
 ```
 
 ---
 
-<h2 align="center">⚙️ Configurações</h2>  
+### ⚙️ Configurations  
 
-### Opções  
+#### `GiftManager` Options  
 
-- **`fileName`**: Nome do arquivo para armazenamento dos dados (padrão: `gifts`).
+- **`fileName`**: File name for data storage (default: `gifts`).
+- **`fileType`**: File type, can be `.json` or `.yaml`.
 
-### Parâmetros de Geração  
+#### Gift Generation Parameters  
 
-- **`type`**: Tipo do gift (ex: "coins", "item").
-- **`amount`**: Valor associado ao gift.
-- **`expiration`**: Tempo de expiração, no formato `60s`, `10m`, `7d`, `1y`.
-- **`maxRedeem`**: Valor máximo de uso.
+- **`type`**: Gift type (e.g.: `coins`, `item`).
+- **`value`**: Reward value for the gift.
+- **`expiration`**: Expiration time in formats like `60s`, `10m`, `7d`, `1y`.
+- **`maxRedeem`**: Maximum number of allowed redemptions (default: `1`).
 
 ---
 
-<h2 align="center">📚 Tecnologias Utilizadas</h2>  
+### 📚 Technologies Used  
 
 - **Node.js**  
+- **JavaScript**  
 - **TypeScript**  
 - **quick.db**  
 
 ---
 
-<h2 align="center">🤝 Contribuições</h2>  
+### 🤝 How to Contribute  
 
-Contribuições são bem-vindas!  
+Contributions are welcome! Follow these steps to get started:  
 
-1. Faça um fork.  
-2. Crie um branch: `git checkout -b minha-mudanca`.  
-3. Faça um push: `git push origin minha-mudanca`.  
-4. Abra um Pull Request.  
-
----
-
-<h2 align="center">📄 Licença</h2>  
-
-Este projeto está sob a licença [MIT](LICENSE).  
+1. Fork this repository.  
+2. Create a new **branch**: `git checkout -b my-change`.  
+3. Make your changes and **commit**: `git commit -m 'Description of change'`.  
+4. Push to your branch: `git push origin my-change`.  
+5. Open a **Pull Request**.
 
 ---
 
-<h2 align="center">👨‍💻 Autor</h2>  
+### 📄 License  
 
-Criado com 💻 por [yeyTaken](https://github.com/yeyTaken).
+This project is licensed under the [MIT License](LICENSE).  
+
+---
+
+### 👨‍💻 Author  
+
+Created with 💻 by [yeyTaken](https://github.com/yeyTaken) and [Israel R. Jatobá](https://github.com/).

@@ -1,6 +1,6 @@
 import { QuickDB } from 'quick.db';
 
-export type GiftAmount = unknown;
+export type GiftValue = unknown;
 
 export type Gift = {
     id: string;
@@ -9,30 +9,40 @@ export type Gift = {
     maxRedeem: number; // Limite de resgates permitidos
     expiresAt?: string; // Data de expiração em formato ISO 8601
     type?: string;
-    amount?: GiftAmount;
+    value?: GiftValue;
 };
 
 type GenerateOptions = {
     type?: string;
-    amount?: GiftAmount;
+    value?: GiftValue;
     expiration?: string; // e.g., '60s', '7d', '10m', '1y'
     maxRedeem?: number; // Limite de resgates
 };
 
 type GiftManagerOptions = {
     fileName?: string;
+    fileType?: number;
 };
 
 export class GiftManager {
-    private db: QuickDB;
+    private db!: QuickDB;
 
     constructor(options?: GiftManagerOptions) {
         const fileName = options?.fileName || 'gifts';
-        this.db = new QuickDB({ filePath: `${fileName}.json` });
+        const fileType = options?.fileType || 1;
+
+        if (fileType === 1) {
+            this.db = new QuickDB({ filePath: `${fileName}.json` });
+        } else if (fileType === 2) {
+            this.db = new QuickDB({ filePath: `${fileName}.yaml` });
+        } else {
+            throw new Error('Invalid fileType. Use 1 for JSON or 2 for YAML.');
+        }
+
     }
 
     public async generate(options?: GenerateOptions): Promise<string> {
-        const { type, amount, expiration, maxRedeem = 1 } = options || {};
+        const { type, value, expiration, maxRedeem = 1 } = options || {};
         const expiresAt = expiration ? this.calculateExpirationDate(expiration) : undefined;
 
         const newGift: Gift = {
@@ -42,7 +52,7 @@ export class GiftManager {
             maxRedeem,
             expiresAt,
             type,
-            amount,
+            value,
         };
 
         const code = newGift.id;
@@ -73,7 +83,7 @@ export class GiftManager {
         return { success: true };
     }
 
-    public async view(giftId: string): Promise<{ valid: boolean; type?: string; amount?: GiftAmount }> {
+    public async view(giftId: string): Promise<{ valid: boolean; type?: string; value?: GiftValue }> {
         const gift = await this.db.get<Gift>(`gifts.${giftId}`);
 
         if (!gift) return { valid: false };
@@ -87,7 +97,7 @@ export class GiftManager {
         return {
             valid: !gift.isRedeemed && gift.redeemedCount < gift.maxRedeem,
             type: gift.type,
-            amount: gift.amount,
+            value: gift.value,
         };
     }
 
@@ -95,7 +105,7 @@ export class GiftManager {
         const now = new Date();
         const duration = expiration.match(/^(\d+)([smhdy])$/);
 
-        if (!duration) throw new Error('Invalid expiration format. Use formats like 60s, 7d, 10m, 1y.');
+        if (!duration) throw new Error('Formato de expiração inválido. Use formatos como 60s, 7d, 10m, 1y.');
 
         const value = parseInt(duration[1], 10);
         const unit = duration[2];
@@ -117,7 +127,7 @@ export class GiftManager {
                 now.setFullYear(now.getFullYear() + value);
                 break;
             default:
-                throw new Error('Invalid time unit. Use s, d, h, m, or y.');
+                throw new Error('Unidade de tempo inválida. Use s, d, h, m, ou y.');
         }
 
         return now.toISOString();

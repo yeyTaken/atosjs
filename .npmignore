@@ -8,6 +8,7 @@ tsconfig.build.json
 # Ignorar arquivos de teste
 test/
 test.json
+test.yaml
 # Ignorar a pasta node_modules
 node_modules/
 

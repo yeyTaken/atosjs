@@ -13,7 +13,7 @@ describe('GiftManager', () => {
 
     afterEach(async () => {
         // Limpa os dados do banco após cada teste
-        const db = new QuickDB({ filePath: 'test.json' });
+        const db = new QuickDB({ filePath: 'test.yaml' });
         await db.delete('gifts');
     });
 

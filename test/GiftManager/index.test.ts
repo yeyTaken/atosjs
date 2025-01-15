@@ -1,7 +1,14 @@
-import { GiftManager } from '../src';
 import { QuickDB } from 'quick.db';
+import { ErrorMessages } from '../../src/class/GiftManager/errors';
+import { GiftManager } from '../../src';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+// const { GiftManager } = require('../../lib'); // testar a versão buildada
+
+import { describe, expect, beforeAll, afterEach, test } from 'vitest';
 
 describe('GiftManager', () => {
+    // let gm: typeof GiftManager; // versão buildada
     let gm: GiftManager;
 
     beforeAll(() => {
@@ -23,9 +30,9 @@ describe('GiftManager', () => {
                 fileName: 'test',
                 fileType: 3
             });
-        }).toThrow('Invalid fileType. Use 1 for JSON or 2 for YAML.');
+        }).toThrow(ErrorMessages.INVALID_FILE_TYPE);
     });
-    
+
     test('Deve gerar um gift com sucesso', async () => {
         const giftId = await gm.generate({
             type: 'test',
@@ -39,6 +46,18 @@ describe('GiftManager', () => {
         expect(gift.valid).toBe(true);
         expect(gift.type).toBe('test');
         expect(gift.value).toEqual({ id: 1, wallet: { coins: 100, bank: true } });
+    });
+
+    test('Deve gerar um giftId editado com sucesso', async () => {
+        const customCode = 'ABC123EDITED'; // Código personalizado
+    
+        const generatedCode = await gm.generate({
+            edit: {
+                code: customCode, // Força o uso desse código
+            },
+        });
+    
+        expect(generatedCode).toBe(customCode); // Verifica se o código gerado é igual ao enviado
     });
 
     test('Deve respeitar o limite de resgates', async () => {

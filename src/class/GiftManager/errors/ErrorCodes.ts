@@ -1,0 +1,4 @@
+export enum ErrorCodes {
+  INVALID_FILE_TYPE = 'INVALID_FILE_TYPE',
+  INVALID_TIME_UNIT = 'INVALID_TIME_UNIT'
+}

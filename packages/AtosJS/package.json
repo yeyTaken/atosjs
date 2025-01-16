@@ -1,0 +1,52 @@
+{
+  "name": "atosjs",
+  "version": "2.0.0",
+  "description": "Uma biblioteca NPM escrita em TypeScript",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "start": "tsc -p tsconfig.build.json && vitest",
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -w",
+    "test": "vitest",
+    "lint": "eslint . --ext .ts",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yeyTaken/atosjs.git"
+  },
+  "keywords": [
+    "gift",
+    "reward",
+    "GiftManager",
+    "TimeFormat",
+    "timer",
+    "time",
+    "api",
+    "client",
+    "node"
+  ],
+  "author": "Rabi",
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^11.7.2",
+    "quick.db": "^9.1.7"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitest/ui": "^2.1.8",
+    "eslint": "^8.0.0",
+    "mongoose": "^8.9.4",
+    "mysql2": "^3.12.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.8"
+  },
+  "files": [
+    "lib"
+  ]
+}

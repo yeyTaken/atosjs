@@ -1,0 +1,147 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: var(--color-paper);
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100%;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.sidebar.visible {
+  transform: translateX(0);
+}
+
+.sidebar-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.sidebar-text {
+  color: var(--color-text);
+  font-size: 22px;
+  margin-left: 10px;
+}
+
+/* Navigation Links */
+.nav-links {
+  list-style: none;
+  padding-top: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.nav-links li {
+  width: 100%;
+}
+
+.nav-links li a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  background-color: var(--color-primary-contrast);
+  color: var(--color-text);
+}
+
+/* Dividers */
+.divider {
+  border: none;
+  height: 1px;
+  background-color: var(--color-primary-contrast);
+  margin: 15px 0;
+  width: 100%;
+}
+
+/* Popup */
+.popup {
+  position: fixed;
+  top: 20px;
+  right: 0;
+  background-color: var(--color-primary-contrast);
+  color: var(--color-text);
+  padding: 10px;
+  border-radius: 5px 0px 0px 5px;
+  z-index: 9999;
+  animation: slideInRight 1s ease-in-out, stay 3s ease-in-out 1s, slideOutRight 1s ease-in-out 4s forwards;
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup span {
+  display: flex;
+  align-items: center;
+}
+
+.popup span svg {
+  margin-right: 8px;
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes stay {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    padding-top: 60px;
+    display: block;
+    position: fixed;
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar {
+    transform: translateX(0);
+    top: 0;
+  }
+}

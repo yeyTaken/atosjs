@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+
+:root {
+  /* Catppuccin Color Palette */
+  --color-background: #2e2b2b;    /* Cor de fundo (tom de café - Machiato) */
+  --color-text: #f1e2e6;          /* Cor principal para o texto */
+  --color-accent: #f6c7a1;        /* Cor de destaque suave (bege claro) */
+  --color-muted: #6e6b6b;         /* Cor para elementos menos importantes */
+  --color-surface: #3b3535;       /* Fundo para componentes ou áreas secundárias */
+  --color-border: #b29e8e;        /* Cor de borda para elementos */
+  --color-highlight: #e8bca6;     /* Cor para destaque interativo */
+  
+  /* Para links */
+  --color-link: #f6c7a1;          /* Cor dos links */
+  --color-link-hover: #f1e2e6;    /* Cor dos links ao passar o mouse */
+  
+  /* Cores para cards ou seções específicas */
+  --color-card-background: #4a4242;
+  --color-card-border: #b29e8e;
+}
+
+body {
+  padding-left: 280px;
+  margin: 0;
+  font-family: 'Comic Neue', cursive;
+  color: var(--color-text);
+  background: var(--color-background);
+}
+
+/* Links */
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-link-hover);
+}
+
+/* Cards */
+.card {
+  background-color: var(--color-card-background);
+  color: var(--color-text);
+  padding: 20px;
+  margin: 15px;
+  border-radius: 8px;
+  border: 1px solid var(--color-card-border);
+}
+
+.card h3 {
+  color: var(--color-accent);
+}
+
+/* Texto de parágrafos */
+p {
+  color: var(--color-muted);
+}
+
+/* Destaque de fundo em uma seção */
+.highlight {
+  background-color: var(--color-highlight);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Barra lateral */
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+.sidebar h1 {
+  color: var(--color-accent);
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.sidebar-links {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar-links li {
+  margin: 15px 0;
+}
+
+.sidebar-links a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.sidebar-links a:hover {
+  color: var(--color-accent);
+}

@@ -16,17 +16,17 @@
 </div>
 
 ## About
-AtosJS is a powerful and easy-to-use package, built with [Node.js](website-nodejs), and supporting ESLint to ensure proper import usage. It offers useful systems for daily tasks, optimizing your workflow. Visit the [website](website).
+AtosJS is a powerful and easy-to-use package, built with [Node.js](https://nodejs.org/), and supporting ESLint to ensure proper import usage. It offers useful systems for daily tasks, optimizing your workflow. Visit the [website](https://atosjs.website/).
 
 ## Classes
 - `GiftManager` Is a tools for creating, managing, and redeeming reward codes  integrated with APIs like Discord Bot. It facilitates community engagement.
 - `TimeFormat` Is a class for scheduling and repeating task at specific intervals or times.
 
 ## Links
-- AtosJS [website](website) Oficial.
-- [Documentation](website-docs)
-- AtosJS [guide](website-guide)
-- [npm](npm), latest version: `1.1.3`
+- AtosJS [website](https://atosjs.website/) Oficial.
+- [Documentation](https://github.com/yeyTaken/atosjs)
+- AtosJS [guide](https://atos.js.org/guide/version/latest)
+- [npm](https://www.npmjs.com/package/atosjs), latest version: `1.1.3`
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true"></img>
@@ -41,10 +41,3 @@ AtosJS is a powerful and easy-to-use package, built with [Node.js](website-nodej
     <img src="https://img.shields.io/github/license/yeyTaken/atosjs?style=for-the-badge&color=b7bdf8" />
   </a>
 </p>
-
-
-[website]: https://atosjs.website/
-[website-guide]: https://atosjs.website/guide/v/latest
-[website-docs]: https://github.com/yeyTaken/atosjs
-[website-nodejs]: https://nodejs.org/
-[npm]: https://www.npmjs.com/package/atosjs

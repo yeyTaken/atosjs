@@ -54,31 +54,36 @@
   border: 2px solid transparent;
 }
 
-.docs {
+.guide {
   background-color: var(--color-primary-contrast);
   border-color: var(--color-primary);
 }
 
-.guide, .github {
-  border-color: #4b5563; /* dark neutral-700 border */
-}
-
-.button:hover {
-  background-color: #374151; /* dark background on hover */
-}
-
-.docs:hover {
-  background-color: var(--color-primary); /* blurple background on hover */
-}
-
 .guide:hover {
-  background-color:rgb(41, 38, 38); /* light grey on hover for guide */
+  background-color: var(--color-primary);
+}
+
+.github, .donate {
+  border-color: #4b5563; /* dark neutral-700 border */
 }
 
 .github:hover {
   background-color: rgb(41, 38, 38); /* light grey on hover for github */
 }
 
+.donate {
+  border-color: #e63946;
+}
+
+.donate:hover {
+  background-color: #e63946;
+}
+
 svg {
   margin-left: 8px;
 }
+
+.lucide-heart {
+  stroke: #fff;
+}
+

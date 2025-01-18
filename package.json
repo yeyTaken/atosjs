@@ -1,0 +1,37 @@
+{
+  "name": "atosjs",
+  "version": "1.0.0",
+  "description": "AtosJS, It´s a complex and adventure-filled book!",
+  "scripts": {
+    "global:test": "vitest",
+
+    "atosjs": "npm i ./packages/AtosJS && vitest ./packages/AtosJS",
+    "atosjs:test": "vitest ./packages/AtosJS"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yeyTaken/atosjs.git"
+  },
+  "keywords": [
+    "gift",
+    "reward",
+    "GiftManager",
+    "TimeFormat",
+    "timer",
+    "time",
+    "api",
+    "client",
+    "node"
+  ],
+  "author": "Rabi",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.10.7",
+    "vitest": "^3.0.2"
+  },
+  "dependencies": {
+    "atosjs": "file:packages/AtosJS",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  }
+}

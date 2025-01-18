@@ -1,19 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-text: #ffffff;
+  --color-text-paragraph: #D4D4D4;
+  --color-error: #ff6557;
+  --color-paper: #333333;
+  --color-primary: #1a1a2e;
+  --color-background: #0e0d0d;
+  --color-primary-contrast: #121647;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* body */
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: 'Comic Neue', cursive;
+  color: var(--color-text);
+  background: var(--color-background);
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 10px;
+  border: 3px solid var(--color-paper);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-primary-contrast);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--color-paper);
 }

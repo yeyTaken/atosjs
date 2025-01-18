@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+.atosjs {
+    padding: 48px 32px 64px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.atosjs h1 {
+  font-size: 75px;
+  font-family: 'GeistSans', 'GeistSans Fallback', sans-serif;
+  z-index: 10;
+  line-height: 1.25;
+}
+
+.atosjs h1 span {
+  background-color: var(--color-primary-contrast);
+  border-radius: 0.375rem;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  color: white;
+}
+
+.atosjs p {
+  color: var(--color-text-paragraph);
+  font-size: 16px;
+  font-family: 'GeistSans', 'GeistSans Fallback', sans-serif;
+  z-index: 10;
+  line-height: 1.25;
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  text-decoration: none;
+  background-color: transparent;
+  color: white;
+  border: 2px solid transparent;
+}
+
+.docs {
+  background-color: var(--color-primary-contrast);
+  border-color: var(--color-primary);
+}
+
+.guide, .github {
+  border-color: #4b5563; /* dark neutral-700 border */
+}
+
+.button:hover {
+  background-color: #374151; /* dark background on hover */
+}
+
+.docs:hover {
+  background-color: var(--color-primary); /* blurple background on hover */
+}
+
+.guide:hover {
+  background-color:rgb(41, 38, 38); /* light grey on hover for guide */
+}
+
+.github:hover {
+  background-color: rgb(41, 38, 38); /* light grey on hover for github */
+}
+
+svg {
+  margin-left: 8px;
+}

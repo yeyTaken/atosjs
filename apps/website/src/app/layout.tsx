@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AtosJS - Guide",
-  description: "guide for AtosJS.",
+  title: "AtosJS",
+  description: "AtosJS, It´s a complex and adventure-filled book!",
 };
 
 export default function RootLayout({

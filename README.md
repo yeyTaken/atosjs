@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://i.imgur.com/giy9KEe.png" width="456" alt="AtosJS"></img>
-
+  
   <p>
   <!-- AtosJS badges -->
   <a href="https://www.npmjs.com/package/atosjs">

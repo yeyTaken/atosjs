@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/guide/:path",
-            "destination": "https://atosjs-guide.vercel.app/:path"
+            "destination": "https://atosjs-guide.vercel.app/guide/:path*"
         }
     ]
 }

@@ -93,7 +93,7 @@ export default function Home() {
       <div className="button-container">
         <a
           className="button guide"
-          href="/guide/version/latest"
+          href="https://atosjs-guide/guide/version/latest"
           rel="noopener noreferrer"
           target="_blank"
         >

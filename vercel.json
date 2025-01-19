@@ -1,0 +1,16 @@
+{
+    "projects": {
+        "guide": "apps/guide",
+        "website": "apps/website"
+    },
+    "rewrites": [
+        {
+            "source": "/guide/:path*",
+            "destination": "/guide/:path*"
+        },
+        {
+            "source": "/:path*",
+            "destination": "/website/:path*"
+        }
+    ]
+}

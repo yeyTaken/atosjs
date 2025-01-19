@@ -31,7 +31,7 @@ export default function Home() {
 
           setTimeout(() => {
             setPopupVisible(false);
-          }, 3000);
+          }, 5500);
         })
         .catch((error) => {
           console.error("Failed to copy text: ", error);

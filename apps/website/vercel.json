@@ -1,8 +1,0 @@
-{
-    "redirects": [
-        {
-            "source": "/guide/:path*",
-            "destination": "https://atosjs-guide.vercel.app/:path*"
-        }
-    ]
-}

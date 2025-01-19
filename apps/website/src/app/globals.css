@@ -4,13 +4,14 @@
 
 :root {
   --color-text: #ffffff;
-  --color-text-paragraph: #D4D4D4;
+  --color-text-paragraph: #bebcbc;
   --color-error: #ff6557;
-  --color-paper: #333333;
+  --color-paper: #1e1f22;
   --color-primary: #1a1a2e;
-  --color-background: #0e0d0d;
+  --color-background: #171718;
   --color-primary-contrast: #121647;
 }
+
 
 /* body */
 body {

@@ -1,61 +1,84 @@
 "use client";
 
-import { useEffect } from "react";
+import { JSX, useState } from "react";
+import { LuCopy, LuCheck } from "react-icons/lu";
+
 import "../../public/home.css";
 
 export default function Home() {
-  useEffect(() => {
-    let currentCommand = "npm install atosjs@latest";
-    const copyIcon = document.getElementById("copy-icon");
+  const [activeButton, setActiveButton] = useState("npm");
+  const [copyClicked, setCopyClicked] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
 
-    function showCommand(tool: string) {
-      const buttons = document.querySelectorAll(".tab-bar button");
-      buttons.forEach((button) => button.classList.remove("active"));
+  const showCommand = (tool: string) => {
+    setActiveButton(tool);
+  };
 
-      const commands: Record<string, string> = {
-        npm: '<span class="command">npm</span> <span class="option">install</span> <span class="package">atosjs@latest</span>',
-        yarn: '<span class="command">yarn</span> <span class="option">add</span> <span class="package">atosjs@latest</span>',
-        pnpm: '<span class="command">pnpm</span> <span class="option">add</span> <span class="package">atosjs@latest</span>',
-        bun: '<span class="command">bun</span> <span class="option">add</span> <span class="package">atosjs@latest</span>',
-      };
+  const handleCopyClick = () => {
+    const commandText = getCommandText(activeButton);
 
-      const codeBox = document.querySelector(".code-box");
-      if (codeBox) {
-        codeBox.innerHTML = `
-          <div class="language">sh</div>
-          ${commands[tool]}
-        `;
-      }
+    if (commandText) {
+      navigator.clipboard.writeText(commandText)
+        .then(() => {
+          setPopupMessage(`Copied ${activeButton} command`);
+          setPopupVisible(true);
+          setCopyClicked(true);
 
-      currentCommand = `${tool} ${tool === "npm" ? "install" : "add"} atosjs@latest`;
-
-      const activeButton = document.querySelector(
-        `button[onclick="showCommand('${tool}')"]`
-      );
-      if (activeButton) activeButton.classList.add("active");
-    }
-
-    function copyCommand() {
-      navigator.clipboard.writeText(currentCommand).then(() => {
-        if (copyIcon) {
-          copyIcon.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path fill="#28a745" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-            </svg>
-          `;
           setTimeout(() => {
-            copyIcon.innerHTML = `
-              <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-            `;
-          }, 2000);
-        }
-      });
-    }
+            setCopyClicked(false);
+          }, 3000);
 
-    // Attach functions to the window object so they can be used in the DOM
-    (window as Window & typeof globalThis).showCommand = showCommand;
-    (window as Window & typeof globalThis).copyCommand = copyCommand;
-  }, []);
+          setTimeout(() => {
+            setPopupVisible(false);
+          }, 3000);
+        })
+        .catch((error) => {
+          console.error("Failed to copy text: ", error);
+        });
+    }
+  };
+
+  const getCommandText = (tool: string) => {
+    const commands: Record<string, string> = {
+      npm: "npm install atosjs@latest",
+      yarn: "yarn add atosjs@latest",
+      pnpm: "pnpm add atosjs@latest",
+      bun: "bun add atosjs@latest",
+    };
+    return commands[tool];
+  };
+
+  const getCommandJSX = (tool: string) => {
+    const commands: Record<string, JSX.Element[]> = {
+      npm: [
+        <span key="dollarSign">$ </span>,
+        <span key="command" className="command">npm </span>,
+        <span key="option" className="option">install </span>,
+        <span key="package" className="package">atosjs@latest</span>
+      ],
+      yarn: [
+        <span key="dollarSign">$ </span>,
+        <span key="command" className="command">yarn </span>,
+        <span key="option" className="option">add </span>,
+        <span key="package" className="package">atosjs@latest</span>
+      ],
+      pnpm: [
+        <span key="dollarSign">$ </span>,
+        <span key="command" className="command">pnpm </span>,
+        <span key="option" className="option">add </span>,
+        <span key="package" className="package">atosjs@latest</span>
+      ],
+      bun: [
+        <span key="dollarSign">$ </span>,
+        <span key="command" className="command">bun </span>,
+        <span key="option" className="option">add </span>,
+        <span key="package" className="package">atosjs@latest</span>
+      ],
+    };
+    return commands[tool];
+  };
+  
 
   return (
     <div className="atosjs">
@@ -101,7 +124,7 @@ export default function Home() {
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
           </svg>
         </a>
-        <a className="button donate" href="/donate">
+        <a className="button donate" href="https://github.com/sponsors/yeyTaken">
           Donate
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -125,35 +148,51 @@ export default function Home() {
         <div className="tab-bar">
           <div className="tabs">
             <button
-              className="active"
-              onClick={() => (window as Window & typeof globalThis).showCommand("npm")}
+              className={activeButton === "npm" ? "active" : ""}
+              onClick={() => showCommand("npm")}
             >
               npm
             </button>
-            <button onClick={() => (window as Window & typeof globalThis).showCommand("yarn")}>
+            <button
+              className={activeButton === "yarn" ? "active" : ""}
+              onClick={() => showCommand("yarn")}
+            >
               yarn
             </button>
-            <button onClick={() => (window as Window & typeof globalThis).showCommand("pnpm")}>
+            <button
+              className={activeButton === "pnpm" ? "active" : ""}
+              onClick={() => showCommand("pnpm")}
+            >
               pnpm
             </button>
-            <button onClick={() => (window as Window & typeof globalThis).showCommand("bun")}>
+            <button
+              className={activeButton === "bun" ? "active" : ""}
+              onClick={() => showCommand("bun")}
+            >
               bun
             </button>
           </div>
           <button
-            className="copy-btn"
-            onClick={() => (window as Window & typeof globalThis).copyCommand()}
+            onClick={handleCopyClick}
+            className={`copy-icon ${copyClicked ? "copied" : ""}`}
           >
-            <svg id="copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
-            </svg>
+            {copyClicked ? <LuCheck /> : <LuCopy />}
           </button>
         </div>
         <div className="code-box">
           <div className="language">sh</div>
-          <span className="command">npm</span> <span className="option">install</span> <span className="package">atosjs@latest</span>
+          {getCommandJSX(activeButton)}
         </div>
       </div>
+
+      {popupVisible && (
+        <div className="popup">
+          <span>
+            <LuCheck />
+            {popupMessage}
+          </span>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,56 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --color-text: #ffffff; /* Branco para o texto */
-  --color-error: #ff6557; /* Cor de erro */
-  --color-paper: #333333; /* Cinza escuro para o fundo do papel */
-  --color-primary: #1a1a2e; /* Azul escuro bem escuro para a cor primária */
-  --color-background: #0e0d0d; /* Fundo escuro */
-  --color-primary-contrast: #121647; /* Cor de contraste primário */
-  --color-comment: #75715e; /* Cor dos comentários */
-  --color-string: #a6e22e; /* Cor das strings */
-  --color-variable: #f8f8f2; /* Cor das variáveis */
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
-
-/* Scroll Moderno e Bonito */
-::-webkit-scrollbar {
-  width: 12px;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
-
-::-webkit-scrollbar-track {
-  background: var(--color-paper);
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--color-primary);
-  border-radius: 10px;
-  border: 3px solid var(--color-paper);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-primary-contrast);
-}
-
-::-webkit-scrollbar-corner {
-  background: var(--color-paper);
-}
-
 
 body {
-  padding-left: 250px;
-  font-family: 'Comic Neue', cursive;
-  color: var(--color-text);
-  background: var(--color-background);
-}
-
-@media (max-width: 769px) {
-  body {
-  padding-left: 0;
-
-  }
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
 }

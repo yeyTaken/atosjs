@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import "./home.css";
+import "../../public/home.css";
 
 export default function Home() {
   useEffect(() => {

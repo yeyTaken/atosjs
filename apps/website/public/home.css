@@ -67,12 +67,12 @@ body {
   transition: background-color 0.2s, border-color 0.2s;
 }
 
-.guide {
+.docs {
   background-color: var(--color-primary-contrast);
   border-color: var(--color-primary);
 }
 
-.guide:hover {
+.docs:hover {
   background-color: var(--color-primary);
 }
 

@@ -1,1 +1,0 @@
-# Guide in NextJS

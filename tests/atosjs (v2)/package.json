@@ -1,0 +1,14 @@
+{
+  "name": "atosjs-v2",
+  "module": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ."
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

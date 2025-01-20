@@ -36,7 +36,7 @@ const config: DocsThemeConfig = {
   chat: {
     link: 'https://atos.js.org/discord',
   },
-  docsRepositoryBase: 'https://github.com/shuding/nextra-docs-template',
+  docsRepositoryBase: 'https://github.com/yeyTaken/atosjs',
   footer: {
     text: '© 2025 Rabi & TakenStudios. AtosJS documentation.',
   },

@@ -1,1 +1,127 @@
-# generate
+import { Callout } from 'nextra-theme-docs';
+
+# Gerando Presentes com o GiftManager
+
+O **GiftManager** permite gerar presentes de forma simples, oferecendo a flexibilidade de configurar propriedades como tipo, valor, data de expiração e limite de resgates. A seguir, você encontrará um guia completo sobre como utilizar a função `generate()` para criar presentes de acordo com suas necessidades.
+
+## Usando o GiftManager para Gerar um Presente
+
+Primeiro, importe e configure o `GiftManager`. O exemplo abaixo demonstra como gerar um presente utilizando a função `generate()`.
+
+```js showLineNumbers filename="JavaScript" copy
+const { GiftManager } = require('atosjs');
+const gm = new GiftManager();
+
+const giftId = await gm.generate();
+console.log(giftId);
+
+// Isso gera um ID de presente aleatório, mas sem definir valores específicos, ou seja, um presente "vazio".
+```
+
+## Parâmetros de Configuração
+
+A função `generate()` aceita várias opções, permitindo customizar o presente conforme sua necessidade. Veja a seguir os parâmetros disponíveis:
+
+### 1. `type`
+Define o tipo do presente. Esse parâmetro é opcional, mas pode ser útil para categorização.
+
+- **Exemplo**: `'desconto'`, `'premium'`, `'moedas'`
+
+### 2. `value`
+Define o valor do presente. O tipo do valor pode ser qualquer coisa, desde números até objetos, dependendo de como o presente será utilizado.
+
+- **Exemplo**: `100`, `'VIP Access'`, `{ wallet: { coins: 5000 } }`
+
+### 3. `expiration`
+Define a data de expiração do presente no formato relativo, como `60s`, `7d`, `10m`, `1y`. A função calcula a data de expiração automaticamente com base na unidade de tempo especificada.
+
+- **Exemplo**: `'60s'` (expira em 60 segundos), `'7d'` (expira em 7 dias), `'1y'` (expira em 1 ano)
+
+### 4. `maxRedeem`
+Limita o número de vezes que o presente pode ser resgatado. O valor padrão é `1`, o que significa que o presente pode ser resgatado uma única vez.
+
+- **Exemplo**: `5` (permite até 5 resgates)
+
+### 5. `edit`
+Se você quiser customizar o código do presente, pode usar esse parâmetro para definir um código específico em vez de gerar um código aleatório.
+
+- **Exemplo**: `{ code: 'NATAL2025' }` — irá gerar um presente com o código `NATAL2025`
+
+## Exemplo de Geração Completa de Presente
+
+Aqui está um exemplo de código completo utilizando todas as opções disponíveis para gerar um presente:
+
+```js showLineNumbers filename="JavaScript" copy
+const { GiftManager } = require('atosjs');
+const gm = new GiftManager();
+
+const giftId = await gm.generate({
+    type: 'desconto',         // Tipo do presente
+    value: 50,                // Valor do presente
+    expiration: '7d',         // Expira em 7 dias
+    maxRedeem: 12,            // Limite de resgates
+    edit: {
+        code: 'NATAL2025'     // Código personalizado para o presente
+    }
+});
+
+console.log(giftId); // O ID gerado será 'NATAL2025'
+```
+
+Esse código cria um presente com o tipo "desconto", valor de `50`, data de expiração em 7 dias e limite de até 12 resgates. O presente também terá um código personalizado (`NATAL2025`).
+
+### Exemplo de Presente de Moedas
+
+Se você quiser gerar um presente que dê moedas, o exemplo seria o seguinte:
+
+```js showLineNumbers filename="JavaScript" copy
+const { GiftManager } = require('atosjs');
+const gm = new GiftManager();
+
+const giftId = await gm.generate({
+    type: 'coins',         // Tipo do presente
+    value: 5000,           // Valor do presente (5000 moedas)
+});
+
+console.log(giftId); // Um ID aleatório será gerado, por exemplo: 'GYGTFD4546GDDSAF'
+```
+
+Esse exemplo cria um presente com 5000 moedas, e o código do presente será gerado aleatoriamente.
+
+## Códigos de Erro
+
+Caso ocorra um erro durante a geração do presente, a função `generate()` pode lançar um erro do tipo `AtosJSError`. Aqui estão alguns erros possíveis:
+
+- **INVALID_TIME_UNIT**: Ocorre quando a unidade de tempo fornecida para a expiração não é válida.
+- **INVALID_MAX_REDEEM**: Ocorre quando o valor de `maxRedeem` é menor que 1.
+
+### Exemplo de Captura de Erro
+
+```js showLineNumbers filename="JavaScript" copy
+try {
+    const giftId = await gm.generate({
+        expiration: '10z',  // Unidade de tempo inválida
+    });
+} catch (error) {
+    console.error(error.message); // Exibe o erro caso a unidade de tempo seja inválida
+}
+```
+<Callout type="error">
+AtosJSError: Invalid time unit. Use 60s, 7d, 10m and 1y. "INVALID_TIME_UNIT"
+</Callout>
+
+Neste exemplo, um erro será lançado devido à unidade de tempo inválida (`'10z'`), e a mensagem de erro será exibida.
+
+## Resumo das Opções
+
+| Parâmetro   | Descrição                                                          | Exemplo                |
+|-------------|--------------------------------------------------------------------|------------------------|
+| `type`      | Define o tipo do presente.                                         | `'desconto'`, `'premium'`, `'moedas'` |
+| `value`     | Define o valor do presente.                                         | `100`, `'VIP Access'`, `{ wallet: { coins: 5000 } }` |
+| `expiration`| Define a data de expiração do presente.                            | `'60s'`, `'7d'`, `'1y'` |
+| `maxRedeem` | Define o número máximo de resgates do presente.                    | `5`                     |
+| `edit`      | Permite definir um código personalizado para o presente.          | `{ code: 'NATAL2025' }` |
+
+## Próximos Passos
+
+Agora que você sabe como gerar um presente, o próximo passo é usar a função `view()` para verificar se o presente ainda é válido ou para consultar suas propriedades, como o tipo e o valor. Isso permitirá que você confirme os detalhes do presente antes de disponibilizá-lo para resgate.

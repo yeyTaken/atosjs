@@ -1,7 +1,129 @@
-# GiftManager
+import { Tabs, Tab, Callout } from 'nextra-theme-docs';
 
-```js filename="JavaScript" copy
+# Configuração do GiftManager
+
+O **GiftManager** é uma ferramenta poderosa para gerenciar presentes e recompensas em suas aplicações [NodeJS](https://nodejs.org/). Abaixo, escolha seu gerenciador de pacotes favorito para instalar o `atosjs`:
+
+<Tabs items={['npm', 'yarn', 'pnpm', 'bun']}>
+  <Tab>
+    ```bash copy filename="Terminal"
+    npm install atosjs
+    ```
+  </Tab>
+  <Tab>
+    ```bash copy filename="Terminal"
+    yarn add atosjs
+    ```
+  </Tab>
+  <Tab>
+    ```bash copy filename="Terminal"
+    pnpm add atosjs
+    ```
+  </Tab>
+  <Tab>
+    ```bash copy filename="Terminal"
+    bun add atosjs
+    ```
+  </Tab>
+</Tabs>
+
+## Configuração
+
+Após a instalação, importe e inicie o `GiftManager` em seu projeto:
+
+```js showLineNumbers /GiftManager/ filename="JavaScript" copy
 const { GiftManager } = require('atosjs');
 
-const gm = new GiftManager()
+const gm = new GiftManager(); // O arquivo padrão gerado será 'gift.json'
 ```
+
+### Configuração personalizada para o nome do arquivo
+
+Você pode personalizar o nome do arquivo gerado. Veja como fazer isso:
+
+```js showLineNumbers /fileName/ filename="JavaScript" copy
+const gm = new GiftManager({
+    fileName: 'gift-test',  // Nome do arquivo a ser gerado
+});
+
+// O código acima criará um arquivo chamado 'gift-test.json'
+```
+
+### Configuração personalizada para o tipo de arquivo
+
+Escolha o tipo de arquivo que você deseja gerar. O valor de `fileType` pode ser:
+
+- `1` para um arquivo `.json`
+- `2` para um arquivo `.yaml`
+
+Exemplo:
+
+```js showLineNumbers /fileType/ filename="JavaScript" copy
+const gm = new GiftManager({
+    fileType: 2,            // Tipo de arquivo: 1 para .json, 2 para .yaml
+});
+
+/**
+ * @fileType 
+ * 1 = Gera um arquivo .json
+ * 2 = Gera um arquivo .yaml
+ * Qualquer valor diferente de 1 ou 2 resultará em um erro
+ */
+
+// O código acima criará um arquivo chamado 'gift.yaml'
+```
+
+## Códigos de Erro
+
+Caso ocorra um erro, a função `GiftManager()` pode lançar um erro do tipo `AtosJSError`. Abaixo estão alguns erros possíveis:
+
+- **INVALID_FILE_TYPE**: Ocorre quando o valor do parâmetro `fileType` é diferente de 1 ou 2.
+
+### Exemplo de Captura de Erro
+
+```js showLineNumbers filename="JavaScript" copy
+try {
+    const gm = new GiftManager({
+        fileType: 3,  // valor inválido para o tipo de arquivo
+    });
+} catch (error) {
+    console.error(error.message); // Exibe a mensagem de erro caso o valor do fileType seja inválido
+}
+```
+
+<Callout type="error">
+AtosJSError: Invalid fileType. Use 1 for JSON or 2 for YAML. "INVALID_FILE_TYPE"
+</Callout>
+
+Neste exemplo, um erro será lançado devido ao valor inválido `3` para o parâmetro `fileType`. A mensagem de erro será exibida informando que o valor correto deve ser `1` para JSON ou `2` para YAML.
+
+### Código completo com ambas as opções configuradas
+
+Agora, vamos combinar as opções de nome e tipo de arquivo:
+
+```js showLineNumbers filename="JavaScript" copy
+const { GiftManager } = require('atosjs');
+
+const gm = new GiftManager({
+    fileName: 'gift-test',  // Nome do arquivo a ser gerado
+    fileType: 2,            // Tipo de arquivo: 1 para .json, 2 para .yaml
+});
+
+/**
+ * @fileType 
+ * 1 = Gera um arquivo .json
+ * 2 = Gera um arquivo .yaml
+ * Qualquer valor diferente de 1 ou 2 resultará em um erro
+ */
+
+// O código acima criará um arquivo chamado 'gift.yaml'
+```
+
+## Explicação
+
+- **@fileName**: Defina o nome do arquivo gerado.
+- **@fileType**: Escolha o tipo de arquivo. Se não for `1` ou `2`, ocorrerá um erro.
+
+### Próximo Passo
+
+Após configurar o nome e o tipo de arquivo, você pode começar a gerar o código necessário para gerenciar presentes e recompensas em sua aplicação.

@@ -92,12 +92,12 @@ export default function Home() {
       </p>
       <div className="button-container">
         <a
-          className="button guide"
-          href="https://atosjs-guide/guide/version/latest"
+          className="button docs"
+          href="https://atosjs-docs.vercel.app/"
           rel="noopener noreferrer"
           target="_blank"
         >
-          Guide
+          Docs
         </a>
         <a
           className="button github"

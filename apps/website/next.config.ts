@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      {
+        source: '/discord',
+        destination: 'https://discord.gg/2eawa4PsFP',
+        permanent: true
+      }
+    ]
+  }
 };
 
 export default nextConfig;

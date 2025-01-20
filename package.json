@@ -4,14 +4,17 @@
   "description": "AtosJS, It´s a complex and adventure-filled book!",
   "scripts": {
     "global:test": "vitest",
-
     "atosjs": "npm i ./packages/AtosJS && vitest ./packages/AtosJS",
     "atosjs:test": "vitest ./packages/AtosJS"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yeyTaken/atosjs.git"
+    "url": "git+https://github.com/yeyTaken/atosjs.git"
   },
+  "bugs": {
+    "url": "https://github.com/yeyTaken/atosjs/issues"
+  },
+  "homepage": "https://github.com/yeyTaken/atosjs#readme",
   "keywords": [
     "gift",
     "reward",
@@ -31,7 +34,6 @@
   },
   "dependencies": {
     "atosjs": "file:packages/AtosJS",
-    "fs": "^0.0.1-security",
-    "path": "^0.12.7"
+    "fs": "^0.0.1-security"
   }
 }

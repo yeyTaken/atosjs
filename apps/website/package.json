@@ -8,6 +8,16 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yeyTaken/atosjs.git"
+  },
+  "author": "Rabi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yeyTaken/atosjs/issues"
+  },
+  "homepage": "https://github.com/yeyTaken/atosjs#readme",
   "dependencies": {
     "autoprefixer": "^10.4.20",
     "next": "15.1.5",

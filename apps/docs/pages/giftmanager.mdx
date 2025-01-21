@@ -1,4 +1,4 @@
-import { Tabs, Tab, Callout } from 'nextra-theme-docs';
+import { Tabs, Tab, Callout, FileTree } from 'nextra/components';
 
 # Configuração do GiftManager
 
@@ -34,8 +34,15 @@ Após a instalação, importe e inicie o `GiftManager` em seu projeto:
 ```js showLineNumbers /GiftManager/ filename="JavaScript" copy
 const { GiftManager } = require('atosjs');
 
-const gm = new GiftManager(); // O arquivo padrão gerado será 'gift.json'
+const gm = new GiftManager(); // O arquivo padrão gerado será 'gifts.json'
 ```
+
+<FileTree>
+  <FileTree.Folder name="your-project" defaultOpen>
+    <FileTree.File name="gifts.json" />
+  </FileTree.Folder>
+</FileTree>
+
 
 ### Configuração personalizada para o nome do arquivo
 
@@ -43,11 +50,16 @@ Você pode personalizar o nome do arquivo gerado. Veja como fazer isso:
 
 ```js showLineNumbers /fileName/ filename="JavaScript" copy
 const gm = new GiftManager({
-    fileName: 'gift-test',  // Nome do arquivo a ser gerado
+    fileName: 'gifts-test',  // Nome do arquivo a ser gerado
 });
 
-// O código acima criará um arquivo chamado 'gift-test.json'
+// O código acima criará um arquivo chamado 'gifts-test.json'
 ```
+<FileTree>
+  <FileTree.Folder name="your-project" defaultOpen>
+    <FileTree.File name="gifts-test.json" />
+  </FileTree.Folder>
+</FileTree>
 
 ### Configuração personalizada para o tipo de arquivo
 
@@ -70,8 +82,13 @@ const gm = new GiftManager({
  * Qualquer valor diferente de 1 ou 2 resultará em um erro
  */
 
-// O código acima criará um arquivo chamado 'gift.yaml'
+// O código acima criará um arquivo chamado 'gifts.yaml'
 ```
+<FileTree>
+  <FileTree.Folder name="your-project" defaultOpen>
+    <FileTree.File name="gifts.yaml" />
+  </FileTree.Folder>
+</FileTree>
 
 ## Códigos de Erro
 
@@ -105,7 +122,7 @@ Agora, vamos combinar as opções de nome e tipo de arquivo:
 const { GiftManager } = require('atosjs');
 
 const gm = new GiftManager({
-    fileName: 'gift-test',  // Nome do arquivo a ser gerado
+    fileName: 'gifts-test',  // Nome do arquivo a ser gerado
     fileType: 2,            // Tipo de arquivo: 1 para .json, 2 para .yaml
 });
 
@@ -116,8 +133,14 @@ const gm = new GiftManager({
  * Qualquer valor diferente de 1 ou 2 resultará em um erro
  */
 
-// O código acima criará um arquivo chamado 'gift.yaml'
+// O código acima criará um arquivo chamado 'gifts-test.yaml'
 ```
+
+<FileTree>
+  <FileTree.Folder name="your-project" defaultOpen>
+    <FileTree.File name="gifts-test.yaml" />
+  </FileTree.Folder>
+</FileTree>
 
 ## Explicação
 

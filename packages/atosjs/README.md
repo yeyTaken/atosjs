@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://i.imgur.com/giy9KEe.png" width="456" alt="AtosJS"></img>
-
+  
   <p>
   <!-- AtosJS badges -->
   <a href="https://www.npmjs.com/package/atosjs">
@@ -24,8 +24,8 @@ AtosJS is a powerful and easy-to-use package, built with [Node.js](https://nodej
 
 ## Links
 - AtosJS [website](https://atos.js.org/) Oficial.
-- [Documentation](https://github.com/yeyTaken/atosjs)
-- AtosJS [guide](https://atos.js.org/guide/version/latest)
+- [GitHub](https://github.com/yeyTaken/atosjs)
+- AtosJS [docs](https://atos.js.org/docs)
 - [npm](https://www.npmjs.com/package/atosjs), latest version: `1.1.3`
 
 <p align="center">

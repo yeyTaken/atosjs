@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
         source: '/discord',
         destination: 'https://discord.gg/2eawa4PsFP',
         permanent: true
+      },
+      {
+        source: '/docs',
+        destination: 'https://atosjs-docs.vercel.app/',
+        permanent: true
       }
     ]
   }

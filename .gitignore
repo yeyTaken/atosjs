@@ -1,6 +1,7 @@
 node_modules/
 package-lock.json
 lib/
+dist/
 .env
 test.json
 test.yaml

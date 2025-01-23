@@ -1,18 +1,18 @@
 import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
 
-# Exemplo de Projeto
+# Project Example
 
 <Tabs items={['npm', 'yarn', 'pnpm', 'bun']}>
   <Tab>
     <Steps>
-      ### Instalação do Projeto (npm)
+      ### Project Installation (npm)
 
       ```bash copy filename="Terminal"
       npm init -y
       npm i atosjs@latest
       ```
 
-      ```bash filename="Terminal: Retorno"
+      ```bash filename="Terminal: Output"
       $ npm init -y
       Wrote to /workspaces/atosjs/tests/random/package.json:
 
@@ -39,7 +39,7 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
       found 0 vulnerabilities
       ```
 
-      ### Arquivos do Projeto
+      ### Project Files
 
       ```js showLineNumbers copy filename="index.js"
       const readline = require('readline');
@@ -66,7 +66,7 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
       newGift();
       setTimeout(async () => {
           console.log();
-          console.log('Digite seu código aqui:');
+          console.log('Enter your code here:');
       }, 1000);
 
       rl.question('', async (code) => {
@@ -74,15 +74,15 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
           const view = await gm.view(code);
 
           if (redeem.success) {
-              console.log(`Código resgatado com sucesso! Você ganhou ${view.value} ${view.type}`);
+              console.log(`Code successfully redeemed! You received ${view.value} ${view.type}`);
           } else {
-              console.log('O código não existe ou já foi usado.');
+              console.log('The code does not exist or has already been used.');
           }
           rl.close();
       });
       ```
 
-      ### Estrutura Final do Projeto
+      ### Final Project Structure
 
       <FileTree>
         <FileTree.Folder name="my-project" defaultOpen>
@@ -99,14 +99,14 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
 
   <Tab>
     <Steps>
-      ### Instalação do Projeto (yarn)
+      ### Project Installation (yarn)
 
       ```bash copy filename="Terminal"
       yarn init -y
       yarn add atosjs
       ```
 
-      ```bash filename="Terminal: Retorno"
+      ```bash filename="Terminal: Output"
       $ yarn init -y
       success Wrote to package.json:
 
@@ -122,7 +122,7 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
       success Saved 41 new dependencies.
       ```
 
-      ### Arquivos do Projeto
+      ### Project Files
 
       ```js showLineNumbers copy filename="index.js"
       const readline = require('readline');
@@ -149,7 +149,7 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
       newGift();
       setTimeout(async () => {
           console.log();
-          console.log('Digite seu código aqui:');
+          console.log('Enter your code here:');
       }, 1000);
 
       rl.question('', async (code) => {
@@ -157,15 +157,15 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
           const view = await gm.view(code);
 
           if (redeem.success) {
-              console.log(`Código resgatado com sucesso! Você ganhou ${view.value} ${view.type}`);
+              console.log(`Code successfully redeemed! You received ${view.value} ${view.type}`);
           } else {
-              console.log('O código não existe ou já foi usado.');
+              console.log('The code does not exist or has already been used.');
           }
           rl.close();
       });
       ```
 
-      ### Estrutura Final do Projeto
+      ### Final Project Structure
 
       <FileTree>
         <FileTree.Folder name="my-project" defaultOpen>
@@ -182,14 +182,14 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
 
   <Tab>
     <Steps>
-      ### Instalação do Projeto (pnpm)
+      ### Project Installation (pnpm)
 
       ```bash copy filename="Terminal"
       pnpm init
       pnpm add atosjs
       ```
 
-      ```bash filename="Terminal: Retorno"
+      ```bash filename="Terminal: Output"
       $ pnpm init
       Wrote to package.json:
 
@@ -205,7 +205,8 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
       +	atosjs 4.0.0
       Progress: resolved 42, reused 41, downloaded 1, done
       ```
-      ### Arquivos do Projeto
+
+      ### Project Files
 
       ```js showLineNumbers copy filename="index.js"
       const readline = require('readline');
@@ -232,7 +233,7 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
       newGift();
       setTimeout(async () => {
           console.log();
-          console.log('Digite seu código aqui:');
+          console.log('Enter your code here:');
       }, 1000);
 
       rl.question('', async (code) => {
@@ -240,15 +241,15 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
           const view = await gm.view(code);
 
           if (redeem.success) {
-              console.log(`Código resgatado com sucesso! Você ganhou ${view.value} ${view.type}`);
+              console.log(`Code successfully redeemed! You received ${view.value} ${view.type}`);
           } else {
-              console.log('O código não existe ou já foi usado.');
+              console.log('The code does not exist or has already been used.');
           }
           rl.close();
       });
       ```
 
-      ### Estrutura Final do Projeto
+      ### Final Project Structure
 
       <FileTree>
         <FileTree.Folder name="my-project" defaultOpen>
@@ -265,14 +266,14 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
 
   <Tab>
     <Steps>
-      ### Instalação do Projeto (bun)
+      ### Project Installation (bun)
 
       ```bash copy filename="Terminal"
       bun init
       bun add atosjs
       ```
 
-      ```bash filename="Terminal: Retorno"
+      ```bash filename="Terminal: Output"
       $ bun init
       Created package.json
 
@@ -286,7 +287,8 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
       $ bun add atosjs
       + atosjs@latest
       ```
-      ### Arquivos do Projeto
+
+      ### Project Files
 
       ```js showLineNumbers copy filename="index.js"
       const readline = require('readline');
@@ -313,7 +315,7 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
       newGift();
       setTimeout(async () => {
           console.log();
-          console.log('Digite seu código aqui:');
+          console.log('Enter your code here:');
       }, 1000);
 
       rl.question('', async (code) => {
@@ -321,15 +323,15 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
           const view = await gm.view(code);
 
           if (redeem.success) {
-              console.log(`Código resgatado com sucesso! Você ganhou ${view.value} ${view.type}`);
+              console.log(`Code successfully redeemed! You received ${view.value} ${view.type}`);
           } else {
-              console.log('O código não existe ou já foi usado.');
+              console.log('The code does not exist or has already been used.');
           }
           rl.close();
       });
       ```
 
-      ### Estrutura Final do Projeto
+      ### Final Project Structure
 
       <FileTree>
         <FileTree.Folder name="my-project" defaultOpen>
@@ -346,8 +348,8 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
 
 </Tabs>
 
-
 <Callout type="info" emoji="ℹ️">
-  Toda vez que você criar um novo `giftId`, o arquivo `gifts.yaml` será atualizado, pois os códigos são salvos lá. 
-  Caso o projeto seja público, recomendamos adicionar o `gifts.*` ao `.gitignore`.
+  Every time you create a new `giftId`, the `gifts.yaml` file will be updated because the codes are stored there.  
+  If the project is public, it is recommended to add `gifts.*` to `.gitignore`.
 </Callout>
+

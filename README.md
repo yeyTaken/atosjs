@@ -26,14 +26,14 @@ AtosJS is a powerful and easy-to-use package, built with [Node.js](https://nodej
 - AtosJS [website](https://atos.js.org/) Oficial.
 - [GitHub](https://github.com/yeyTaken/atosjs)
 - AtosJS [docs](https://atos.js.org/docs)
-- [npm](https://www.npmjs.com/package/atosjs), latest version: `1.1.3`
+- [npm](https://www.npmjs.com/package/atosjs), latest version: `v2`
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true"></img>
 </p>
 
 <p align="center">
-  Copyright &copy; 2020-2025, Israel R. Jatobá & TakenStudios.
+  Copyright &copy; 2025, Israel R. Jatobá & TakenStudios.
 </p>
 
 <p align="center">

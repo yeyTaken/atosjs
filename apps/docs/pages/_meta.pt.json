@@ -14,19 +14,5 @@
     "type": "page",
     "href": "https://twitter.com/yeytaken",
     "newWindow": true
-  },
-  "language": {
-    "title": "Language",
-    "type": "menu",
-    "items": {
-      "pt": {
-        "title": "Português",
-        "href": "https://atosjs-docs.vercel.app/pt"
-      },
-      "en": {
-        "title": "English",
-        "href": "https://atosjs-docs.vercel.app/en"
-      }
-    }
   }
 }

@@ -1,0 +1,153 @@
+import { Tabs, Tab, Callout, FileTree } from 'nextra/components';
+
+# Configuring the GiftManager
+
+The **GiftManager** is a powerful tool for managing gifts and rewards in your [NodeJS](https://nodejs.org/) applications. Below, select your favorite package manager to install `atosjs`:
+
+<Tabs items={['npm', 'yarn', 'pnpm', 'bun']}>
+  <Tab>
+    ```bash copy filename="Terminal"
+    npm install atosjs@latest
+    ```
+  </Tab>
+  <Tab>
+    ```bash copy filename="Terminal"
+    yarn add atosjs@latest
+    ```
+  </Tab>
+  <Tab>
+    ```bash copy filename="Terminal"
+    pnpm add atosjs@latest
+    ```
+  </Tab>
+  <Tab>
+    ```bash copy filename="Terminal"
+    bun add atosjs@latest
+    ```
+  </Tab>
+</Tabs>
+
+## Configuration
+
+After installation, import and initialize the `GiftManager` in your project:
+
+```js showLineNumbers /GiftManager/ filename="JavaScript" copy
+const { GiftManager } = require('atosjs');
+
+const gm = new GiftManager(); // The default file generated will be 'gifts.json'
+```
+
+<FileTree>
+  <FileTree.Folder name="your-project" defaultOpen>
+    <FileTree.File name="gifts.json" />
+  </FileTree.Folder>
+</FileTree>
+
+### Customizing the File Name
+
+You can customize the name of the generated file. Here's how:
+
+```js showLineNumbers /fileName/ filename="JavaScript" copy
+const gm = new GiftManager({
+    fileName: 'gifts-test',  // Name of the file to be generated
+});
+
+// The code above will create a file named 'gifts-test.json'
+```
+
+<FileTree>
+  <FileTree.Folder name="your-project" defaultOpen>
+    <FileTree.File name="gifts-test.json" />
+  </FileTree.Folder>
+</FileTree>
+
+### Customizing the File Type
+
+Choose the file type you want to generate. The `fileType` value can be:
+
+- `1` for a `.json` file
+- `2` for a `.yaml` file
+
+Example:
+
+```js showLineNumbers /fileType/ filename="JavaScript" copy
+const gm = new GiftManager({
+    fileType: 2,            // File type: 1 for .json, 2 for .yaml
+});
+
+/**
+ * @fileType 
+ * 1 = Generates a .json file
+ * 2 = Generates a .yaml file
+ * Any value other than 1 or 2 will result in an error
+ */
+
+// The code above will create a file named 'gifts.yaml'
+```
+
+<FileTree>
+  <FileTree.Folder name="your-project" defaultOpen>
+    <FileTree.File name="gifts.yaml" />
+  </FileTree.Folder>
+</FileTree>
+
+## Error Codes
+
+If an error occurs, the `GiftManager()` function may throw an `AtosJSError`. Below are some possible errors:
+
+- **INVALID_FILE_TYPE**: Occurs when the `fileType` parameter value is neither 1 nor 2.
+
+### Error Handling Example
+
+```js showLineNumbers filename="JavaScript" copy
+try {
+    const gm = new GiftManager({
+        fileType: 3,  // Invalid value for file type
+    });
+} catch (error) {
+    console.error(error.message); // Displays the error message if the fileType value is invalid
+}
+```
+
+<Callout type="error">
+AtosJSError: Invalid fileType. Use 1 for JSON or 2 for YAML. "INVALID_FILE_TYPE"
+</Callout>
+
+In this example, an error will be thrown due to the invalid value `3` for the `fileType` parameter. The error message will inform you that the correct value should be `1` for JSON or `2` for YAML.
+
+### Complete Code with Both Options Configured
+
+Now, let's combine the file name and file type options:
+
+```js showLineNumbers filename="JavaScript" copy
+const { GiftManager } = require('atosjs');
+
+const gm = new GiftManager({
+    fileName: 'gifts-test',  // Name of the file to be generated
+    fileType: 2,            // File type: 1 for .json, 2 for .yaml
+});
+
+/**
+ * @fileType 
+ * 1 = Generates a .json file
+ * 2 = Generates a .yaml file
+ * Any value other than 1 or 2 will result in an error
+ */
+
+// The code above will create a file named 'gifts-test.yaml'
+```
+
+<FileTree>
+  <FileTree.Folder name="your-project" defaultOpen>
+    <FileTree.File name="gifts-test.yaml" />
+  </FileTree.Folder>
+</FileTree>
+
+## Explanation
+
+- **@fileName**: Set the name of the generated file.
+- **@fileType**: Choose the file type. If it is not `1` or `2`, an error will occur.
+
+### Next Steps
+
+After configuring the file name and type, you can start generating the necessary code to manage gifts and rewards in your application.

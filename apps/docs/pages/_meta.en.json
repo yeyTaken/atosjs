@@ -14,5 +14,19 @@
     "type": "page",
     "href": "https://twitter.com/yeytaken",
     "newWindow": true
+  },
+  "language": {
+    "title": "Language",
+    "type": "menu",
+    "items": {
+      "pt": {
+        "title": "Português",
+        "href": "/pt"
+      },
+      "en": {
+        "title": "English",
+        "href": "/en"
+      }
+    }
   }
 }

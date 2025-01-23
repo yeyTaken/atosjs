@@ -2,6 +2,10 @@ import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 
 const config: DocsThemeConfig = {
+  i18n: [
+    { locale: 'en', text: 'English' },
+    { locale: 'pt', text: 'Português' },
+  ],
   banner: {
     key: 'discord',
     text: (

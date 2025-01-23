@@ -44,17 +44,17 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
       ```js showLineNumbers copy filename="index.js"
         const { TimeFormat } = require('atosjs');
 
-        const t = new TimeFormat(); // TimeFormat instance
+        const t = new TimeFormat(); // Instance of TimeFormat
 
         console.log('Starting tests for TimeFormat...\n');
 
-        // Test: Convert to milliseconds
+        // Test: Converting to milliseconds
         console.log('Test: convertToMilliseconds');
         console.log(`10s -> ${t.convertToMilliseconds('10s')}ms`);
         console.log(`5m -> ${t.convertToMilliseconds('5m')}ms`);
         console.log(`2h -> ${t.convertToMilliseconds('2h')}ms\n`);
 
-        // Test: Convert from milliseconds
+        // Test: Converting from milliseconds
         console.log('Test: convertFromMilliseconds');
         console.log(`3661000ms -> ${t.convertFromMilliseconds(3661000)}\n`);
 
@@ -85,7 +85,7 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
         // Test: DailyAt
         console.log('Test: dailyAt');
         t.dailyAt(new Date().getHours(), new Date().getMinutes() + 1, () => {
-        console.log('DailyAt callback executed!\n');
+        console.log('Callback dailyAt executed!\n');
         });
 
         // Test: After
@@ -102,6 +102,7 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
         });
 
         console.log('\nTests completed! Check the logs.');
+
       ```
 
       ### Final Project Structure
@@ -143,7 +144,83 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
       success Saved 41 new dependencies.
       ```
 
-      <!-- The rest of the content is identical to npm -->
+      ### Project Files
+
+      ```js showLineNumbers copy filename="index.js"
+        const { TimeFormat } = require('atosjs');
+
+        const t = new TimeFormat(); // Instance of TimeFormat
+
+        console.log('Starting tests for TimeFormat...\n');
+
+        // Test: Converting to milliseconds
+        console.log('Test: convertToMilliseconds');
+        console.log(`10s -> ${t.convertToMilliseconds('10s')}ms`);
+        console.log(`5m -> ${t.convertToMilliseconds('5m')}ms`);
+        console.log(`2h -> ${t.convertToMilliseconds('2h')}ms\n`);
+
+        // Test: Converting from milliseconds
+        console.log('Test: convertFromMilliseconds');
+        console.log(`3661000ms -> ${t.convertFromMilliseconds(3661000)}\n`);
+
+        // Test: Elapsed time
+        console.log('Test: elapsedSince');
+        const timestamp = Date.now() - 5000;
+        console.log(`Elapsed time (approx. 5000ms) -> ${t.elapsedSince(timestamp)}ms\n`);
+
+        // Test: Repeat with a limited number
+        console.log('Test: repeat');
+        t.repeat(3, '1s', () => {
+        console.log('Repeat callback executed!');
+        });
+
+        // Test: Infinite repeat
+        console.log('Test: repeatInfinite');
+        const infiniteId = t.repeatInfinite('1s', () => {
+        console.log('RepeatInfinite callback executed!');
+        clearInterval(infiniteId); // Ends after one cycle
+        });
+
+        // Test: Countdown
+        console.log('Test: countdown');
+        t.countdown('2s', () => {
+        console.log('Countdown completed!\n');
+        });
+
+        // Test: DailyAt
+        console.log('Test: dailyAt');
+        t.dailyAt(new Date().getHours(), new Date().getMinutes() + 1, () => {
+        console.log('Callback dailyAt executed!\n');
+        });
+
+        // Test: After
+        console.log('Test: after');
+        t.after('2s', () => {
+        console.log('After callback executed!\n');
+        });
+
+        // Test: Every
+        console.log('Test: every');
+        const everyId = t.every('1s', () => {
+        console.log('Every callback executed!');
+        clearInterval(everyId); // Ends after one cycle
+        });
+
+        console.log('\nTests completed! Check the logs.');
+
+      ```
+
+      ### Final Project Structure
+
+      <FileTree>
+        <FileTree.Folder name="my-project" defaultOpen>
+          <FileTree.Folder name="node_modules">
+          </FileTree.Folder>
+          <FileTree.File name="index.js" />
+          <FileTree.File name="package.json" />
+          <FileTree.File name="yarn.lock" />
+        </FileTree.Folder>
+      </FileTree>
     </Steps>
   </Tab>
 
@@ -159,10 +236,97 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
       ```bash filename="Terminal: Output"
       $ pnpm init
       Wrote to package.json:
-      ...
+
+      {
+        "name": "my-project",
+        "version": "1.0.0",
+        "main": "index.js",
+        "license": "ISC"
+      }
+
+      $ pnpm add atosjs
+      Packages: +41
+      + atosjs 4.0.0
+      Progress: resolved 42, reused 41, downloaded 1, done
       ```
 
-      <!-- The rest of the content is identical to npm -->
+      ### Project Files
+
+      ```js showLineNumbers copy filename="index.js"
+        const { TimeFormat } = require('atosjs');
+
+        const t = new TimeFormat(); // Instance of TimeFormat
+
+        console.log('Starting tests for TimeFormat...\n');
+
+        // Test: Converting to milliseconds
+        console.log('Test: convertToMilliseconds');
+        console.log(`10s -> ${t.convertToMilliseconds('10s')}ms`);
+        console.log(`5m -> ${t.convertToMilliseconds('5m')}ms`);
+        console.log(`2h -> ${t.convertToMilliseconds('2h')}ms\n`);
+
+        // Test: Converting from milliseconds
+        console.log('Test: convertFromMilliseconds');
+        console.log(`3661000ms -> ${t.convertFromMilliseconds(3661000)}\n`);
+
+        // Test: Elapsed time
+        console.log('Test: elapsedSince');
+        const timestamp = Date.now() - 5000;
+        console.log(`Elapsed time (approx. 5000ms) -> ${t.elapsedSince(timestamp)}ms\n`);
+
+        // Test: Repeat with a limited number
+        console.log('Test: repeat');
+        t.repeat(3, '1s', () => {
+        console.log('Repeat callback executed!');
+        });
+
+        // Test: Infinite repeat
+        console.log('Test: repeatInfinite');
+        const infiniteId = t.repeatInfinite('1s', () => {
+        console.log('RepeatInfinite callback executed!');
+        clearInterval(infiniteId); // Ends after one cycle
+        });
+
+        // Test: Countdown
+        console.log('Test: countdown');
+        t.countdown('2s', () => {
+        console.log('Countdown completed!\n');
+        });
+
+        // Test: DailyAt
+        console.log('Test: dailyAt');
+        t.dailyAt(new Date().getHours(), new Date().getMinutes() + 1, () => {
+        console.log('Callback dailyAt executed!\n');
+        });
+
+        // Test: After
+        console.log('Test: after');
+        t.after('2s', () => {
+        console.log('After callback executed!\n');
+        });
+
+        // Test: Every
+        console.log('Test: every');
+        const everyId = t.every('1s', () => {
+        console.log('Every callback executed!');
+        clearInterval(everyId); // Ends after one cycle
+        });
+
+        console.log('\nTests completed! Check the logs.');
+
+      ```
+
+      ### Final Project Structure
+
+      <FileTree>
+        <FileTree.Folder name="my-project" defaultOpen>
+          <FileTree.Folder name="node_modules">
+          </FileTree.Folder>
+          <FileTree.File name="index.js" />
+          <FileTree.File name="package.json" />
+          <FileTree.File name="pnpm-lock.yaml" />
+        </FileTree.Folder>
+      </FileTree>
     </Steps>
   </Tab>
 
@@ -178,14 +342,101 @@ import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
       ```bash filename="Terminal: Output"
       $ bun init
       Created package.json
-      ...
+
+      {
+        "name": "my-project",
+        "version": "1.0.0",
+        "main": "index.js",
+        "license": "MIT"
+      }
+
+      $ bun add atosjs
+      + atosjs@latest
       ```
 
-      <!-- The rest of the content is identical to npm -->
+      ### Project Files
+
+      ```js showLineNumbers copy filename="index.js"
+        const { TimeFormat } = require('atosjs');
+
+        const t = new TimeFormat(); // Instance of TimeFormat
+
+        console.log('Starting tests for TimeFormat...\n');
+
+        // Test: Converting to milliseconds
+        console.log('Test: convertToMilliseconds');
+        console.log(`10s -> ${t.convertToMilliseconds('10s')}ms`);
+        console.log(`5m -> ${t.convertToMilliseconds('5m')}ms`);
+        console.log(`2h -> ${t.convertToMilliseconds('2h')}ms\n`);
+
+        // Test: Converting from milliseconds
+        console.log('Test: convertFromMilliseconds');
+        console.log(`3661000ms -> ${t.convertFromMilliseconds(3661000)}\n`);
+
+        // Test: Elapsed time
+        console.log('Test: elapsedSince');
+        const timestamp = Date.now() - 5000;
+        console.log(`Elapsed time (approx. 5000ms) -> ${t.elapsedSince(timestamp)}ms\n`);
+
+        // Test: Repeat with a limited number
+        console.log('Test: repeat');
+        t.repeat(3, '1s', () => {
+        console.log('Repeat callback executed!');
+        });
+
+        // Test: Infinite repeat
+        console.log('Test: repeatInfinite');
+        const infiniteId = t.repeatInfinite('1s', () => {
+        console.log('RepeatInfinite callback executed!');
+        clearInterval(infiniteId); // Ends after one cycle
+        });
+
+        // Test: Countdown
+        console.log('Test: countdown');
+        t.countdown('2s', () => {
+        console.log('Countdown completed!\n');
+        });
+
+        // Test: DailyAt
+        console.log('Test: dailyAt');
+        t.dailyAt(new Date().getHours(), new Date().getMinutes() + 1, () => {
+        console.log('Callback dailyAt executed!\n');
+        });
+
+        // Test: After
+        console.log('Test: after');
+        t.after('2s', () => {
+        console.log('After callback executed!\n');
+        });
+
+        // Test: Every
+        console.log('Test: every');
+        const everyId = t.every('1s', () => {
+        console.log('Every callback executed!');
+        clearInterval(everyId); // Ends after one cycle
+        });
+
+        console.log('\nTests completed! Check the logs.');
+
+      ```
+
+      ### Final Project Structure
+
+      <FileTree>
+        <FileTree.Folder name="my-project" defaultOpen>
+          <FileTree.Folder name="node_modules">
+          </FileTree.Folder>
+          <FileTree.File name="index.js" />
+          <FileTree.File name="package.json" />
+          <FileTree.File name="bun.lockb" />
+        </FileTree.Folder>
+      </FileTree>
     </Steps>
   </Tab>
+
 </Tabs>
 
 <Callout type="info" emoji="ℹ️">
-    You can use **TimeFormat** to create time-based events, such as countdowns, repeating callbacks, scheduling callbacks, etc.
+    You can use **TimeFormat** to create time-based events, such as countdowns, repeated callbacks, scheduled callbacks, and more.
 </Callout>
+

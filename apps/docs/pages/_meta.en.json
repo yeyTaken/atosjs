@@ -21,11 +21,11 @@
     "items": {
       "pt": {
         "title": "Português",
-        "href": "/pt"
+        "href": "https://atosjs-docs.vercel.app/pt"
       },
       "en": {
         "title": "English",
-        "href": "/en"
+        "href": "https://atosjs-docs.vercel.app/en"
       }
     }
   }

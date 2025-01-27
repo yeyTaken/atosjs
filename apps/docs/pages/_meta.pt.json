@@ -9,6 +9,16 @@
     "href": "https://atos.js.org/about",
     "newWindow": true
   },
+  "versions": {
+    "title": "Versions",
+    "type": "menu",
+    "items": {
+      "about": {
+        "title": "AtosJS v2 Docs ↗",
+        "href": "https://atosjs-docs-v2.vercel.app/"
+      }
+    }
+  },
   "contact": {
     "title": "Contact ↗",
     "type": "page",

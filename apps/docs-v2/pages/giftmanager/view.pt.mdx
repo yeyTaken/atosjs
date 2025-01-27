@@ -1,0 +1,104 @@
+import { Tabs, Tab, Callout } from 'nextra/components';
+
+## Método `view`
+
+<Callout type="info" emoji="ℹ️">
+O método `view` permite visualizar informações detalhadas sobre um presente gerado, incluindo validade e valores associados.
+</Callout>
+
+O método `view` da classe `GiftManager` é usado para visualizar informações detalhadas sobre um presente gerado. Ele retorna um objeto contendo informações sobre a validade e os dados do presente.
+
+---
+
+### Assinatura do Método
+```js showLineNumbers filename="JavaScript" copy
+async view(giftId: string): Promise<Object>
+```
+
+---
+
+### Parâmetros
+- **`giftId`** (string): O identificador único do presente que será visualizado. Esse ID é gerado pelo método `generate()`.
+
+<Callout type="warning" emoji="⚠️">
+Certifique-se de que o `giftId` passado seja válido e tenha sido gerado pela mesma instância do `GiftManager`.
+</Callout>
+
+---
+
+### Retorno
+Uma `Promise` que resolve para um objeto contendo:
+- **`valid`** (boolean): Indica se o presente ainda é válido.
+- **`type`** (string): O tipo do presente.
+- **`value`** (string): O valor associado ao presente.
+
+<Callout type="info" emoji="ℹ️">
+Os dados retornados permitem verificar a validade do presente antes de tentar resgatá-lo.
+</Callout>
+
+---
+
+### Exemplo de Uso
+
+O exemplo abaixo demonstra como utilizar o método `view` para obter informações detalhadas sobre um presente:
+
+```js showLineNumbers filename="JavaScript" copy
+async function gift() {
+    const gm = new GiftManager({
+        fileName: 'atosjs-test',
+        fileType: 2 // YAML format
+    });
+
+    const giftId = await gm.generate({
+        type: 'test',
+        value: 'test giftId in string',
+        maxRedeem: 3,
+        edit: {
+            code: 'ATOSJS_TEST'
+        }
+    });
+
+    console.log({ 
+        giftID: giftId,
+        giftView: await gm.view(giftId), // Exibe informações detalhadas sobre o presente
+    });
+};
+
+gift();
+```
+
+<Callout type="default" emoji="💡">
+Se você precisar apenas de uma propriedade específica, pode acessar diretamente utilizando a notação de ponto.
+</Callout>
+
+```js showLineNumbers filename="JavaScript" copy
+async function gift() {
+    console.log({ 
+        giftViewType: await gm.view(giftId).type, // Exibe o tipo do presente.
+        giftViewValid: await gm.view(giftId).valid, // Exibe `true` para válido ou `false` para inválido.
+    });
+};
+
+gift();
+```
+
+---
+
+### Saída do Console
+```bash filename="Terminal"
+{
+  giftID: 'ATOSJS_TEST',
+  giftView: { valid: true, type: 'test', value: 'test giftId in string' }
+}
+{
+  giftView2: { type: 'test', valid: true }
+}
+```
+
+---
+
+### Observações
+
+<Callout type="info" emoji="ℹ️">
+O método `view` deve ser usado sempre que for necessário validar ou recuperar informações sobre um presente antes de tentar resgatá-lo.
+</Callout>

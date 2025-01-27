@@ -43,24 +43,11 @@ t.convertToMilliseconds('2h');  // 7200000ms
 Converts a value in milliseconds to a human-readable format of hours, minutes, and seconds.
 
 #### Example:
-
 ```js showLineNumbers filename="JavaScript" copy
 t.convertFromMilliseconds(3661000); // '1h 1m 1s'
-
-// Instantiating the TimeFormat class with custom settings
-const t = new TimeFormat({
-  format: {
-    short: false, // Sets the full format, e.g., '1h 1m 1s' instead of '1h'
-    language: 'en-US', // Sets the language to 'en-US', so values are expressed as 'hours', 'minutes', 'seconds'.
-  }
-});
-
-// Converting 3661000 milliseconds (equivalent to 1 hour, 1 minute, and 1 second)
-t.convertFromMilliseconds(3661000); // Output: '1h hour 1 minute 1 second'
 ```
-
 <Callout type="info" emoji="ℹ️">
-**Note**: The `convertFromMilliseconds` method makes it easy to convert time from milliseconds to a more readable format, allowing it to be displayed in a custom format and in the language of your choice. For example, '1h 1m 1s' can be displayed as '1h hour 1 minute 1 second' in English.
+**Note**: This method makes it easier to visualize times expressed in milliseconds in a more comprehensible way, like '1h 1m 1s'.
 </Callout>
 
 #### Parameters:

@@ -9,8 +9,8 @@ const config: DocsThemeConfig = {
   banner: {
     key: 'discord',
     text: (
-      <a href="https://atos.js.org/discord" target="_blank">
-        😎 AtosJS discord, Read more →
+      <a href="https://atosjs-docs.vercel.app/" target="_blank">
+        ❤ New update v2.1, Read more →
       </a>
     )
   },

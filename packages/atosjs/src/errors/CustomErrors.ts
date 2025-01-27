@@ -20,3 +20,15 @@ export class InvalidTimeUnit extends AtosJSError {
     super('Invalid time unit. Use 60s, 7d, 10m and 1y.', 'INVALID_TIME_UNIT');
   }
 }
+
+export class InvalidFormatData extends AtosJSError {
+  constructor() {
+    super('Invalid formatData provided.', 'INVALID_FORMAT_DATA');
+  }
+}
+
+export class InvalidMsValue extends AtosJSError {
+  constructor() {
+    super('The value must be greater than or equal to 1000 milliseconds (1s).', 'INVALID_MS_VALUE');
+  }
+}

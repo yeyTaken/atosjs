@@ -1,0 +1,13 @@
+{
+  "en-US": {
+    "h": ["hour", "hours"],
+    "m": ["minute", "minutes"],
+    "s": ["second", "seconds"]
+  },
+  
+  "pt-BR": {
+    "h": ["hora", "horas"],
+    "m": ["minuto", "minutos"],
+    "s": ["segundo", "segundos"]
+  }
+}

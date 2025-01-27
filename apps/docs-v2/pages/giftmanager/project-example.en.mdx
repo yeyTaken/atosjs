@@ -1,0 +1,355 @@
+import { Tabs, Tab, Callout, Steps, FileTree } from 'nextra/components';
+
+# Project Example
+
+<Tabs items={['npm', 'yarn', 'pnpm', 'bun']}>
+  <Tab>
+    <Steps>
+      ### Project Installation (npm)
+
+      ```bash copy filename="Terminal"
+      npm init -y
+      npm i atosjs@latest
+      ```
+
+      ```bash filename="Terminal: Output"
+      $ npm init -y
+      Wrote to /workspaces/atosjs/tests/random/package.json:
+
+      {
+        "name": "my-project",
+        "version": "1.0.0",
+        "main": "index.js",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "keywords": [],
+        "author": "",
+        "license": "ISC",
+        "description": ""
+      }
+
+      $ npm i atosjs@latest
+
+      added 41 packages, and audited 42 packages in 4s
+
+      9 packages are looking for funding
+      run `npm fund` for details
+
+      found 0 vulnerabilities
+      ```
+
+      ### Project Files
+
+      ```js showLineNumbers copy filename="index.js"
+      const readline = require('readline');
+      const { GiftManager } = require('atosjs');
+
+      const gm = new GiftManager({
+          fileType: 2
+      });
+
+      async function newGift() {
+          const giftId = await gm.generate({
+              type: 'coins',
+              value: 1500
+          });
+
+          return console.log('giftId: ' + giftId);
+      }
+
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+
+      newGift();
+      setTimeout(async () => {
+          console.log();
+          console.log('Enter your code here:');
+      }, 1000);
+
+      rl.question('', async (code) => {
+          const redeem = await gm.redeem(code);
+          const view = await gm.view(code);
+
+          if (redeem.success) {
+              console.log(`Code successfully redeemed! You received ${view.value} ${view.type}`);
+          } else {
+              console.log('The code does not exist or has already been used.');
+          }
+          rl.close();
+      });
+      ```
+
+      ### Final Project Structure
+
+      <FileTree>
+        <FileTree.Folder name="my-project" defaultOpen>
+          <FileTree.Folder name="node_modules">
+          </FileTree.Folder>
+          <FileTree.File name="index.js" />
+          <FileTree.File name="gifts.yaml" />
+          <FileTree.File name="package.json" />
+          <FileTree.File name="package-lock.json" />
+        </FileTree.Folder>
+      </FileTree>
+    </Steps>
+  </Tab>
+
+  <Tab>
+    <Steps>
+      ### Project Installation (yarn)
+
+      ```bash copy filename="Terminal"
+      yarn init -y
+      yarn add atosjs
+      ```
+
+      ```bash filename="Terminal: Output"
+      $ yarn init -y
+      success Wrote to package.json:
+
+      {
+        "name": "my-project",
+        "version": "1.0.0",
+        "main": "index.js",
+        "license": "MIT"
+      }
+
+      $ yarn add atosjs
+      success Saved lockfile.
+      success Saved 41 new dependencies.
+      ```
+
+      ### Project Files
+
+      ```js showLineNumbers copy filename="index.js"
+      const readline = require('readline');
+      const { GiftManager } = require('atosjs');
+
+      const gm = new GiftManager({
+          fileType: 2
+      });
+
+      async function newGift() {
+          const giftId = await gm.generate({
+              type: 'coins',
+              value: 1500
+          });
+
+          return console.log('giftId: ' + giftId);
+      }
+
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+
+      newGift();
+      setTimeout(async () => {
+          console.log();
+          console.log('Enter your code here:');
+      }, 1000);
+
+      rl.question('', async (code) => {
+          const redeem = await gm.redeem(code);
+          const view = await gm.view(code);
+
+          if (redeem.success) {
+              console.log(`Code successfully redeemed! You received ${view.value} ${view.type}`);
+          } else {
+              console.log('The code does not exist or has already been used.');
+          }
+          rl.close();
+      });
+      ```
+
+      ### Final Project Structure
+
+      <FileTree>
+        <FileTree.Folder name="my-project" defaultOpen>
+          <FileTree.Folder name="node_modules">
+          </FileTree.Folder>
+          <FileTree.File name="index.js" />
+          <FileTree.File name="gifts.yaml" />
+          <FileTree.File name="package.json" />
+          <FileTree.File name="yarn.lock" />
+        </FileTree.Folder>
+      </FileTree>
+    </Steps>
+  </Tab>
+
+  <Tab>
+    <Steps>
+      ### Project Installation (pnpm)
+
+      ```bash copy filename="Terminal"
+      pnpm init
+      pnpm add atosjs
+      ```
+
+      ```bash filename="Terminal: Output"
+      $ pnpm init
+      Wrote to package.json:
+
+      {
+        "name": "my-project",
+        "version": "1.0.0",
+        "main": "index.js",
+        "license": "ISC"
+      }
+
+      $ pnpm add atosjs
+      Packages: +41
+      +	atosjs 4.0.0
+      Progress: resolved 42, reused 41, downloaded 1, done
+      ```
+
+      ### Project Files
+
+      ```js showLineNumbers copy filename="index.js"
+      const readline = require('readline');
+      const { GiftManager } = require('atosjs');
+
+      const gm = new GiftManager({
+          fileType: 2
+      });
+
+      async function newGift() {
+          const giftId = await gm.generate({
+              type: 'coins',
+              value: 1500
+          });
+
+          return console.log('giftId: ' + giftId);
+      }
+
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+
+      newGift();
+      setTimeout(async () => {
+          console.log();
+          console.log('Enter your code here:');
+      }, 1000);
+
+      rl.question('', async (code) => {
+          const redeem = await gm.redeem(code);
+          const view = await gm.view(code);
+
+          if (redeem.success) {
+              console.log(`Code successfully redeemed! You received ${view.value} ${view.type}`);
+          } else {
+              console.log('The code does not exist or has already been used.');
+          }
+          rl.close();
+      });
+      ```
+
+      ### Final Project Structure
+
+      <FileTree>
+        <FileTree.Folder name="my-project" defaultOpen>
+          <FileTree.Folder name="node_modules">
+          </FileTree.Folder>
+          <FileTree.File name="index.js" />
+          <FileTree.File name="gifts.yaml" />
+          <FileTree.File name="package.json" />
+          <FileTree.File name="pnpm-lock.yaml" />
+        </FileTree.Folder>
+      </FileTree>
+    </Steps>
+  </Tab>
+
+  <Tab>
+    <Steps>
+      ### Project Installation (bun)
+
+      ```bash copy filename="Terminal"
+      bun init
+      bun add atosjs
+      ```
+
+      ```bash filename="Terminal: Output"
+      $ bun init
+      Created package.json
+
+      {
+        "name": "my-project",
+        "version": "1.0.0",
+        "main": "index.js",
+        "license": "MIT"
+      }
+
+      $ bun add atosjs
+      + atosjs@latest
+      ```
+
+      ### Project Files
+
+      ```js showLineNumbers copy filename="index.js"
+      const readline = require('readline');
+      const { GiftManager } = require('atosjs');
+
+      const gm = new GiftManager({
+          fileType: 2
+      });
+
+      async function newGift() {
+          const giftId = await gm.generate({
+              type: 'coins',
+              value: 1500
+          });
+
+          return console.log('giftId: ' + giftId);
+      }
+
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+
+      newGift();
+      setTimeout(async () => {
+          console.log();
+          console.log('Enter your code here:');
+      }, 1000);
+
+      rl.question('', async (code) => {
+          const redeem = await gm.redeem(code);
+          const view = await gm.view(code);
+
+          if (redeem.success) {
+              console.log(`Code successfully redeemed! You received ${view.value} ${view.type}`);
+          } else {
+              console.log('The code does not exist or has already been used.');
+          }
+          rl.close();
+      });
+      ```
+
+      ### Final Project Structure
+
+      <FileTree>
+        <FileTree.Folder name="my-project" defaultOpen>
+          <FileTree.Folder name="node_modules">
+          </FileTree.Folder>
+          <FileTree.File name="index.js" />
+          <FileTree.File name="gifts.yaml" />
+          <FileTree.File name="package.json" />
+          <FileTree.File name="bun.lockb" />
+        </FileTree.Folder>
+      </FileTree>
+    </Steps>
+  </Tab>
+
+</Tabs>
+
+<Callout type="info" emoji="ℹ️">
+  Every time you create a new `giftId`, the `gifts.yaml` file will be updated because the codes are stored there.  
+  If the project is public, it is recommended to add `gifts.*` to `.gitignore`.
+</Callout>
+

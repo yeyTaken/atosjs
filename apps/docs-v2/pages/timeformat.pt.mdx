@@ -46,28 +46,11 @@ Converte um valor em milissegundos para um formato legível de horas, minutos e 
 #### Exemplo:
 ```js showLineNumbers filename="JavaScript" copy
 t.convertFromMilliseconds(3661000); // '1h 1m 1s'
-
-// Instanciando a classe TimeFormat com configurações personalizadas
-const t = new TimeFormat({
-  format: {
-    short: false, // Define o formato completo, por exemplo, '1h 1m 1s' em vez de '1h'
-    language: 'pt-BR', // Define a linguagem para 'pt-BR', fazendo com que os valores sejam expressos como 'horas', 'minutos', 'segundos'.
-  }
-});
-
-// Convertendo 3661000 milissegundos (equivalente a 1 hora, 1 minuto e 1 segundo)
-t.convertFromMilliseconds(3661000); // Saída: '1h hora 1 minuto 1 segundo'
 ```
-
 <Callout type="info" emoji="ℹ️">
-**Nota**: O método `convertFromMilliseconds` facilita a conversão de tempos em milissegundos para uma forma mais legível, permitindo que sejam exibidos em um formato customizado e na língua de sua escolha. Por exemplo, '1h 1m 1s' pode ser exibido como '1h hora 1 minuto 1 segundo' em português.
+**Nota**: Este método facilita a visualização de tempos expressos em milissegundos de uma maneira mais compreensível, como '1h 1m 1s'.
 </Callout>
 
-### Detalhes:
-
-1. **Formato Completo vs. Curto**: A configuração `short: false` garante que a conversão seja exibida de forma completa, sem abreviações.
-2. **Internacionalização**: O parâmetro `language: 'pt-BR'` é utilizado para ajustar a saída para o português brasileiro, alterando as palavras que descrevem unidades de tempo.
-3. **Exemplo Real**: A conversão de `3661000` milissegundos resulta em '1h hora 1 minuto 1 segundo', tornando a saída mais compreensível.
 #### Parâmetros:
 - `milliseconds` (number): O número de milissegundos a ser convertido.
 

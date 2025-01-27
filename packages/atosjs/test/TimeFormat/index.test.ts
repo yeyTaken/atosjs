@@ -1,5 +1,4 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-
 import { ErrorMessages } from '../../src/errors';
 import { TimeFormat } from '../../src';
 
@@ -30,7 +29,6 @@ describe('TimeFormat', () => {
     it('deve lançar erro para unidade inválida', () => {
       expect(() => timeFormat.convertToMilliseconds('10z')).toThrowError(ErrorMessages.INVALID_TIME_UNIT);
     });
-
   });
 
   describe('every', () => {
@@ -39,12 +37,11 @@ describe('TimeFormat', () => {
       const interval = '1s';
       timeFormat.every(interval, callback);
   
-      // Wait for the interval to elapse and verify the callback was called
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 1 second
+      // Espera o intervalo passar e verifica se a função foi chamada
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Espera por 1 segundo
       expect(callback).toHaveBeenCalledTimes(1);
     });
   });
-  
 
   describe('repeatInfinite', () => {
     it('deve chamar a função infinitamente', () => {
@@ -54,7 +51,7 @@ describe('TimeFormat', () => {
 
       // Verifica se a função foi chamada infinitamente após 1 segundo
       setTimeout(() => {
-        expect(callback).toHaveBeenCalledTimes(2); // pelo menos 2 vezes após 2 segundos
+        expect(callback).toHaveBeenCalledTimes(2); // Pelo menos 2 vezes após 2 segundos
       }, 2000);
     });
   });
@@ -134,17 +131,17 @@ describe('TimeFormat', () => {
   describe('convertFromMilliseconds', () => {
     it('deve converter milissegundos para formato de tempo', () => {
       const ms = 3605000;
-      expect(timeFormat.convertFromMilliseconds(ms)).toBe('1h 0m 5s');
+      expect(timeFormat.convertFromMilliseconds(ms)).toBe('1h 5s');
     });
 
     it('deve converter milissegundos para formato de tempo sem horas', () => {
       const ms = 500000;
-      expect(timeFormat.convertFromMilliseconds(ms)).toBe('0h 8m 20s');
+      expect(timeFormat.convertFromMilliseconds(ms)).toBe('8m 20s');
     });
 
     it('deve converter milissegundos para formato de tempo sem minutos', () => {
       const ms = 5000;
-      expect(timeFormat.convertFromMilliseconds(ms)).toBe('0h 0m 5s');
+      expect(timeFormat.convertFromMilliseconds(ms)).toBe('5s');
     });
   });
 });

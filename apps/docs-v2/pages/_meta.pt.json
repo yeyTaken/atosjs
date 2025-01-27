@@ -13,9 +13,9 @@
     "title": "Versions",
     "type": "menu",
     "items": {
-      "v2.1": {
-        "title": "AtosJS v2 Docs ↗",
-        "href": "https://atosjs-docs-v2.vercel.app/"
+      "about": {
+        "title": "AtosJS v2.1 Docs ↗",
+        "href": "https://atosjs-docs.vercel.app/"
       }
     }
   },

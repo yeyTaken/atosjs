@@ -11,6 +11,7 @@ test.json
 test.yaml
 # Ignorar a pasta node_modules
 node_modules/
+.npmrc
 
 # Ignorar o arquivo de lock do npm (opcional)
 package-lock.json

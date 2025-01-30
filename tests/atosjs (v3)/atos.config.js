@@ -1,4 +1,4 @@
-import { GiftManager, TimeFormat } from '../../packages/atosjs/lib/index.js';
+import { GiftManager, TimeFormat } from '../../packages/atosjs/dist/index.js';
 
 // TimeFormat
 export const time = new TimeFormat();

@@ -1,4 +1,4 @@
-import { TimeFormat } from "../../packages/atosjs/lib/index.js";
+import { TimeFormat } from "atosjs";
 
 const t = new TimeFormat({
   format: {

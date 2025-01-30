@@ -1,198 +1,109 @@
 "use client";
 
-import { JSX, useState } from "react";
-import { LuCopy, LuCheck } from "react-icons/lu";
+import { BookOpenTextIcon, GithubIcon, Heart } from "lucide-react";
+import Link from "next/link";
+import { Snippet } from "@heroui/react";
+import { useState } from "react";
 
-import "../../public/home.css";
+interface IconProps {
+  size?: number;
+  height?: number;
+  width?: number;
+  [key: string]: any; // For additional props
+}
+
+export const CopyIcon = ({ size, height, width, ...props }: IconProps) => {
+  return (
+    <svg
+      fill="none"
+      height={size || height || 20}
+      shapeRendering="geometricPrecision"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.5"
+      viewBox="0 0 24 24"
+      width={size || width || 20}
+      {...props}
+    >
+      <path d="M6 17C4.89543 17 4 16.1046 4 15V5C4 3.89543 4.89543 3 6 3H13C13.7403 3 14.3866 3.4022 14.7324 4M11 21H18C19.1046 21 20 20.1046 20 19V9C20 7.89543 19.1046 7 18 7H11C9.89543 7 9 7.89543 9 9V19C9 20.1046 9.89543 21 11 21Z" />
+    </svg>
+  );
+};
+
+export const CheckIcon = ({ size, height, width, ...props }: IconProps) => {
+  return (
+    <svg
+      fill="currentColor"
+      height={size || height || 24}
+      viewBox="0 0 24 24"
+      width={size || width || 24}
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="m2.394 13.742 4.743 3.62 7.616-8.704-1.506-1.316-6.384 7.296-3.257-2.486zm19.359-5.084-1.506-1.316-6.369 7.279-.753-.602-1.25 1.562 2.247 1.798z" />
+    </svg>
+  );
+};
 
 export default function Home() {
-  const [activeButton, setActiveButton] = useState("npm");
-  const [copyClicked, setCopyClicked] = useState(false);
-  const [popupVisible, setPopupVisible] = useState(false);
-  const [popupMessage, setPopupMessage] = useState('');
+  const [isClicked, setIsClicked] = useState(false);
 
-  const showCommand = (tool: string) => {
-    setActiveButton(tool);
+  const handleClick = () => {
+    setIsClicked(true);
+    setTimeout(() => setIsClicked(false), 1000); // Volta ao estado original após 1 segundo
   };
-
-  const handleCopyClick = () => {
-    const commandText = getCommandText(activeButton);
-
-    if (commandText) {
-      navigator.clipboard.writeText(commandText)
-        .then(() => {
-          setPopupMessage(`Copied ${activeButton} command`);
-          setPopupVisible(true);
-          setCopyClicked(true);
-
-          setTimeout(() => {
-            setCopyClicked(false);
-          }, 3000);
-
-          setTimeout(() => {
-            setPopupVisible(false);
-          }, 5500);
-        })
-        .catch((error) => {
-          console.error("Failed to copy text: ", error);
-        });
-    }
-  };
-
-  const getCommandText = (tool: string) => {
-    const commands: Record<string, string> = {
-      npm: "npm install atosjs@latest",
-      yarn: "yarn add atosjs@latest",
-      pnpm: "pnpm add atosjs@latest",
-      bun: "bun add atosjs@latest",
-    };
-    return commands[tool];
-  };
-
-  const getCommandJSX = (tool: string) => {
-    const commands: Record<string, JSX.Element[]> = {
-      npm: [
-        <span key="dollarSign">$ </span>,
-        <span key="command" className="command">npm </span>,
-        <span key="option" className="option">install </span>,
-        <span key="package" className="package">atosjs@latest</span>
-      ],
-      yarn: [
-        <span key="dollarSign">$ </span>,
-        <span key="command" className="command">yarn </span>,
-        <span key="option" className="option">add </span>,
-        <span key="package" className="package">atosjs@latest</span>
-      ],
-      pnpm: [
-        <span key="dollarSign">$ </span>,
-        <span key="command" className="command">pnpm </span>,
-        <span key="option" className="option">add </span>,
-        <span key="package" className="package">atosjs@latest</span>
-      ],
-      bun: [
-        <span key="dollarSign">$ </span>,
-        <span key="command" className="command">bun </span>,
-        <span key="option" className="option">add </span>,
-        <span key="package" className="package">atosjs@latest</span>
-      ],
-    };
-    return commands[tool];
-  };
-  
 
   return (
-    <div className="atosjs">
-      <h1 className="heading">
-        Your <span>imagination</span> is the limit.
-      </h1>
-      <p className="paragraph">
-        AtosJS is a JavaScript library that simplifies event management. Its
-        main class, GiftManager, handles the distribution of virtual rewards,
-        efficiently controlling the delivery and validity of prizes.
-      </p>
-      <div className="button-container">
-        <a
-          className="button docs"
-          href="/docs"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Docs
-        </a>
-        <a
-          className="button github"
-          href="https://github.com/yeyTaken/atosjs"
-          rel="external noopener noreferrer"
-          target="_blank"
-        >
-          GitHub
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-external-link"
-            aria-hidden="true"
-          >
-            <path d="M15 3h6v6"></path>
-            <path d="M10 14 21 3"></path>
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-          </svg>
-        </a>
-        <a className="button donate" href="https://github.com/sponsors/yeyTaken">
-          Donate
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-heart"
-            aria-hidden="true"
-          >
-            <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"></path>
-          </svg>
-        </a>
-      </div>
+    <>
+      <section className="flex items-center justify-center flex-col text-center m-10 p-10 space-y-20">
+        <div className="space-y-3">
+          <h1 className="text-6xl font-semibold">
+            Your <span className="underline">imagination</span> is the limit.
+          </h1>
+          <p className="text-xl text-paragraph">
+            AtosJS is a JavaScript library that simplifies event management. Its main class,
+            GiftManager, handles the distribution of virtual rewards, efficiently controlling the
+            delivery and validity of prizes.
+          </p>
+        </div>
 
-      <div className="install-box">
-        <div className="tab-bar">
-          <div className="tabs">
-            <button
-              className={activeButton === "npm" ? "active" : ""}
-              onClick={() => showCommand("npm")}
-            >
-              npm
-            </button>
-            <button
-              className={activeButton === "yarn" ? "active" : ""}
-              onClick={() => showCommand("yarn")}
-            >
-              yarn
-            </button>
-            <button
-              className={activeButton === "pnpm" ? "active" : ""}
-              onClick={() => showCommand("pnpm")}
-            >
-              pnpm
-            </button>
-            <button
-              className={activeButton === "bun" ? "active" : ""}
-              onClick={() => showCommand("bun")}
-            >
-              bun
-            </button>
-          </div>
-          <button
-            onClick={handleCopyClick}
-            className={`copy-icon ${copyClicked ? "copied" : ""}`}
+        <div className="flex items-center justify-center space-x-5">
+          <Link
+            href={"/docs"}
+            className="flex items-center p-3 border-2 border-blue-950 rounded-md hover:bg-blue-950/70 hover:text-white transition-colors ease-in-out duration-300"
           >
-            {copyClicked ? <LuCheck /> : <LuCopy />}
-          </button>
+            <BookOpenTextIcon className="inline-block w-6 h-6 mr-1" /> Documentation
+          </Link>
+          <Link
+            href={"https://github.com/yeyTaken/atosjs"}
+            className="flex items-center py-3 px-10 border-2 border-white/70 rounded-md"
+          >
+            <GithubIcon className="inline-block w-6 h-6 mr-1" /> Github
+          </Link>
+          <Link
+            href={"https://github.com/yeyTaken"}
+            className="flex items-center py-3 px-10 border-2 border-pink-600 rounded-md"
+          >
+            <Heart className="inline-block w-6 h-6 mr-1" /> Donate
+          </Link>
         </div>
-        <div className="code-box">
-          <div className="language">sh</div>
-          {getCommandJSX(activeButton)}
-        </div>
-      </div>
 
-      {popupVisible && (
-        <div className="popup">
-          <span>
-            <LuCheck />
-            {popupMessage}
-          </span>
+        <div onClick={handleClick}>
+          <Snippet
+            checkIcon={
+              <CheckIcon
+                className={isClicked ? "text-green-500" : "text-white"} // Verde quando ativo, branco quando inativo
+              />
+            }
+            copyIcon={<CopyIcon className="text-white" />} // Sempre branco
+            variant="bordered"
+            className="text-white"
+          >
+            npm install atosjs@latest
+          </Snippet>
         </div>
-      )}
-    </div>
+      </section>
+    </>
   );
 }

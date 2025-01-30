@@ -1,3 +1,4 @@
+import {heroui} from '@heroui/theme';
 import type { Config } from "tailwindcss";
 
 export default {
@@ -5,19 +6,20 @@ export default {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@heroui/theme/dist/components/(snippet|button|ripple|spinner|popover).js"
   ],
   theme: {
     extend: {
       colors: {
         text: "var(--color-text)",
-        "text-paragraph": "var(--color-text-paragraph)",
+        paragraph: "var(--color-paragraph)",
         error: "var(--color-error)",
-        paper: "var(--color-error)",
+        paper: "var(--color-paper)",
         primary: "var(--color-primary)",
         background: "var(--color-background)",
         "primary-contrast": "var(--color-primary-contrast)",
       },
     },
   },
-  plugins: [],
+  plugins: [heroui()],
 } satisfies Config;

@@ -51,7 +51,7 @@ async function copyConfigFile(language: Language, extension: string) {
 
 // Main function
 async function main(autoSelectLanguage?: string) {
-    console.log(chalk.hex('#6C5CE7')(figlet.textSync('AtosJS CLI', { horizontalLayout: 'full' })));
+    console.log(chalk.hex('#6C5CE7')(figlet.textSync('AtosJS', { horizontalLayout: 'full' })));
 
     try {
         const languages: Language[] = properties.languages;

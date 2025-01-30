@@ -1,6 +1,6 @@
 "use client";
 
-import { FaDiscord, FaNpm, FaUsers, FaCircleInfo, FaEnvelope } from "react-icons/fa6";
+import { FaDiscord, FaUsers } from "react-icons/fa6";
 import Link from "next/link";
 
 export const AtosLogo = () => {
@@ -18,7 +18,7 @@ export const AtosLogo = () => {
 
 export default function Header() {
   return (
-    <header className="py-3 px-6 flex items-center justify-between">
+    <header className="flex justify-between items-center bg-transparent shadow p-5">
     <div className="flex items-center cursor-pointer">
       <Link href="/" className="flex items-center">
         <AtosLogo />
@@ -26,34 +26,12 @@ export default function Header() {
       </Link>
     </div>
 
-      <nav className="flex-1 flex justify-center">
-        <ul className="flex items-center justify-center gap-6">
-          <li className="relative text-white cursor-pointer after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full">
-            <Link href="/team" className="flex items-center gap-2">
-              <FaUsers className="text-xl" />
-              Team
-            </Link>
-          </li>
-          <li className="relative text-white cursor-pointer after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full">
-            <Link href="/about" className="flex items-center gap-2">
-              <FaCircleInfo className="text-xl" />
-              About
-            </Link>
-          </li>
-          <li className="relative text-white cursor-pointer after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full">
-            <Link href="/contact" className="flex items-center gap-2">
-              <FaEnvelope className="text-xl" />
-              Contact
-            </Link>
-          </li>
-        </ul>
-      </nav>
 
       <nav>
         <ul className="flex items-center justify-center gap-3">
           <li className="relative text-white cursor-pointer">
-            <Link href="https://www.npmjs.com/package/atosjs">
-              <FaNpm className="text-2xl cursor-pointer hover:text-red-500/70 hover:text-white transition-colors ease-in-out duration-300" />
+            <Link href="/team">
+              <FaUsers className="text-2xl cursor-pointer hover:text-red-500/70 hover:text-white transition-colors ease-in-out duration-300" />
             </Link>
           </li>
           <li className="relative text-white cursor-pointer">

@@ -4,6 +4,9 @@
   "description": "AtosJS, It´s a complex and adventure-filled book!",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "bin": {
+    "atos": "./lib/index.js"
+  },
   "scripts": {
     "atosjs": "npm install && npm start",
     "start": "tsc -p tsconfig.build.json && vitest",

@@ -23,6 +23,7 @@ interface Language {
 // Function to copy the configuration file
 async function copyConfigFile(language: Language, extension: string) {
     const spinner = new Spinner(`Copying configuration file for ${chalk.cyan(language.name)}...`);
+    spinner.setSpinnerString(18)
     spinner.start();
 
     // Simulate the 3-second delay for the animation to be visible

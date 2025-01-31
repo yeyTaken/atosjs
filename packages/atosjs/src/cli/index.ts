@@ -4,15 +4,14 @@ import { select } from '@inquirer/prompts';
 import chalk from 'chalk';
 import consola from 'consola';
 import figlet from 'figlet';
-import { Spinner } from 'cli-spinner'; // Substituímos ora por cli-spinner
+import { Spinner } from 'cli-spinner';
 
-// Path to the properties file
 const propertiesPath = path.join(__dirname, '../../templates/config/properties.json');
+const PackageJsonPath = path.join(__dirname, '../../package.json');
 
-// Read the properties file
+const packageJSON = JSON.parse(fs.readFileSync(PackageJsonPath, 'utf-8'));
 const properties = JSON.parse(fs.readFileSync(propertiesPath, 'utf-8'));
 
-// Interface for the language object
 interface Language {
     name: string;
     icon: string;
@@ -20,21 +19,16 @@ interface Language {
     extensions: string[];
 }
 
-// Function to copy the configuration file
 async function copyConfigFile(language: Language, extension: string) {
+    console.log();
     const spinner = new Spinner(`Copying configuration file for ${chalk.cyan(language.name)}...`);
-    spinner.setSpinnerString(18)
+    spinner.setSpinnerString(18);
     spinner.start();
 
-    // Simulate the 3-second delay for the animation to be visible
     setTimeout(() => {
-        // Build the source file path
         const sourcePath = path.join(__dirname, `../../templates/config/${language.path}/atos.config.${extension}`);
-        
-        // Build the destination file path
         const destPath = path.join(process.cwd(), `atos.config.${extension}`);
 
-        // Check if the source file exists
         if (!fs.existsSync(sourcePath)) {
             spinner.stop(true);
             consola.error(`Configuration file not found for ${language.name}.`);
@@ -42,24 +36,22 @@ async function copyConfigFile(language: Language, extension: string) {
             process.exit(1);
         }
 
-        // Copy the configuration file
         fs.copyFileSync(sourcePath, destPath);
         spinner.stop(true);
         consola.success(`Configuration file copied to: ${chalk.green(destPath)}`);
-    }, 3000); // 3-second delay
+    }, 3000);
 }
 
-// Main function
 async function main(autoSelectLanguage?: string) {
     console.log(chalk.hex('#6C5CE7')(figlet.textSync('AtosJS', { horizontalLayout: 'full' })));
+    consola.info(chalk.blue('AtosJS CLI 📦 ') + chalk.gray.underline(packageJSON.version));
+    console.log();
 
     try {
         const languages: Language[] = properties.languages;
-
         let chosenLanguage: Language;
 
         if (autoSelectLanguage) {
-            // Automatically select the language based on the flag
             const selectedLanguage = languages.find((lang) => lang.name.toLowerCase() === autoSelectLanguage.toLowerCase());
             if (!selectedLanguage) {
                 consola.error(`Language "${autoSelectLanguage}" not found.`);
@@ -67,21 +59,13 @@ async function main(autoSelectLanguage?: string) {
             }
             chosenLanguage = selectedLanguage;
         } else {
-            // Create the selection menu
             chosenLanguage = await select({
                 message: chalk.hex('#6C5CE7')('🚀 Choose a language:'),
                 choices: languages.map((lang) => ({
                     name: `${lang.icon} ${chalk.bold(lang.name)}`,
                     value: lang,
-                    description: chalk.dim(`Extensions: atos.config.${lang.extensions.join(', atos.config.')}`),
+                    description: chalk.gray(`Extensions: atos.config.${lang.extensions.join(', atos.config.')}`),
                 })),
-                theme: {
-                    prefix: chalk.hex('#6C5CE7')('$'),
-                    style: {
-                        message: chalk.hex('#6C5CE7'),
-                        description: chalk.dim,
-                    },
-                },
             });
         }
 
@@ -90,27 +74,22 @@ async function main(autoSelectLanguage?: string) {
             process.exit(1);
         }
 
-        // If the chosen language is JavaScript (ES6), ask for the extension
         let chosenExtension: string;
         if (chosenLanguage.name === 'JavaScript (ES6)') {
-            chosenExtension = await select({
-                message: chalk.hex('#6C5CE7')('📄 Choose an extension:'),
+            const useMjs = await select({
+                message: chalk.hex('#6C5CE7')('📄 Choose the file extension:'),
                 choices: [
-                    { name: chalk('🔹 atos.config.js'), value: 'js' },
-                    { name: chalk('🔸 atos.config.mjs'), value: 'mjs' },
+                    { name: 'Configurable', value: 'js', description: chalk.gray('Extension: atos.config.js') },
+                    { name: 'Automatic', value: 'mjs', description: chalk.gray('Extension: atos.config.mjs') },
                 ],
-                theme: {
-                    prefix: chalk.hex('#6C5CE7')('$'),
-                    style: {
-                        message: chalk.hex('#6C5CE7'),
-                    },
-                },
+                pageSize: 2,
             });
+            chosenExtension = useMjs;
         } else {
             chosenExtension = chosenLanguage.extensions[0];
         }
+        
 
-        // Copy the configuration file for the chosen language and extension
         copyConfigFile(chosenLanguage, chosenExtension);
     } catch (error) {
         consola.error('Error:', error);
@@ -118,7 +97,6 @@ async function main(autoSelectLanguage?: string) {
     }
 }
 
-// Check command-line arguments
 if (process.argv[2] === 'init') {
     const languageFlags = ['-js', '-ts', '-es6'];
     const selectedFlag = process.argv.find((arg) => languageFlags.includes(arg));
@@ -134,7 +112,12 @@ if (process.argv[2] === 'init') {
     } else {
         main();
     }
-} else if (process.argv[2] === 'help') {
+} else if (
+  process.argv.slice(2).includes('-h') ||
+  process.argv.slice(2).includes('help') ||
+  process.argv.slice(2).includes('--help') ||
+  process.argv.slice(2).includes('ajuda')
+) {
     consola.box({
         title: chalk.hex('#6C5CE7')('📖 AtosJS CLI Help'),
         message: `
@@ -154,4 +137,8 @@ ${chalk.bold('Examples:')}
   ${chalk.cyan('$ atos help')}
 `,
     });
-}
+} else if (
+    process.argv.slice(2).includes('-v') ||
+    process.argv.slice(2).includes('version') ||
+    process.argv.slice(2).includes('--version')
+) { console.log(`📦 v${packageJSON.version}`) }

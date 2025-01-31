@@ -44,7 +44,7 @@ async function copyConfigFile(language: Language, extension: string) {
 
 async function main(autoSelectLanguage?: string) {
     console.log(chalk.hex('#6C5CE7')(figlet.textSync('AtosJS', { horizontalLayout: 'full' })));
-    consola.info(chalk.blue('AtosJS CLI 📦 ') + chalk.gray.underline(packageJSON.version));
+    console.log(chalk.blue('$ AtosJS CLI 📦 ') + chalk.gray.underline(packageJSON.version));
     console.log();
 
     try {
@@ -115,26 +115,28 @@ if (process.argv[2] === 'init') {
 } else if (
   process.argv.slice(2).includes('-h') ||
   process.argv.slice(2).includes('help') ||
-  process.argv.slice(2).includes('--help') ||
-  process.argv.slice(2).includes('ajuda')
+  process.argv.slice(2).includes('--help')
 ) {
     consola.box({
         title: chalk.hex('#6C5CE7')('📖 AtosJS CLI Help'),
         message: `
-${chalk.bold('Usage:')}
+${chalk.bold('Commands:')}
+  ${chalk.hex('#6C5CE7')('atos help')} ${chalk.dim('[-h|--help|help]')}
+  ${chalk.hex('#6C5CE7')('atos version')} ${chalk.dim('[-v|--version|version]')}
   ${chalk.hex('#6C5CE7')('atos init')} ${chalk.dim('[-js|-ts|-es6]')}
-    ${chalk.green('-js')}: Use JavaScript configuration
-    ${chalk.green('-ts')}: Use TypeScript configuration
-    ${chalk.green('-es6')}: Use JavaScript (ES6) configuration
+    ${chalk.green('-js')}: Use ${chalk.yellowBright('JavaScript')} configuration
+    ${chalk.green('-es6')}: Use ${chalk.yellow('JavaScript (ES6)')} configuration
+    ${chalk.green('-ts')}: Use ${chalk.blue('TypeScript')} configuration
 
-  ${chalk.hex('#6C5CE7')('atos help')}
-    ${chalk.bold('📜 Documentation:')} ${chalk.underline('https://atosjs.org/docs')}
-    ${chalk.bold('💬 Community:')} ${chalk.underline('https://atosjs.org/discord')}
+${chalk.bold('Links:')}
+    ${chalk.bold('📜 Documentation:')} ${chalk.blue.underline('https://atosjs.org/docs')}
+    ${chalk.bold('💬 Community:')} ${chalk.blue.underline('https://atosjs.org/discord')}
 
 ${chalk.bold('Examples:')}
   ${chalk.cyan('$ atos init')}
   ${chalk.cyan('$ atos init -js')}
-  ${chalk.cyan('$ atos help')}
+  ${chalk.cyan('$ atos -h')}
+  ${chalk.cyan('$ atos -v')}
 `,
     });
 } else if (

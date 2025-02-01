@@ -1,13 +1,14 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
+import { Gift } from "../../../classes/GiftManager/@types/gifts"; // Importe o tipo Gift
 
-const giftSchema = new mongoose.Schema({
-    id: { type: String, required: true },
+const giftSchema: Schema<Gift> = new Schema<Gift>({
+    id: { type: String, required: true, unique: true },
     isRedeemed: { type: Boolean, default: false },
     redeemedCount: { type: Number, default: 0 },
     maxRedeem: { type: Number, required: true },
-    expiresAt: { type: Date, required: true },
+    expiresAt: { type: Date }, // Alterado para ser opcional
     type: { type: String },
-    value: { type: Map, of: mongoose.Schema.Types.Mixed }  // or another suitable type depending on your data
-  });
-  
-export const GiftModel = mongoose.model("Gift", giftSchema);
+    value: { type: Schema.Types.Mixed } // Alterado para ser um objeto genérico
+});
+
+export const GiftModel = model<Gift>("Gift", giftSchema);

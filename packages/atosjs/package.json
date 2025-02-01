@@ -43,6 +43,7 @@
     "@types/better-sqlite3": "^7.6.12",
     "@types/cli-spinner": "^0.2.3",
     "@types/figlet": "^1.7.0",
+    "@types/inquirer": "^9.0.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitest/ui": "^2.1.8",

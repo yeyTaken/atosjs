@@ -1,0 +1,55 @@
+{
+  "init": {
+    "name": "deseja usar:",
+    "choices": [
+      {
+        "value": "GiftManager",
+        "icon": "🎁"
+      },
+      {
+        "value": "TimeFormat",
+        "icon": "⏰"
+      }
+    ]
+  },
+  "database": {
+    "name": "Escolha o banco de dados:",
+    "choices": [
+      {
+        "value": "QuickDB",
+        "path": "./database/quickdb",
+        "icon": "📦"
+      },
+      {
+        "value": "MongoDB",
+        "path": "./database/mongodb",
+        "icon": "🍃"
+      }
+    ]
+  },
+  "MongoDB": {
+    "name": "Configurações do MongoDB:",
+    "questions": [
+      {
+        "name": "databaseName",
+        "message": "Qual o nome da database:",
+        "default": "gifts"
+      },
+      {
+        "name": "mongoUri",
+        "message": "Informe o URI do MongoDB:",
+        "default": "mongodb://localhost:27017"
+      }
+    ]
+  },
+  "QuickDB": {
+    "name": "Configurações do QuickDB:",
+    "questions": [
+      {
+        "name": "filePath",
+        "message": "Informe o caminho do arquivo QuickDB:",
+        "default": "./gifts.json"
+      }
+    ]
+  }
+}

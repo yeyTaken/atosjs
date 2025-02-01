@@ -1,12 +1,17 @@
 import { GiftManager, TimeFormat } from '../../packages/atosjs/dist/index.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // TimeFormat
 export const time = new TimeFormat();
-const uri = "mongodb+srv://rabi:2kVXHwjP5VYmKsbR@cluster0.tpw7e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
+const uri = process.env.DB_URI;
 // GiftManager
 export const gift = new GiftManager({
+    // dbLocal: {
+    //     filePath: './src/gift.db',
+    // }
     mongodb: {
-        connect: uri
+        connect: uri,
     }
 });

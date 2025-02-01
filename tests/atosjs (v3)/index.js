@@ -5,10 +5,16 @@ async function main() {
         type: 'test',
         value: 'test giftId in string'
     });
-    console.log(giftId)
+    
+    const viewGift = await gift.view(giftId);
+
+    console.log({
+        giftId,
+        viewGift
+    })
 
 };
 time.after('5s', () => {
-    // main().catch(console.error);
+    main().catch(console.error);
 
 })

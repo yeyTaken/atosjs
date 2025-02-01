@@ -1,9 +1,9 @@
-import { QuickDB } from 'quick.db';
 import { GenerateOptions, Gift } from '../@types/gifts';
 import { AtosJSError, ErrorCodes, ErrorMessages } from '../../../errors';
+import { dbHandler } from '../@types/db';
 
 export async function generateGift(
-    db: QuickDB,
+    db: dbHandler,
     options?: GenerateOptions
 ): Promise<string> {
     const { type, value, expiration, maxRedeem = 1 } = options || {};

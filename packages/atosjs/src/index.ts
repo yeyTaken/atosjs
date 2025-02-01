@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { GiftManager } from './class/GiftManager';
-import { TimeFormat } from './class/TimeFormat';
+import { GiftManager } from './classes/GiftManager';
+import { TimeFormat } from './classes/TimeFormat';
 import './cli';
 
 // AtosJS classes

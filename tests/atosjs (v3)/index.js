@@ -8,5 +8,7 @@ async function main() {
     console.log(giftId)
 
 };
+time.after('5s', () => {
+    // main().catch(console.error);
 
-main().catch(console.error);
+})

@@ -32,3 +32,9 @@ export class InvalidMsValue extends AtosJSError {
     super('The value must be greater than or equal to 1000 milliseconds (1s).', 'INVALID_MS_VALUE');
   }
 }
+
+export class InvalidDbSelection extends AtosJSError {
+  constructor() {
+    super('Invalid database selection provided.', 'INVALID_DB_SELECTION');
+  }
+}

@@ -13,8 +13,9 @@ describe('GiftManager', () => {
 
     beforeAll(() => {
         gm = new GiftManager({
-            fileName: 'test',
-            fileType: 2
+            dbLocal: {
+                filePath: 'test.yaml'
+            }
         });
     });
 
@@ -22,15 +23,6 @@ describe('GiftManager', () => {
         // Limpa os dados do banco após cada teste
         const db = new QuickDB({ filePath: 'test.yaml' });
         await db.delete('gifts');
-    });
-
-    test('Deve retornar um erro no fileType', () => {
-        expect(() => {
-            new GiftManager({
-                fileName: 'test',
-                fileType: 3
-            });
-        }).toThrow(ErrorMessages.INVALID_FILE_TYPE);
     });
 
     test('Deve gerar um gift com sucesso', async () => {

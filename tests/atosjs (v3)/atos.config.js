@@ -1,6 +1,5 @@
 import { GiftManager, TimeFormat } from '../../packages/atosjs/dist/index.js';
-import dotenv from 'dotenv';
-dotenv.config();
+import 'dotenv/config';
 
 export const time = new TimeFormat();
 

@@ -3,7 +3,7 @@ import path from 'node:path';
 import { checkbox } from '@inquirer/prompts';
 import chalk from 'chalk';
 
-const propertiesPath = path.join(__dirname, '../../../templates/properties.json');
+const propertiesPath = path.join(__dirname, '../../../src/cli/templates/properties.json');
 
 interface Properties {
     init: {

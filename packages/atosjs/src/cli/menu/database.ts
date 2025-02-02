@@ -4,7 +4,7 @@ import { select, input } from '@inquirer/prompts';
 import chalk from 'chalk';
 import consola from 'consola';
 
-const propertiesPath = path.join(__dirname, '../../../templates/properties.json');
+const propertiesPath = path.join(__dirname, '../../../src/cli/templates/properties.json');
 
 interface Properties {
     database: {
@@ -71,7 +71,7 @@ export async function databaseMenu(): Promise<{
 
         });
 
-        consola.success(chalk.green.bold('Configurações do 🍃 MongoDB:'));
+        consola.success(chalk.green(`${chalk.bold("Configurações do")} ${chalk.gray("🍃 MongoDB")}:`));
         consola.info(chalk.blue(`${chalk.bold('Database name:')} ${chalk.gray(db.databaseName)}`));
         consola.info(chalk.blue(`${chalk.bold('Connect:')} ${chalk.gray(db.MongoUri)}`));
     } else if (selectedDatabase === 'QuickDB') {
@@ -82,7 +82,7 @@ export async function databaseMenu(): Promise<{
 
         });
 
-        consola.success(chalk.green.bold('Configurações do 📦 QuickDB:'));
+        consola.success(chalk.green(`${chalk.bold("Configurações do")} ${chalk.gray("📦 QuickDB")}:`));
         consola.info(chalk.blue(`${chalk.bold('Caminho do arquivo:')} ${chalk.gray(db.filePath)}`));
     }
 

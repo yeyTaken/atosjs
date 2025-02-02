@@ -1,4 +1,4 @@
-import { classesMenu, databaseMenu } from '../../../src/cli';
+import { classesMenu, databaseMenu } from '../../..';
 
 async function MongoDbTemplate() {
     const selectedDatabase = await databaseMenu();

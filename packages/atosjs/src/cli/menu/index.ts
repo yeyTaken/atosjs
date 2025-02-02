@@ -2,25 +2,13 @@ import fs from 'fs';
 import path from 'node:path';
 import chalk from 'chalk';
 import consola from 'consola';
-import figlet from 'figlet';
 import initialMenu from './initial';
 
-const propertiesPath = path.join(__dirname, '../../../templates/properties.json');
+const propertiesPath = path.join(__dirname, '../../../src/cli/templates/properties.json');
 const PackageJsonPath = path.join(__dirname, '../../../package.json');
 
 const packageJSON = JSON.parse(fs.readFileSync(PackageJsonPath, 'utf-8'));
 const properties = JSON.parse(fs.readFileSync(propertiesPath, 'utf-8'));
-
-// Banner estilizado
-// console.log(
-//     chalk.hex('#6C5CE7').bold(
-//         figlet.textSync('AtosJS', { horizontalLayout: 'full' })
-//     )
-// );
-// console.log(
-//     chalk.blue.bold('$ AtosJS CLI 📦 ') + chalk.gray.underline(`v${packageJSON.version}`)
-// );
-// console.log();
 
 if (process.argv[2] === 'init') {
     initialMenu();

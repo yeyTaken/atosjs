@@ -1,15 +1,15 @@
 import { QuickDB } from 'quick.db';
 // import { ErrorMessages } from '../../src/errors';
-import { GiftManager } from '../../src';
+// import { GiftManager } from '../../src';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-// const { GiftManager } = require('../../lib'); // testar a versão buildada
+const { GiftManager } = require('../../lib'); // testar a versão buildada
 
 import { describe, expect, beforeAll, afterEach, test } from 'vitest';
 
 describe('GiftManager', () => {
-    // let gm: typeof GiftManager; // versão buildada
-    let gm: GiftManager;
+    let gm: typeof GiftManager; // versão buildada
+    // let gm: GiftManager;
 
     beforeAll(() => {
         gm = new GiftManager({

@@ -1,21 +1,15 @@
 {
   "name": "atosjs",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "AtosJS, It´s a complex and adventure-filled book!",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
   "bin": {
-    "atos": "./dist/index.js"
+    "atos": "./lib/index.js"
   },
   "scripts": {
-    "atosjs": "npm install && npm start",
-    "start": "tsc -p tsconfig.build.json && vitest",
-    "build": "tsc -p tsconfig.build.json",
-    "dev": "tsc -w",
-    "test": "vitest",
-    "lint": "eslint . --ext .ts --fix",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint"
+    "start": "tsc --build && vitest",
+    "build": "tsc --build",
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
@@ -59,8 +53,5 @@
     "quick.db": "^9.1.7",
     "typescript": "^5.7.3",
     "vitest": "^2.1.8"
-  },
-  "files": [
-    "dist"
-  ]
+  }
 }

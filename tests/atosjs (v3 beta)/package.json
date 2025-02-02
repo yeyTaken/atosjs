@@ -10,6 +10,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "atosjs": "^3.0.1"
+    "atosjs": "^3.0.2",
+    "chalk": "^5.4.1",
+    "consola": "^3.4.0",
+    "quick.db": "^9.1.7"
   }
 }

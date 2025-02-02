@@ -10,9 +10,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "atosjs": "^3.0.3",
-    "chalk": "^5.4.1",
-    "consola": "^3.4.0",
-    "quick.db": "^9.1.7"
+    "@inquirer/prompts": "^7.3.1",
+    "atosjs": "^3.0.4",
+    "mongoose": "^8.9.6"
   }
 }

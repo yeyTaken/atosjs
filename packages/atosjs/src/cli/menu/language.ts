@@ -1,20 +1,8 @@
-import fs from 'fs';
-import path from 'node:path';
 import { select, confirm } from '@inquirer/prompts';
 import chalk from 'chalk';
 import consola from 'consola';
 
-const propertiesPath = path.join(__dirname, '../../../src/cli/templates/properties.json');
-
-interface Properties {
-    lang: Array<{
-        name: string;
-        icon: string;
-        extensions: string[];
-    }>;
-}
-
-const properties: Properties = JSON.parse(fs.readFileSync(propertiesPath, 'utf-8'));
+import properties from '../templates/properties.json'
 
 async function chooseExtension(): Promise<string> {
     const useMJS = await confirm({

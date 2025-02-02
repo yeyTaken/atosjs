@@ -1,21 +1,7 @@
-import fs from 'fs';
-import path from 'node:path';
 import { checkbox } from '@inquirer/prompts';
 import chalk from 'chalk';
 
-const propertiesPath = path.join(__dirname, '../../../src/cli/templates/properties.json');
-
-interface Properties {
-    init: {
-        name: string;
-        choices: Array<{
-            value: string;
-            icon: string;
-        }>;
-    };
-}
-
-const properties: Properties = JSON.parse(fs.readFileSync(propertiesPath, 'utf-8'));
+import properties from '../templates/properties.json'
 
 export async function classesMenu(): Promise<string[]> {
     const choices = properties.init.choices.map((choice) => ({

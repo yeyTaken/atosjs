@@ -1,37 +1,8 @@
-import fs from 'fs';
-import path from 'node:path';
 import { select, input } from '@inquirer/prompts';
 import chalk from 'chalk';
 import consola from 'consola';
 
-const propertiesPath = path.join(__dirname, '../../../src/cli/templates/properties.json');
-
-interface Properties {
-    database: {
-        name: string;
-        choices: Array<{
-            value: string;
-            path: string;
-            icon: string;
-        }>;
-    };
-    MongoDB: {
-        questions: Array<{
-            name: string;
-            message: string;
-            default: string;
-        }>;  
-    };
-    QuickDB: {
-        questions: Array<{
-            name: string;
-            message: string;
-            default: string;
-        }>;  
-    };
-}
-
-const properties: Properties = JSON.parse(fs.readFileSync(propertiesPath, 'utf-8'));
+import properties from '../templates/properties.json'
 
 export async function databaseMenu(): Promise<{
     name: string;

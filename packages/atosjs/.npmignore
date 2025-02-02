@@ -15,6 +15,8 @@ node_modules/
 
 # Ignorar o arquivo de lock do npm (opcional)
 package-lock.json
+.env
+atos.*
 
 # Ignorar arquivos de configuração de editor
 .vscode/

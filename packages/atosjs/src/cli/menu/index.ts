@@ -23,10 +23,7 @@ if (process.argv[2] === 'init') {
 ${chalk.bold('Commands:')}
   ${chalk.hex('#6C5CE7')('atos help')} ${chalk.dim('[-h|--help|help]')}
   ${chalk.hex('#6C5CE7')('atos version')} ${chalk.dim('[-v|--version|version]')}
-  ${chalk.hex('#6C5CE7')('atos init')} ${chalk.dim('[-js|-ts|-es6]')}
-    ${chalk.green('-js')}: Use ${chalk.yellowBright('JavaScript')} configuration
-    ${chalk.green('-es6')}: Use ${chalk.yellow('JavaScript (ES6)')} configuration
-    ${chalk.green('-ts')}: Use ${chalk.blue('TypeScript')} configuration
+  ${chalk.hex('#6C5CE7')('atos init')}
 
 ${chalk.bold('Links:')}
     ${chalk.bold('📜 Documentation:')} ${chalk.blue.underline('https://atosjs.org/docs')}
@@ -34,7 +31,6 @@ ${chalk.bold('Links:')}
 
 ${chalk.bold('Examples:')}
   ${chalk.cyan('$ atos init')}
-  ${chalk.cyan('$ atos init -js')}
   ${chalk.cyan('$ atos -h')}
   ${chalk.cyan('$ atos -v')}
 `),

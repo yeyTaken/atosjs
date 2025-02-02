@@ -10,6 +10,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "atosjs": "^3.0.0"
+    "atosjs": "^3.0.1"
   }
 }

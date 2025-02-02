@@ -25,7 +25,7 @@ export async function generateConfigFile(
         configContent = generateMJSConfig(selectedClasses, selectedDatabase);
     } else if (selectedLanguage.name === 'JavaScript (ES6)' && selectedLanguage.selectedExtension === '.js') {
         configContent = generateJSConfig(selectedClasses, selectedDatabase);
-    } else if (selectedLanguage.name === 'JavaScript' && selectedLanguage.selectedExtension === '.js') {
+    } else if (selectedLanguage.name === 'JavaScript') {
         configContent = generateJSConfig(selectedClasses, selectedDatabase);
     }
 

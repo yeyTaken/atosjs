@@ -1,6 +1,6 @@
 {
   "name": "atosjs",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "description": "AtosJS, It´s a complex and adventure-filled book!",
   "main": "lib/index.js",
   "bin": {
@@ -53,6 +53,7 @@
     "chalk": "^4.1.2",
     "cli-spinner": "^0.2.10",
     "consola": "^3.4.0",
+    "dotenv": "^16.4.7",
     "mongoose": "^8.9.6",
     "quick.db": "^9.1.7"
   }

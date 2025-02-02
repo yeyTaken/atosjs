@@ -1,6 +1,6 @@
 {
   "name": "atosjs",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "AtosJS, It´s a complex and adventure-filled book!",
   "main": "lib/index.js",
   "bin": {
@@ -41,8 +41,6 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitest/ui": "^2.1.8",
-    "better-sqlite3": "^11.7.2",
-    "cli-spinner": "^0.2.10",
     "figlet": "^1.8.0",
     "mongodb": "^6.13.0",
     "mysql2": "^3.12.0",
@@ -51,9 +49,11 @@
   },
   "dependencies": {
     "@inquirer/prompts": "^7.2.4",
+    "better-sqlite3": "^11.8.1",
     "chalk": "^4.1.2",
+    "cli-spinner": "^0.2.10",
     "consola": "^3.4.0",
-    "quick.db": "^9.1.7",
-    "mongoose": "^8.9.6"
+    "mongoose": "^8.9.6",
+    "quick.db": "^9.1.7"
   }
 }

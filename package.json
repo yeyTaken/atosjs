@@ -33,7 +33,6 @@
     "vitest": "^3.0.2"
   },
   "dependencies": {
-    "atosjs": "file:packages/AtosJS",
     "fs": "^0.0.1-security"
   }
 }

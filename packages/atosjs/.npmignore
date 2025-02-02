@@ -17,6 +17,7 @@ node_modules/
 package-lock.json
 .env
 atos.*
+vitest.*
 
 # Ignorar arquivos de configuração de editor
 .vscode/

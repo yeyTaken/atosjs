@@ -5,3 +5,4 @@ dist/
 .env
 test.json
 test.yaml
+atos.*

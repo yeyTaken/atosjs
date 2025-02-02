@@ -11,7 +11,6 @@ if (process.argv[2] === 'init') {
   initialMenu();
 } else if (
   process.argv.slice(2).includes('-h') ||
-  process.argv.slice(2).includes('help') ||
   process.argv.slice(2).includes('--help')
 ) {
   consola.box({
@@ -34,7 +33,6 @@ ${chalk.bold('Examples:')}
   });
 } else if (
   process.argv.slice(2).includes('-v') ||
-  process.argv.slice(2).includes('version') ||
   process.argv.slice(2).includes('--version')
 ) {
   console.log(`📦 v${packageJSON.version}`);

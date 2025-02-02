@@ -22,6 +22,11 @@ AtosJS is a powerful and easy-to-use package, built with [Node.js](https://nodej
 - `GiftManager` Is a tools for creating, managing, and redeeming reward codes  integrated with APIs like Discord Bot. It facilitates community engagement.
 - `TimeFormat` Is a class for scheduling and repeating task at specific intervals or times.
 
+## AtosJS CLI
+- `atos init`
+- `atos -v` or `atos --version`
+- `atos -h` or `atos --help`
+
 ## Links
 - AtosJS [website](https://atos.js.org/) Oficial.
 - [GitHub](https://github.com/yeyTaken/atosjs)

@@ -51,5 +51,23 @@
         "default": "./gifts.json"
       }
     ]
-  }
+  },
+
+  "lang": [
+    {
+      "name": "JavaScript",
+      "icon": "🟡",
+      "extensions": [".js"]
+    },
+    {
+      "name": "JavaScript (ES6)",
+      "icon": "🟠",
+      "extensions": [".js", ".mjs"]
+    },
+    {
+      "name": "TypeScript",
+      "icon": "🔵",
+      "extensions": [".ts"]
+    }
+  ]
 }

@@ -1,6 +1,6 @@
 {
   "name": "atosjs",
-  "version": "3.0.7",
+  "version": "3.0.8",
   "description": "AtosJS, It´s a complex and adventure-filled book!",
   "main": "lib/index.js",
   "bin": {

@@ -24,7 +24,7 @@ export function generateTSConfig(
         if (selectedDatabase.name === 'MongoDB') {
             configContent += 'export const gift = new GiftManager({\n';
             configContent += '  mongodb: {\n';
-            configContent += '    connect: process.env.MONGO_URI,\n';
+            configContent += '    connect: process.env.MONGO_URI!,\n';
             configContent += `    dbName: '${selectedDatabase.databaseName}',\n`;
             configContent += '  },\n';
             configContent += '});\n\n';

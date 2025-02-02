@@ -1,17 +1,19 @@
-import path from "node:path";
-import { Spinner } from "cli-spinner";
-import consola from "consola";
-import chalk from "chalk";
-import fs from "fs";
+import path from 'node:path';
+import { Spinner } from 'cli-spinner';
+import consola from 'consola';
+import chalk from 'chalk';
+import fs from 'fs';
 
-import { generateJSConfig } from "./JSConfig";
-import { generateMJSConfig } from "./MJSConfig";
-import { generateTSConfig } from "./TSConfig";
+import { generateJSConfig } from './JSConfig';
+import { generateMJSConfig } from './MJSConfig';
+import { generateTSConfig } from './TSConfig';
+
+import { Database, Language } from '../../../menu/initial';
 
 export async function generateConfigFile(
     selectedClasses: string[],
-    selectedDatabase: any,
-    selectedLanguage: any
+    selectedDatabase: Database | null,
+    selectedLanguage: Language
 ) {
     const configFilePath = path.join(process.cwd(), `atos.config${selectedLanguage.selectedExtension || selectedLanguage.extensions[0]}`);
 
@@ -22,9 +24,10 @@ export async function generateConfigFile(
     } else if (selectedLanguage.name === 'JavaScript (ES6)' && selectedLanguage.selectedExtension === '.mjs') {
         configContent = generateMJSConfig(selectedClasses, selectedDatabase);
     } else if (selectedLanguage.name === 'JavaScript (ES6)' && selectedLanguage.selectedExtension === '.js') {
-        configContent = generateMJSConfig(selectedClasses, selectedDatabase);
-    } else {
         configContent = generateJSConfig(selectedClasses, selectedDatabase);
+    } else {
+        // Caso não seja um tipo de linguagem reconhecido, podemos colocar uma lógica adicional ou lançar um erro
+        throw new Error('Unsupported language or extension');
     }
 
     // Use cli-spinner to show the creation of the file

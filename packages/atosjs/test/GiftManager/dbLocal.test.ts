@@ -1,5 +1,5 @@
 import { QuickDB } from 'quick.db';
-import { ErrorMessages } from '../../src/errors';
+// import { ErrorMessages } from '../../src/errors';
 import { GiftManager } from '../../src';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

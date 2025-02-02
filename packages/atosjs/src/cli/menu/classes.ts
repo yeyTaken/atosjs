@@ -30,4 +30,4 @@ export async function classesMenu(): Promise<string[]> {
     });
 
     return selectedClasses;
-};
+}

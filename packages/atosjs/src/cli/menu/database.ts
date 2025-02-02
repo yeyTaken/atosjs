@@ -49,7 +49,7 @@ export async function databaseMenu(): Promise<{
         choices,
     });
 
-    let db = { name: selectedDatabase } as {
+    const db = { name: selectedDatabase } as {
         name: string;
         MongoUri?: string;
         databaseName?: string;
@@ -71,7 +71,7 @@ export async function databaseMenu(): Promise<{
 
         });
 
-        consola.success(chalk.green(`${chalk.bold("MongoDB Settings:")}`));
+        consola.success(chalk.green(`${chalk.bold('MongoDB Settings:')}`));
         consola.info(chalk.blue(`${chalk.bold('Database name:')} ${chalk.gray(db.databaseName)}`));
         consola.info(chalk.blue(`${chalk.bold('Connection URI:')} ${chalk.gray(db.MongoUri)}`));
     } else if (selectedDatabase === 'QuickDB') {
@@ -82,7 +82,7 @@ export async function databaseMenu(): Promise<{
 
         });
 
-        consola.success(chalk.green(`${chalk.bold("QuickDB Settings:")}`));
+        consola.success(chalk.green(`${chalk.bold('QuickDB Settings:')}`));
         consola.info(chalk.blue(`${chalk.bold('File path:')} ${chalk.gray(db.filePath)}`));
     }
 

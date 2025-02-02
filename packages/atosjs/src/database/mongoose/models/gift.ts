@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import { Gift } from "../../../classes/GiftManager/@types/gifts"; // Importe o tipo Gift
+import { Schema, model } from 'mongoose';
+import { Gift } from '../../../classes/GiftManager/@types/gifts'; // Importe o tipo Gift
 
 const giftSchema: Schema<Gift> = new Schema<Gift>({
     id: { type: String, required: true, unique: true },
@@ -11,4 +11,4 @@ const giftSchema: Schema<Gift> = new Schema<Gift>({
     value: { type: Schema.Types.Mixed } // Alterado para ser um objeto genérico
 });
 
-export const GiftModel = model<Gift>("Gift", giftSchema);
+export const GiftModel = model<Gift>('Gift', giftSchema);

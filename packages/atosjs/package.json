@@ -1,6 +1,6 @@
 {
   "name": "atosjs",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "AtosJS, It´s a complex and adventure-filled book!",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,7 +13,7 @@
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsc -w",
     "test": "vitest",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint . --ext .ts --fix",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint"
   },

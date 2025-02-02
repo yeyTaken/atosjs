@@ -25,9 +25,8 @@ export async function generateConfigFile(
         configContent = generateMJSConfig(selectedClasses, selectedDatabase);
     } else if (selectedLanguage.name === 'JavaScript (ES6)' && selectedLanguage.selectedExtension === '.js') {
         configContent = generateJSConfig(selectedClasses, selectedDatabase);
-    } else {
-        // Caso não seja um tipo de linguagem reconhecido, podemos colocar uma lógica adicional ou lançar um erro
-        throw new Error('Unsupported language or extension');
+    } else if (selectedLanguage.name === 'JavaScript' && selectedLanguage.selectedExtension === '.js') {
+        configContent = generateJSConfig(selectedClasses, selectedDatabase);
     }
 
     // Use cli-spinner to show the creation of the file

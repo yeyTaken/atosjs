@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 import Footer from "@/components/footer";
-// import Header from "@/components/header";
+import Header from "@/components/header";
 
 import "@/styles/globals.css";
 
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-neutral-950">
-        {/* <Header /> */}
+        <Header />
         <main>{children}</main>
         <Footer />
       </body>

@@ -20,14 +20,14 @@ interface Properties {
             name: string;
             message: string;
             default: string;
-        }>;
+        }>;  
     };
     QuickDB: {
         questions: Array<{
             name: string;
             message: string;
             default: string;
-        }>;
+        }>;  
     };
 }
 
@@ -45,7 +45,7 @@ export async function databaseMenu(): Promise<{
     }));
 
     const selectedDatabase = await select({
-        message: chalk.hex('#6C5CE7').bold('📦 Escolha o banco de dados:'),
+        message: chalk.hex('#6C5CE7').bold('📦 Choose the database:'),
         choices,
     });
 
@@ -71,9 +71,9 @@ export async function databaseMenu(): Promise<{
 
         });
 
-        consola.success(chalk.green(`${chalk.bold("Configurações do")} ${chalk.gray("🍃 MongoDB")}:`));
+        consola.success(chalk.green(`${chalk.bold("MongoDB Settings:")}`));
         consola.info(chalk.blue(`${chalk.bold('Database name:')} ${chalk.gray(db.databaseName)}`));
-        consola.info(chalk.blue(`${chalk.bold('Connect:')} ${chalk.gray(db.MongoUri)}`));
+        consola.info(chalk.blue(`${chalk.bold('Connection URI:')} ${chalk.gray(db.MongoUri)}`));
     } else if (selectedDatabase === 'QuickDB') {
         db.filePath = await input({
             message: chalk.blue(properties.QuickDB.questions[0].message),
@@ -82,8 +82,8 @@ export async function databaseMenu(): Promise<{
 
         });
 
-        consola.success(chalk.green(`${chalk.bold("Configurações do")} ${chalk.gray("📦 QuickDB")}:`));
-        consola.info(chalk.blue(`${chalk.bold('Caminho do arquivo:')} ${chalk.gray(db.filePath)}`));
+        consola.success(chalk.green(`${chalk.bold("QuickDB Settings:")}`));
+        consola.info(chalk.blue(`${chalk.bold('File path:')} ${chalk.gray(db.filePath)}`));
     }
 
     return db;

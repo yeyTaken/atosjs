@@ -1,6 +1,6 @@
 {
   "init": {
-    "name": "deseja usar:",
+    "name": "Do you want to use:",
     "choices": [
       {
         "value": "GiftManager",
@@ -13,7 +13,7 @@
     ]
   },
   "database": {
-    "name": "Escolha o banco de dados:",
+    "name": "Choose the database:",
     "choices": [
       {
         "value": "QuickDB",
@@ -28,26 +28,26 @@
     ]
   },
   "MongoDB": {
-    "name": "Configurações do MongoDB:",
+    "name": "MongoDB Settings:",
     "questions": [
       {
         "name": "databaseName",
-        "message": "Qual o nome da database:",
+        "message": "What is the database name:",
         "default": "gifts"
       },
       {
         "name": "mongoUri",
-        "message": "Informe o URI do MongoDB:",
+        "message": "Enter the MongoDB URI:",
         "default": "mongodb://localhost:27017"
       }
     ]
   },
   "QuickDB": {
-    "name": "Configurações do QuickDB:",
+    "name": "QuickDB Settings:",
     "questions": [
       {
         "name": "filePath",
-        "message": "Informe o caminho do arquivo QuickDB:",
+        "message": "Enter the QuickDB file path:",
         "default": "./gifts.json"
       }
     ]

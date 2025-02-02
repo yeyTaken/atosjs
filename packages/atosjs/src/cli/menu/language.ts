@@ -18,7 +18,7 @@ const properties: Properties = JSON.parse(fs.readFileSync(propertiesPath, 'utf-8
 
 async function chooseExtension(): Promise<string> {
     const useMJS = await confirm({
-        message: chalk.hex('#6C5CE7').bold('💡 Deseja usar a extensão .mjs?'),
+        message: chalk.hex('#6C5CE7').bold('💡 Would you like to use the .mjs extension?'),
         default: false,
     });
 
@@ -33,14 +33,14 @@ export async function languageMenu(): Promise<{ name: string; extensions: string
     }));
 
     const selectedLanguage = await select({
-        message: chalk.hex('#6C5CE7').bold('💻 Escolha a linguagem:'),
+        message: chalk.hex('#6C5CE7').bold('💻 Choose the language:'),
         choices,
     });
 
     const languageDetails = properties.lang.find(lang => lang.name === selectedLanguage);
 
     if (!languageDetails) {
-        throw new Error('Linguagem selecionada não encontrada.');
+        throw new Error('Selected language not found.');
     }
 
     let selectedExtension: string | undefined;
@@ -48,7 +48,7 @@ export async function languageMenu(): Promise<{ name: string; extensions: string
     if (selectedLanguage === 'JavaScript (ES6)') {
         selectedExtension = await chooseExtension();
         consola.success(
-            chalk.green.bold('Extensão selecionada: ') +
+            chalk.green.bold('Selected extension: ') +
             chalk.gray(selectedExtension)
         );
     }

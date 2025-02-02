@@ -14,7 +14,7 @@ export default async function initialMenu() {
     consola.box({
         title: chalk.hex("#6C5CE7").bold("🚀 AtosJS CLI"),
         message: chalk.gray(
-            "Bem-vindo ao AtosJS CLI! Escolha as classes que deseja usar."
+            "Welcome to AtosJS CLI! Choose the classes you want to use."
         ),
     });
 
@@ -24,25 +24,25 @@ export default async function initialMenu() {
     );
     console.log();
 
-    // Obter as classes selecionadas
+    // Get the selected classes
     const selectedClasses = await classesMenu();
 
-    // Verificar se a classe GiftManager foi selecionada
+    // Check if the GiftManager class was selected
     const hasGiftManager = selectedClasses.includes('GiftManager');
 
-    // Se a classe GiftManager foi selecionada, mostrar o menu de banco de dados
+    // If the GiftManager class was selected, show the database menu
     let selectedDatabase = null;
     if (hasGiftManager) {
         selectedDatabase = await databaseMenu();
     }
 
-    // Obter a linguagem selecionada
+    // Get the selected language
     const selectedLanguage = await languageMenu();
 
-    // Gerar o arquivo de configuração
+    // Generate the config file
     await generateConfigFile(selectedClasses, selectedDatabase, selectedLanguage);
 
-    // Exibir os resultados
+    // Display the results
     // console.log({
     //     selectedClasses,
     //     selectedDatabase,
@@ -65,26 +65,26 @@ async function generateConfigFile(selectedClasses: string[], selectedDatabase: a
         configContent = generateJSConfig(selectedClasses, selectedDatabase);
     }
 
-    // Usar cli-spinner para mostrar a criação do arquivo
+    // Use cli-spinner to show the creation of the file
     console.log();
-    const spinner = new Spinner('Criando arquivo de configuração...');
+    const spinner = new Spinner('Creating configuration file...');
     spinner.setSpinnerString(18);
     spinner.start();
 
-    // Simular uma espera de 3 segundos
+    // Simulate a wait of 3 seconds
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    // Escrever o arquivo de configuração
+    // Write the config file
     fs.writeFileSync(configFilePath, configContent, 'utf-8');
 
     spinner.stop(true);
-    consola.success(`Arquivo de configuração criado em: ${chalk.green(configFilePath)}`);
+    consola.success(`Configuration file created at: ${chalk.green(configFilePath)}`);
 }
 
 function generateTypeScriptConfig(selectedClasses: string[], selectedDatabase: any): string {
     let configContent = ``;
 
-    // Criar a importação em uma única linha
+    // Create the import in a single line
     if (selectedClasses.length > 0) {
         configContent += `import { ${selectedClasses.join(", ")} } from 'atosjs';\n\n`;
     }
@@ -112,12 +112,11 @@ function generateTypeScriptConfig(selectedClasses: string[], selectedDatabase: a
 
     return configContent;
 }
-
 
 function generateMJSConfig(selectedClasses: string[], selectedDatabase: any): string {
     let configContent = ``;
 
-    // Criar a importação em uma única linha
+    // Create the import in a single line
     if (selectedClasses.length > 0) {
         configContent += `import { ${selectedClasses.join(", ")} } from 'atosjs';\n\n`;
     }
@@ -145,13 +144,12 @@ function generateMJSConfig(selectedClasses: string[], selectedDatabase: any): st
 
     return configContent;
 }
-
 
 function generateJSConfig(selectedClasses: string[], selectedDatabase: any): string {
     let configContent = ``;
     let exportsList: string[] = [];
 
-    // Criar a linha de importação em uma única linha
+    // Create the import line in a single line
     if (selectedClasses.length > 0) {
         configContent += `const { ${selectedClasses.join(", ")} } = require('atosjs');\n\n`;
     }

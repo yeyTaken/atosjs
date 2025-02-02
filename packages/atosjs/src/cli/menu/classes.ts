@@ -25,9 +25,8 @@ export async function classesMenu(): Promise<string[]> {
     }));
 
     const selectedClasses = await checkbox({
-        message: chalk.hex('#6C5CE7').bold('✨ Escolha as classes:'),
+        message: chalk.hex('#6C5CE7').bold('✨ Choose the classes:'),
         choices,
-        
     });
 
     return selectedClasses;

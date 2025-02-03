@@ -4,7 +4,7 @@
   "description": "AtosJS, It´s a complex and adventure-filled book!",
   "scripts": {
     "global:test": "vitest",
-    "atosjs": "npm i ./packages/atosjs && vitest ./packages/atosjs",
+    "atosjs": "npm i ./packages/atosjs && tsc -b ./packages/atosjs && vitest ./packages/atosjs",
     "atosjs:test": "vitest ./packages/AtosJS"
   },
   "repository": {

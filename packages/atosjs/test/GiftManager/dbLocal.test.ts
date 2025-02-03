@@ -14,7 +14,7 @@ describe('GiftManager', () => {
     beforeAll(() => {
         gm = new GiftManager({
             dbLocal: {
-                filePath: 'test.yaml'
+                filePath: './dbLocal.sqlite'
             }
         });
     });

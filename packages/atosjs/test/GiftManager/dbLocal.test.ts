@@ -14,14 +14,14 @@ describe('GiftManager', () => {
     beforeAll(() => {
         gm = new GiftManager({
             dbLocal: {
-                filePath: './dbLocal.sqlite'
+                filePath: 'dbLocal.sqlite'
             }
         });
     });
 
     afterEach(async () => {
         // Limpa os dados do banco após cada teste
-        const db = new QuickDB({ filePath: 'test.yaml' });
+        const db = new QuickDB({ filePath: 'dbLocal.sqlite' });
         await db.delete('gifts');
     });
 

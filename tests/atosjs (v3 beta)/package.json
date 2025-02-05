@@ -9,6 +9,6 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "atosjs": "^3.0.7"
+    "atosjs": "^3.0.8"
   }
 }

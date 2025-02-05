@@ -4,7 +4,7 @@
     "": {
       "name": "atosjs-(v3-beta)",
       "dependencies": {
-        "atosjs": "^3.0.7",
+        "atosjs": "^3.0.8",
       },
       "devDependencies": {
         "@types/bun": "latest",
@@ -61,7 +61,7 @@
 
     "ansi-styles": ["ansi-styles@4.3.0", "", { "dependencies": { "color-convert": "^2.0.1" } }, "sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg=="],
 
-    "atosjs": ["atosjs@3.0.7", "", { "dependencies": { "@inquirer/prompts": "^7.2.4", "better-sqlite3": "^11.8.1", "chalk": "^4.1.2", "cli-spinner": "^0.2.10", "consola": "^3.4.0", "dotenv": "^16.4.7", "mongoose": "^8.9.6", "quick.db": "^9.1.7" }, "bin": { "atos": "lib/index.js" } }, "sha512-l2fBHx+2gpiOuiJEYismJ0hXQzTW/oOHPPcFB3vvh3R9S35fQiThktW/ptmDZTTI4M0VPdNtv2S9S9nGbH2+mQ=="],
+    "atosjs": ["atosjs@3.0.8", "", { "dependencies": { "@inquirer/prompts": "^7.2.4", "better-sqlite3": "^11.8.1", "chalk": "^4.1.2", "cli-spinner": "^0.2.10", "consola": "^3.4.0", "dotenv": "^16.4.7", "mongoose": "^8.9.6", "quick.db": "^9.1.7" }, "bin": { "atos": "lib/index.js" } }, "sha512-RiC6h5OZCNCT/cDQy4z9mXn0+dgytu6t12UOfIvq9B6eOLHE/pMYGebghSftnjf6qQuaQ6utAFtTyLHsQfjGwQ=="],
 
     "base64-js": ["base64-js@1.5.1", "", {}, "sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA=="],
 

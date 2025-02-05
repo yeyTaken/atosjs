@@ -1,39 +1,25 @@
 {
-  "name": "atosjs",
-  "version": "3.0.8",
-  "description": "AtosJS, It´s a complex and adventure-filled book!",
+  "name": "@atosjs/root",
+  "private": true,
   "scripts": {
-    "global:test": "vitest",
-    "atosjs": "npm i ./packages/atosjs && tsc -b ./packages/atosjs && vitest ./packages/atosjs",
-    "atosjs:test": "vitest ./packages/AtosJS"
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "commit": "better-commits"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yeyTaken/atosjs.git"
-  },
-  "bugs": {
-    "url": "https://github.com/yeyTaken/atosjs/issues"
-  },
-  "homepage": "https://github.com/yeyTaken/atosjs#readme",
-  "keywords": [
-    "gift",
-    "reward",
-    "GiftManager",
-    "TimeFormat",
-    "timer",
-    "time",
-    "api",
-    "client",
-    "node"
-  ],
-  "author": "Rabi",
-  "license": "MIT",
   "devDependencies": {
-    "@types/node": "^22.10.7",
-    "vitest": "^3.0.2"
+    "better-commits": "^1.15.7",
+    "prettier": "^3.2.5",
+    "turbo": "^2.2.3",
+    "typescript": "5.5.4",
+    "vitest": "^2.1.4"
   },
-  "dependencies": {
-    "atosjs": "file:packages/atosjs",
-    "fs": "^0.0.1-security"
-  }
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@10.2.4",
+  "workspaces": [
+    "packages/*"
+  ]
 }

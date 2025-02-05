@@ -1,5 +1,6 @@
 # Ignorar arquivos de código-fonte TypeScript
 src/
+.turbo/
 
 # Ignorar arquivos de configuração do TypeScript
 tsconfig.json

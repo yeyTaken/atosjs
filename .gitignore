@@ -7,3 +7,5 @@ test.json
 test.yaml
 tsconfig.tsbuildinfo
 dbLocal.*
+
+.turbo

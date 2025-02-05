@@ -1,0 +1,13 @@
+<<<<<<< HEAD
+node_modules
+/src/test/*
+=======
+node_modules/
+>>>>>>> 23da92ba33c466b56b7fd45c21b382cc0478c929
+package-lock.json
+dist/
+.npmrc
+.env
+test.json
+test.yaml
+atos.*

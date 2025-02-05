@@ -1,0 +1,28 @@
+# Ignorar arquivos de código-fonte TypeScript
+src/
+
+# Ignorar arquivos de configuração do TypeScript
+tsconfig.json
+tsconfig.build.json
+
+# Ignorar arquivos de teste
+test/
+test.json
+test.yaml
+# Ignorar a pasta node_modules
+node_modules/
+.npmrc
+
+# Ignorar o arquivo de lock do npm (opc)
+package-lock.json
+.env
+atos.*
+vitest.*
+
+# Ignorar arquivos de configuração de editor
+.vscode/
+.idea/
+
+# Ignorar arquivos temporários do sistema
+.DS_Store
+Thumbs.db

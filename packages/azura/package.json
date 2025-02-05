@@ -1,0 +1,26 @@
+{
+  "name": "@atosjs/azura",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node .",
+    "test": "ts-node /test/index.test.ts",
+    "dev": "ts-node -r tsconfig-paths/register --transpiler sucrase/ts-node-plugin src/index.ts",
+    "build": "tsc && tscpaths -p tsconfig.json -s ./src -o ./dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "sucrase": "^3.34.0",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tscpaths": "^0.0.9"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "figures": "^6.1.0"
+  }
+}

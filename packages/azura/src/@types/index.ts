@@ -44,6 +44,9 @@ export interface ServerOptions {
   };
 }
 export interface Request {
+  setHeader(arg0: string, arg1: string): unknown;
+  end(): unknown;
+  writeHead(arg0: number): unknown;
   method: string;
   url: string;
   path: string;

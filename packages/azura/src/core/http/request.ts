@@ -17,6 +17,15 @@ export async function parseRequest(req: IncomingMessage, jsonParser: boolean): P
           params: {},
           query: {},
           body: jsonParser && data ? JSON.parse(data) : data,
+          setHeader: function (): unknown {
+            throw new Error("Function not implemented.");
+          },
+          end: function (): unknown {
+            throw new Error("Function not implemented.");
+          },
+          writeHead: function (): unknown {
+            throw new Error("Function not implemented.");
+          }
         };
 
         resolve(request);

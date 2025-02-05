@@ -32,11 +32,11 @@ export function swaggerDocs(routerManager: RouterManager) {
 }
 
 export function swaggerRender(router: RouterManager) {
-  router.addRoute("get", "/swagger.json", (req: any, res: any) => {
+  router.addRoute("get", "/swagger.json", (res: any) => {
     res.send(swaggerDocs(router));
   });
 
-  router.addRoute("get", "/docs", (req: any, res: any) => {
+  router.addRoute("get", "/docs", (res: any) => {
     res.writeHead(200, { "Content-Type": "text/html" });
     res.end(`
               <!DOCTYPE html>

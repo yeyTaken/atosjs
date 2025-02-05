@@ -1,4 +1,4 @@
-import { Middleware, Plugin, RouteMeta, RouterHandler, ServerOptions } from "./@types";
+import { Middleware, Plugin, RouterHandler, ServerOptions } from "./@types";
 import { RouterManager } from "./router/routerManager";
 import { LRUCache } from "./utils/cacheManager";
 import serverConnection from "./core/server";
@@ -25,7 +25,7 @@ export class AzuraServer {
       swaggerRender(this.router);
     }
 
-    this.router.addRoute("get", "/favicon.ico", (req, res) => {
+    this.router.addRoute("get", "/favicon.ico", (res) => {
       res.writeHead(204);
       res.end();
     });

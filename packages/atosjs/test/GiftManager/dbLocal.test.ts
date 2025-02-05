@@ -3,7 +3,7 @@ import { QuickDB } from 'quick.db';
 // import { GiftManager } from '../../src';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { GiftManager } = require('../../lib'); // testar a versão buildada
+const { GiftManager } = require('../../dist/index.cjs'); // testar a versão buildada
 
 import { describe, expect, beforeAll, afterEach, test } from 'vitest';
 

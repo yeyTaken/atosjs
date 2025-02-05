@@ -1,23 +1,9 @@
 {
+  "extends": "../config/base.json",
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "CommonJS",
-    "allowJs": true,
-    "checkJs": true,
-    "declaration": true,
-    "outDir": "lib",
-    "rootDir": "src",
-    "composite": true,
-    "incremental": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "strict": true,
-    "resolveJsonModule": true
-  },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.js",
-    "src/**/*.json"
-  ],
-  "exclude": ["node_modules"]
+    "baseUrl": ".",
+    "paths": {
+      "#package": ["./src/index.ts"]
+    }
+  }
 }

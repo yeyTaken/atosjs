@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'node:path';
 import chalk from 'chalk';
 import consola from 'consola';
+
 import initialMenu from './initial';
 
 const PackageJsonPath = path.join(__dirname, '../../../package.json');

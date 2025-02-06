@@ -57,7 +57,7 @@ export default async function initialMenu() {
 
     // Generate the config file
     await generateConfigFile(selectedClasses, selectedDatabase, selectedLanguage);
-    await generateDotenvFile(selectedClasses, selectedDatabase);
+    await generateDotenvFile(selectedDatabase);
 
     // Display the results (Descomentado para depuração)
     // console.log({

@@ -2,11 +2,7 @@
   "name": "@atosjs/root",
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "test": "turbo test",
-    "commit": "better-commits"
+    "test": "turbo test"
   },
   "devDependencies": {
     "better-commits": "^1.15.7",
@@ -16,7 +12,7 @@
     "vitest": "^2.1.4"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "packageManager": "npm@10.2.4",
   "workspaces": [

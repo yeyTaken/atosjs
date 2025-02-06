@@ -1,10 +1,10 @@
 import mongoose, { UpdateQuery } from 'mongoose';
-import { GiftModel } from './models/gift';
-// Supondo que o tipo Gift esteja definido nesse caminho ou ajuste conforme necessário:
-import { Gift } from '../../classes/GiftManager/@types/gifts';
 import chalk from 'chalk';
-import { dbHandler } from '../../classes/GiftManager/@types/db';
 import consola from 'consola';
+
+import { GiftModel } from './models/gift';
+import { Gift } from '../../classes/GiftManager/@types/gifts';
+import { dbHandler } from '../../classes/GiftManager/@types/db';
 
 export class MongooseHandler implements dbHandler {
   private dbName: string;

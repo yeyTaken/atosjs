@@ -3,8 +3,7 @@ package-lock.json
 lib/
 dist/
 .env
-test.json
-test.yaml
+test.*
 tsconfig.tsbuildinfo
 dbLocal.*
 

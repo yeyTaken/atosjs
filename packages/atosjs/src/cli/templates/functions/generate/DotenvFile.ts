@@ -5,8 +5,7 @@ import path from 'path';
 import { Database } from '../../../menu/initial';
 
 export function generateDotenvFile(
-    selectedClasses: string[],
-    selectedDatabase: Database | null  // Tipando como Database ou null
+    selectedDatabase: Database | null
 ): void {
     if (selectedDatabase?.name === 'MongoDB') {
         const envPath = path.join(process.cwd(), '.env');

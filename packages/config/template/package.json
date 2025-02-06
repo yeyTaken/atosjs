@@ -1,5 +1,5 @@
 {
-  "name": "@atosjs/azura",
+  "name": "@atosjs/template",
   "version": "1.0.0",
   "type": "module",
   "publishConfig": {
@@ -23,20 +23,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "description": "",
   "devDependencies": {
-    "@atosjs/config": "*",
-
-    "@types/node": "^22.13.0",
-    "sucrase": "^3.34.0",
-    "ts-node": "^10.9.2",
-    "tsconfig-paths": "^4.2.0",
-    "tscpaths": "^0.0.9",
+    "@atosjs/config": "^0.0.0-config",
     "unbuild": "^3.3.1"
-  },
-  "dependencies": {
-    "chalk": "^4.1.2",
-    "figures": "^3.2.0"
   }
 }

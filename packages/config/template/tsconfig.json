@@ -4,7 +4,7 @@
     "baseUrl": ".",
     "paths": {
       "@package": ["./src/index.ts"],
-      "@build/*": ["./build/*"]
+      "@build/*": ["./dist/*"]
     }
   }
 }

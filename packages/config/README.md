@@ -108,17 +108,9 @@ Ajuste o `package.json` para incluir configurações de build e publicação:
     "build": "unbuild"
   },
   "devDependencies": {
-    "@types/node": "^22.13.0",
-    "sucrase": "^3.34.0",
-    "ts-node": "^10.9.2",
-    "tsconfig-paths": "^4.2.0",
-    "tscpaths": "^0.0.9",
     "unbuild": "^3.3.1"
   },
-  "dependencies": {
-    "chalk": "^4.1.2",
-    "figures": "^3.2.0"
-  }
+  "dependencies": {}
 }
 ```
 

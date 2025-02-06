@@ -1,7 +1,11 @@
 {
   "name": "@atosjs/config",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.0-config",
+  "files": [
+    "base.json",
+    "build.preset.ts"
+  ],
+  "private": false,
   "license": "MIT",
   "publishConfig": {
     "access": "public"

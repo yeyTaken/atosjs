@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://i.imgur.com/giy9KEe.png" width="456" alt="AtosJS"></img>
+  <img src="./assets/images/atosPNG.png" width="456" alt="AtosJS"></img>
   
   <p>
   <!-- AtosJS badges -->

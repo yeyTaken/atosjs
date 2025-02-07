@@ -1,133 +1,133 @@
 import { AtosJSError, ErrorCodes, ErrorMessages } from '../../errors';
-import formatData from './format.json';
 
-type TimeFormatOptions = {
-  format?: {
-    short?: boolean;
-    locale?: keyof typeof formatData; // Restrict locale to keys of formatData
-  };
+type TimeOptions = {
+  time: number | string | { hour: number; minute: number };
+  type: 1 | 2;
+  repeat?: number;
+  start(): void;
 };
 
 export class TimeFormat {
-  private format: { short: boolean; locale: keyof typeof formatData };
+  private time: number;
+  private repeat?: number;
+  private startFn: () => void;
+  private intervalId?: NodeJS.Timeout;
 
-  constructor(options: TimeFormatOptions = {}) {
-    this.format = {
-      short: options.format?.short ?? true, // Default: short format
-      locale: options.format?.locale ?? 'en-US', // Default: en-US
-    };
+  constructor(options: TimeOptions) {
+    const { time, type, repeat, start } = options;
 
-    if (!formatData[this.format.locale]) {
+    if (type !== 2 && repeat !== undefined) {
       throw new AtosJSError(
-        ErrorMessages[ErrorCodes.INVALID_FORMAT_DATA],
-        ErrorCodes.INVALID_FORMAT_DATA
-      );
-    }
-  }
-
-  convertToMilliseconds(time: string): number {
-    const regex = /(\d+)([smh])/;
-    const match = regex.exec(time);
-    if (!match) {
-      throw new AtosJSError(
-        ErrorMessages[ErrorCodes.INVALID_TIME_UNIT],
-        ErrorCodes.INVALID_TIME_UNIT
+        ErrorMessages[ErrorCodes.REPEAT_NOT_ALLOWED],
+        ErrorCodes.REPEAT_NOT_ALLOWED
       );
     }
 
-    const value = parseInt(match[1], 10);
-    const unit = match[2];
+    if (type === 2 && (repeat === undefined || repeat < 1)) {
+      throw new AtosJSError(
+        ErrorMessages[ErrorCodes.INVALID_REPEAT_VALUE],
+        ErrorCodes.INVALID_REPEAT_VALUE
+      );
+    }
 
-    switch (unit) {
-      case 's':
-        return value * 1000;
-      case 'm':
-        return value * 60 * 1000;
-      case 'h':
-        return value * 60 * 60 * 1000;
+    this.time = typeof time === 'object' ? this.convertToMilliseconds(time) : Number(ms(time));
+    this.repeat = repeat;
+    this.startFn = start;
+
+    switch (type) {
+      case 1:
+        this.startTimeout();
+        break;
+      case 2:
+        this.startRepeat();
+        break;
       default:
         throw new AtosJSError(
-          ErrorMessages[ErrorCodes.INVALID_TIME_UNIT],
-          ErrorCodes.INVALID_TIME_UNIT
+          ErrorMessages[ErrorCodes.INVALID_TYPE_VALUE],
+          ErrorCodes.INVALID_TYPE_VALUE
         );
     }
   }
 
-  convertFromMilliseconds(ms: number): string {
-    // Verifica se o valor de milissegundos é menor que 1000 (1 segundo)
-    if (ms < 1000) {
+  private convertToMilliseconds(time: { hour: number; minute: number }): number {
+    const now = new Date();
+    const target = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      time.hour,
+      time.minute,
+      0
+    );
+
+    const diff = target.getTime() - now.getTime();
+    return diff > 0 ? diff : diff + 24 * 60 * 60 * 1000;
+  }
+
+  private startTimeout() {
+    this.intervalId = setTimeout(this.startFn, this.time);
+  }
+
+  private startRepeat() {
+    let count = 0;
+    if (this.repeat && this.repeat < 1) {
       throw new AtosJSError(
-        ErrorMessages[ErrorCodes.INVALID_MS_VALUE],
-        ErrorCodes.INVALID_MS_VALUE
+        ErrorMessages[ErrorCodes.INVALID_REPEAT_VALUE],
+        ErrorCodes.INVALID_REPEAT_VALUE
       );
     }
-  
-    const { short, locale } = this.format;
-    const timeUnits = formatData[locale]; // Agora inferido de forma segura
-  
-    const hours = Math.floor(ms / (60 * 60 * 1000));
-    const minutes = Math.floor((ms % (60 * 60 * 1000)) / (60 * 1000));
-    const seconds = Math.floor((ms % (60 * 1000)) / 1000);
-  
-    if (short) {
-      // Formato curto: '1h 20m 30s'
-      return `${hours > 0 ? `${hours}h ` : ''}${minutes > 0 ? `${minutes}m ` : ''}${seconds > 0 ? `${seconds}s ` : ''}`.trim();
-    }
-  
-    // Formato longo: e.g., '1 hour 20 minutes 30 seconds' (en-US) ou '1 hora 20 minutos 30 segundos' (pt-BR)
-    const hourStr = hours > 0 ? `${hours} ${hours > 1 ? timeUnits.h[1] : timeUnits.h[0]}` : '';
-    const minuteStr = minutes > 0 ? `${minutes} ${minutes > 1 ? timeUnits.m[1] : timeUnits.m[0]}` : '';
-    const secondStr = seconds > 0 ? `${seconds} ${seconds > 1 ? timeUnits.s[1] : timeUnits.s[0]}` : '';
-  
-    return [hourStr, minuteStr, secondStr].filter(Boolean).join(' ');
-  }
-
-  every(interval: string, callback: () => void): NodeJS.Timeout {
-    const ms = this.convertToMilliseconds(interval);
-    return setInterval(callback, ms);
-  }
-
-  repeatInfinite(interval: string, callback: () => void): NodeJS.Timeout {
-    const ms = this.convertToMilliseconds(interval);
-    return setInterval(callback, ms);
-  }
-
-  after(delay: string, callback: () => void): void {
-    const ms = this.convertToMilliseconds(delay);
-    setTimeout(callback, ms);
-  }
-
-  elapsedSince(timestamp: number): number {
-    return Date.now() - timestamp;
-  }
-
-  dailyAt(hour: number, minute: number, callback: () => void): void {
-    const now = new Date();
-    const next = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minute, 0, 0);
-    if (next <= now) next.setDate(next.getDate() + 1);
-
-    const delay = next.getTime() - now.getTime();
-    setTimeout(() => {
-      callback();
-      this.every('24h', callback);
-    }, delay);
-  }
-
-  repeat(count: number, interval: string, callback: () => void): void {
-    const ms = this.convertToMilliseconds(interval);
-    let executed = 0;
-    const id = setInterval(() => {
-      if (executed >= count) {
-        clearInterval(id);
+    this.intervalId = setInterval(() => {
+      if (this.repeat && count >= this.repeat) {
+        this.stop();
         return;
       }
-      executed++;
-      callback();
-    }, ms);
+      this.startFn();
+      count++;
+    }, this.time);
   }
 
-  countdown(duration: string, onComplete: () => void): void {
-    const ms = this.convertToMilliseconds(duration);
-    setTimeout(onComplete, ms);
+  public stop() {
+    if (this.intervalId) {
+      clearTimeout(this.intervalId);
+      clearInterval(this.intervalId);
+    }
   }
+}
+
+// Função utilitária para converter tempo:
+export function ms(input: number | string): number | string {
+  if (typeof input === 'number') {
+    // Converter milissegundos para a string de tempo correspondente
+    if (input % (60 * 60 * 1000) === 0) return `${input / (60 * 60 * 1000)}h`;
+    if (input % (60 * 1000) === 0) return `${input / (60 * 1000)}m`;
+    if (input % 1000 === 0) return `${input / 1000}s`;
+    return `${input}ms`; // Caso não seja divisível por milissegundos, devolve o número diretamente
+  }
+
+  const match = input.match(/^(\d+)(ms|s|m|h)$/);
+  if (!match) {
+    throw new AtosJSError(
+      ErrorMessages[ErrorCodes.INVALID_TIME_UNIT],
+      ErrorCodes.INVALID_TIME_UNIT
+    );
+  }
+
+  const [, amount, unit] = match;
+  const parsed = parseInt(amount, 10);
+
+  switch (unit) {
+    case 'ms':
+      return parsed;
+    case 's':
+      return parsed * 1000;
+    case 'm':
+      return parsed * 60 * 1000;
+    case 'h':
+      return parsed * 60 * 60 * 1000;
+    default:
+      throw new AtosJSError(
+        ErrorMessages[ErrorCodes.INVALID_TIME_UNIT],
+        ErrorCodes.INVALID_TIME_UNIT
+      );
+  } 
 }

@@ -1,4 +1,4 @@
-import { AzuraServer } from "../src/index";
+import { AzuraServer } from "../dist/index.mjs";
 
 const app = new AzuraServer();
 

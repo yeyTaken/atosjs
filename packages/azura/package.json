@@ -19,6 +19,7 @@
     "dist"
   ],
   "scripts": {
+    "start": "node test/index.mjs",
     "build": "unbuild"
   },
   "keywords": [],

@@ -25,7 +25,7 @@ export class AzuraServer {
       swaggerRender(this.router);
     }
 
-    this.router.addRoute("get", "/favicon.ico", (res) => {
+    this.router.addRoute("get", "/favicon.ico", (_req, res) => {
       res.writeHead(204);
       res.end();
     });

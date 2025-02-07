@@ -17,17 +17,17 @@ export async function parseRequest(req: IncomingMessage, jsonParser: boolean): P
           params: {},
           query: {},
           body: jsonParser && data ? JSON.parse(data) : data,
-          setHeader: function (): unknown {
-            throw new Error("Function not implemented.");
+          setHeader: () => {
+            return;
           },
-          end: function (): unknown {
-            throw new Error("Function not implemented.");
+          end: () => {
+            return;
           },
-          writeHead: function (): unknown {
-            throw new Error("Function not implemented.");
-          }
+          writeHead: () => {
+            return;
+          },
         };
-
+        
         resolve(request);
       } catch (error) {
         reject(error);

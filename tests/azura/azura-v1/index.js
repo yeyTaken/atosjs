@@ -1,15 +1,15 @@
-const { AzuraServer } = require("../../../packages/azura/dist/index.cjs");
+import { AzuraServer } from "../../../packages/azura/dist/index.mjs";
 
-const app = new AzuraServer({ logging: true, jsonParser: true, swagger: true, cors: true });
+const app = new AzuraServer();
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.get("/", (_req, res, swagger) => {
+  swagger({
+    summary: "Hello World",
+    description: "This is a sample route",
+    tags: ["Sample"],
+  });
 
-app.get("/test", (req, res, swagger) => {
-  swagger({ summary: "Teste", description: "Teste", tags: ["test"] });
-
-  res.send("Teste Swagger");
+  res.send({ message: "Hello, Azura!" });
 });
 
 app.start();

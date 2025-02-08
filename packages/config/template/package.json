@@ -17,7 +17,9 @@
   "types": "./dist/index.d.ts",
   "files": ["dist"],
   "scripts": {
-    "build": "unbuild"
+    "start": "npm run build && node .",
+    "dev": "tsx src/index.ts",
+    "build": "unbuild",
   },
   "keywords": [],
   "author": "",
@@ -25,6 +27,8 @@
   "description": "",
   "devDependencies": {
     "@atosjs/config": "^0.0.0-config",
+
+    "tsx": "^4.19.2",
     "unbuild": "^3.3.1"
   }
 }

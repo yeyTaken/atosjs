@@ -1,9 +1,11 @@
 const { GiftManager, TimeFormat, ms } = require('atosjs');
+require('dotenv/config');
 
 const gift = new GiftManager({
-    dbLocal: {
-        filePath: 'gifts.yaml',
-    },
+    mongodb: {
+        connect: process.env.MONGO_URI,
+        dbName: 'gift',
+    }
 });
 
 module.exports = { gift, TimeFormat, ms };

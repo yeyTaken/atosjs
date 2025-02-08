@@ -1,22 +1,26 @@
+import consola from 'consola';
+
 module.exports = {
     name: 'generate:atosjs',
     description: 'Generates a new AtosJS project',
     run: async toolbox => {
         const {
+            generateAtosJS,
             parameters,
-            template,
             filesystem,
-            print: { success, error },
             system
         } = toolbox;
 
+        const { warn, info } = consola;
+        
         const type = parameters.options.use || 'js';
+        let db = parameters.options.db || 'local';
 
         const packages = await filesystem.read('package.json', 'json');
         const haveAtosJS = !!packages.dependencies['atosjs'];
 
         if (!haveAtosJS) {
-            error('AtosJS is not installed. Installing now...');
+            warn('AtosJS is not installed. Installing now...');
             
             const getPackageManager = () => {
                 if (filesystem.exists('yarn.lock')) {
@@ -50,47 +54,11 @@ module.exports = {
             }
 
             await system.spawn(installCommand, { stdio: 'inherit' });
-
-            await generateProject(type);
+            await generateAtosJS(type, db);
             return;
         }
 
-        success('Generating AtosJS project...');
-        await generateProject(type);
-
-        async function generateProject(type) {
-            // Se o tipo for JS, gera atos.config.js
-            if (type === 'js') {
-                await template.generate({
-                    template: 'atos.config:default.js.ejs',
-                    target: 'atos.config.js',
-                    props: {},
-                });
-
-                success('Generated AtosJS project with JS configuration.');
-            }
-            // Se o tipo for TS, gera atos.config.ts
-            else if (type === 'ts') {
-                await template.generate({
-                    template: 'atos.config:default.ts.ejs',
-                    target: 'atos.config.ts',
-                    props: {},
-                });
-
-                success('Generated AtosJS project with TS configuration.');
-            }
-            // Se o tipo for MJS, gera atos.config.mjs
-            else if (type === 'mjs') {
-                await template.generate({
-                    template: 'atos.config:default.ts.ejs', // Use o template TS para MJS.
-                    target: 'atos.config.mjs',
-                    props: {},
-                });
-
-                success('Generated AtosJS project with MJS configuration.');
-            } else {
-                error('Invalid type specified. Use TS, JS, or MJS.');
-            }
-        }
+        info('Generating AtosJS project...');
+        await generateAtosJS(type, db);
     }
 }

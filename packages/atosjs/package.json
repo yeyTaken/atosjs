@@ -47,7 +47,7 @@
   "author": "Rabi",
   "license": "MIT",
   "devDependencies": {
-    "@atosjs/config": "*",
+    "@atosjs/config": "^0.0.0-config",
 
     "@types/better-sqlite3": "^7.6.12",
     "@types/cli-spinner": "^0.2.3",

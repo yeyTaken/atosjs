@@ -27,7 +27,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@atosjs/config": "*",
+    "@atosjs/config": "^0.0.0-config",
 
     "@types/node": "^22.13.0",
     "sucrase": "^3.34.0",

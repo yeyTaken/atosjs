@@ -16,9 +16,7 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "start": "npm run build && npm run test",
     "build": "unbuild",
@@ -47,7 +45,7 @@
   "author": "Rabi",
   "license": "MIT",
   "devDependencies": {
-    "@atosjs/config": "^0.0.0-config",
+    "@atosjs/config": "latest",
 
     "@types/better-sqlite3": "^7.6.12",
     "@types/cli-spinner": "^0.2.3",

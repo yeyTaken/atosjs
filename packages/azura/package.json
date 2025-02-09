@@ -15,9 +15,7 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "start": "node test/index.mjs",
     "build": "unbuild"
@@ -27,7 +25,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@atosjs/config": "^0.0.0-config",
+    "@atosjs/config": "latest",
 
     "@types/node": "^22.13.0",
     "sucrase": "^3.34.0",

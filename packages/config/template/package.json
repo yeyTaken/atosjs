@@ -26,7 +26,7 @@
   "license": "MIT",
   "description": "",
   "devDependencies": {
-    "@atosjs/config": "^0.0.0-config",
+    "@atosjs/config": "latest",
 
     "tsx": "^4.19.2",
     "unbuild": "^3.3.1"

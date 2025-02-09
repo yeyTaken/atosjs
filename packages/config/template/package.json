@@ -19,7 +19,7 @@
   "scripts": {
     "start": "npm run build && node .",
     "dev": "tsx src/index.ts",
-    "build": "unbuild",
+    "build": "unbuild"
   },
   "keywords": [],
   "author": "",

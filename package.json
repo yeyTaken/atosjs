@@ -2,7 +2,9 @@
   "name": "@atosjs/root",
   "private": true,
   "scripts": {
-    "test": "turbo test"
+    "start": "turbo start",
+    "test": "turbo test",
+    "build": "turbo build"
   },
   "devDependencies": {
     "better-commits": "^1.15.7",
@@ -16,6 +18,7 @@
     "node": ">=20"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "tests/*"
   ]
 }

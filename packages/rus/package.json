@@ -11,8 +11,8 @@
     "clean-build": "rimraf -rf ./build",
     "compile": "tsc -p .",
     "copy-templates": "copyfiles ./src/templates/* ./build/templates",
-    "build": "npm clean-build && npm compile && npm copy-templates",
-    "prepublishOnly": "npm build",
+    "build": "yarn clean-build && yarn compile && yarn copy-templates",
+    "prepublishOnly": "yarn build",
     "format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
     "test": "jest",
     "watch": "jest --watch",
@@ -58,6 +58,7 @@
     "semi": false,
     "singleQuote": true
   },
+  "packageManager": "yarn@1.22.22",
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"

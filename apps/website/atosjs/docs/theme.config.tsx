@@ -34,6 +34,12 @@ const config: DocsThemeConfig = {
     link: 'https://github.com/yeyTaken/atosjs',
   },
   docsRepositoryBase: 'https://github.com/yeyTaken/atosjs',
+  color: {
+    lightness: { dark: 30, light: 35 },
+    hue: { light: 215, dark: 215 },
+    saturation: { light: 70, dark: 70 },
+  }
+  
 }
 
 export default config

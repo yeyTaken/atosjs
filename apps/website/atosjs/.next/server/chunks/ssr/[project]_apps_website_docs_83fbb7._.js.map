@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///workspaces/atosjs/apps/website/docs/apps/website/docs/src/app/page.jsx"],"sourcesContent":["export default function IndexPage() {\n  return (\n    <h1\n      style={{\n        textAlign: 'center',\n        fontSize: 64,\n        margin: '25vh 0',\n        fontWeight: 'bold'\n      }}\n    >\n      Index page\n    </h1>\n  )\n}\n"],"names":[],"mappings":";;;;;AAAe,SAAS;IACtB,qBACE,yQAAC;QACC,OAAO;YACL,WAAW;YACX,UAAU;YACV,QAAQ;YACR,YAAY;QACd;kBACD;;;;;;AAIL"}},
+    {"offset": {"line": 27, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 38, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":""}},
+    {"offset": {"line": 38, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

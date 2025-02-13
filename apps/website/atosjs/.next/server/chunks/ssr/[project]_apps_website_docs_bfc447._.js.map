@@ -1,0 +1,11 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///workspaces/atosjs/apps/website/docs/apps/website/docs/mdx-components.js"],"sourcesContent":["import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'\n\nconst docsComponents = getDocsMDXComponents()\n\nexport const useMDXComponents = components => ({\n  ...docsComponents,\n  ...components\n})\n"],"names":[],"mappings":";;;AAAA;;AAEA,MAAM,iBAAiB,CAAA,GAAA,wMAAA,CAAA,mBAAoB,AAAD;AAEnC,MAAM,mBAAmB,CAAA,aAAc,CAAC;QAC7C,GAAG,cAAc;QACjB,GAAG,UAAU;IACf,CAAC"}},
+    {"offset": {"line": 17, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 28, "column": 0}, "map": {"version":3,"sources":["file:///workspaces/atosjs/apps/website/docs/apps/website/docs/public/demo.png.mjs%20%28structured%20image%20object%29"],"sourcesContent":["import src from \"IMAGE\";\nexport default { src, width: 2288, height: 1974, blurDataURL: \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAHCAYAAAA1WQxeAAAAwElEQVR42k3NKw6DQBAG4E0FmkCgZZfySOAYXICQBg0GEs6E4hDYFYiyHACLxaCBmm5JpsuKppN8Zv55IIxvteu6IyFEwhiPlmVJmqbVSDRoEATgOA74vg+e50m2bYOqqhQRgmmaPqCqKiiKArIsgzzPIY5j0HWdojAM256xY99fsCwLrOsK27YBY8MhrrbINM2oZ8P05h85MM+z1HXdZBhGhMQflTHWcM6fYvtHVHNmSFGUS5Ik17Is7//O3pl9AdA6apH5n1s8AAAAAElFTkSuQmCC\", blurWidth: 8, blurHeight: 7 }\n"],"names":[],"mappings":";;;AAAA;;uCACe;IAAE,KAAA,sIAAA,CAAA,UAAG;IAAE,OAAO;IAAM,QAAQ;IAAM,aAAa;IAAsW,WAAW;IAAG,YAAY;AAAE"}},
+    {"offset": {"line": 41, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":""}},
+    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

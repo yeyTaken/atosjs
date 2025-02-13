@@ -1,8 +1,8 @@
 /* eslint-env node */
-import { Footer, Layout, Navbar } from 'nextra-theme-docs'
-import { Banner, Head } from 'nextra/components'
-import { getPageMap } from 'nextra/page-map'
-import 'nextra-theme-docs/style.css'
+import { Footer, Layout, Navbar } from 'nextra-theme-docs';
+import { Banner, Head } from 'nextra/components';
+import { getPageMap } from 'nextra/page-map';
+import 'nextra-theme-docs/style.css';
 
 export const metadata = {
   metadataBase: new URL('https://nextra.site'),
@@ -16,9 +16,10 @@ export const metadata = {
     title: 'AtosJS'
   },
   other: {
-    'msapplication-TileImage': '/ms-icon-144x144.png',
+    'msapplication-TileImage': '/ms-icon-144x144.svg',
     'msapplication-TileColor': '#fff'
-  }
+  },
+  
 }
 
 export default async function RootLayout({ children }) {
@@ -48,9 +49,16 @@ export default async function RootLayout({ children }) {
       <Head faviconGlyph="✦" />
       <body>
         <Layout
-          banner={<Banner storageKey="Nextra 2">AtosJS v3</Banner>}
+          banner={
+          <Banner storageKey="AtosJS">AtosJS v3</Banner>
+        }
+
           navbar={navbar}
-          footer={<Footer>MIT {new Date().getFullYear()} © AtosJS.</Footer>}
+
+          footer={
+          <Footer>MIT {new Date().getFullYear()} © AtosJS.</Footer>
+        }
+        
           editLink="Edit this page on GitHub"
           docsRepositoryBase="https://github.com/yeyTaken/atosjs/website/atosjs/docs"
           sidebar={{ defaultMenuCollapseLevel: 1 }}

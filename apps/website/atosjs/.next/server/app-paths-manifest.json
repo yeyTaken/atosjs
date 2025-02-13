@@ -1,6 +1,7 @@
 {
   "/page": "app/page.js",
   "/icon.png/route": "app/icon.png/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/apple-icon.png/route": "app/apple-icon.png/route.js",
   "/docs/[[...mdxPath]]/page": "app/docs/[[...mdxPath]]/page.js"
 }

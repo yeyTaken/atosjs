@@ -20,7 +20,7 @@ export const metadata = {
     'msapplication-TileImage': '/ms-icon-144x144.svg',
     'msapplication-TileColor': '#fff'
   },
-  
+
 }
 
 export default async function RootLayout({ children }) {
@@ -47,16 +47,22 @@ export default async function RootLayout({ children }) {
   const pageMap = await getPageMap()
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
-      <Head faviconGlyph="A" />
+      <Head
+        backgroundColor={{
+          dark: 'rgb(0, 0, 0)',
+          light: 'rgb(246, 246, 255)'
+        }}
+        faviconGlyph="A"
+      />
       <body>
         <Layout
 
           navbar={navbar}
 
           footer={
-          <Footer>MIT {new Date().getFullYear()} © AtosJS.</Footer>
+            <Footer>MIT {new Date().getFullYear()} © AtosJS.</Footer>
           }
-        
+
           editLink="Edit this page on GitHub"
           docsRepositoryBase="https://github.com/yeyTaken/atosjs/website/atosjs/docs"
           sidebar={{ defaultMenuCollapseLevel: 1 }}

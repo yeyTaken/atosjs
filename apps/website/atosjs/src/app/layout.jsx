@@ -1,7 +1,8 @@
 /* eslint-env node */
 import { Footer, Layout, Navbar } from 'nextra-theme-docs';
-import { Banner, Head } from 'nextra/components';
+import { Head } from 'nextra/components';
 import { getPageMap } from 'nextra/page-map';
+
 import 'nextra-theme-docs/style.css';
 
 export const metadata = {
@@ -40,24 +41,21 @@ export default async function RootLayout({ children }) {
           </span>
         </>
       }
-      chatLink="https://atos.js.org/discord"
+      projectLink="https://github.com/yeyTaken/atosjs"
     />
   )
   const pageMap = await getPageMap()
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
-      <Head faviconGlyph="✦" />
+      <Head faviconGlyph="A" />
       <body>
         <Layout
-          banner={
-          <Banner storageKey="AtosJS">AtosJS v3</Banner>
-        }
 
           navbar={navbar}
 
           footer={
           <Footer>MIT {new Date().getFullYear()} © AtosJS.</Footer>
-        }
+          }
         
           editLink="Edit this page on GitHub"
           docsRepositoryBase="https://github.com/yeyTaken/atosjs/website/atosjs/docs"

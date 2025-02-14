@@ -9,15 +9,45 @@
 </p>
 </div>
 
+## 🚀 **Get Started**  
 
+### 1. **Installation**  
+Make sure you have Bun installed on your machine. To install the project's dependencies, run:  
 
+```bash
+bun install
+```  
 
+### 2. **Project Structure**  
+The project structure is organized as follows:  
 
+```
+atosjs/
+├── apps/
+│   ├── api/          # API-related files
+│   └── website/      # Website-related files
+├── assets/           # Static assets
+│   └── images/       # Static images
+├── packages/         # Core packages for AtosJS
+│   ├── atosjs/       # Framework core files
+│   └── config/       # Build configuration files
+├── tests/            # Test files
+│   └── atosjs/       # Tests for specific packages (e.g., `atosjs-auth`, `atosjs-user-management`)
+```
 
+### 3. **Run the Global Project**  
+To run the complete project, we use the `turbo.json` file. Follow the steps below:  
 
+```bash
+# Run tests
+bun test
 
+# Build the project
+bun run build
 
-
+# Start the project
+bun start
+```
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true"></img>

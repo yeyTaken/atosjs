@@ -1,0 +1,72 @@
+.box {
+  position: relative;
+  background-color: #0000120f;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Garante que o conteúdo não ultrapasse as bordas arredondadas */
+  
+  /* Borda com o gradiente */
+  border: 3px solid transparent;
+  border-image: linear-gradient(to right, var(--border-color), transparent 50%, rgb(175, 175, 179));
+  border-image-slice: 1;
+  
+  border-radius: 10px; /* Borda arredondada */
+  padding: 1rem; /* Ajuste o espaçamento conforme necessário */
+}
+
+.box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box-icon {
+  display: flex;
+  align-items: center;
+  user-select: none;
+  font-size: 1.25rem;
+}
+
+.box-name {
+  margin: 0.5rem;
+  font-weight: 600;
+}
+
+.box-content {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.5rem;
+  margin-top: 0.75rem;
+}
+
+.box-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.box--idea {
+  --border-color: #3b82f6;
+  color: #1e3a8a;
+}
+
+.box--error {
+  --border-color: #ef4444;
+  color: #7f1d1d;
+}
+
+.box--info {
+  --border-color: #3b82f6;
+  color: #1e3a8a;
+}
+
+.box--warn {
+  --border-color: #f59e0b;
+  color: #78350f;
+}

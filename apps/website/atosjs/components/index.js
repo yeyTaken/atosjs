@@ -1,5 +1,9 @@
-import Callout from './Callout'
+import Box from './Box'
+import { FileTree, Callout ,Tabs } from 'nextra/components'
 
 export {
-    Callout
+    FileTree,
+    Callout,
+    Tabs,
+    Box
 }

@@ -1,10 +1,11 @@
 import { 
-FileTree, 
-Tabs
-} from 'nextra/components'
-import {Callout} from '../components'
+  FileTree,
+  Callout, 
+  Tabs,
+  Box
+} from '../components'
 
-<Callout type={0}>
+<Box type={0} BoxName="Idea">
   ### aaaaaaa
   
   <div>
@@ -12,8 +13,9 @@ import {Callout} from '../components'
   // test
   ```
   </div>
-</Callout>
-<Callout type={1}>
+</Box>
+
+<Box type={1} BoxName="Error" isDropdown>
   ### aaaaaaa
   
   <div>
@@ -21,8 +23,9 @@ import {Callout} from '../components'
   // test
   ```
   </div>
-</Callout>
-<Callout type={2}>
+</Box>
+
+<Box type={2} BoxName="Info">
   ### aaaaaaa
   
   <div>
@@ -30,8 +33,9 @@ import {Callout} from '../components'
   // test
   ```
   </div>
-</Callout>
-<Callout type={3}>
+</Box>
+
+<Box type={3} BoxName="Warn">
   ### aaaaaaa
   
   <div>
@@ -39,6 +43,10 @@ import {Callout} from '../components'
   // test
   ```
   </div>
+</Box>
+
+<Callout>
+test
 </Callout>
 ```js showLineNumbers filename="example.js" copy
 

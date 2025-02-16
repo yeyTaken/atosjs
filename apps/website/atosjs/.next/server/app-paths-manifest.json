@@ -1,4 +1,7 @@
 {
-  "/docs/[[...mdxPath]]/page": "app/docs/[[...mdxPath]]/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/icon.svg/route": "app/icon.svg/route.js",
+  "/page": "app/page.js",
+  "/docs/[[...mdxPath]]/page": "app/docs/[[...mdxPath]]/page.js"
 }

@@ -21,5 +21,6 @@
     "packages/*",
     "tests/*",
     "apps/*"
-  ]
+  ],
+  "dependencies": {}
 }

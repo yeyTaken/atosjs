@@ -29,7 +29,7 @@ atosjs/
 ├── assets/           # Static assets
 │   └── images/       # Static images
 ├── packages/         # Core packages for AtosJS
-│   ├── atosjs/       # Framework core files
+│   ├── atosjs/       # Principal NPM core files
 │   └── config/       # Build configuration files
 ├── tests/            # Test files
 │   └── atosjs/       # Tests for specific packages (e.g., `atosjs-auth`, `atosjs-user-management`)

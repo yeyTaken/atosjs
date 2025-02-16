@@ -19,14 +19,14 @@
 AtosJS is a powerful and easy-to-use package, built with [Node.js](https://nodejs.org/), and supporting ESLint to ensure proper import usage. It offers useful systems for daily tasks, optimizing your workflow. Visit the [website](https://atos.js.org/).
 
 ## Classes
-- `GiftManager` view [documentation](https://atos.js.org/docs/gift-manager/).
-- `TimeFormat` view [documentation](https://atos.js.org/docs/time-format/).
+- [`GiftManager`](https://atos.js.org/docs/gift-manager/)
+- [`TimeFormat`](https://atos.js.org/docs/time-format/)
 
 
 ## Links
 - AtosJS [website](https://atos.js.org/) | [Documentation](https://atos.js.org/docs).
 - [GitHub](https://github.com/yeyTaken/atosjs) monorep.
-- [npm](https://www.npmjs.com/package/atosjs), Latest version: `v3.0.10`.
+- [NPM](https://www.npmjs.com/package/atosjs), Latest version: `v3.0.10`.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true"></img>

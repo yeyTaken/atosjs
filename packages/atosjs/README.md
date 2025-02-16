@@ -16,11 +16,11 @@
 </div>
 
 ## About
-AtosJS is a powerful and easy-to-use package, built with [Node.js](https://nodejs.org/), and supporting ESLint to ensure proper import usage. It offers useful systems for daily tasks, optimizing your workflow. Visit the [website](https://atos.js.org/).
+AtosJS is a powerful and easy-to-use package, built with [Node.js](https://nodejs.org/), and supporting `.ts`, `.js`, `.mjs`, `.cjs` to ensure proper import usage. It offers useful systems for daily tasks, optimizing your workflow. Visit the [website](https://atos.js.org/).
 
 ## Classes
 - [`GiftManager`](https://atos.js.org/docs/gift-manager/)
-- [`TimeFormat`](https://atos.js.org/docs/time-format/)
+- [`TimeFormat`](https://atos.js.org/docs/time-format/) | [`ms`](https://atos.js.org/time-format/ms/)
 
 
 ## Links

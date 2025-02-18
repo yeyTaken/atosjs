@@ -2,12 +2,12 @@
 
 import { useState } from 'react'
 import cn from 'clsx'
-import { 
-  FaInfoCircle, 
-  FaTimesCircle, 
-  FaExclamationTriangle, 
-  FaLightbulb, 
-  FaChevronDown, 
+import {
+  FaInfoCircle,
+  FaTimesCircle,
+  FaExclamationTriangle,
+  FaLightbulb,
+  FaChevronDown,
   FaChevronUp
 } from 'react-icons/fa'
 
@@ -33,11 +33,11 @@ const classes = {
   )
 }
 
-export const Box = ({ children, type = 'default', emoji, isDropDown = false, BoxTitle = '' }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const icon = emoji || TypeToEmoji[type]
+export const Box = ({ children, type = 'default', isDropDown = false, title = '' }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const icon = TypeToEmoji[type];
 
-  const toggleDropDown = () => setIsOpen(prev => !prev)
+  const toggleDropDown = () => setIsOpen(prev => !prev);
 
   return (
     <div
@@ -59,10 +59,10 @@ export const Box = ({ children, type = 'default', emoji, isDropDown = false, Box
       <div className="x:w-full x:min-w-0 x:leading-7">
         <div className="x:flex x:items-center x:justify-between">
           <div className="x:flex x:items-center">
-            {BoxTitle && <span className="x:text-xl x:font-semibold x:ms-2">{BoxTitle}</span>}
+            {title && <span className="x:text-xl x:font-semibold x:ms-2">{title}</span>}
           </div>
           {isDropDown && (
-            <div 
+            <div
               className="x:cursor-pointer x:text-xl"
               onClick={toggleDropDown}
             >

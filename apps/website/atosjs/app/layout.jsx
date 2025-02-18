@@ -1,7 +1,8 @@
 /* eslint-env node */
 import { Footer, Layout, Navbar } from 'nextra-theme-docs';
-import { Head } from 'nextra/components';
+import { Head, Search } from 'nextra/components';
 import { getPageMap } from 'nextra/page-map';
+import { FaCode } from 'react-icons/fa';
 
 import './globals.css';
 
@@ -26,6 +27,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const navbar = (
     <Navbar
+    
       logo={
         <>
           <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
@@ -44,6 +46,14 @@ export default async function RootLayout({ children }) {
       projectLink="https://github.com/yeyTaken/atosjs"
     />
   )
+
+  const search = (
+    <Search
+      
+      placeholder="Search..."
+    />
+  );
+
   const pageMap = await getPageMap()
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
@@ -58,6 +68,7 @@ export default async function RootLayout({ children }) {
         <Layout
 
           navbar={navbar}
+          search={search}
 
           footer={
             <Footer>MIT {new Date().getFullYear()} © AtosJS.</Footer>

@@ -1,6 +1,6 @@
 {
-  "/page": "app/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/docs/[[...mdxPath]]/page": "app/docs/[[...mdxPath]]/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
   "/icon.svg/route": "app/icon.svg/route.js"
 }

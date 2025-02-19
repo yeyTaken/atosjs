@@ -1,6 +1,9 @@
 node_modules/
+
 package-lock.*
 yarn.*
+bun.*
+
 lib/
 dist/
 .env
@@ -8,5 +11,5 @@ test.*
 tsconfig.tsbuildinfo
 dbLocal.*
 
-.turbo
-.next
+.turbo/
+.next/

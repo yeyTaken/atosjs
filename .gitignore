@@ -4,7 +4,6 @@ package-lock.*
 yarn.*
 bun.*
 
-lib/
 dist/
 .env
 test.*

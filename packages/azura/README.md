@@ -41,8 +41,6 @@ app.start(); // ou app.start(3000 | "you port");
 
 Azura inclui suporte nativo a **Swagger**:
 
-````ts
-
 
 ## 🛠️ CLI Inteligente
 Rodando o servidor em modo de desenvolvimento:

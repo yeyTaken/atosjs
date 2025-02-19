@@ -8,7 +8,7 @@ dist/
 .env
 test.*
 tsconfig.tsbuildinfo
-dbLocal.*
+dbLocal.sqlite
 
 .turbo/
 .next/

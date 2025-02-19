@@ -7,6 +7,14 @@
     "atos": "./dist/index.cjs"
   },
   "exports": {
+    "./GiftManager": {
+      "import": "./dist/classes/GiftManager.mjs",
+      "require": "./dist/classes/GiftManager.cjs"
+    },
+    "./TimeFormat": {
+      "import": "./dist/classes/TimeFormat.mjs",
+      "require": "./dist/classes/TimeFormat.cjs"
+    },
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",

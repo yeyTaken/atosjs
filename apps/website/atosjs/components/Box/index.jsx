@@ -15,7 +15,7 @@ const TypeToEmoji = {
   default: <FaLightbulb size={20} className="x:mt-1" />,
   error: <FaTimesCircle size={20} className="x:mt-1" />,
   info: <FaInfoCircle size={20} className="x:mt-1" />,
-  warning: <FaExclamationTriangle size={20} className="x:mt-1" />
+  warn: <FaExclamationTriangle size={20} className="x:mt-1" />
 }
 
 const classes = {
@@ -28,7 +28,7 @@ const classes = {
   info: cn(
     'x:border-blue-200 x:bg-blue-100/70 x:text-blue-900 x:dark:border-blue-200/30 x:dark:bg-blue-900/30 x:dark:text-blue-200'
   ),
-  warning: cn(
+  warn: cn(
     'x:border-yellow-100 x:bg-yellow-50/70 x:text-yellow-900 x:dark:border-yellow-200/30 x:dark:bg-yellow-700/30 x:dark:text-yellow-200'
   )
 }

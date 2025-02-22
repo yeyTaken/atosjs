@@ -58,7 +58,6 @@
     "semi": false,
     "singleQuote": true
   },
-  "packageManager": "yarn@1.22.22",
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"

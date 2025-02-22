@@ -1,11 +1,8 @@
 {
   "name": "atosjs",
-  "version": "3.0.8",
+  "version": "3.0.10",
   "description": "AtosJS, It´s a complex and adventure-filled book!",
   "type": "module",
-  "bin": {
-    "atos": "./dist/index.cjs"
-  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -47,6 +44,7 @@
   "license": "MIT",
   "devDependencies": {
     "@atosjs/config": "workspace:*",
+
     "@types/better-sqlite3": "^7.6.12",
     "@types/cli-spinner": "^0.2.3",
     "@types/figlet": "^1.7.0",

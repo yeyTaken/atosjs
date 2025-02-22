@@ -1,11 +1,15 @@
-const { GiftManager, TimeFormat } = require('atosjs');
-
-const time = new TimeFormat();
+const {
+    GiftManager,
+    sleep,
+    time,
+    queue,
+    ms,
+} = require('../../../packages/atosjs/dist/index.cjs');
 
 const gift = new GiftManager({
-  dbLocal: {
-    filePath: './gifts.json',
-  },
+    dbLocal: {
+        filePath: './gifts.json',
+    },
 });
 
-module.exports = { time, gift };
+module.exports = { gift, time, queue, sleep, ms };

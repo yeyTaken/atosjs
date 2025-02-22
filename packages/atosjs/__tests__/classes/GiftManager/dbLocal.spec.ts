@@ -5,7 +5,7 @@ import { QuickDB } from 'quick.db';
 
 // is CommonJS:
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { GiftManager } = require('../../dist/index.cjs');
+const { GiftManager } = require('../../../dist/index.cjs');
 
 // is Module:
 // import { GiftManager } from '../../dist/index.mjs';

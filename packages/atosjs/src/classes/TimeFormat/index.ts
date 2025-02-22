@@ -1,133 +1,147 @@
-import { AtosJSError, ErrorCodes, ErrorMessages } from '../../errors';
+// import { AtosJSError, ErrorCodes, ErrorMessages } from '../../errors';
+import ms from "ms";
 
-type TimeOptions = {
-  time: number | string | { hour: number; minute: number };
-  type: 1 | 2;
-  repeat?: number;
-  start(): void;
+/**
+ * Pauses execution for a specified amount of time.
+ * 
+ * @param time - The wait time in milliseconds.
+ * @returns A Promise that resolves after the specified time.
+ * 
+ * @example
+ * await sleep(1000); // Waits for 1 second
+ */
+export const sleep = (time: number): Promise<void> => {
+  return new Promise((resolve) => setTimeout(resolve, time));
 };
 
-export class TimeFormat {
-  private time: number;
-  private repeat?: number;
-  private startFn: () => void;
-  private intervalId?: NodeJS.Timeout;
+/**
+ * Executes a function repeatedly at defined intervals.
+ * 
+ * @param interval - The time interval between executions, in milliseconds.
+ * @param repetitions - The number of repetitions. If omitted, it runs once.
+ * @param callback - The function to execute. Receives the current iteration count as a parameter.
+ * 
+ * @example
+ * // Runs 3 times, every 1 second
+ * time(1000, 3, (count) => {
+ *   console.log(`Execution ${count}`);
+ * });
+ * 
+ * @example
+ * // Runs once after 2 seconds
+ * time(2000, (count) => {
+ *   console.log(`Execution ${count}`);
+ * });
+ */
+export function time(interval: number, callback: (count: number) => void): void;
+export function time(interval: number, repetitions: number, callback: (count: number) => void): void;
+export function time(
+  interval: number,
+  repetitionsOrCallback: number | ((count: number) => void),
+  callbackArg?: (count: number) => void
+): void {
+  let repetitions: number;
+  let callback: (count: number) => void;
 
-  constructor(options: TimeOptions) {
-    const { time, type, repeat, start } = options;
-
-    if (type !== 2 && repeat !== undefined) {
-      throw new AtosJSError(
-        ErrorMessages[ErrorCodes.REPEAT_NOT_ALLOWED],
-        ErrorCodes.REPEAT_NOT_ALLOWED
-      );
-    }
-
-    if (type === 2 && (repeat === undefined || repeat < 1)) {
-      throw new AtosJSError(
-        ErrorMessages[ErrorCodes.INVALID_REPEAT_VALUE],
-        ErrorCodes.INVALID_REPEAT_VALUE
-      );
-    }
-
-    this.time = typeof time === 'object' ? this.convertToMilliseconds(time) : Number(ms(time));
-    this.repeat = repeat;
-    this.startFn = start;
-
-    switch (type) {
-      case 1:
-        this.startTimeout();
-        break;
-      case 2:
-        this.startRepeat();
-        break;
-      default:
-        throw new AtosJSError(
-          ErrorMessages[ErrorCodes.INVALID_TYPE_VALUE],
-          ErrorCodes.INVALID_TYPE_VALUE
-        );
-    }
+  if (typeof repetitionsOrCallback === 'function') {
+    repetitions = 1;
+    callback = repetitionsOrCallback;
+  } else {
+    repetitions = repetitionsOrCallback;
+    callback = callbackArg!;
   }
 
-  private convertToMilliseconds(time: { hour: number; minute: number }): number {
-    const now = new Date();
-    const target = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate(),
-      time.hour,
-      time.minute,
-      0
-    );
+  let count = 0;
 
-    const diff = target.getTime() - now.getTime();
-    return diff > 0 ? diff : diff + 24 * 60 * 60 * 1000;
-  }
-
-  private startTimeout() {
-    this.intervalId = setTimeout(this.startFn, this.time);
-  }
-
-  private startRepeat() {
-    let count = 0;
-    if (this.repeat && this.repeat < 1) {
-      throw new AtosJSError(
-        ErrorMessages[ErrorCodes.INVALID_REPEAT_VALUE],
-        ErrorCodes.INVALID_REPEAT_VALUE
-      );
+  const execute = () => {
+    callback(count + 1);
+    count++;
+    if (count < repetitions) {
+      setTimeout(execute, interval);
     }
-    this.intervalId = setInterval(() => {
-      if (this.repeat && count >= this.repeat) {
-        this.stop();
-        return;
+  };
+
+  setTimeout(execute, interval);
+}
+
+type Task = () => Promise<any>;
+
+interface QueueOptions {
+  concurrency?: number; // Controls the maximum number of tasks running simultaneously.
+  stopOnError?: boolean; // Whether to stop execution on error.
+}
+
+/**
+ * Executes a queue of asynchronous tasks sequentially or with controlled concurrency.
+ * 
+ * @param tasks - An array of asynchronous functions (tasks) to execute.
+ * @param options - Configuration options:
+ *   - `concurrency`: Maximum number of tasks running simultaneously (default: 1).
+ *   - `stopOnError`: If true, stops execution on error (default: true).
+ * @returns A Promise that resolves when all tasks are completed.
+ * 
+ * @example
+ * const task1 = async () => {
+ *   console.log("Task 1 started");
+ *   await sleep(5000);
+ *   console.log("Task 1 finished");
+ * };
+ * 
+ * const task2 = async () => {
+ *   console.log("Task 2 started");
+ *   await sleep(1000);
+ *   console.log("Task 2 finished");
+ * };
+ * 
+ * queue([task1, task2])
+ *   .then(() => console.log("All tasks completed."))
+ *   .catch((error) => console.error("Error in tasks:", error));
+ */
+export function queue(tasks: Task[], options: QueueOptions = {}): Promise<void> {
+  const { concurrency = 1, stopOnError = true } = options;
+  let pending = 0;
+  let currentIndex = 0;
+  let hasError = false;
+
+  return new Promise((resolve, reject) => {
+    const runNext = () => {
+      if (hasError && stopOnError) return reject();
+      if (currentIndex === tasks.length && pending === 0) return resolve();
+
+      while (pending < concurrency && currentIndex < tasks.length && !hasError) {
+        const task = tasks[currentIndex];
+        currentIndex++;
+        pending++;
+
+        task()
+          .catch((error) => {
+            hasError = true;
+            reject(error);
+          })
+          .finally(() => {
+            pending--;
+            runNext();
+          });
       }
-      this.startFn();
-      count++;
-    }, this.time);
-  }
+    };
 
-  public stop() {
-    if (this.intervalId) {
-      clearTimeout(this.intervalId);
-      clearInterval(this.intervalId);
-    }
-  }
+    runNext();
+  });
 }
 
-// Função utilitária para converter tempo:
-export function ms(input: number | string): number | string {
-  if (typeof input === 'number') {
-    // Converter milissegundos para a string de tempo correspondente
-    if (input % (60 * 60 * 1000) === 0) return `${input / (60 * 60 * 1000)}h`;
-    if (input % (60 * 1000) === 0) return `${input / (60 * 1000)}m`;
-    if (input % 1000 === 0) return `${input / 1000}s`;
-    return `${input}ms`; // Caso não seja divisível por milissegundos, devolve o número diretamente
-  }
 
-  const match = input.match(/^(\d+)(ms|s|m|h)$/);
-  if (!match) {
-    throw new AtosJSError(
-      ErrorMessages[ErrorCodes.INVALID_TIME_UNIT],
-      ErrorCodes.INVALID_TIME_UNIT
-    );
-  }
-
-  const [, amount, unit] = match;
-  const parsed = parseInt(amount, 10);
-
-  switch (unit) {
-    case 'ms':
-      return parsed;
-    case 's':
-      return parsed * 1000;
-    case 'm':
-      return parsed * 60 * 1000;
-    case 'h':
-      return parsed * 60 * 60 * 1000;
-    default:
-      throw new AtosJSError(
-        ErrorMessages[ErrorCodes.INVALID_TIME_UNIT],
-        ErrorCodes.INVALID_TIME_UNIT
-      );
-  } 
-}
+/**
+ * Converts a time string (e.g., "1s", "2m", "3h") to milliseconds, or milliseconds to a human-readable string.
+ * 
+ * @param value - The time string (e.g., "1s") or number of milliseconds (e.g., 1000).
+ * @returns The time in milliseconds (if input is a string) or a human-readable string (if input is a number).
+ * 
+ * @example
+ * const delay = ms("2s"); // 2000
+ * await sleep(delay); // Waits for 2 seconds
+ * 
+ * @example
+ * const readable = ms(1000); // "1s"
+ * console.log(readable); // Outputs "1s"
+ */
+export { ms };

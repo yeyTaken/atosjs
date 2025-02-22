@@ -1,3 +1,2 @@
-#!/usr/bin/env node
 export { GiftManager } from './classes/GiftManager';
-export { TimeFormat, ms } from './classes/TimeFormat';
+export { time, sleep, queue, ms } from './classes/TimeFormat';

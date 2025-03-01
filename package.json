@@ -17,8 +17,7 @@
   },
   "workspaces": [
     "packages/*",
-    "tests/*",
-    "apps/*"
+    "tests/*"
   ],
   "dependencies": {}
 }

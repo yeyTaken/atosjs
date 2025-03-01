@@ -5,7 +5,6 @@ const withNextra = createWithNextra({
   unstable_shouldAddLocaleToLinks: true,
 })
 
-
 /**
  * @type {import("next").NextConfig}
  */
@@ -25,4 +24,11 @@ export default withNextra({
   sassOptions: {
     silenceDeprecations: ['legacy-js-api'],
   },
+  redirects: async () => [
+    {
+      source: '/discord',
+      destination: 'https://discord.gg/2eawa4PsFP',
+      permanent: true,
+    },
+  ],
 })

@@ -89,7 +89,6 @@ export const LinkPreview = ({
             </div>
           )
         : null}
-
       <HoverCardPrimitive.Root
         openDelay={50}
         closeDelay={100}

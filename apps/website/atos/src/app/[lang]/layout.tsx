@@ -16,11 +16,8 @@ import { ThemeProvider } from './_components/ThemeProvider'
 import './styles/index.css'
 
 export const metadata = {
-  metadataBase: new URL('https://nextra.site'),
-  title: '%s - AtosJS',
-  description: 'A melhor NPM que verá!',
+  metadataBase: new URL('https://atos.js.org/'),
   applicationName: 'AtosJS',
-  generator: 'Next.js',
   appleWebApp: {
     title: 'AtosJS'
   },
@@ -43,7 +40,7 @@ const CustomBanner = async ({ lang }: I18nLangAsyncProps) => {
         { t('banner.title') }
         {' '}
         <a
-          className="max-sm:hidden text-warning hover:underline"
+          className="max-sm:hidden text-blue-800 hover:underline"
           target="_blank"
           href={repo}
         >

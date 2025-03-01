@@ -9,14 +9,23 @@
 </p>
 </div>
 
-## 🚀 **Get Started**: Project made using [`bun`](https://bun.sh/).
+---
+
+## 🚀 **Get Started**: Project built with [`Bun`](https://bun.sh/).  
 
 ### 1. **Installation**  
-Make sure you have Bun installed on your machine. To install the project's dependencies, run:  
+Ensure you have Bun installed on your system. If you don’t have it yet, install it globally:  
+
+```bash
+npm install -g bun
+```  
+
+Then, install the project dependencies:  
 
 ```bash
 bun install
 ```  
+---
 
 ### 2. **Project Structure**  
 The project structure is organized as follows:  
@@ -34,6 +43,7 @@ atosjs/
 ├── tests/            # Test files
 │   └── atosjs/       # Tests for specific packages (e.g., `atosjs-auth`, `atosjs-user-management`)
 ```
+---
 
 ### 3. **Run the Global Project**  
 To run the complete project, we use the `turbo.json` file. Follow the steps below:  

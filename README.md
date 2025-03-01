@@ -3,8 +3,8 @@
   
   <p>
   <!-- AtosJS badges -->
-  <a href="https://github.com/yeyTaken/atosjs">
-    <img src="https://img.shields.io/badge/github-atosjs-8da6ce?style=for-the-badge&logo=github" />
+  <a href="https://atos.js.org/discord">
+    <img src="https://img.shields.io/badge/discord-atosjs-8da6ce?style=for-the-badge" />
   </a>
 </p>
 </div>

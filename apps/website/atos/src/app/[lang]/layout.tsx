@@ -16,13 +16,22 @@ import { ThemeProvider } from './_components/ThemeProvider'
 import './styles/index.css'
 
 export const metadata = {
-  // Define your metadata here
-  // For more information on metadata API, see: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
-  metadataBase: new URL('https://nextjs-nextra-starter-green.vercel.app'),
-  icons: '/img/favicon.svg',
+  metadataBase: new URL('https://nextra.site'),
+  title: '%s - AtosJS',
+  description: 'A melhor NPM que verá!',
+  applicationName: 'AtosJS',
+  generator: 'Next.js',
+  appleWebApp: {
+    title: 'AtosJS'
+  },
+  other: {
+    'msapplication-TileImage': '/img/ms-icon-144x144.svg',
+    'msapplication-TileColor': '#fff'
+  },
+
 } satisfies Metadata
 
-const repo = 'https://github.com/pdsuwwz/nextjs-nextra-starter'
+const repo = 'https://github.com/yeyTaken/atosjs'
 
 const CustomBanner = async ({ lang }: I18nLangAsyncProps) => {
   const { t } = await useServerLocale(lang)
@@ -50,9 +59,21 @@ const CustomNavbar = async ({ lang }: I18nLangAsyncProps) => {
   const { t } = await useServerLocale(lang)
   return (
     <Navbar
-      logo={(
-        <span>{ t('systemTitle') }</span>
-      )}
+    logo={
+      <>
+        <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
+          <path
+            clipRule="evenodd"
+            d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
+            fill="currentColor"
+            fillRule="evenodd"
+          />
+        </svg>
+        <span style={{ marginLeft: '.4em', fontWeight: 800 }}>
+          AtosJS
+        </span>
+      </>
+    }
       logoLink={`/${lang}`}
       projectLink={repo}
     >
@@ -75,8 +96,8 @@ export default async function RootLayout({ children, params }: Props) {
   const dictionary = await getDictionary(lang)
   const pageMap = await getPageMap(lang)
 
-  const title = 'My Nextra Starter'
-  const description = 'A Starter template with Next.js, Nextra'
+  const title = 'AtosJS'
+  const description = 'A best NPM'
 
   const { t } = await useServerLocale(lang)
 
@@ -120,7 +141,7 @@ export default async function RootLayout({ children, params }: Props) {
               </LastUpdated>
             )}
             editLink={null}
-            docsRepositoryBase="https://github.com/pdsuwwz/nextjs-nextra-starter"
+            docsRepositoryBase="https://github.com/yeyTaken/atosjs"
             footer={(
               <Footer className="bg-background py-5!">
                 <CustomFooter />

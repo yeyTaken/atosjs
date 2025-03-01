@@ -6,7 +6,7 @@ export default {
     title: (
       <span style={{ display: 'flex', alignItems: 'center' }}>
         <FaHome style={{ marginRight: '0.5em' }} />
-        Introdução
+        Introduction
       </span>
     )
   }

@@ -9,7 +9,7 @@
 </p>
 </div>
 
-## 🚀 **Get Started**  
+## 🚀 **Get Started**: Project made using [`bun`](https://bun.sh/).
 
 ### 1. **Installation**  
 Make sure you have Bun installed on your machine. To install the project's dependencies, run:  

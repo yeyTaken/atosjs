@@ -40,12 +40,12 @@ const CustomBanner = async ({ lang }: I18nLangAsyncProps) => {
         { t('banner.title') }
         {' '}
         <a
-          className="max-sm:hidden text-blue-800 hover:underline"
+          className="max-sm:hidden text-blue-800 underline"
           target="_blank"
           href={repo}
         >
-          { t('banner.more') }
-        </a>
+          {t('banner.more')}
+        </a>.
       </div>
     </Banner>
   )

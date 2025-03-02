@@ -101,7 +101,12 @@ The versioning format follows this structure:
 
 - **Z (Bug Fixes)** → Number of bugs fixed within an improvement (`Y`).  
   - Example: The number `22` means that **22 bugs were fixed** in change `16`.  
-  - When `Y` increases (e.g., `16` → `17`), the bug counter (`Z`) resets to `0`.  
+  - When `Y` increases (e.g., `16` → `17`), the bug counter (`Z`) resets to `0`.
+
+---
+
+## Links:
+[Website](https://atos.js.org/en) | [Documentation](https://atos.js.org/en/docs) | [Discord](https://atos.js.org/discord)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true"></img>

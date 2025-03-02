@@ -7,11 +7,11 @@
     <img src="https://img.shields.io/badge/discord-atosjs-8da6ce?style=for-the-badge" />
   </a>
 </p>
-</div>
-
----
+</div>
 
 ## 🚀 **Get Started**: Project built with [`Bun`](https://bun.sh/).  
+
+---
 
 ### 1. **Installation**  
 Ensure you have Bun installed on your system. If you don’t have it yet, install it globally:  

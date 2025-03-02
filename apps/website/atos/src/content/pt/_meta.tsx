@@ -19,6 +19,15 @@ export default {
       toc: false,
     },
   },
+  about: {
+    type: 'page',
+    display: 'hidden',
+    theme: {
+      timestamp: false,
+      layout: 'full',
+      toc: false,
+    },
+  },
   docs: {
     type: 'page',
     title: docs,

@@ -45,7 +45,7 @@ const CustomBanner = async ({ lang }: I18nLangAsyncProps) => {
           href={repo}
         >
           {t('banner.more')}
-        </a>.
+        </a>
       </div>
     </Banner>
   )

@@ -105,7 +105,7 @@ The versioning format follows this structure:
 
 ---
 
-## Links:
+## 🔗 Links:
 [Website](https://atos.js.org/en) | [Documentation](https://atos.js.org/en/docs) | [Discord](https://atos.js.org/discord)
 
 <p align="center">

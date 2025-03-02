@@ -1,5 +1,6 @@
 {
   "name": "@atosjs/root",
+  "version": "2.0.0"
   "private": true,
   "scripts": {
     "start": "turbo start",

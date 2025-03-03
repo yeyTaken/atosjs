@@ -1,7 +1,7 @@
 {
-  "name": "nextjs-nextra-starter",
+  "name": "@atosjs/website",
   "type": "module",
-  "version": "0.0.1",
+  "version": "3.0.10",
   "description": "Next.js Nextra (v4) Tailwind CSS (v4) docs starter",
   "author": "Wisdom <pdsu.wwz@foxmail.com>",
   "license": "MIT",

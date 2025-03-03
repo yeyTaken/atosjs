@@ -9,8 +9,8 @@
   <a href="https://www.npmjs.com/package/@atosjs/pokemon">
     <img src="https://img.shields.io/npm/dt/@atosjs/pokemon?style=for-the-badge&color=f5a97f&label=downloads&logo=npm" />
   </a>
-  <a href="https://github.com/yeyTaken/atosjs/packages/pokemon">
-    <img src="https://img.shields.io/badge/github-atosjs/packages/pokemon-8da6ce?style=for-the-badge&logo=github" />
+  <a href="https://github.com/yeyTaken/atosjs">
+    <img src="https://img.shields.io/badge/github-atosjs-8da6ce?style=for-the-badge&logo=github" />
   </a>
 </p>
 </div>

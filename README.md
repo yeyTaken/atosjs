@@ -7,7 +7,8 @@
     <img src="https://img.shields.io/badge/discord-atosjs-8da6ce?style=for-the-badge" />
   </a>
 </p>
-</div>
+</div>
+
 
 ## 🚀 **Get Started**: Project built with [`Bun`](https://bun.sh/).
 
@@ -106,7 +107,7 @@ The versioning format follows this structure:
 ---
 
 ## 🔗 Links:
-[Website](https://atos.js.org/en) | [Documentation](https://atos.js.org/en/docs) | [Discord](https://atos.js.org/discord)
+- [Website](https://atos.js.org/en) | [Documentation](https://atos.js.org/en/docs) | [Discord](https://atos.js.org/discord)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true"></img>

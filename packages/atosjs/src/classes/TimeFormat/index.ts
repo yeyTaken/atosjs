@@ -2,47 +2,47 @@ import ms from "ms";
 
 export class TimeFormat {
   /**
-   * Pausa a execução por um determinado tempo.
+   * Pauses execution for a specified time.
    *
-   * @param time - Tempo em milissegundos.
-   * @returns Uma Promise que é resolvida após o tempo especificado.
+   * @param time - Time in milliseconds.
+   * @returns A Promise that resolves after the specified time.
    *
    * @example
-   * await t.sleep(1000); // Aguarda 1 segundo
+   * await t.sleep(1000); // Waits for 1 second
    */
   public sleep(time: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, time));
   }
 
   /**
-   * Executa uma função repetidamente em intervalos definidos.
+   * Executes a function repeatedly at a set interval.
    *
-   * @param interval - Intervalo de tempo entre as execuções, em milissegundos.
-   * @param callback - Função a ser executada, que recebe o contador atual como parâmetro.
+   * @param interval - Time interval between executions, in milliseconds.
+   * @param callback - Function to be executed, receiving the current count as a parameter.
    *
    * @example
-   * // Executa uma vez após 2 segundos
+   * // Executes once after 2 seconds
    * t.time(2000, (count) => {
-   *   console.log(`Execução ${count}`);
+   *   console.log(`Execution ${count}`);
    * });
    */
   public time(interval: number, callback: (count: number) => void): void;
-  
+
   /**
-   * Executa uma função repetidamente em intervalos definidos, um número específico de vezes.
+   * Executes a function repeatedly at a set interval, a specific number of times.
    *
-   * @param interval - Intervalo de tempo entre as execuções, em milissegundos.
-   * @param repetitions - Número de repetições.
-   * @param callback - Função a ser executada, que recebe o contador atual como parâmetro.
+   * @param interval - Time interval between executions, in milliseconds.
+   * @param repetitions - Number of times to execute.
+   * @param callback - Function to be executed, receiving the current count as a parameter.
    *
    * @example
-   * // Executa 3 vezes, a cada 1 segundo
+   * // Executes 3 times, every 1 second
    * t.time(1000, 3, (count) => {
-   *   console.log(`Execução ${count}`);
+   *   console.log(`Execution ${count}`);
    * });
    */
   public time(interval: number, repetitions: number, callback: (count: number) => void): void;
-  
+
   public time(
     interval: number,
     repetitionsOrCallback: number | ((count: number) => void),
@@ -50,7 +50,7 @@ export class TimeFormat {
   ): void {
     let repetitions: number;
     let callback: (count: number) => void;
-  
+
     if (typeof repetitionsOrCallback === "function") {
       repetitions = 1;
       callback = repetitionsOrCallback;
@@ -58,9 +58,9 @@ export class TimeFormat {
       repetitions = repetitionsOrCallback;
       callback = callbackArg!;
     }
-  
+
     let count = 0;
-  
+
     const execute = () => {
       callback(count + 1);
       count++;
@@ -68,35 +68,35 @@ export class TimeFormat {
         setTimeout(execute, interval);
       }
     };
-  
+
     setTimeout(execute, interval);
   }
 
   /**
-   * Executa uma fila de tarefas assíncronas de forma sequencial ou com controle de concorrência.
+   * Runs a queue of asynchronous tasks sequentially or with concurrency control.
    *
-   * @param tasks - Um array de funções assíncronas (tarefas) a serem executadas.
-   * @param options - Opções de configuração:
-   *   - `concurrency`: Número máximo de tarefas executando simultaneamente (padrão: 1).
-   *   - `stopOnError`: Se true, para a execução em caso de erro (padrão: true).
-   * @returns Uma Promise que é resolvida quando todas as tarefas são concluídas.
+   * @param tasks - An array of asynchronous functions (tasks) to be executed.
+   * @param options - Configuration options:
+   *   - `concurrency`: Maximum number of tasks running simultaneously (default: 1).
+   *   - `stopOnError`: If true, stops execution on error (default: true).
+   * @returns A Promise that resolves when all tasks are completed.
    *
    * @example
    * const task1 = async () => {
-   *   console.log("Task 1 iniciada");
+   *   console.log("Task 1 started");
    *   await t.sleep(5000);
-   *   console.log("Task 1 finalizada");
+   *   console.log("Task 1 finished");
    * };
    * 
    * const task2 = async () => {
-   *   console.log("Task 2 iniciada");
+   *   console.log("Task 2 started");
    *   await t.sleep(1000);
-   *   console.log("Task 2 finalizada");
+   *   console.log("Task 2 finished");
    * };
    * 
    * t.queue([task1, task2])
-   *   .then(() => console.log("Todas as tarefas concluídas."))
-   *   .catch((error) => console.error("Erro em alguma tarefa:", error));
+   *   .then(() => console.log("All tasks completed."))
+   *   .catch((error) => console.error("Error in a task:", error));
    */
   public queue(
     tasks: Array<() => Promise<any>>,
@@ -106,17 +106,17 @@ export class TimeFormat {
     let pending = 0;
     let currentIndex = 0;
     let hasError = false;
-  
+
     return new Promise((resolve, reject) => {
       const runNext = () => {
         if (hasError && stopOnError) return reject();
         if (currentIndex === tasks.length && pending === 0) return resolve();
-  
+
         while (pending < concurrency && currentIndex < tasks.length && !hasError) {
           const task = tasks[currentIndex];
           currentIndex++;
           pending++;
-  
+
           task()
             .catch((error) => {
               hasError = true;
@@ -128,17 +128,17 @@ export class TimeFormat {
             });
         }
       };
-  
+
       runNext();
     });
   }
 
   /**
-   * Converte um valor de tempo: se for uma string, retorna o número de milissegundos;
-   * se for um número, retorna uma string legível.
+   * Converts a time value: if it's a string, returns the number of milliseconds;
+   * if it's a number, returns a readable string.
    *
-   * @param value - String de tempo (ex: "1s", "2m", "3h") ou número de milissegundos.
-   * @returns O valor convertido.
+   * @param value - Time string (e.g., "1s", "2m", "3h") or milliseconds.
+   * @returns The converted value.
    *
    * @example
    * const delay = t.ms("2s"); // 2000

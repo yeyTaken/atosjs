@@ -25,12 +25,6 @@ To use PokeDex in your project, install it via npm:
 npm install @atosjs/pokemon
 ```
 
-Or using yarn:
-
-```sh
-yarn add @atosjs/pokemon
-```
-
 ## Usage
 
 ### Importing the Library
@@ -140,6 +134,7 @@ invalidPokemon();
 ```
 
 ## Links
+- [Website](https://atos.js.org/en) | [Documentation](https://atos.js.org/en/docs) | [Discord](https://atos.js.org/discord)
 - [GitHub](https://github.com/yeyTaken/atosjs/packages/pokemon) monorep.
 - [NPM](https://www.npmjs.com/package/@atosjs/pokemon), Latest version: `v1.0.0`.
 

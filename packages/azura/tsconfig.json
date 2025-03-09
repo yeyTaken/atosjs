@@ -1,0 +1,11 @@
+{
+  "extends": "@atosjs/config/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@package": ["./src/index.ts"],
+      "@build/*": ["./build/*"]
+    }
+  }
+}

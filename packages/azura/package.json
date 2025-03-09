@@ -1,0 +1,54 @@
+{
+  "name": "@atosjs/azura",
+  "description": "Azura is a simple and lightweight web framework for Node.js",
+  "version": "1.0.1",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "npm run build",
+    "build": "unbuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Thinxy/azura-v2.git",
+    "directory": "/"
+  },
+  "bugs": {
+    "url": "https://github.com/Thinxy/azura-v2/issues"
+  },
+  "homepage": "https://github.com/Thinxy/azura-v2#readme",
+  "keywords": [
+    "web",
+    "framework",
+    "api",
+    "node"
+  ],
+  "author": "Rabi & Wyntch",
+  "license": "ISC",
+  "devDependencies": {
+    "@atosjs/config": "workspace:*",
+    "@types/node": "^22.13.10",
+    "tscpaths": "^0.0.9",
+    "unbuild": "^3.5.0"
+  },
+  "dependencies": {
+    "chalk": "4.1.2",
+    "figures": "3.2.0",
+    "tslib": "^2.8.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

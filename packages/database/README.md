@@ -45,9 +45,9 @@ import { AtosDB } from "@atosjs/database";
 
 ---
 
-## geral example use
+### **General Usage Example**
 
-uso geral da database;
+Below is a generic example of how to use `AtosDB`, including setting values, manipulating data, and performing basic operations such as adding, subtracting, and checking keys.
 
 ```js
 const { AtosDB } = require('../../../packages/database/dist/index.cjs');

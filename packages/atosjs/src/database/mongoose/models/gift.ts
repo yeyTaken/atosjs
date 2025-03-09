@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-import { Gift } from '../../../classes/GiftManager/@types/gifts';
+import { Gift } from '../../../classes/GiftManager/types/gifts';
 
 const giftSchema: Schema<Gift> = new Schema<Gift>({
     id: { type: String, required: true, unique: true },

@@ -9,6 +9,8 @@ dist/
 test.*
 tsconfig.tsbuildinfo
 dbLocal.sqlite
+quickdb.sqlite
+
 
 .turbo/
 .next/

@@ -1,6 +1,6 @@
-import { GenerateOptions, Gift } from '../@types/gifts';
+import { GenerateOptions, Gift } from '../types/gifts';
 import { AtosJSError, ErrorCodes, ErrorMessages } from '../../../errors';
-import { dbHandler } from '../@types/db';
+import { dbHandler } from '../types/db';
 
 export async function generateGift(
     db: dbHandler,

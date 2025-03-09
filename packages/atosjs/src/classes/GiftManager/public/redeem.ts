@@ -1,4 +1,4 @@
-import { dbHandler } from '../@types/db';
+import { dbHandler } from '../types/db';
 
 export async function redeemGift(
     db: dbHandler,

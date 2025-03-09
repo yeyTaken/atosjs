@@ -1,1 +1,0 @@
-// estava desatualizado ent removi o código para evitar problemas, se precisar pode deletar o arquivo TimeFormat/*

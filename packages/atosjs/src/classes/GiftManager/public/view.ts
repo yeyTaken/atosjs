@@ -1,5 +1,5 @@
-import { dbHandler } from '../@types/db';
-import { GiftValue } from '../@types/gifts';
+import { dbHandler } from '../types/db';
+import { GiftValue } from '../types/gifts';
 
 export async function viewGift(
     db: dbHandler,

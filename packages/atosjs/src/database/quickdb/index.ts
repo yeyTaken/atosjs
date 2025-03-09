@@ -2,16 +2,20 @@ import { QuickDB } from 'quick.db';
 import consola from 'consola';
 import chalk from 'chalk';
 
-import { dbHandler } from '../../classes/GiftManager/@types/db';
+import { dbHandler } from '../../classes/GiftManager/types/db';
 
 export class QuickDBHandler implements dbHandler {
   private db: QuickDB;
+  private logging: boolean;
 
-  constructor(filePath: string) {
+  constructor(filePath: string, logging: boolean = true) {
     this.db = new QuickDB({ filePath });
-    consola.success(
-      chalk.gray(`Connected to 📦 ${chalk.yellowBright.bold('QuickDB')} (${chalk.gray.underline(filePath)})`)
-    );
+    this.logging = logging;
+    if (this.logging) {
+      consola.success(
+        chalk.gray(`Connected to 📦 ${chalk.yellowBright.bold('QuickDB')} (${chalk.gray.underline(filePath)})`)
+      );
+    }
   }
 
   async set(key: string, value: unknown) {

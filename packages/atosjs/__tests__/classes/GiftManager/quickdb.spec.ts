@@ -22,9 +22,7 @@ describe('GiftManager', () => {
 
     beforeAll(() => {
         gm = new GiftManager({
-            dbLocal: {
-                filePath: 'dbLocal.sqlite'
-            }
+            quickdb: { filePath: 'quickdb.sqlite' }
         });
     });
 

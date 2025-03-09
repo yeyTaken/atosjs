@@ -19,6 +19,8 @@ export type GenerateOptions = {
 };
 
 export type GiftManagerOptions = {
-    dbLocal?: { filePath?: string };
+    quickdb?: { filePath?: string };
     mongodb?: { connect: string; dbName?: string };
+
+    logging?: boolean;
 };

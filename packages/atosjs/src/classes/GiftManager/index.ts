@@ -1,22 +1,23 @@
 import { QuickDBHandler } from "../../database/quickdb";
 import { MongooseHandler } from "../../database/mongoose";
-import { GenerateOptions, GiftManagerOptions } from "./@types/gifts";
-import { generateGift, redeemGift, viewGift } from "./@types/api";
+import { GenerateOptions, GiftManagerOptions } from "./types/gifts";
+import { generateGift, redeemGift, viewGift } from "./types/api";
 import { AtosJSError, ErrorCodes, ErrorMessages } from "../../errors";
 
 /**
  * GiftManager class for managing gift codes.
  * 
  * @param options - Optional configuration for the gift manager:
- *   - `dbLocal`: An object containing a `filePath` property to specify the local JSON file path (default: "gifts.json").
+ *   - `quickdb`: An object containing a `filePath` property to specify the local JSON file path (default: "json.sqlite").
  *   - `mongodb`: An object containing a `connect` property to specify the MongoDB connection string and an optional `dbName` property to specify the database name (default: "gifts").
+ *   - `logging`: If true, logs will be shown on the console (default: true).
  * @returns A new GiftManager instance.
  * 
  * @example
  * // Example using local JSON file
  * const gift = new GiftManager({
- *   dbLocal: {
- *     filePath: "dbLocal.json" // .db, .yaml, etc...
+ *   quickdb: {
+ *     filePath: "quickdb.json" // .db, .yaml, etc...
  *   }
  * });
  * 
@@ -33,22 +34,25 @@ export class GiftManager {
   private db: QuickDBHandler | MongooseHandler;
 
   constructor(options?: GiftManagerOptions) {
-    if (options?.dbLocal && options?.mongodb) {
+    if (options?.quickdb && options?.mongodb) {
       throw new AtosJSError(
         ErrorMessages[ErrorCodes.INVALID_DB_SELECTION],
         ErrorCodes.INVALID_DB_SELECTION
       );
     }
 
-    if (options?.dbLocal) {
-      this.db = new QuickDBHandler(options.dbLocal.filePath || "gifts.json");
+    const logging = options?.logging ?? true;
+
+    if (options?.quickdb) {
+      this.db = new QuickDBHandler(options.quickdb.filePath || "json.sqlite", logging);
     } else if (options?.mongodb) {
       this.db = new MongooseHandler(
         options.mongodb.connect,
-        options.mongodb.dbName
+        options.mongodb.dbName,
+        logging
       );
     } else {
-      this.db = new QuickDBHandler("gifts.json");
+      this.db = new QuickDBHandler("json.sqlite", logging);
     }
   }
 

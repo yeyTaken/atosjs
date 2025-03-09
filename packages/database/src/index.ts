@@ -3,25 +3,25 @@ import fs from "fs";
 import path from "path";
 
 /**
- * Classe para gerenciar um banco de dados SQLite usando better-sqlite3.
+ * Class to manage an SQLite database using better-sqlite3.
  */
 class AtosDB {
   private db: Database.Database;
 
   /**
-   * Inicializa a conexão com o banco de dados SQLite.
-   * Cria a tabela `data` se não existir.
+   * Initializes the connection with the SQLite database.
+   * Creates the `data` table if it doesn't exist.
    *
-   * @param options.filePath - Caminho do arquivo SQLite.
-   * @param options.verbose - Se verdadeiro, loga as consultas SQL no console.
-   * @throws Error se `filePath` não for uma string válida.
+   * @param options.filePath - Path to the SQLite file.
+   * @param options.verbose - If true, logs SQL queries to the console.
+   * @throws Error if `filePath` is not a valid string.
    */
   constructor({
     filePath = "json.sqlite",
     verbose = false,
   }: { filePath?: string; verbose?: boolean } = {}) {
     if (typeof filePath !== "string" || !filePath.trim()) {
-      throw new Error("O filePath deve ser uma string não vazia");
+      throw new Error("filePath must be a non-empty string");
     }
 
     const dir = path.dirname(filePath);
@@ -38,7 +38,7 @@ class AtosDB {
 
   private _validateKey(key: string): void {
     if (typeof key !== "string" || !key.trim()) {
-      throw new Error("A chave deve ser uma string não vazia");
+      throw new Error("Key must be a non-empty string");
     }
   }
 
@@ -46,7 +46,7 @@ class AtosDB {
     try {
       return JSON.stringify(value);
     } catch {
-      throw new Error("O valor não pôde ser convertido para JSON");
+      throw new Error("Value could not be serialized to JSON");
     }
   }
 
@@ -98,6 +98,54 @@ class AtosDB {
       current = [current, value];
     }
     await this.set(key, current);
+  }
+
+  /**
+   * Method to add a value to the existing one.
+   * @param key The key in the database.
+   * @param value The value to be added.
+   * @returns The updated value.
+   */
+  async add(key: string, value: number): Promise<number> {
+    return this.addSubtract(key, value);
+  }
+
+  /**
+   * Method to subtract a value from the existing one.
+   * @param key The key in the database.
+   * @param value The value to be subtracted.
+   * @returns The updated value.
+   */
+  async sub(key: string, value: number): Promise<number> {
+    return this.addSubtract(key, value, true);
+  }
+
+  /**
+   * Generic method to add or subtract values.
+   * @param key The key in the database.
+   * @param value The value to be added or subtracted.
+   * @param isSubtract Indicates whether it is a subtraction.
+   * @returns The updated value.
+   */
+  private async addSubtract(key: string, value: number, isSubtract: boolean = false): Promise<number> {
+    this._validateKey(key);
+
+    if (typeof value !== "number") {
+      throw new Error("Value must be a number");
+    }
+
+    let current = await this.get(key);
+
+    if (current === null) {
+      current = 0;
+    } else if (typeof current !== "number") {
+      throw new Error("Stored value is not a number");
+    }
+
+    const newValue = isSubtract ? current - value : current + value;
+    await this.set(key, newValue);
+
+    return newValue;
   }
 
   async close(): Promise<void> {

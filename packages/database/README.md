@@ -45,141 +45,78 @@ import { AtosDB } from "@atosjs/database";
 
 ---
 
-### **Creating a Database Instance**  
+## geral example use
+
+uso geral da database;
 
 ```js
-const db = new AtosDB({
-  filePath: "data.sqlite", // Optional (default: "json.sqlite")
-  verbose: true,           // Optional (logs SQL queries)
-});
-```
-
-This will create (or open) a SQLite database file called `data.sqlite`.
-
----
-
-## **Basic CRUD Operations**  
-
-### **Set a Value**  
-
-```js
-await db.set("username", "yeyTaken");
-```
-
-Stores a key-value pair in the database.
-
----
-
-### **Get a Value**  
-
-```js
-const username = await db.get("username");
-console.log(username); // "yeyTaken"
-```
-
-Retrieves the value associated with the given key.
-
----
-
-### **Check if a Key Exists**  
-
-```js
-const exists = await db.has("username");
-console.log(exists); // true
-```
-
-Returns `true` if the key exists, otherwise `false`.
-
----
-
-### **Delete a Key**  
-
-```js
-await db.delete("username");
-```
-
-Removes the key-value pair from the database.
-
----
-
-### **Delete All Data**  
-
-```js
-await db.deleteAll();
-```
-
-Deletes all entries in the database.
-
----
-
-## **Array Operations**  
-
-### **Push a Value to an Array**  
-
-```js
-await db.push("scores", 100);
-await db.push("scores", 200);
-
-console.log(await db.get("scores")); // [100, 200]
-```
-
-If the key doesn't exist, it creates an array and adds the value. If it exists and isn't an array, it converts it into one.
-
----
-
-## **Closing the Database**  
-
-```js
-await db.close();
-```
-
-Closes the database connection.
-
----
-
-## **Error Handling**  
-
-If an invalid key is provided, an error will be thrown:
-
-```js
-try {
-  await db.get("");
-} catch (error) {
-  console.error("Error:", error.message);
-}
-```
-
-## **Example use**
-
-```js
-const { AtosDB } = require('@atosjs/database');
+const { AtosDB } = require('../../../packages/database/dist/index.cjs');
 
 (async () => {
-    const db = new AtosDB({ verbose: false });
-  
-    await db.set("name", "Jonh");
-    console.log(await db.get("name"));
-  
+    // Instantiate the AtosDB class to interact with the database.
+    const db = new AtosDB({
+      filePath: './db/atos.db'
+    });
+
+    /**
+     * Example configuration for the AtosDB instance.
+     * filePath: Path to the SQLite database file (default is `json.sqlite` if not specified).
+     * verbose: Boolean flag (true or false) to enable/disable logging of SQL queries to the console.
+     */
+    // const db = new AtosDB({ filePath: 'path/to/db.json', verbose: true });
+
+    const user = {
+      name: 'Jonh', // User's name
+      id: 123456789 // User's unique identifier (could be any string or number)
+    };
+
+    // Test 1: Setting and getting a simple value in the database.
+    // Set the user's name in the database with a key based on the user's ID.
+    await db.set(`name_${user.id}`, user.name);
+    // Retrieve the name from the database using the same key.
+    const name = await db.get(`name_${user.id}`);
+    console.log(name); // Should print: "Jonh"
+
+    // Test 2: Pushing values into an array in the database.
+    // Add values to the 'numbers' key, which will be treated as an array.
     await db.push("numbers", 1);
     await db.push("numbers", 2);
-    console.log(await db.get("numbers"));
-  
-    console.log(await db.has("name"));
-    await db.delete("name");
-    console.log(await db.has("name"));
-  
+    // Retrieve the updated 'numbers' array from the database.
+    let numbers = await db.get("numbers");
+    console.log(numbers); // Should print: [1, 2]
+
+    // Test 3: Checking if a key exists in the database.
+    // Check if the key `name_${user.id}` exists in the database.
+    console.log(await db.has(`name_${user.id}`)); // Should print: true
+
+    // Test 4: Deleting a key and checking its existence again.
+    // Delete the key `name_${user.id}` from the database.
+    await db.delete(`name_${user.id}`);
+    // Check again if the key `name_${user.id}` exists after deletion.
+    console.log(await db.has(`name_${user.id}`)); // Should print: false
+
+    // Test 5: Adding and subtracting values for a specific key.
+    // Set an initial value of 100 for the `wallet_${user.id}.cash` key.
+    await db.set(`wallet_${user.id}.cash`, 100);
+    // Retrieve the initial value for the `wallet_${user.id}.cash` key.
+    const initialCash = await db.get(`wallet_${user.id}.cash`);
+    console.log(initialCash); // Should print: 100
+
+    // Add 100 to the current value of the `wallet_${user.id}.cash` key.
+    await db.add(`wallet_${user.id}.cash`, 100);
+    // Retrieve the updated value after addition.
+    const afterAdd = await db.get(`wallet_${user.id}.cash`);
+    console.log(afterAdd); // Should print: 200
+
+    // Subtract 100 from the current value of the `wallet_${user.id}.cash` key.
+    await db.sub(`wallet_${user.id}.cash`, 100);
+    // Retrieve the updated value after subtraction.
+    const afterSub = await db.get(`wallet_${user.id}.cash`);
+    console.log(afterSub); // Should print: 100
+
+    // Clean up: Close the database connection when done.
     await db.close();
-  })();
-  
-```
-
-console output:
-
-```
-Jonh
-[ 1, 2 ]
-true
-false
+})();
 ```
 
 ---

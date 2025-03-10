@@ -3,12 +3,12 @@ import { AzuraServer } from "../src";
 const app = new AzuraServer();
 
 // # Example seting routes normally:
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
   res.send("Hello World!");
 });
 
 // # Example seting routes with swagger:
-app.get("/test", (req, res, _query, swagger) => {
+app.get("/test", (_req, res, _query, swagger) => {
   swagger({ summary: "Teste", description: "Teste", tags: ["test"] });
 
   res.send("Teste Swagger");

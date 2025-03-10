@@ -1,0 +1,1 @@
+export { URLSearchParams } from "node:url";

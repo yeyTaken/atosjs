@@ -61,6 +61,9 @@ export interface ServerOptions {
   routesPath?: string;
   redirectsPath?: string;
   redirects?: Redirect[];
+  ejsEngine?: {
+    viewsPath: string;
+  }
 }
 export interface Request {
   method: string;

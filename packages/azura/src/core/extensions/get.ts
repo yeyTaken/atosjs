@@ -1,4 +1,4 @@
-import { Request, Response } from "@/types";
+import { Request, Response, RouteMeta } from "@/types";
 import { URLSearchParams } from "node:url";
 
 export abstract class GetExtensions {
@@ -10,5 +10,5 @@ export abstract class GetExtensions {
     this.path = `/${filename.replace("get", "")}`;
   }
 
-  abstract handle(req: Request, res: Response, query: URLSearchParams, swagger?: any): void;
+  abstract handle(req: Request, res: Response, query?: URLSearchParams, swagger?: RouteMeta): void;
 }

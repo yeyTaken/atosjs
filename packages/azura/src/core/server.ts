@@ -6,7 +6,7 @@ import figures from "figures";
 import { AzuraServer } from "../AzuraServer";
 import { createResponse } from "./http/response";
 import { parseRequest } from "./http/request";
-import { Response, RouteMeta } from "../types";
+import { RouteMeta } from "../types";
 
 export default function serverConnection(
   app: AzuraServer,
@@ -40,7 +40,7 @@ export default function serverConnection(
     const next = () => {
       if (index < app.middleware.length) {
         const middleware = app.middleware[index++];
-        middleware(parsedReq, res as Response, next);
+        app.use(middleware);
       } else {
         const routes = app.router.getRoutes();
         const route = routes[parsedReq.method]?.[parsedReq.path];

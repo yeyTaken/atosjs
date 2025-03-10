@@ -10,5 +10,7 @@ export abstract class GetExtensions {
     this.path = `/${filename.replace("get", "")}`;
   }
 
-  abstract handle(req: Request, res: Response, query?: URLSearchParams, swagger?: RouteMeta): void;
+  swagger?(): RouteMeta;
+
+  abstract handle(req: Request, res: Response, query: URLSearchParams): void;
 }

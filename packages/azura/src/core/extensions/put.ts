@@ -1,4 +1,4 @@
-import { Request, Response } from "@/types";
+import { Request, Response, RouteMeta } from "@/types";
 import { URLSearchParams } from "node:url";
 
 export abstract class PutExtensions {
@@ -10,5 +10,7 @@ export abstract class PutExtensions {
     this.path = `/${filename.replace("put", "")}`;
   }
 
-  abstract handle(req: Request, res: Response, query: URLSearchParams, swagger?: any): void;
+  swagger?(): RouteMeta;
+
+  abstract handle(req: Request, res: Response, query: URLSearchParams): void;
 }

@@ -1,3 +1,4 @@
+export { renderView } from "./functions/renderView";
 export { AzuraServer } from "./AzuraServer";
 export { RedirectExtensions } from "./core/extensions/redirect";
 export { GetExtensions } from "./core/extensions/get";

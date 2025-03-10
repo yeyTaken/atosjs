@@ -10,7 +10,7 @@ export type RouterHandler = (
   swagger: (meta: RouteMeta) => void
 ) => void;
 export type Middleware = (req: Request, res: Response, next: () => void) => void;
-export type RouteMeta = {
+export interface RouteMeta {
   summary?: string;
   description?: string;
   tags?: string[];
@@ -32,7 +32,7 @@ export type RouteMeta = {
     url: string;
   };
   operationId?: string;
-};
+}
 
 interface ConfigParams {
   port?: number | 3001;
@@ -63,7 +63,7 @@ export interface ServerOptions {
   redirects?: Redirect[];
   ejsEngine?: {
     viewsPath: string;
-  }
+  };
 }
 export interface Request {
   method: string;

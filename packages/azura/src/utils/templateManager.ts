@@ -1,39 +1,34 @@
 import * as path from "path";
 import * as fs from "fs";
 import * as ejs from "ejs";
-import chalk from "chalk";
+import { ServerOptions } from "@/types";
 
-export class TemplateManager {
-  private viewsPath: string;
+class TemplateManager {
+  private viewsPath: string = "";
 
-  constructor(viewsPath?: string) {
-    this.viewsPath = viewsPath ?? path.join(process.cwd(), "src/views");
-  }
-
-  setViewsPath(viewsPath: string) {
-    this.viewsPath = viewsPath;
-    console.log(chalk.cyan.bold(`📂 Diretório de views carregado: ${this.viewsPath}`));
+  setViewsPath(config: ServerOptions) {
+    this.viewsPath = config.ejsEngine?.viewsPath || path.join(process.cwd(), "src/views");
+    console.log(`📂 Diretório de views configurado: ${this.viewsPath}`);
   }
 
   async render(view: string, data: Record<string, any> = {}): Promise<string> {
+    if (!this.viewsPath) {
+      throw new Error("O diretório de views não foi definido! Verifique sua configuração.");
+    }
+
     const filePath = path.join(this.viewsPath, `${view}.ejs`);
 
-    console.log(`🔍 Tentando renderizar: ${filePath}`);
-
     if (!fs.existsSync(filePath)) {
-      console.error(`❌ View '${view}.ejs' não encontrada em '${this.viewsPath}'`);
-      throw new Error(`View '${view}.ejs' not found in '${this.viewsPath}'`);
+      throw new Error(`View '${view}.ejs' não encontrada em '${this.viewsPath}'`);
     }
 
     return new Promise((resolve, reject) => {
       ejs.renderFile(filePath, data, {}, (err, str) => {
-        if (err) {
-          console.error(`❌ Erro ao renderizar '${view}.ejs':`, err);
-          return reject(err);
-        }
-        console.log(`✅ View '${view}.ejs' renderizada com sucesso.`);
+        if (err) return reject(err);
         resolve(str);
       });
     });
   }
 }
+
+export const templateManager = new TemplateManager();

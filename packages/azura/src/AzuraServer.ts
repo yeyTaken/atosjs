@@ -6,11 +6,10 @@ import { RouterManager } from "./router/routerManager";
 import { LRUCache } from "./utils/cacheManager";
 import { loadConfig } from "./utils/configManager";
 import { missingInstanceError } from "./errors/messages/missingInstance.error";
-import { TemplateManager } from "./utils/templateManager";
+import { templateManager } from "./utils/templateManager";
 
 class AzuraServer {
   private static instance: AzuraServer | null = null;
-  public template!: TemplateManager;
   public router!: RouterManager;
   public options: ServerOptions;
   public middleware: Middleware[] = [];
@@ -29,7 +28,6 @@ class AzuraServer {
 
     this.cache = new LRUCache(cacheSize, cacheTTL);
     this.router = new RouterManager();
-    this.template = new TemplateManager(this.options.ejsEngine?.viewsPath);
   }
 
   private async loadConfig() {
@@ -39,7 +37,7 @@ class AzuraServer {
         this.options = { ...this.options, ...config };
 
         this.cache = new LRUCache(this.options.cacheSize ?? 1000, this.options.cacheTTL ?? 0);
-        this.template.setViewsPath(this.options.ejsEngine?.viewsPath ?? "src/views");
+        templateManager.setViewsPath(this.options);
       }
     } catch (error) {
       console.error(error);
@@ -89,14 +87,6 @@ class AzuraServer {
 
   delete(path: string, handler: RouterHandler) {
     this.router.addRoute("DELETE", path, handler);
-  }
-
-  setViewsPath(path: string) {
-    this.template.setViewsPath(path);
-  }
-
-  async render(view: string, data: Record<string, any> = {}) {
-    return this.template.render(view, data);
   }
 
   async start(callback?: () => void) {

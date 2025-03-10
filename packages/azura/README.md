@@ -43,18 +43,21 @@ app.start(); // or configure the port in the config file "azura.config.ts" or "a
 Azura inclui suporte nativo a **Swagger**:
 
 ```ts
-import { AzuraServer } from "@atosjs/azura";
+import { GetExtensions, Request, Response, RouteMeta } from "@atosjs/azura";
 
-const app = new AzuraServer();
+export default class Hello extends GetExtensions {
+  swagger(): RouteMeta {
+    return {
+      summary: "Hello World",
+      description: "Retorna uma mensagem de boas-vindas.",
+    };
+  }
 
-// # Example seting routes with swagger:
-app.get("/test", (req, res, swagger) => {
-  swagger({ summary: "Test", description: "Test", tags: ["test"] });
-
-  res.send("Test Swagger"); // view your swagger at http://localhost:3000/docs route or you swagger json file at http://localhost:3000/swagger.json
-});
-
-app.start();
+  handle(_req: Request, res: Response, query: URLSearchParams) {
+    const q = query.toString();
+    res.send({ message: "Hello World!", query: q });
+  }
+}
 ```
 
 # 🔗 Criando Rotas
@@ -82,6 +85,29 @@ import { RedirectExtensions } from "@atosjs/azura";
 export default class Google extends RedirectExtensions {
   static from = "/google";
   static to = "https://www.google.com.br";
+}
+```
+
+# 📝 Renderização de Views
+
+Azura inclui suporte nativo a **Renderização de Views** com o **Engine de Templates EJS**:
+
+```ts
+import { GetExtensions, renderView, Request, Response } from "@atosjs/azura";
+
+export default class GetEjs extends GetExtensions {
+  async handle(_req: Request, res: Response) {
+    try {
+      const html = await renderView("index", { title: "Página EJS", user: "Dev" });
+
+      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+      res.end(html);
+    } catch (error) {
+      console.error(error);
+      res.writeHead(500, { "Content-Type": "text/plain; charset=utf-8" });
+      res.end("Erro ao renderizar a página.");
+    }
+  }
 }
 ```
 
@@ -113,7 +139,10 @@ Exemplo de arquivo de configuração:
       "from": "/old-route",
       "to": "/new-route"
     }
-  ]
+  ],
+  "ejsEngine": {
+    "viewsPath": "src/views" // default: src/views (automatically finds views in src/views)
+  }
 }
 ```
 
@@ -129,6 +158,7 @@ As configurações disponíveis no arquivo de configuração são:
 - `routesPath`: Caminho para a pasta de rotas personalizada ou utilizar a pasta padrão.
 - `redirectsPath`: Caminho para a pasta de redirecionamentos personalizada ou utilizar a pasta padrão.
 - `redirects`: Array de redirecionamentos caso queira utilizar uma pasta pode ser utilizada "/src/redirects" ou uma personalizada no parametro redirectsPath.
+- `ejsEngine`: Configurações do Engine de Templates como viewsPath.
 
 ## 📜 Licença
 

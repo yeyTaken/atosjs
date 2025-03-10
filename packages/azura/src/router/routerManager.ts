@@ -13,12 +13,12 @@ export class RouterManager {
 
   constructor() {}
 
-  addRoute(method: string, path: string, handler: RouterHandler) {
+  addRoute(method: string, path: string, handler: RouterHandler, meta?: RouteMeta) {
     method = method.toUpperCase();
     path = path.startsWith("/") ? path : `/${path}`;
 
     if (!this.routes[method]) this.routes[method] = {};
-    this.routes[method][path] = { handler };
+    this.routes[method][path] = { handler, meta };
   }
 
   async loadRedirectClasses(config: ServerOptions) {
@@ -74,8 +74,6 @@ export class RouterManager {
         res.end();
       });
     }
-
-    console.log(chalk.cyan.bold(`📂 Redirecionamentos carregados.`));
   }
 
   async loadRoutes(config: ServerOptions) {
@@ -106,7 +104,13 @@ export class RouterManager {
           const instance = new RouteClass();
           if (instance.method && typeof instance.handle === "function") {
             const path = instance.path;
-            this.addRoute(instance.method, path, instance.handle.bind(instance));
+            let routeMeta: RouteMeta | undefined;
+
+            if (instance.swagger) {
+              routeMeta = instance.swagger();
+            }
+
+            this.addRoute(instance.method, path, instance.handle.bind(instance), routeMeta);
           }
         }
       } catch (error) {

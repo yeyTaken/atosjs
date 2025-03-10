@@ -1,11 +1,5 @@
-import { TemplateManager } from "@/utils/templateManager";
+import { templateManager } from "@/utils/templateManager";
 
-export async function renderView(
-  view: string, 
-  data: Record<string, any> = {}, 
-  viewsPath?: string
-): Promise<string> {
-  const templateManager = new TemplateManager(viewsPath);
-  
+export async function renderView(view: string, data: Record<string, any> = {}): Promise<string> {
   return templateManager.render(view, data);
 }

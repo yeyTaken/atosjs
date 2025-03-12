@@ -113,9 +113,9 @@ export default class GetEjs extends GetExtensions {
 
 # ⚙ Arquivo de configuração
 
-O arquivo de configuração é um arquivo JSON que contém as configurações do servidor. O arquivo de configuração padrão é o `azura.config.json` e está localizado no diretório atual. Você pode criar um arquivo de configuração personalizado ou usar o arquivo padrão.
+O arquivo de configuração é um arquivo JSON ou Typescript que contém as configurações do servidor. O nome do arquivo é `azura.config.json` ou `azura.config.ts`.
 
-Exemplo de arquivo de configuração:
+Exemplo de arquivo de configuração JSON:
 
 ```json
 {
@@ -145,6 +145,42 @@ Exemplo de arquivo de configuração:
     "viewsPath": "src/views" // default: src/views (automatically finds views in src/views)
   }
 }
+```
+
+Exemplo de arquivo de configuração Typescript:
+
+```ts
+import { ServerOptions } from "@atosjs/azura";
+
+const config: ServerOptions = {
+  server: {
+    port: 3000,
+    ipHost: true,
+    node: "development", // "production" ou "development" (production is not logging)
+  },
+  logging: true,
+  jsonParser: true,
+  cacheSize: 1000,
+  cors: true,
+  swagger: true,
+  database: {
+    uri: "mongodb://localhost:27017/azura",
+    name: "azura",
+  },
+  routesPath: "src/routes", // default: src/routes (automatically finds routes in src/routes)
+  redirectsPath: "src/redirects", // default: src/redirects (automatically finds redirects in src/redirects)
+  redirects: [
+    {
+      from: "/old-route",
+      to: "/new-route",
+    },
+  ],
+  ejsEngine: {
+    viewsPath: "src/views", // default: src/views (automatically finds views in src/views)
+  },
+};
+
+export default config;
 ```
 
 As configurações disponíveis no arquivo de configuração são:

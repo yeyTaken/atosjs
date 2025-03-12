@@ -9,4 +9,5 @@ export { PostExtensions } from "./core/extensions/post";
 export { PutExtensions } from "./core/extensions/put";
 export { DeleteExtensions } from "./core/extensions/delete";
 
-export type { ServerOptions } from "./types";
+export type { ServerOptions, Request, Response, RouteMeta } from "./types";
+export type { URLSearchParams } from "node:url";

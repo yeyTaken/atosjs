@@ -1,3 +1,4 @@
+// src/utils/cacheManager.ts
 export class LRUCache<T> {
   private cache: Map<string, { value: T; expiresAt?: number }>;
   private maxSize: number;
@@ -25,10 +26,10 @@ export class LRUCache<T> {
 
   get(key: string): T | undefined {
     if (!this.has(key)) return undefined;
-    const value = this.cache.get(key)!.value;
+    const entry = this.cache.get(key)!;
     this.cache.delete(key);
-    this.cache.set(key, { value, expiresAt: this.cache.get(key)?.expiresAt });
-    return value;
+    this.cache.set(key, entry);
+    return entry.value;
   }
 
   set(key: string, value: T) {

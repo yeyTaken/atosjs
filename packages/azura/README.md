@@ -122,6 +122,7 @@ Exemplo de arquivo de configuração:
   "server": {
     "port": 3000,
     "ipHost": true,
+    "node": "development" // "production" ou "development" (production is not logging)
   },
   "logging": true,
   "jsonParser": true,

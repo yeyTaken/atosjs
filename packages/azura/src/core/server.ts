@@ -1,4 +1,4 @@
-import http from "node:http";
+import uWS from "uWebSockets.js";
 import os from "os";
 import chalk from "chalk";
 import figures from "figures";
@@ -6,99 +6,131 @@ import figures from "figures";
 import { AzuraServer } from "../AzuraServer";
 import { createResponse } from "./http/response";
 import { parseRequest } from "./http/request";
-import { RouteMeta } from "../types";
+import { RouteMeta, Response } from "../types";
 
 export default function serverConnection(
   app: AzuraServer,
   port: number = 3000,
   callback?: () => void
 ) {
-  if (app.options.logging) {
+  const isProd = app.options.server?.node === "production";
+  const routesMap = app.router.getRoutes();
+
+  if (app.options.logging && !isProd) {
     console.log(chalk.cyan.bold("📌 Routes Registered:"));
-    const routes = app.router.getRoutes();
-    Object.keys(routes).forEach((method) => {
-      Object.keys(routes[method]).forEach((path) => {
-        console.log(chalk.green(`✅ ${method.toUpperCase()} ${chalk.bold(path)}`));
-      });
-    });
+    for (const [method, routes] of routesMap.entries()) {
+      for (const path of routes.keys()) {
+        console.log(chalk.green(`✅ ${method} ${chalk.bold(path)}`));
+      }
+    }
   }
 
-  const server = http.createServer(async (req: http.IncomingMessage, res: http.ServerResponse) => {
-    const start = Date.now();
-    const cacheKey = `${req.method}:${req.url}`;
+  const server = uWS.App();
 
-    if (app.cache.has(cacheKey)) {
-      const response = createResponse(res);
-      if (app.options.logging)
-        console.log(chalk.yellow(`${figures.info} ${req.method} ${req.url} - Cache Hit`));
-      return response.send(app.cache.get(cacheKey));
-    }
+  server.any("/*", async (res, req) => {
+    let aborted = false;
+    res.onAborted(() => {
+      aborted = true;
+    });
 
-    const parsedReq = await parseRequest(req, app.options.jsonParser!);
-    let index = 0;
+    const start = performance.now();
+    const method = req.getMethod().trim().toUpperCase();
+    const url = req.getUrl().trim();
+    const cacheKey = `${method}:${url}`;
 
-    const next = () => {
-      if (index < app.middleware.length) {
-        const middleware = app.middleware[index++];
-        app.use(middleware);
-      } else {
-        const routes = app.router.getRoutes();
-        const route = routes[parsedReq.method]?.[parsedReq.path];
+    if (aborted) return;
 
-        if (route) {
+    try {
+      if (app.cache.has(cacheKey)) {
+        const response = createResponse(res);
+        if (app.options.logging && !isProd)
+          console.log(chalk.yellow(`${figures.info} ${method} ${url} - Cache Hit`));
+        response.send(app.cache.get(cacheKey));
+        return;
+      }
+
+      let parsedReq: any;
+      try {
+        parsedReq = await parseRequest(res, req, app.options.jsonParser!);
+      } catch (parseErr) {
+        console.error("Erro ao parsear a requisição:", parseErr);
+        const response = createResponse(res);
+        response.send({ error: "Internal Server Error" });
+        return;
+      }
+      parsedReq.method = method;
+      parsedReq.path = url.split("?")[0];
+
+      for (let i = 0, len = app.middleware.length; i < len; i++) {
+        try {
+          await new Promise<void>((resolve, _reject) => {
+            app.middleware[i](parsedReq, res as unknown as Response, resolve);
+          });
+        } catch (mwErr) {
+          console.error("Erro no middleware:", mwErr);
+          const response = createResponse(res);
+          response.send({ error: "Internal Server Error" });
+          return;
+        }
+      }
+
+      const route = routesMap.get(method)?.get(parsedReq.path);
+      if (route) {
+        try {
           const response = createResponse(res);
           const swagger = (meta: RouteMeta) => {
             parsedReq.routeMeta = meta;
           };
+          const queryString = url.split("?")[1] || "";
+          const query = queryString ? new URLSearchParams(queryString) : new URLSearchParams();
 
-          const queryString = req.url?.split("?")[1] || "";
-          const query = new URLSearchParams(queryString);
-
-          route.handler(parsedReq, response, query, swagger);
-
-          const end = Date.now();
-          const duration = end - start;
-          console.log(chalk.green(`${figures.pointer} ${req.method} ${req.url} - ${duration}ms`));
-        } else {
+          await Promise.resolve(route.handler(parsedReq, response, query, swagger));
+          if (!isProd) {
+            const duration = performance.now() - start;
+            console.log(
+              chalk.green(`${figures.pointer} ${method} ${url} - ${duration.toFixed(2)}ms`)
+            );
+          }
+        } catch (handlerErr) {
+          console.error("Erro no handler da rota:", handlerErr);
           const response = createResponse(res);
-          response.send({ error: "404 - Not Found" });
-          console.log(chalk.red(`${figures.cross} ${req.method} ${req.url} - 404 Not Found`));
+          response.send({ error: "Internal Server Error" });
+        }
+      } else {
+        const response = createResponse(res);
+        response.send({ error: "404 - Not Found" });
+        if (!isProd) {
+          console.log(chalk.red(`${figures.cross} ${method} ${url} - 404 Not Found`));
         }
       }
-    };
-
-    next();
+    } catch (err) {
+      console.error("Erro não tratado na requisição:", err);
+      try {
+        const response = createResponse(res);
+        response.send({ error: "Internal Server Error" });
+      } catch (sendErr) {
+        console.error("Erro ao enviar resposta de erro:", sendErr);
+      }
+    }
   });
 
-  const tryListen = (port: number) => {
-    server.listen(port, () => {
+  server.listen(port, (token) => {
+    if (token) {
       if (!callback)
         console.log(chalk.blue.bold(`🚀 Server is running on http://localhost:${port}`));
       if (app.options.server?.ipHost) getIP(port);
       callback && callback();
-    });
-
-    server.on("error", (err: any) => {
-      if (err.code === "EADDRINUSE") {
-        console.log(
-          chalk.yellow(`${figures.info} Port ${port} is already in use, trying ${port + 1}`)
-        );
-        server.close();
-        tryListen(port + 1);
-      } else {
-        console.error("Error starting server on port: ", port, err);
-        process.exit(1);
-      }
-    });
-  };
-
-  tryListen(port);
+    } else {
+      console.error(chalk.red("❌ Failed to start server."));
+      process.exit(1);
+    }
+  });
 }
 
 function getIP(port: number) {
   const networkInterfaces = os.networkInterfaces();
-  Object.values(networkInterfaces).forEach((interfaces) => {
-    interfaces?.forEach((iface) => {
+  Object.values(networkInterfaces).forEach((ifaceList) => {
+    ifaceList?.forEach((iface) => {
       if (iface.family === "IPv4" && !iface.internal) {
         console.log(chalk.blue.bold(`🌎 Accessible on http://${iface.address}:${port}`));
       }

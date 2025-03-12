@@ -1,3 +1,4 @@
+// src/AzuraServer.ts
 import { Middleware, Plugin, RouterHandler, ServerOptions } from "./types";
 import serverConnection from "./core/server";
 import { swaggerRender } from "./plugins/swagger";
@@ -5,12 +6,13 @@ import setupCors from "./plugins/cors";
 import { RouterManager } from "./router/routerManager";
 import { LRUCache } from "./utils/cacheManager";
 import { loadConfig } from "./utils/configManager";
-import { missingInstanceError } from "./errors/messages/missingInstance.error";
 import { templateManager } from "./utils/templateManager";
+import cluster from "cluster";
+import os from "os";
 
 class AzuraServer {
   private static instance: AzuraServer | null = null;
-  public router!: RouterManager;
+  public router: RouterManager;
   public options: ServerOptions;
   public middleware: Middleware[] = [];
   public plugins: Plugin[] = [];
@@ -18,14 +20,11 @@ class AzuraServer {
 
   constructor(options?: ServerOptions) {
     this.options = { jsonParser: options?.jsonParser ?? true, ...options };
-
     if (!AzuraServer.instance) {
       AzuraServer.instance = this;
     }
-
     const cacheSize = this.options.cacheSize ?? 1000;
     const cacheTTL = this.options.cacheTTL ?? 0;
-
     this.cache = new LRUCache(cacheSize, cacheTTL);
     this.router = new RouterManager();
   }
@@ -35,7 +34,6 @@ class AzuraServer {
       const config = await loadConfig();
       if (config) {
         this.options = { ...this.options, ...config };
-
         this.cache = new LRUCache(this.options.cacheSize ?? 1000, this.options.cacheTTL ?? 0);
         templateManager.setViewsPath(this.options);
       }
@@ -48,12 +46,9 @@ class AzuraServer {
   private async initializePlugins() {
     await this.loadConfig();
     await this.router.loadRoutes(this.options);
-    await this.router.loadRedirectClasses(this.options);
-    await this.router.loadRedirects(this.options);
 
     this.setupDefaultRoutes();
-
-    if (this.options.cors) this.use(setupCors(this)!);
+    if (this.options.cors) setupCors(this);
     if (this.options.swagger) swaggerRender(this.router);
   }
 
@@ -65,6 +60,9 @@ class AzuraServer {
   }
 
   use(middleware: Middleware) {
+    if (typeof middleware !== "function") {
+      throw new Error("Middleware deve ser uma função!");
+    }
     this.middleware.push(middleware);
   }
 
@@ -90,16 +88,38 @@ class AzuraServer {
   }
 
   async start(callback?: () => void) {
-    const instance = AzuraServer.instance;
+    if (this.options.server?.cluster) {
+      if (cluster.isPrimary) {
+        const cpuCount = os.cpus().length;
+        console.log(`Master ${process.pid} está rodando. Forking ${cpuCount} workers...`);
+        for (let i = 0; i < cpuCount; i++) {
+          cluster.fork();
+        }
+        cluster.on("exit", (worker, _code, _signal) => {
+          console.log(`Worker ${worker.process.pid} morreu. Reiniciando...`);
+          cluster.fork();
+        });
+        if (callback) callback();
+        return;
+      } else {
+        process.on("uncaughtException", (err) => {
+          console.error("Exceção não tratada no worker:", err);
+          process.exit(1);
+        });
+        process.on("unhandledRejection", (reason) => {
+          console.error("Rejeição não tratada no worker:", reason);
+          process.exit(1);
+        });
 
-    if (!instance) {
-      throw new missingInstanceError();
+        await this.initializePlugins();
+        const port = this.options.server?.port ?? 3000;
+        serverConnection(this, port, callback);
+      }
+    } else {
+      await this.initializePlugins();
+      const port = this.options.server?.port ?? 3000;
+      serverConnection(this, port, callback);
     }
-
-    await instance.initializePlugins();
-
-    const port = instance.options.server?.port ?? 3000;
-    serverConnection(instance, port, callback);
   }
 }
 

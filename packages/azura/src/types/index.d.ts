@@ -1,15 +1,18 @@
-import { ServerResponse } from "node:http";
-import { AzuraServer } from "../AzuraServer";
 import { URLSearchParams } from "node:url";
+import { AzuraServer } from "../AzuraServer";
+import uWS from "uWebSockets.js";
 
 export type Plugin = (server: AzuraServer) => void;
+
 export type RouterHandler = (
   req: Request,
   res: Response,
   query: URLSearchParams,
   swagger: (meta: RouteMeta) => void
 ) => void;
+
 export type Middleware = (req: Request, res: Response, next: () => void) => void;
+
 export interface RouteMeta {
   summary?: string;
   description?: string;
@@ -35,8 +38,10 @@ export interface RouteMeta {
 }
 
 interface ConfigParams {
-  port?: number | 3001;
+  port?: number;
   ipHost?: boolean;
+  cluster?: boolean = true;
+  node?: "production" | "development" = "development";
   callback?: () => void;
 }
 
@@ -65,6 +70,7 @@ export interface ServerOptions {
     viewsPath: string;
   };
 }
+
 export interface Request {
   method: string;
   url: string;
@@ -75,6 +81,6 @@ export interface Request {
   routeMeta?: RouteMeta;
 }
 
-export interface Response extends ServerResponse {
+export interface Response extends uWS.HttpResponse {
   send: (data: any) => void;
 }

@@ -1,4 +1,4 @@
-export class RedirectExtensions {
+export class Redirect {
   static from: string;
   static to: string;
 

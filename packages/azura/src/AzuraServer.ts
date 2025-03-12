@@ -1,4 +1,3 @@
-// src/AzuraServer.ts
 import { Middleware, Plugin, RouterHandler, ServerOptions } from "./types";
 import serverConnection from "./core/server";
 import { swaggerRender } from "./plugins/swagger";
@@ -17,6 +16,8 @@ class AzuraServer {
   public middleware: Middleware[] = [];
   public plugins: Plugin[] = [];
   public cache: LRUCache<any>;
+  public requestInterceptors: Middleware[] = [];
+  public responseInterceptors: ((data: any) => any)[] = [];
 
   constructor(options?: ServerOptions) {
     this.options = { jsonParser: options?.jsonParser ?? true, ...options };
@@ -54,8 +55,7 @@ class AzuraServer {
 
   private setupDefaultRoutes() {
     this.router.addRoute("GET", "/favicon.ico", (_req, res) => {
-      res.writeHead(204);
-      res.end();
+      res.status(204).end();
     });
   }
 
@@ -64,6 +64,14 @@ class AzuraServer {
       throw new Error("Middleware deve ser uma função!");
     }
     this.middleware.push(middleware);
+  }
+
+  useRequestInterceptor(middleware: Middleware) {
+    this.requestInterceptors.push(middleware);
+  }
+
+  useResponseInterceptor(interceptor: (data: any) => any) {
+    this.responseInterceptors.push(interceptor);
   }
 
   register(plugin: Plugin) {

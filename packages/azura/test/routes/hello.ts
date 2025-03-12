@@ -1,7 +1,7 @@
 import { Request, Response, RouteMeta } from "@/types";
-import { GetExtensions } from "@/core/extensions/get";
+import { Get } from "@/core/extensions/get";
 
-export default class Hello extends GetExtensions {
+export default class Hello extends Get {
   swagger(): RouteMeta {
     return {
       summary: "Hello World",

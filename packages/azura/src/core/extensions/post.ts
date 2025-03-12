@@ -1,7 +1,7 @@
 import { Request, Response, RouteMeta } from "@/types";
 import { URLSearchParams } from "node:url";
 
-export abstract class PostExtensions {
+export abstract class Post {
   method: string = "POST";
   path: string;
 

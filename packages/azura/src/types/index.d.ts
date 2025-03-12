@@ -42,6 +42,7 @@ interface ConfigParams {
   ipHost?: boolean;
   cluster?: boolean;
   node?: "production" | "development";
+  websocket?: boolean;
   callback?: () => void;
 }
 
@@ -82,5 +83,19 @@ export interface Request {
 }
 
 export interface Response extends uWS.HttpResponse {
-  send: (data: any) => void;
+  send: (body: any) => void;
+  status: (code: number) => Response;
+  render: (view: string, data?: any) => Promise<void>;
+  write: (chunk: string) => void;
+}
+
+export type RequestInterceptor = (options: RequestInit) => RequestInit | Promise<RequestInit>;
+export type ResponseInterceptor<T = any> = (response: T) => T | Promise<T>;
+
+export interface DataRequestOptions {
+  headers?: Record<string, string>;
+  body?: any;
+  authToken?: string;
+  responseType?: "json" | "text" | "blob" | "arrayBuffer";
+  fields?: string[];
 }

@@ -1,7 +1,7 @@
 import { Request, Response, RouteMeta } from "@/types";
 import { URLSearchParams } from "node:url";
 
-export abstract class GetExtensions {
+export abstract class Get {
   method: string = "GET";
   path: string;
 

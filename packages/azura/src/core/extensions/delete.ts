@@ -1,7 +1,7 @@
 import { Request, Response, RouteMeta } from "@/types";
 import { URLSearchParams } from "node:url";
 
-export abstract class DeleteExtensions {
+export abstract class Delete {
   method: string = "DELETE";
   path: string;
 

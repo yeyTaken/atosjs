@@ -2,17 +2,31 @@ import uWS from "uWebSockets.js";
 import os from "os";
 import chalk from "chalk";
 import figures from "figures";
+import net from "node:net";
 
 import { AzuraServer } from "../AzuraServer";
 import { createResponse } from "./http/response";
 import { parseRequest } from "./http/request";
 import { RouteMeta, Response } from "../types";
 
-export default function serverConnection(
+async function findAvailablePort(startPort: number): Promise<number> {
+  return new Promise((resolve) => {
+    const server = net.createServer();
+    server.unref();
+    server.on("error", () => resolve(findAvailablePort(startPort + 1)));
+    server.listen(startPort, () => {
+      server.close(() => resolve(startPort));
+    });
+  });
+}
+
+export default async function serverConnection(
   app: AzuraServer,
-  port: number = 3000,
+  requestedPort: number = 3000,
   callback?: () => void
 ) {
+  const port = await findAvailablePort(requestedPort);
+
   const isProd = app.options.server?.node === "production";
   const routesMap = app.router.getRoutes();
 
@@ -26,6 +40,23 @@ export default function serverConnection(
   }
 
   const server = uWS.App();
+
+  if (app.options.server?.websocket) {
+    server.ws("/ws", {
+      open: (ws) => {
+        console.log("Nova conexão WebSocket");
+        ws.send("Bem-vindo ao WebSocket!");
+      },
+      message: (ws, message) => {
+        const msg = Buffer.from(message).toString();
+        console.log("Mensagem recebida:", msg);
+        ws.send("Echo: " + msg);
+      },
+      close: (_ws, _code, _message) => {
+        console.log("Conexão WebSocket fechada");
+      },
+    });
+  }
 
   server.any("/*", async (res, req) => {
     let aborted = false;
@@ -42,7 +73,7 @@ export default function serverConnection(
 
     try {
       if (app.cache.has(cacheKey)) {
-        const response = createResponse(res);
+        const response = createResponse(res, app);
         if (app.options.logging && !isProd)
           console.log(chalk.yellow(`${figures.info} ${method} ${url} - Cache Hit`));
         response.send(app.cache.get(cacheKey));
@@ -54,12 +85,18 @@ export default function serverConnection(
         parsedReq = await parseRequest(res, req, app.options.jsonParser!);
       } catch (parseErr) {
         console.error("Erro ao parsear a requisição:", parseErr);
-        const response = createResponse(res);
+        const response = createResponse(res, app);
         response.send({ error: "Internal Server Error" });
         return;
       }
       parsedReq.method = method;
       parsedReq.path = url.split("?")[0];
+
+      for (const interceptor of app.requestInterceptors) {
+        await new Promise<void>((resolve) => {
+          interceptor(parsedReq, res as unknown as Response, resolve);
+        });
+      }
 
       for (let i = 0, len = app.middleware.length; i < len; i++) {
         try {
@@ -68,7 +105,7 @@ export default function serverConnection(
           });
         } catch (mwErr) {
           console.error("Erro no middleware:", mwErr);
-          const response = createResponse(res);
+          const response = createResponse(res, app);
           response.send({ error: "Internal Server Error" });
           return;
         }
@@ -77,7 +114,7 @@ export default function serverConnection(
       const route = routesMap.get(method)?.get(parsedReq.path);
       if (route) {
         try {
-          const response = createResponse(res);
+          const response = createResponse(res, app);
           const swagger = (meta: RouteMeta) => {
             parsedReq.routeMeta = meta;
           };
@@ -91,13 +128,16 @@ export default function serverConnection(
               chalk.green(`${figures.pointer} ${method} ${url} - ${duration.toFixed(2)}ms`)
             );
           }
+          if (method === "GET") {
+            app.cache.set(cacheKey, response);
+          }
         } catch (handlerErr) {
           console.error("Erro no handler da rota:", handlerErr);
-          const response = createResponse(res);
+          const response = createResponse(res, app);
           response.send({ error: "Internal Server Error" });
         }
       } else {
-        const response = createResponse(res);
+        const response = createResponse(res, app);
         response.send({ error: "404 - Not Found" });
         if (!isProd) {
           console.log(chalk.red(`${figures.cross} ${method} ${url} - 404 Not Found`));
@@ -106,7 +146,7 @@ export default function serverConnection(
     } catch (err) {
       console.error("Erro não tratado na requisição:", err);
       try {
-        const response = createResponse(res);
+        const response = createResponse(res, app);
         response.send({ error: "Internal Server Error" });
       } catch (sendErr) {
         console.error("Erro ao enviar resposta de erro:", sendErr);

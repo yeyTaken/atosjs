@@ -9,6 +9,10 @@ O **Azura** é um framework de alto desempenho para criação de APIs em **TypeS
 - 📦 **Suporte nativo a WebSockets e RPC**.
 - 🔐 **Sistema de autenticação embutido** para login simplificado.
 - 📊 **Monitoramento de requisições** e CLI inteligente.
+- 🛠 **Interceptadores de request e response** para personalizar o fluxo.
+- 📡 **Streaming de respostas** para envio progressivo de dados.
+- 🔄 **Revalidação de cache** para manter dados sempre atualizados.
+- 🌐 **DataRequest API** para requisições HTTP simplificadas com suporte a filtros e autenticação.
 
 ## 🚀 Instalação
 
@@ -28,24 +32,24 @@ Crie um servidor Azura em poucos segundos:
 import { AzuraServer } from "@atosjs/azura";
 
 const app = new AzuraServer();
-/* params configured in the config file "azura.config.ts" or "azura.config.js" */
+/* parâmetros configurados no arquivo "azura.config.ts" ou "azura.config.js" */
 
-// # Example seting routes normally:
+// # Exemplo de rota simples:
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.start(); // or configure the port in the config file "azura.config.ts" or "azura.config.js"
+app.start(); // ou configure a porta no arquivo de configuração
 ```
 
-# 🔗 Swagger
+## 🔗 Swagger
 
 Azura inclui suporte nativo a **Swagger**:
 
 ```ts
-import { GetExtensions, Request, Response, RouteMeta } from "@atosjs/azura";
+import { Get, Request, Response, RouteMeta } from "@atosjs/azura";
 
-export default class Hello extends GetExtensions {
+export default class Hello extends Get {
   swagger(): RouteMeta {
     return {
       summary: "Hello World",
@@ -60,14 +64,14 @@ export default class Hello extends GetExtensions {
 }
 ```
 
-# 🔗 Criando Rotas
+## 🔗 Criando Rotas
 
-Crie uma pasta chamada `routes` dentro do diretório `src` e crie um arquivo chamado `hello.ts` dentro da pasta `routes`. Dentro do arquivo `hello.ts` crie uma classe chamada `Hello` que herda de `GetExtensions` ou `PostExtensions` ou `PutExtensions` ou `DeleteExtensions`. Em seguida, implemente a função `handle` para que ela execute a lógica da rota.
+Crie uma pasta chamada `routes` dentro do diretório `src` e crie um arquivo chamado `hello.ts` dentro da pasta `routes`. Dentro do arquivo `hello.ts` crie uma classe chamada `Hello` que herda de `Get` (ou de outras extensões como `Post`, etc.) e implemente a função `handle` para executar a lógica da rota.
 
 ```ts
-import { GetExtensions } from "@atosjs/azura";
+import { Get, Request, Response } from "@atosjs/azura";
 
-export default class Hello extends GetExtensions {
+export default class Hello extends Get {
   handle(req: Request, res: Response, query: URLSearchParams) {
     const q = query.toString();
     res.send({ message: "Hello World!", query: q });
@@ -75,54 +79,200 @@ export default class Hello extends GetExtensions {
 }
 ```
 
-# 🔎 Criando Redirecionamentos
+## 🔎 Criando Redirecionamentos
 
-Crie uma pasta chamada `redirects` dentro do diretório `src` e crie um arquivo chamado `oi.ts` dentro da pasta `redirects`. Dentro do arquivo `oi.ts` crie uma classe chamada `Oi` que herda de `RedirectExtensions`. Em seguida, implemente as propriedades `from` e `to` para que ela execute a lógica do redirecionamento.
+Crie uma pasta chamada `redirects` dentro do diretório `src` e crie um arquivo chamado `oi.ts` dentro da pasta `redirects`. Dentro do arquivo `oi.ts` crie uma classe chamada `Oi` que herda de `Redirect` e implemente as propriedades `from` e `to` para definir o redirecionamento.
 
 ```ts
-import { RedirectExtensions } from "@atosjs/azura";
+import { Redirect } from "@atosjs/azura";
 
-export default class Google extends RedirectExtensions {
+export default class Google extends Redirect {
   static from = "/google";
   static to = "https://www.google.com.br";
 }
 ```
 
-# 📝 Renderização de Views
+## 📝 Renderização de Views
 
 Azura inclui suporte nativo a **Renderização de Views** com o **Engine de Templates EJS**:
 
 ```ts
-import { GetExtensions, renderView, Request, Response } from "@atosjs/azura";
+import { Get, Request, Response } from "@atosjs/azura";
 
-export default class GetEjs extends GetExtensions {
+export default class GetEjs extends Get {
   async handle(_req: Request, res: Response) {
-    try {
-      const html = await renderView("index", { title: "Página EJS", user: "Dev" });
-
-      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-      res.end(html);
-    } catch (error) {
-      console.error(error);
-      res.writeHead(500, { "Content-Type": "text/plain; charset=utf-8" });
-      res.end("Erro ao renderizar a página.");
-    }
+    await res.render("index", { title: "Página EJS", user: "Dev" });
   }
 }
 ```
 
-# ⚙ Arquivo de configuração
+## 🚀 Exemplos Avançados
 
-O arquivo de configuração é um arquivo JSON ou Typescript que contém as configurações do servidor. O nome do arquivo é `azura.config.json` ou `azura.config.ts`.
+### 🔍 Interceptadores
 
-Exemplo de arquivo de configuração JSON:
+Você pode interceptar requisições e respostas para personalizar o fluxo do seu aplicativo. Por exemplo:
+
+```ts
+import { AzuraServer } from "@atosjs/azura";
+
+const app = new AzuraServer();
+
+// Interceptador de request: registra método e rota da requisição
+app.useRequestInterceptor((req, res, next) => {
+  console.log(`Interceptando request: ${req.method} ${req.path}`);
+  next();
+});
+
+// Interceptador de response: modifica a resposta em caso de erro
+app.useResponseInterceptor((data) => {
+  if (data.error) {
+    data.customMessage = "Erro tratado pelo interceptor";
+  }
+  return data;
+});
+```
+
+### 📡 Streaming de Respostas
+
+Envie dados de forma progressiva utilizando streaming. Ideal para grandes volumes de dados:
+
+```ts
+app.get("/stream", async (_req, res) => {
+  res.write("Parte 1...\n");
+  setTimeout(() => res.write("Parte 2...\n"), 2000);
+  setTimeout(() => res.write("Parte 3...\n"), 4000);
+  setTimeout(() => res.end(), 6000);
+});
+```
+
+### 🌐 WebSockets
+
+Com o Azura, é possível habilitar WebSockets facilmente. Ative a opção no arquivo de configuração e utilize o endpoint `/ws`:
+
+**Configuração (azura.config.json ou azura.config.ts):**
 
 ```json
 {
   "server": {
     "port": 3000,
     "ipHost": true,
-    "node": "development" // "production" ou "development" (production is not logging)
+    "node": "development",
+    "websocket": true
+  },
+  ...
+}
+```
+
+**Exemplo no cliente:**
+
+```js
+const socket = new WebSocket("ws://localhost:3000/ws");
+socket.onopen = () => {
+  socket.send("Olá WebSocket!");
+};
+socket.onmessage = (event) => console.log("Recebido:", event.data);
+```
+
+### 🔄 Revalidação de Cache
+
+Utilize o sistema de cache integrado para armazenar e revalidar dados automaticamente:
+
+```ts
+// Rota que utiliza cache para armazenar resposta
+app.get("/data", async (req, res) => {
+  // Se houver cache, ele será retornado automaticamente
+  res.send({ data: "Dados atualizados" });
+});
+
+// Rota para atualizar dados e invalidar o cache
+app.post("/update", async (req, res) => {
+  // Lógica de atualização dos dados
+  // Invalida o cache da rota /data
+  app.cache.delete("GET:/data");
+  res.send({ success: true });
+});
+```
+
+## 🌐 DataRequest API
+
+A classe **Data** permite realizar requisições HTTP de forma simples e flexível, com suporte a interceptadores, autenticação Bearer, e a opção de filtrar campos da resposta. Veja alguns exemplos:
+
+### Exemplo 1: GET - Retornando a Resposta Completa
+
+```ts
+import { Data } from "@atosjs/azura";
+
+const api = new Data("https://jsonplaceholder.typicode.com");
+
+async function fetchTodoCompleto() {
+  try {
+    // Retorna todos os campos do todo
+    const todo = await api.get("/todos/1");
+    console.log("Todo completo:", todo);
+  } catch (error) {
+    console.error("Erro no GET:", error);
+  }
+}
+
+fetchTodoCompleto();
+```
+
+### Exemplo 2: GET - Filtrando Apenas Alguns Campos
+
+```ts
+import { Data } from "@atosjs/azura";
+
+const api = new Data("https://jsonplaceholder.typicode.com");
+
+async function fetchTodoFiltrado() {
+  try {
+    // Mesmo que a API retorne vários campos, com a opção "fields" serão retornados
+    // somente os campos especificados (por exemplo, 'id' e 'title')
+    const todo = await api.get("/todos/1", { fields: ["id", "title"] });
+    console.log("Todo filtrado:", todo); // Exemplo: { id: 1, title: "delectus aut autem" }
+  } catch (error) {
+    console.error("Erro no GET:", error);
+  }
+}
+
+fetchTodoFiltrado();
+```
+
+### Exemplo 3: POST - Enviando Dados com Autenticação
+
+```ts
+import { Data } from "@atosjs/azura";
+
+const api = new Data("https://jsonplaceholder.typicode.com");
+
+async function createTodo() {
+  try {
+    const newTodo = await api.post("/todos", {
+      body: { title: "Novo Todo", completed: false },
+      authToken: "seu_token_aqui"
+    });
+    console.log("Todo criado:", newTodo);
+  } catch (error) {
+    console.error("Erro no POST:", error);
+  }
+}
+
+createTodo();
+```
+
+## ⚙ Arquivo de Configuração
+
+O arquivo de configuração é um arquivo JSON ou TypeScript que contém as configurações do servidor. O nome do arquivo é `azura.config.json` ou `azura.config.ts`.
+
+**Exemplo de arquivo de configuração JSON:**
+
+```json
+{
+  "server": {
+    "port": 3000,
+    "ipHost": true,
+    "node": "development", // "production" ou "development" (production não realiza logging)
+    "websocket": true
   },
   "logging": true,
   "jsonParser": true,
@@ -133,8 +283,8 @@ Exemplo de arquivo de configuração JSON:
     "uri": "mongodb://localhost:27017/azura",
     "name": "azura"
   },
-  "routesPath": "src/routes", // default: src/routes (automatically finds routes in src/routes)
-  "redirectsPath": "src/redirects" // default: src/redirects (automatically finds redirects in src/redirects)
+  "routesPath": "src/routes",
+  "redirectsPath": "src/redirects",
   "redirects": [
     {
       "from": "/old-route",
@@ -142,12 +292,12 @@ Exemplo de arquivo de configuração JSON:
     }
   ],
   "ejsEngine": {
-    "viewsPath": "src/views" // default: src/views (automatically finds views in src/views)
+    "viewsPath": "src/views"
   }
 }
 ```
 
-Exemplo de arquivo de configuração Typescript:
+**Exemplo de arquivo de configuração TypeScript:**
 
 ```ts
 import { ServerOptions } from "@atosjs/azura";
@@ -156,7 +306,8 @@ const config: ServerOptions = {
   server: {
     port: 3000,
     ipHost: true,
-    node: "development", // "production" ou "development" (production is not logging)
+    node: "development", // "production" ou "development"
+    websocket: true
   },
   logging: true,
   jsonParser: true,
@@ -165,37 +316,23 @@ const config: ServerOptions = {
   swagger: true,
   database: {
     uri: "mongodb://localhost:27017/azura",
-    name: "azura",
+    name: "azura"
   },
-  routesPath: "src/routes", // default: src/routes (automatically finds routes in src/routes)
-  redirectsPath: "src/redirects", // default: src/redirects (automatically finds redirects in src/redirects)
+  routesPath: "src/routes",
+  redirectsPath: "src/redirects",
   redirects: [
     {
       from: "/old-route",
-      to: "/new-route",
-    },
+      to: "/new-route"
+    }
   ],
   ejsEngine: {
-    viewsPath: "src/views", // default: src/views (automatically finds views in src/views)
-  },
+    viewsPath: "src/views"
+  }
 };
 
 export default config;
 ```
-
-As configurações disponíveis no arquivo de configuração são:
-
-- `server`: Configurações do servidor, como porta, IP, etc.
-- `logging`: Habilita ou desabilita o registro de eventos no console.
-- `jsonParser`: Habilita ou desabilita o parser de JSON.
-- `cacheSize`: Tamanho do cache do servidor.
-- `cors`: Habilita ou desabilita o CORS.
-- `swagger`: Habilita ou desabilita a documentação do Swagger.
-- `database`: Configurações do banco de dados.
-- `routesPath`: Caminho para a pasta de rotas personalizada ou utilizar a pasta padrão.
-- `redirectsPath`: Caminho para a pasta de redirecionamentos personalizada ou utilizar a pasta padrão.
-- `redirects`: Array de redirecionamentos caso queira utilizar uma pasta pode ser utilizada "/src/redirects" ou uma personalizada no parametro redirectsPath.
-- `ejsEngine`: Configurações do Engine de Templates como viewsPath.
 
 ## 📜 Licença
 

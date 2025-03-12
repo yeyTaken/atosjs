@@ -1,7 +1,7 @@
 import { Request, Response, RouteMeta } from "@/types";
 import { URLSearchParams } from "node:url";
 
-export abstract class PutExtensions {
+export abstract class Put {
   method: string = "PUT";
   path: string;
 

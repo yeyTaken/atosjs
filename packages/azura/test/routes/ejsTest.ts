@@ -1,18 +1,8 @@
-import { GetExtensions } from "@/core/extensions/get";
-import { renderView } from "@/functions/renderView";
+import { Get } from "@/core/extensions/get";
 import { Request, Response } from "@/types";
 
-export default class GetEjs extends GetExtensions {
+export default class GetEjs extends Get {
   async handle(_req: Request, res: Response) {
-    try {
-      const html = await renderView("index", { title: "Página EJS", user: "Dev" });
-
-      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-      res.end(html);
-    } catch (error) {
-      console.error(error);
-      res.writeHead(500, { "Content-Type": "text/plain; charset=utf-8" });
-      res.end("Erro ao renderizar a página.");
-    }
+    await res.render("index", { title: "Página EJS", user: "Dev" });
   }
 }

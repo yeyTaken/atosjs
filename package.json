@@ -11,6 +11,7 @@
     "better-commits": "^1.15.7",
     "prettier": "^3.4.2",
     "typescript": "5.5.4",
+    "turbo": "^2.4.4",
     "vitest": "^2.1.4"
   },
   "engines": {
@@ -21,7 +22,5 @@
     "packages/*",
     "tests/*"
   ],
-  "dependencies": {
-    "turbo": "^2.4.4"
-  }
+  "dependencies": {}
 }

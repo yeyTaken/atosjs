@@ -3,8 +3,8 @@ import chalk from 'chalk';
 import consola from 'consola';
 
 import { GiftModel } from './models/gift';
-import { Gift } from '../../classes/GiftManager/types/gifts';
-import { dbHandler } from '../../classes/GiftManager/types/db';
+import { Gift } from '../../types/gifts';
+import { dbHandler } from '../../types/db';
 
 export class MongooseHandler implements dbHandler {
   private dbName: string;

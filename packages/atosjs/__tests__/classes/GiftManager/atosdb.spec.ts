@@ -1,4 +1,4 @@
-import { QuickDB } from 'quick.db';
+import { AtosDB } from '@atosjs/database';
 // import { ErrorMessages } from '../../src/errors';
 // import { GiftManager } from '../../src';
 
@@ -22,13 +22,13 @@ describe('GiftManager', () => {
 
     beforeAll(() => {
         gm = new GiftManager({
-            quickdb: { filePath: 'quickdb.sqlite' }
+            atosdb: { filePath: 'atosdb.sqlite' }
         });
     });
 
     afterEach(async () => {
         // Limpa os dados do banco após cada teste
-        const db = new QuickDB({ filePath: 'quickdb.sqlite' });
+        const db = new AtosDB({ filePath: 'atosdb.sqlite' });
         await db.delete('gifts');
     });
 

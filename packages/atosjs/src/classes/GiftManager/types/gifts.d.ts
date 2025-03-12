@@ -19,8 +19,12 @@ export type GenerateOptions = {
 };
 
 export type GiftManagerOptions = {
+
+    // database's
     quickdb?: { filePath?: string };
+    atosdb?: { filePath?: string };
     mongodb?: { connect: string; dbName?: string };
 
+    // generic
     logging?: boolean;
 };

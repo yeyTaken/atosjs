@@ -1,5 +1,6 @@
-import { QuickDBHandler } from "../../database/quickdb";
-import { MongooseHandler } from "../../database/mongoose";
+import { AtosDBHandler } from "./database/atosdb";
+import { QuickDBHandler } from "./database/quickdb";
+import { MongooseHandler } from "./database/mongoose";
 import { GenerateOptions, GiftManagerOptions } from "./types/gifts";
 import { generateGift, redeemGift, viewGift } from "./types/api";
 import { AtosJSError, ErrorCodes, ErrorMessages } from "../../errors";
@@ -8,10 +9,19 @@ import { AtosJSError, ErrorCodes, ErrorMessages } from "../../errors";
  * GiftManager class for managing gift codes.
  * 
  * @param options - Optional configuration for the gift manager:
+ *   - `atosdb`: An object containing a `filePath` property to specify the local JSON file path (default: "json.sqlite").
  *   - `quickdb`: An object containing a `filePath` property to specify the local JSON file path (default: "json.sqlite").
  *   - `mongodb`: An object containing a `connect` property to specify the MongoDB connection string and an optional `dbName` property to specify the database name (default: "gifts").
  *   - `logging`: If true, logs will be shown on the console (default: true).
  * @returns A new GiftManager instance.
+ * 
+ * @example
+ * // Example using local JSON file
+ * const gift = new GiftManager({
+ *   atosdb: {
+ *     filePath: "atosdb.json" // .db, .yaml, etc...
+ *   }
+ * });
  * 
  * @example
  * // Example using local JSON file
@@ -31,10 +41,10 @@ import { AtosJSError, ErrorCodes, ErrorMessages } from "../../errors";
  * });
  */
 export class GiftManager {
-  private db: QuickDBHandler | MongooseHandler;
+  private db: AtosDBHandler | QuickDBHandler | MongooseHandler;
 
   constructor(options?: GiftManagerOptions) {
-    if (options?.quickdb && options?.mongodb) {
+    if (options?.atosdb && options?.quickdb && options?.mongodb) {
       throw new AtosJSError(
         ErrorMessages[ErrorCodes.INVALID_DB_SELECTION],
         ErrorCodes.INVALID_DB_SELECTION
@@ -43,7 +53,9 @@ export class GiftManager {
 
     const logging = options?.logging ?? true;
 
-    if (options?.quickdb) {
+    if (options?.atosdb) {
+      this.db = new AtosDBHandler(options.atosdb.filePath || "json.sqlite", logging);
+    } else if (options?.quickdb) {
       this.db = new QuickDBHandler(options.quickdb.filePath || "json.sqlite", logging);
     } else if (options?.mongodb) {
       this.db = new MongooseHandler(
@@ -52,7 +64,7 @@ export class GiftManager {
         logging
       );
     } else {
-      this.db = new QuickDBHandler("json.sqlite", logging);
+      this.db = new AtosDBHandler("json.sqlite", logging);
     }
   }
 

@@ -2,7 +2,7 @@ import { QuickDB } from 'quick.db';
 import consola from 'consola';
 import chalk from 'chalk';
 
-import { dbHandler } from '../../classes/GiftManager/types/db';
+import { dbHandler } from '../../types/db';
 
 export class QuickDBHandler implements dbHandler {
   private db: QuickDB;

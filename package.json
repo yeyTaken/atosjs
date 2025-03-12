@@ -16,9 +16,12 @@
   "engines": {
     "bun": ">=1"
   },
+  "packageManager": "bun@1.2.4",
   "workspaces": [
     "packages/*",
     "tests/*"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "turbo": "^2.4.4"
+  }
 }

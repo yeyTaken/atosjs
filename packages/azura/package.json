@@ -1,7 +1,7 @@
 {
   "name": "@atosjs/azura",
   "description": "Azura is a simple and lightweight web framework for Node.js",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -22,13 +22,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Thinxy/azura-v2.git",
+    "url": "https://github.com/yeyTaken/atosjs/tree/1.0.0/packages/azura.git",
     "directory": "/"
   },
   "bugs": {
-    "url": "https://github.com/Thinxy/azura-v2/issues"
+    "url": "https://github.com/yeyTaken/atosjs/issues"
   },
-  "homepage": "https://github.com/Thinxy/azura-v2#readme",
+  "homepage": "https://github.com/yeyTaken/atosjs/tree/1.0.0/packages/azura#readme",
   "keywords": [
     "web",
     "framework",

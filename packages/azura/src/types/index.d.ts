@@ -40,8 +40,8 @@ export interface RouteMeta {
 interface ConfigParams {
   port?: number;
   ipHost?: boolean;
-  cluster?: boolean = true;
-  node?: "production" | "development" = "development";
+  cluster?: boolean;
+  node?: "production" | "development";
   callback?: () => void;
 }
 

@@ -9,6 +9,10 @@ tsconfig.build.json
 test/
 test.json
 test.yaml
+dbLocal.*
+quickdb.*
+atosdb.*
+
 # Ignorar a pasta node_modules
 node_modules/
 .npmrc

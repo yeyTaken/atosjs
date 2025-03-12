@@ -8,9 +8,9 @@ dist/
 .env
 test.*
 tsconfig.tsbuildinfo
-dbLocal.sqlite
-quickdb.sqlite
-
+dbLocal.*
+quickdb.*
+atosdb.*
 
 .turbo/
 .next/

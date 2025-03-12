@@ -20,7 +20,7 @@ AtosJS is a powerful and easy-to-use package, built with [Node.js](https://nodej
 
 ## Classes
 - [`GiftManager`](https://atos.js.org/docs/gift-manager/)
-- [`TimeFormat`](https://atos.js.org/docs/time-format/) | [`ms`](https://atos.js.org/time-format/ms/)
+- [`TimeFormat`](https://atos.js.org/docs/time-format/)
 
 
 ## Links

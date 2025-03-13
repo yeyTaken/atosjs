@@ -25,7 +25,7 @@ class AzuraServer {
       AzuraServer.instance = this;
     }
     const cacheSize = this.options.cacheSize ?? 1000;
-    const cacheTTL = this.options.cacheTTL ?? 0;
+    const cacheTTL = this.options.cacheTTL ?? 60000;
     this.cache = new LRUCache(cacheSize, cacheTTL);
     this.router = new RouterManager();
   }

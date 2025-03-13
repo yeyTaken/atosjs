@@ -56,6 +56,7 @@ export interface ServerOptions {
   server?: ConfigParams;
   logging?: boolean;
   jsonParser?: boolean;
+  cache?: boolean;
   cacheSize?: number;
   cacheTTL?: number;
   cors?: boolean;

@@ -72,11 +72,14 @@ export default async function serverConnection(
     if (aborted) return;
 
     try {
-      if (app.cache.has(cacheKey)) {
+      if (app.options.cache && app.cache.has(cacheKey)) {
         const response = createResponse(res, app);
+        const cachedData = app.cache.get(cacheKey);
+
         if (app.options.logging && !isProd)
           console.log(chalk.yellow(`${figures.info} ${method} ${url} - Cache Hit`));
-        response.send(app.cache.get(cacheKey));
+
+        response.send(cachedData);
         return;
       }
 
@@ -128,8 +131,9 @@ export default async function serverConnection(
               chalk.green(`${figures.pointer} ${method} ${url} - ${duration.toFixed(2)}ms`)
             );
           }
-          if (method === "GET") {
-            app.cache.set(cacheKey, response);
+
+          if (app.options.cache && method === "GET") {
+            app.cache.set(cacheKey, response.body);
           }
         } catch (handlerErr) {
           console.error("Erro no handler da rota:", handlerErr);

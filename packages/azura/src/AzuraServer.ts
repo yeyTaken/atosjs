@@ -47,6 +47,8 @@ class AzuraServer {
   private async initializePlugins() {
     await this.loadConfig();
     await this.router.loadRoutes(this.options);
+    await this.router.loadRedirectClasses(this.options);
+    await this.router.loadRedirects(this.options);
 
     this.setupDefaultRoutes();
     if (this.options.cors) setupCors(this);

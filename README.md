@@ -49,7 +49,7 @@ To run the complete project, we use the `turbo.json` file. Follow the steps belo
 
 ```bash
 # Run tests
-bun test
+bun run test
 
 # Build the project
 bun run build

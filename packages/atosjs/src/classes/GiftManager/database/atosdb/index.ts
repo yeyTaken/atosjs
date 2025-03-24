@@ -13,7 +13,7 @@ export class AtosDBHandler implements dbHandler {
     this.logging = logging;
     if (this.logging) {
       consola.success(
-        chalk.gray(`Connected to 📦 ${chalk.blueBright.bold('AtosDB')} (${chalk.gray.underline(filePath)})`)
+        chalk.gray(`Connected to 🚀 ${chalk.blueBright.bold('AtosDB')} (${chalk.gray.underline(filePath)})`)
       );
     }
   }

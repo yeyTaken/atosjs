@@ -1,6 +1,6 @@
 import mongoose, { UpdateQuery } from 'mongoose';
 import chalk from 'chalk';
-import consola from 'consola';
+import { consola } from 'consola';
 
 import { GiftModel } from './models/gift';
 import { Gift } from '../../types/gifts';

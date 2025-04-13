@@ -1,4 +1,4 @@
-const { t } = require("./atos.config");
+const { t, gift } = require("./atos.config");
 
 // TimeFormat
 (async () => {
@@ -33,4 +33,34 @@ const { t } = require("./atos.config");
   t.queue([task1, task2])
     .then(() => console.log("All tasks completed."))
     .catch((error) => console.error("Error in tasks:", error));
+})();
+
+// GiftManager
+(async () => {
+
+  // gift example one
+  const giftCoin = await gift.generate({
+    type: "coin",
+    value: 100
+  });
+
+  console.log({
+    GiftId: giftCoin,
+    log: await gift.view(giftCoin)
+  });
+
+  // gift example two
+  const PROMOTION = await gift.generate({
+    type: "CUPOM",
+    value: 30,
+    edit: {
+      code: "NATAL2026"
+    }
+  });
+
+  console.log({
+    GiftId: PROMOTION,
+    log: await gift.view(PROMOTION)
+  });
+
 })();

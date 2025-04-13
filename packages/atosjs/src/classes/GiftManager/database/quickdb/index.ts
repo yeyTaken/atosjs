@@ -1,5 +1,5 @@
 import { QuickDB } from 'quick.db';
-import consola from 'consola';
+import { consola } from 'consola';
 import chalk from 'chalk';
 
 import { dbHandler } from '../../types/db';

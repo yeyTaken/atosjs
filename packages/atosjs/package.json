@@ -15,7 +15,7 @@
   "types": "./dist/index.d.ts",
   "files": ["dist"],
   "scripts": {
-    "start": "npm run build && npm run test",
+    "start": "bun run build && bun run test",
     "build": "unbuild",
     "test": "vitest --run"
   },

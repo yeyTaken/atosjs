@@ -6,4 +6,5 @@ dist/
 .npmrc
 .env
 atos.*
+atosdb.sqlite
 atosdb.*

@@ -1,5 +1,5 @@
 {
-  "name": "@atosjs/template",
+  "name": "@atosjs/toolkit",
   "version": "1.0.0",
   "type": "module",
   "publishConfig": {
@@ -17,23 +17,30 @@
   "types": "./dist/index.d.ts",
   "files": ["dist"],
   "scripts": {
-    "start": "npm run build && node .",
+    "start": "bun run build && bun run dev",
     "dev": "tsx src/index.ts",
     "build": "unbuild"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/yeyTaken/atosjs.git",
-    "directory": "packages/"
+    "directory": "packages/toolkit"
   },
   "bugs": {
     "url": "https://github.com/yeyTaken/atosjs/issues"
   },
   "homepage": "https://atos.js.org/",
   "keywords": [
-    ""
+    "atosjs",
+    "toolkit",
+    "tools",
+    "azura",
+    "database",
+    "db",
+    "SQLite",
+    "pokemon"
   ],
-  "author": "",
+  "author": "Rabi",
   "license": "MIT",
   "description": "",
   "devDependencies": {

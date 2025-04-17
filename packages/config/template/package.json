@@ -17,7 +17,7 @@
   "types": "./dist/index.d.ts",
   "files": ["dist"],
   "scripts": {
-    "start": "npm run build && node .",
+    "start": "bun run build && bun run dev",
     "dev": "tsx src/index.ts",
     "build": "unbuild"
   },

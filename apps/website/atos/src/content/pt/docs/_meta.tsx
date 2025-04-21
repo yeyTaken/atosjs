@@ -1,5 +1,5 @@
 import type { MetaRecord } from 'nextra'
-import { FaHome, FaGift, FaClock, FaInfo, FaDiscord } from 'react-icons/fa';
+import { FaHome, FaGift, FaClock, FaInfo, FaDiscord, FaDatabase } from 'react-icons/fa';
 
 const index = (
   <span style={{ display: 'flex', alignItems: 'center' }}>
@@ -19,6 +19,13 @@ const timeFormat = (
   <span style={{ display: 'flex', alignItems: 'center' }}>
     <FaClock style={{ marginRight: '0.5em' }} />
     TimeFormat
+  </span>
+);
+
+const database = (
+  <span style={{ display: 'flex', alignItems: 'center' }}>
+    <FaDatabase style={{ marginRight: '0.5em' }} />
+    AtosDB
   </span>
 );
 
@@ -50,6 +57,7 @@ export default {
     title: giftManager
   },
   "time-format": timeFormat,
+  "atos-db": database,
 
   __: {
     type: 'separator',

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css"; // você pode escolher outro tema do Prismjs
-import { FaGithub, FaCopy, FaArrowRight } from "react-icons/fa";
+import { FaGithub, FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 export default function Home() {

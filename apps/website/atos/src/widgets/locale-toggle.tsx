@@ -9,9 +9,6 @@ import { useCallback, useEffect } from 'react'
 
 const ONE_YEAR = 365 * 24 * 60 * 60 * 1000
 
-/**
- * 快速切换语言组件，用于覆盖 nextra 原生切换下拉框
- */
 export default function LocaleToggle({
   className,
 }: {
@@ -49,9 +46,7 @@ export default function LocaleToggle({
   }, [forceHideBanner])
 
   const changeLocale = useCallback(() => {
-    // 滚动条位置记录
     const currentPosition = window.scrollY
-    // 检查是否滚动到底部
     const isAtBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight
 
     const nextHref = {
@@ -91,8 +86,8 @@ export default function LocaleToggle({
     >
       {
         currentLocale === 'en'
-          ? <span className="icon-[uil--letter-chinese-a]" />
-          : <span className="icon-[ri--english-input]" />
+          ? <span className="text-sm">Pt</span>
+          : <span className="text-sm">En</span>
       }
     </Toggle>
   )

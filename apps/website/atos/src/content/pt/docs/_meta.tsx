@@ -1,5 +1,14 @@
 import type { MetaRecord } from 'nextra'
-import { FaHome, FaGift, FaClock, FaInfo, FaDiscord, FaDatabase } from 'react-icons/fa';
+import { MdCatchingPokemon } from "react-icons/md";
+import { AiFillDiscord } from "react-icons/ai";
+import { 
+  FaHome, 
+  FaGift, 
+  FaClock, 
+  FaInfo, 
+  // FaDiscord, 
+  FaDatabase
+} from 'react-icons/fa';
 
 const index = (
   <span style={{ display: 'flex', alignItems: 'center' }}>
@@ -29,6 +38,13 @@ const database = (
   </span>
 );
 
+const pokedex = (
+  <span style={{ display: 'flex', alignItems: 'center' }}>
+    <MdCatchingPokemon  style={{ marginRight: '0.5em' }} />
+    PokeDex
+  </span>
+);
+
 const about = (
   <span style={{ display: 'flex', alignItems: 'center' }}>
     <FaInfo style={{ marginRight: '0.5em' }} />
@@ -38,7 +54,7 @@ const about = (
 
 const discord = (
   <span style={{ display: 'flex', alignItems: 'center' }}>
-    <FaDiscord style={{ marginRight: '0.5em' }} />
+    <AiFillDiscord style={{ marginRight: '0.5em' }} />
     Discord
   </span>
 );
@@ -53,11 +69,10 @@ export default {
     title: 'Classes'
   },
 
-  "gift-manager": {
-    title: giftManager
-  },
+  "gift-manager": giftManager,
   "time-format": timeFormat,
   "atos-db": database,
+  "pokedex": pokedex,
 
   __: {
     type: 'separator',

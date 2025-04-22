@@ -4,6 +4,7 @@ import { Toggle } from '@/components/ui/toggle'
 import clsx from 'clsx'
 import { useTheme } from 'nextra-theme-docs'
 import { useCallback } from 'react'
+import { FaSun, FaMoon } from 'react-icons/fa' // Importando os ícones
 
 export default function ThemeToggle({
   className,
@@ -15,8 +16,7 @@ export default function ThemeToggle({
   const changeTheme = useCallback(() => {
     if (theme === 'dark') {
       setTheme('light')
-    }
-    else {
+    } else {
       setTheme('dark')
     }
   }, [setTheme, theme])
@@ -30,7 +30,11 @@ export default function ThemeToggle({
       ])}
       onClick={changeTheme}
     >
-      <span className="icon-[ri--sun-fill] dark:icon-[ri--moon-clear-fill]"></span>
+      {theme === 'dark' ? (
+        <FaSun /> // Ícone de Sol para o tema claro
+      ) : (
+        <FaMoon /> // Ícone de Lua para o tema escuro
+      )}
     </Toggle>
   )
 }

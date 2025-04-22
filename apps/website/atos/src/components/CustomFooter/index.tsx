@@ -61,8 +61,8 @@ export function CustomFooter() {
           className="max-sm:hidden h-5 mx-2"
         />
         <div className="flex justify-center h-5 items-center space-x-2 text-sm">
-          <ThemeToggle />
-          <Separator orientation="vertical" />
+          {/* <ThemeToggle /> */}
+          {/* <Separator orientation="vertical" /> */}
           <LocaleToggle />
         </div>
 

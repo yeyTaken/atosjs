@@ -9,5 +9,5 @@ export default {
       layout: 'full',
       toc: false,
     },
-  }
+  },
 } satisfies MetaRecord

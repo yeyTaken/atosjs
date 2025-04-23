@@ -1,5 +1,5 @@
-import pt from './pt'
 import en from './en'
+import pt from './pt'
 
 export const i18nConfig = Object.freeze({
   pt,

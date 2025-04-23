@@ -1,17 +1,17 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import Prism from "prismjs";
-import "prismjs/themes/prism-tomorrow.css"; // você pode escolher outro tema do Prismjs
-import { FaGithub, FaArrowRight } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion'
+import Prism from 'prismjs'
+import { useEffect } from 'react'
+import { FaArrowRight, FaGithub } from 'react-icons/fa'
+
+import 'prismjs/themes/prism-tomorrow.css';
 
 export default function Home() {
-  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    Prism.highlightAll(); // executa o highlight após o render
-  }, []);
+    Prism.highlightAll() // executa o highlight após o render
+  }, [])
 
   return (
     <div className="flex flex-col lg:flex-row items-center lg:items-start justify-start min-h-screen py-8 px-4 lg:px-16">
@@ -25,10 +25,12 @@ export default function Home() {
           !
         </h1>
         <p className="mt-4 text-lg text-center lg:text-left lg:max-w-[80%]">
-          O{' '}
+          O
+          {' '}
           <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
             AtosJS
-          </span>{' '}
+          </span>
+          {' '}
           é o seu conjunto definitivo de ferramentas para transformar sua
           experiência como desenvolvedor, tornando seu dia a dia mais
           produtivo e eficiente.
@@ -83,5 +85,5 @@ module.exports = {
         </pre>
       </div>
     </div>
-  );
+  )
 }

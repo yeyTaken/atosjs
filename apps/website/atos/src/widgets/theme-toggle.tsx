@@ -4,7 +4,7 @@ import { Toggle } from '@/components/ui/toggle'
 import clsx from 'clsx'
 import { useTheme } from 'nextra-theme-docs'
 import { useCallback } from 'react'
-import { FaSun, FaMoon } from 'react-icons/fa' // Importando os ícones
+import { FaMoon, FaSun } from 'react-icons/fa' // Importando os ícones
 
 export default function ThemeToggle({
   className,
@@ -16,7 +16,8 @@ export default function ThemeToggle({
   const changeTheme = useCallback(() => {
     if (theme === 'dark') {
       setTheme('light')
-    } else {
+    }
+    else {
       setTheme('dark')
     }
   }, [setTheme, theme])

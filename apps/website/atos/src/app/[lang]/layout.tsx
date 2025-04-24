@@ -5,7 +5,7 @@ import type { ReactNode } from 'react'
 
 import { CustomFooter } from '@/components/CustomFooter'
 import { useServerLocale } from '@/hooks'
-// import LocaleToggle from '@/widgets/locale-toggle'
+import LocaleToggle from '@/widgets/locale-toggle'
 import ThemeToggle from '@/widgets/theme-toggle'
 import { Footer, LastUpdated, Layout, Navbar } from 'nextra-theme-docs'
 import { Banner, Head, Search } from 'nextra/components'
@@ -75,8 +75,8 @@ const CustomNavbar = async ({ lang }: I18nLangAsyncProps) => {
       projectLink={repo}
     >
       <>
-        {/* <LocaleToggle className="max-md:hidden" /> */}
-        <ThemeToggle className="max-md:hidden" />
+        <LocaleToggle className="max-md:hidden" />
+        {/* <ThemeToggle className="max-md:hidden" /> */}
       </>
 
     </Navbar>

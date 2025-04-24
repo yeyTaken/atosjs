@@ -8,6 +8,8 @@ import {
   FaHome,
   FaInfo,
 } from 'react-icons/fa'
+import { FaBoxOpen } from "react-icons/fa6";
+
 import { MdCatchingPokemon } from 'react-icons/md'
 
 const index = (
@@ -31,17 +33,24 @@ const timeFormat = (
   </span>
 )
 
+const azura = (
+  <span style={{ display: 'flex', alignItems: 'center' }}>
+    <FaBoxOpen style={{ marginRight: '0.5em' }} />
+    azura
+  </span>
+)
+
 const database = (
   <span style={{ display: 'flex', alignItems: 'center' }}>
     <FaDatabase style={{ marginRight: '0.5em' }} />
-    AtosDB
+    database
   </span>
 )
 
 const pokedex = (
   <span style={{ display: 'flex', alignItems: 'center' }}>
     <MdCatchingPokemon style={{ marginRight: '0.5em' }} />
-    PokeDex
+    pokemon
   </span>
 )
 
@@ -71,10 +80,17 @@ export default {
 
   'gift-manager': giftManager,
   'time-format': timeFormat,
-  'atos-db': database,
-  pokedex,
 
   __: {
+    type: 'separator',
+    title: '@atosjs/',
+  },
+
+  'atos-db': database,
+  'azura': azura,
+  'pokedex': pokedex,
+
+  ___: {
     type: 'separator',
     title: 'More',
   },

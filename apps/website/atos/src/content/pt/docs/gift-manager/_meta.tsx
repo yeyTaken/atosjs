@@ -25,21 +25,13 @@ const redeem = (
 const exampleProject = (
   <span style={{ display: 'flex', alignItems: 'center' }}>
     <FaProjectDiagram style={{ marginRight: '0.5em' }} />
-    Example Project
+    Exemplo de uso
   </span>
 )
 
 export default {
-  generate: {
-    title: generate,
-  },
-  view: {
-    title: view,
-  },
-  redeem: {
-    title: redeem,
-  },
-  'example-project': {
-    title: exampleProject,
-  },
+  index: generate,
+  view: view,
+  redeem: redeem,
+  'example-project': exampleProject
 } satisfies MetaRecord

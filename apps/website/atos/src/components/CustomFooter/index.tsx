@@ -3,6 +3,7 @@ import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import LocaleToggle from '@/widgets/locale-toggle'
 import Link from 'next/link'
+import ThemeToggle from '@/widgets/theme-toggle'
 
 const UnderlineLink = ({
   link,
@@ -60,11 +61,10 @@ export function CustomFooter() {
           className="max-sm:hidden h-5 mx-2"
         />
         <div className="flex justify-center h-5 items-center space-x-2 text-sm">
-          {/* <ThemeToggle /> */}
-          {/* <Separator orientation="vertical" /> */}
           <LocaleToggle />
+          <Separator orientation="vertical" />
+          <ThemeToggle />
         </div>
-
       </div>
     </div>
   )

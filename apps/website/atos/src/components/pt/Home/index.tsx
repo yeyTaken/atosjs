@@ -5,7 +5,7 @@ import Prism from 'prismjs'
 import { useEffect } from 'react'
 import { FaArrowRight, FaGithub } from 'react-icons/fa'
 
-import 'prismjs/themes/prism-tomorrow.css';
+import '@/components/theme/prismjs/atos.css';
 
 export default function Home() {
 
@@ -65,7 +65,8 @@ export default function Home() {
       <div className="w-full lg:w-1/2 mt-8 lg:mt-0 hidden lg:block">
         <pre className="rounded-lg bg-gray-900 p-4 overflow-x-auto">
           <code className="language-javascript">
-            {`const { GiftManager, TimeFormat } = require('atosjs');
+            {`// Configuração do arquivo: atos.config.js
+const { GiftManager, TimeFormat } = require('atosjs');
 
 module.exports = { 
   // Instância do GiftManager:

@@ -7,6 +7,8 @@ import { addBasePath } from 'next/dist/client/add-base-path'
 import { usePathname, useRouter } from 'next/navigation'
 import { useCallback, useEffect } from 'react'
 
+import { IoLanguage } from "react-icons/io5";
+
 const ONE_YEAR = 365 * 24 * 60 * 60 * 1000
 
 export default function LocaleToggle({
@@ -84,11 +86,12 @@ export default function LocaleToggle({
       ])}
       onClick={changeLocale}
     >
-      {
+      < IoLanguage />
+      {/* {
         currentLocale === 'en'
-          ? <span className="text-sm">Pt</span>
-          : <span className="text-sm">En</span>
-      }
+          ? < IoLanguage /> // portugues icon
+          : < IoLanguage /> // english icon
+      } */}
     </Toggle>
   )
 }

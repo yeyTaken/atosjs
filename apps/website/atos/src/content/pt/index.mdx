@@ -2,6 +2,52 @@
 title: "AtosJS - Inicio"
 ---
 
+import { Callout, Steps, Tabs } from 'nextra/components';
+import { FaFeatherAlt, FaCogs  } from 'react-icons/fa'
+
 import Home from '@/components/pt/Home';
 
 <Home />
+
+---
+
+# <FaCogs /> Configuração rápida.
+
+<Steps>
+### Arquivo de configuração (`atos.config.js`):
+
+```js filename="atos.config.js" ShowLineNumbers copy
+const { GiftManager, TimeFormat } = require('atosjs');
+
+module.exports = { 
+  gift: new GiftManager({
+    logging: false, // Desativa os logs
+    atosdb: { filePath: 'gifts.sqlite' }, // filePath padrão: "json.sqlite"
+  }),
+
+  t: new TimeFormat(),
+};
+```
+
+### Arquivo Principal (`index.js`):
+
+```js filename="index.js" ShowLineNumbers copy
+const { gift } = require("./atos.config");
+
+(async () => {
+
+  const giftCoin = await gift.generate({
+    type: "coin",
+    value: 100
+  });
+
+  console.log({
+    GiftId: giftCoin,
+    log: await gift.view(giftCoin)
+  });
+
+})();
+
+```
+
+</Steps>

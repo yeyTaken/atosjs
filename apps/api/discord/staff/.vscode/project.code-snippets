@@ -1,0 +1,218 @@
+{
+	"Slash Command": {
+		"prefix": ["new.command", "create.command"],
+		"scope":"typescript",
+		"body": [
+			"createCommand({",
+			"    name: \"$1\",",
+			"    description: \"app command\",",
+			"    type: ApplicationCommandType.ChatInput,",
+			"    async run(interaction){",
+			"        $3",
+			"    }",
+			"});"
+		],
+		"description": "Create a new Slash Command"
+	},
+	"Slash Command with options": {
+		"prefix": ["new.command.options", "create.command.options"],
+		"scope":"typescript",
+		"body": [
+			"createCommand({",
+			"    name: \"$1\",",
+			"    description: \"app command\",",
+			"    type: ApplicationCommandType.ChatInput,",
+			"    options: [",
+			"        {",
+			"            name: \"$3\",",
+			"            description: \"$4\",",
+			"            type: ApplicationCommandOptionType.$5",
+			"        }",
+			"    ],",
+			"    async run(interaction){",
+			"        const { options } = interaction;",
+			"        ",
+			"    }",
+			"});"
+		],
+		"description": "Create a new Slash Command with options"
+	},
+	"Slash Command option": {
+		"prefix": ["new.option"],
+		"scope":"typescript",
+		"body": [
+			"{",
+			"    name: \"$1\",",
+			"    description: \"command option\",",
+			"    type: ApplicationCommandOptionType.$3,",
+			"}",
+		],
+		"description": "Create a new Slash Command with options"
+	},
+	"User Context Command": {
+		"prefix": ["new.command.user", "create.command.user"],
+		"scope":"typescript",
+		"body": [
+			"createCommand({",
+			"    name: \"$1\",",
+			"    type: ApplicationCommandType.User,",
+			"    async run(interaction){",
+			"        ",
+			"    }",
+			"});"
+		],
+		"description": "Create a new User Context Command"
+	},
+	"Message Context Command": {
+		"prefix": ["new.command.message", "create.command.message"],
+		"scope":"typescript",
+		"body": [
+			"createCommand({",
+			"    name: \"$1\",",
+			"    type: ApplicationCommandType.Message,",
+			"    async run(interaction){",
+			"        ",
+			"    }",
+			"});"
+		],
+		"description": "Create a new Message Context Command"
+	},
+	"Responder": {
+		"prefix": ["new.responder", "create.responder"],
+		"scope":"typescript",
+		"body": [
+			"createResponder({",
+			"    customId: \"context/action\",",
+			"    types: [ResponderType.Button], cache: \"cached\",",
+			"    async run(interaction) {",
+			"        ",
+			"    },",
+			"});"
+		],
+		"description": "Create a new responder"
+	},
+	"Responder Params": {
+		"prefix": ["new.responder.params", "create.responder.params"],
+		"scope":"typescript",
+		"body": [
+			"createResponder({",
+			"    customId: \"users/:userId/:action\",",
+			"    types: [ResponderType.Button], cache: \"cached\",",
+			"    async run(interaction, { userId, action }) {",
+			"        ",
+			"    },",
+			"});"
+		],
+		"description": "Create a new responder with params"
+	},
+	"Event": {
+		"prefix": ["new.event", "create.event"],
+		"scope":"typescript",
+		"body": [
+			"import { createEvent } from \"#base\";",
+			"",
+			"createEvent({",
+			"    name: \"$1\",",
+			"    event: \"$2\",",
+			"    $3",
+			"});"
+		],
+		"description": "Create a new event"
+	},
+	"Create Row With Buttons": {
+		"prefix": "create.row.buttons",
+		"scope":"typescript",
+		"body": [
+			"createRow(",
+			"    new ButtonBuilder({",
+			"        customId: \"$1\"," ,
+			"        label: \"$2\", ",
+			"        style: ButtonStyle.Success",
+			"    })",
+			");"
+		],
+		"description": "Create a new row with buttons"
+	},
+	"Create Row With String Select": {
+		"prefix": "createrow.stringselect",
+		"scope":"typescript",
+		"body": [
+			"createRow(",
+			"    new StringSelectMenuBuilder({",
+			"        customId: \"$1\",",
+			"        placeholder: \"$2\",",
+			"        options: [",
+			"            { label: \"\", value: \"\", description: \"\" },",
+			"            { label: \"\", value: \"\", description: \"\" },",
+			"            { label: \"\", value: \"\", description: \"\" }",
+			"        ]",
+			"    })",
+			");"
+		],
+		"description": "Create a new row with string select"
+	},
+	"Extract slash interaction props": {
+		"prefix": "const.interaction.slash",
+		"scope":"typescript",
+		"body": [
+			"const { options, member, guild } = interaction;"
+		],
+		"description": "Extract slash interaction properties"
+	},
+	"Extract modal interaction props": {
+		"prefix": "const.interaction.modal",
+		"scope":"typescript",
+		"body": [
+			"const { fields, member, guild } = interaction;"
+		],
+		"description": "Extract modal interaction properties"
+	},
+	"Extract button interaction props": {
+		"prefix": "const.interaction.button",
+		"scope":"typescript",
+		"body": [
+			"const { member, guild } = interaction;"
+		],
+		"description": "Extract button interaction properties"
+	},
+	"Extract select interaction props": {
+		"prefix": "const.interaction.select",
+		"scope":"typescript",
+		"body": [
+			"const { values, member, guild } = interaction;"
+		],
+		"description": "Extract select interaction properties"
+	},
+	"Create a interactive menu function": {
+		"prefix": ["new.menu", "create.menu"],
+		"scope":"typescript",
+		"body": [
+			"import { ButtonBuilder, ButtonStyle, type InteractionReplyOptions } from \"discord.js\";",
+			"import { createEmbed, createRow, brBuilder } from \"@magicyan/discord\";",
+			"",
+			"export function ${TM_FILENAME_BASE}Menu<R>(): R {",
+			"    const embed = createEmbed({",
+			"        color: \"Random\",",
+			"        description: brBuilder(",
+			"            \"${TM_FILENAME_BASE} menu\"",
+			"        )",
+			"    });",
+			"",
+			"    const components = [",
+			"        createRow(",
+			"            new ButtonBuilder({",
+			"                customId: \"menu/action\",",
+			"                label: \">\", ",
+			"                style: ButtonStyle.Success",
+			"            })",
+			"        )",
+			"    ];",
+			"",
+			"    return ({",
+			"        flags, embeds: [embed], components",
+			"    } satisfies InteractionReplyOptions) as R;",
+			"}"
+		],
+		"description": "Extract select interaction properties"
+	},
+}

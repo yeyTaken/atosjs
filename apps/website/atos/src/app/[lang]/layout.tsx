@@ -2,11 +2,11 @@ import type { I18nLangAsyncProps, I18nLangKeys } from '@/i18n'
 
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { CustomFooter } from '@/components/CustomFooter'
 import { useServerLocale } from '@/hooks'
 import LocaleToggle from '@/widgets/locale-toggle'
-import ThemeToggle from '@/widgets/theme-toggle'
+// import ThemeToggle from '@/widgets/theme-toggle'
 import { Footer, LastUpdated, Layout, Navbar } from 'nextra-theme-docs'
 import { Banner, Head, Search } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
@@ -30,26 +30,26 @@ export const metadata = {
 
 const repo = 'https://github.com/yeyTaken/atosjs'
 
-const CustomBanner = async ({ lang }: I18nLangAsyncProps) => {
-  const { t } = await useServerLocale(lang)
-  return (
-    <Banner
-      storageKey="starter-banner"
-    >
-      <div className="flex justify-center items-center gap-1">
-        { t('banner.title') }
-        {' '}
-        <a
-          className="max-sm:hidden text-blue-800 underline"
-          target="_blank"
-          href={repo}
-        >
-          {t('banner.more')}
-        </a>
-      </div>
-    </Banner>
-  )
-}
+// const CustomBanner = async ({ lang }: I18nLangAsyncProps) => {
+//   const { t } = await useServerLocale(lang)
+//   return (
+//     <Banner
+//       storageKey="starter-banner"
+//     >
+//       <div className="flex justify-center items-center gap-1">
+//         { t('banner.title') }
+//         {' '}
+//         <a
+//           className="max-sm:hidden text-blue-800 underline"
+//           target="_blank"
+//           href={repo}
+//         >
+//           {t('banner.more')}
+//         </a>
+//       </div>
+//     </Banner>
+//   )
+// }
 
 
 const CustomNavbar = async ({ lang }: I18nLangAsyncProps) => {
@@ -154,6 +154,7 @@ export default async function RootLayout({ children, params }: Props) {
           // ... Your additional layout options
           >
             {children}
+            <SpeedInsights/>
           </Layout>
         </ThemeProvider>
       </body>

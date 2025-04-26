@@ -65,8 +65,7 @@ export default function Home() {
       <div className="w-full lg:w-1/2 mt-8 lg:mt-0 hidden lg:block">
         <pre className="rounded-lg bg-gray-900 p-4 overflow-x-auto">
           <code className="language-javascript">
-            {`// Configuração do arquivo: atos.config.js
-const { GiftManager, TimeFormat } = require('atosjs');
+            {`const { GiftManager, TimeFormat } = require('atosjs');
 
 module.exports = { 
   // Instância do GiftManager:
@@ -74,8 +73,9 @@ module.exports = {
   // Para desativar os logs (padrão: true), descomente 'logging: false'.
   gift: new GiftManager({
     // logging: false, // Desativa os logs
-    // quickdb: { filePath: 'data.db' }, // Usa o QuickDB com o arquivo 'data.db' padrão é "json.sqlite"
-    // atosdb: { filePath: 'atos.db' }, // Usa o AtosDB com o arquivo 'atos.db' padrão é "json.sqlite"
+    // Se você quiser especificar um caminho, poderá fazê-lo assim
+    // quickdb: { filePath: 'source/to/path/test.sqlite' },
+    // atosdb: { filePath: 'source/to/path/test.sqlite' },
     // mongodb: { connect: 'MONGO_URI', dbName: 'nome-do-seu-banco' }, // Usa o MongoDB
   }),
 

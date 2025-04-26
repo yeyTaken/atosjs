@@ -2,52 +2,191 @@
 title: "AtosJS - Inicio"
 ---
 
-import { Callout, Steps, Tabs } from 'nextra/components';
-import { FaFeatherAlt, FaCogs  } from 'react-icons/fa'
+import { Callout, Steps, Tabs, FileTree  } from "nextra/components";
+import { FaFeatherAlt, FaCogs } from "react-icons/fa";
 
-import Home from '@/components/pt/Home';
+import Home from "@/components/pt/Home";
 
 <Home />
 
----
+<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '2rem', fontWeight: 'bold' }}>
+  <FaCogs size="3rem" />
+  <span>Configuração rápida.</span>
+</div>
 
-# <FaCogs /> Configuração rápida.
+<Tabs items={['JavaScript', 'TypeScript', 'toolkit']}>
+  <Tabs.Tab>
+  <Steps>
+    <Callout type="info">
+      Instalação da AtosJS
+      <Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+        <Tabs.Tab>
+          ```bash filename="Terminal" copy
+          npm install atosjs@latest
+          ```
+        </Tabs.Tab>
 
-<Steps>
-### Arquivo de configuração (`atos.config.js`):
+        <Tabs.Tab>
+          ```bash filename="Terminal" copy
+          pnpm add atosjs@latest
+          ```
+        </Tabs.Tab>
 
-```js filename="atos.config.js" ShowLineNumbers copy
-const { GiftManager, TimeFormat } = require('atosjs');
+        <Tabs.Tab>
+          ```bash filename="Terminal" copy
+          yarn add atosjs@latest
+          ```
+        </Tabs.Tab>
 
-module.exports = { 
-  gift: new GiftManager({
-    logging: false, // Desativa os logs
-    atosdb: { filePath: 'gifts.sqlite' }, // filePath padrão: "json.sqlite"
-  }),
+        <Tabs.Tab>
+          ```bash filename="Terminal" copy
+          bun add atosjs@latest
+          ```
+        </Tabs.Tab>
+      </Tabs>
+    </Callout>
 
-  t: new TimeFormat(),
-};
-```
+    ### Arquivo de configuração (`atos.config.js`):
 
-### Arquivo Principal (`index.js`):
+    ```javascript filename="atos.config.js" showLineNumbers copy
+    const { GiftManager, TimeFormat } = require("atosjs");
 
-```js filename="index.js" ShowLineNumbers copy
-const { gift } = require("./atos.config");
+    module.exports = {
+      gift: new GiftManager({
+        logging: false, // Desativa os logs
+        atosdb: { filePath: "gifts.sqlite" }, // filePath padrão: "json.sqlite"
+      }),
 
-(async () => {
+      t: new TimeFormat(),
+    };
+    ```
 
-  const giftCoin = await gift.generate({
-    type: "coin",
-    value: 100
-  });
+    ### Arquivo Principal (`index.js`):
 
-  console.log({
-    GiftId: giftCoin,
-    log: await gift.view(giftCoin)
-  });
+    ```javascript filename="index.js" showLineNumbers copy
+    const { gift } = require("./atos.config");
 
-})();
+    (async () => {
+      const giftCoin = await gift.generate({
+        type: "coin",
+        value: 100,
+      });
 
-```
+      console.log({
+        GiftId: giftCoin,
+        log: await gift.view(giftCoin),
+      });
+    })();
+    ```
+    ### Formato do Arquivo:
+    <FileTree>
+      <FileTree.Folder name="configuracao-rapida" defaultOpen>
+        <FileTree.File name="atos.config.js" />
+        <FileTree.File name="index.js" />
+        <FileTree.File name="gifts.sqlite" />
+        <FileTree.File name="package.json" />
+      </FileTree.Folder>
+    </FileTree>
 
-</Steps>
+    </Steps>
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    <Steps>
+      <Callout type="info">
+        Instalação da AtosJS
+        <Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+          <Tabs.Tab>
+            ```bash filename="Terminal" copy
+            npm install atosjs@latest
+            ```
+          </Tabs.Tab>
+
+          <Tabs.Tab>
+            ```bash filename="Terminal" copy
+            pnpm add atosjs@latest
+            ```
+          </Tabs.Tab>
+
+          <Tabs.Tab>
+            ```bash filename="Terminal" copy
+            yarn add atosjs@latest
+            ```
+          </Tabs.Tab>
+
+          <Tabs.Tab>
+            ```bash filename="Terminal" copy
+            bun add atosjs@latest
+            ```
+          </Tabs.Tab>
+        </Tabs>
+      </Callout>
+
+      ### Arquivo de configuração (`atos.config.ts`):
+
+      ```ts filename="atos.config.ts" showLineNumbers copy
+      import { GiftManager, TimeFormat } from 'atosjs';
+
+      export const gift = new GiftManager({
+        logging: false, // Disable logs
+        atosdb: { filePath: "gifts.sqlite" }, // Default filePath: "json.sqlite"
+      });
+
+      export const t = new TimeFormat();
+      ```
+
+      ### Arquivo Principal (`index.ts`):
+
+      ```ts /@atosjs/ filename="atos.config.ts" showLineNumbers copy
+      import { gift } from '@atosjs';
+
+      (async () => {
+        const giftCoin = await gift.generate({
+          type: "coin",
+          value: 100,
+        });
+
+        console.log({
+          GiftId: giftCoin,
+          log: await gift.view(giftCoin),
+        });
+      })();
+      ```
+
+      ### tsconfig:
+      ```json {6} filename="tsconfig.json" showLineNumbers copy
+      {
+        "compilerOptions": {
+          "baseUrl": "./",
+          "paths": {
+            "@/*": ["src/*"],
+            "@atosjs": ["./atos.config.ts"]
+          },
+          "outDir": "./dist",
+          "rootDir": "./src",
+          "strict": true,
+          "module": "commonjs",
+          "target": "es6",
+          "esModuleInterop": true
+        }
+      }
+      ```
+
+      ### Formato do Arquivo:
+      <FileTree>
+        <FileTree.Folder name="configuracao-rapida" defaultOpen>
+          <FileTree.Folder name="src" defaultOpen>
+            <FileTree.File name="index.ts" />
+          </FileTree.Folder>
+          <FileTree.File name="atos.config.ts" />
+          <FileTree.File name="gifts.sqlite" />
+          <FileTree.File name="package.json" />
+          <FileTree.File name="tsconfig.json" />
+        </FileTree.Folder>
+      </FileTree>
+
+      </Steps>
+    </Tabs.Tab>
+
+  <Tabs.Tab>Em desenvolvimento...</Tabs.Tab>
+</Tabs>

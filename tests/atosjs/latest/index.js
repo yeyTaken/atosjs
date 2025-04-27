@@ -69,21 +69,17 @@
 
 
 const { GiftManager } = require("atosjs");
+const gift = new GiftManager();
 
 (async () => {
-  const gift = new GiftManager({
-    logging: true, // padrão é 'true'
-    atosdb: { filePath: "gifts.sqlite" },
+  const coin = await gift.generate({
+    type: "coin", // tipo do presente, no caso, moeda.
+    value: 30000, // valor do presente, no caso, 100 moedas.
+    expiration: '7d' // duração de 7 dias.
   });
 
-  const giftCoin = await gift.generate({
-    type: "coin",
-    value: 100,
-  });
-  
   console.log({
-    GiftId: giftCoin,
-    log: await gift.view(giftCoin),
+    code: coin, // código do presente gerado.
+    log: await gift.view(coin) // visualização do presente gerado.
   });
-  
 })();

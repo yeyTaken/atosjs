@@ -44,11 +44,9 @@ A opção `logging` controla a exibição das mensagens de log pré-definidas pe
 ```javascript filename="index.js" showLineNumbers copy 
 const { GiftManager } = require("atosjs");
 
-(async () => {
-  const gift = new GiftManager({
-    logging: false, // desativa os logs (padrão é true)
-  });
-})();
+const gift = new GiftManager({
+  logging: false, // desativa os logs (padrão é true)
+});
 ```
 
 ---
@@ -64,14 +62,12 @@ Se nenhuma opção de banco de dados for configurada, o `GiftManager` utilizará
     ```javascript filename="index.js" showLineNumbers copy 
 const { GiftManager } = require("atosjs");
 
-(async () => {
-  const gift = new GiftManager({
+const gift = new GiftManager({
       mongodb: {
         connect: "mongodb://localhost:27017", // URL de conexão
         dbName: "gifts", // Nome do banco
       }
-  });
-})();
+});
     ```
   </Tabs.Tab>
 
@@ -79,11 +75,9 @@ const { GiftManager } = require("atosjs");
     ```javascript filename="index.js" showLineNumbers copy 
 const { GiftManager } = require("atosjs");
 
-(async () => {
-  const gift = new GiftManager({
+const gift = new GiftManager({
       quickdb: { filePath: "source/to/path/test.sqlite" }, // caminho do arquivo SQLite
-  });
-})();
+});
     ```
   </Tabs.Tab>
 
@@ -91,11 +85,9 @@ const { GiftManager } = require("atosjs");
     ```javascript filename="index.js" showLineNumbers copy 
 const { GiftManager } = require("atosjs");
 
-(async () => {
-  const gift = new GiftManager({
+const gift = new GiftManager({
       atosdb: { filePath: "source/to/path/test.sqlite" }, // caminho do arquivo SQLite
-  });
-})();
+});
     ```
   </Tabs.Tab>
 </Tabs>

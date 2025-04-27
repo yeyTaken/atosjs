@@ -1,5 +1,13 @@
 import type { MetaRecord } from 'nextra'
-import { FaEye, FaGift, FaMagic, FaProjectDiagram } from 'react-icons/fa'
+import { FaEye, FaGift, FaMagic, FaProjectDiagram, FaCalendarCheck  } from 'react-icons/fa'
+
+
+const index = (
+  <span style={{ display: 'flex', alignItems: 'center' }}>
+    <FaCalendarCheck style={{ marginRight: '0.5em' }} />
+    Começar
+  </span>
+)
 
 const generate = (
   <span style={{ display: 'flex', alignItems: 'center' }}>
@@ -30,8 +38,12 @@ const exampleProject = (
 )
 
 export default {
-  index: generate,
+  index: index,
+  'example-project': exampleProject,
+  _: {
+    type: 'separator',
+  },
+  generate: generate,
   view: view,
   redeem: redeem,
-  'example-project': exampleProject
 } satisfies MetaRecord

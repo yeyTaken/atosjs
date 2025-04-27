@@ -1,1 +1,88 @@
-# Exemplo
+---
+title: "AtosJS - GiftManager"
+---
+
+import { Callout, Tabs, Steps, FileTree } from "nextra/components";
+
+<Steps>
+
+## 1. Instalação da AtosJS
+
+<Callout type="info">
+Para instalar a AtosJS, escolha o gerenciador de pacotes de sua preferência:
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    npm install atosjs@latest
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    pnpm add atosjs@latest
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    yarn add atosjs@latest
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    bun add atosjs@latest
+    ```
+  </Tabs.Tab>
+</Tabs>
+</Callout>
+
+---
+
+## 2. Arquivo Principal (`index.js`)
+
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager } = require("atosjs");
+
+(async () => {
+  const gift = new GiftManager({
+    logging: true, // ativa as mensagens de log (padrão é 'true')
+    atosdb: { filePath: "gifts.sqlite" }, // usando AtosDB com arquivo personalizado
+  });
+
+  const coin = await gift.generate({
+    type: "coin",
+    value: 100,
+  });
+  
+  console.log({
+    GiftId: coin,
+    log: await gift.view(coin),
+  });
+})();
+```
+
+---
+
+## 3. Resultado esperado
+
+Após a execução do arquivo:
+
+```bash filename="Terminal"
+✔ Connected to 🚀 AtosDB (gifts.sqlite)                                                                       01:24:29
+{
+  GiftId: 'AWYVZY7MYOKAP',
+  log: { valid: true, type: 'coin', value: 100 }
+}
+```
+
+---
+
+## 4. Estrutura do Projeto
+
+<FileTree>
+  <FileTree.Folder name="example-project" defaultOpen>
+    <FileTree.File name="index.js" />
+    <FileTree.File name="gifts.sqlite" />
+    <FileTree.File name="package.json" />
+  </FileTree.Folder>
+</FileTree>
+
+</Steps>

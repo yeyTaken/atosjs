@@ -5,14 +5,14 @@ import { FaNewspaper } from "react-icons/fa6";
 const docs = (
   <span style={{ display: 'flex', alignItems: 'center' }}>
     <FaBook style={{ marginRight: '0.5em' }} />
-    Docs
+    Documentação
   </span>
 )
 
 const updates = (
   <span style={{ display: 'flex', alignItems: 'center' }}>
     <FaNewspaper style={{ marginRight: '0.5em' }} />
-    Updates
+    Atualizações
   </span>
 )
 

@@ -68,18 +68,30 @@ const { t, gift } = require("./atos.config");
 
 
 
-// const { GiftManager, codeId } = require("atosjs");
+// const { GiftManager } = require("atosjs");
 // const gift = new GiftManager();
- 
+
 // (async () => {
-//     const editedCode = await gift.generate({
-//         edit: {
-//             code: "test-" + codeId()
-//         },
-//     });
- 
-//     console.log({
-//         giftId: editedCode,
-//     });
- 
+// const invalidCode = 'UYFSGDYUTFGU';
+// const coin = await gift.generate({
+//     type: "coin",
+//     value: 30000,
+//     edit: { expiration: '7d' }
+// });
+
+// const viewGift = await gift.view(coin);
+// const invalidGift = await gift.view(invalidCode);
+
+// if (viewGift.valid) {
+//     console.log(`O gift ${coin} é um código válido.`)
+// } else {
+//     console.log(`O gift ${coin} é um código inválido.`)
+// }
+
+// if (invalidGift.valid) {
+//     console.log(`O gift ${invalidCode} é um código válido.`)
+// } else {
+//     console.log(`O gift ${invalidCode} é um código inválido.`)
+// }
+
 // })();

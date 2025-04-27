@@ -1,1 +1,131 @@
-# ver
+---
+title: "AtosJS - view"
+---
+
+import { Callout, Tabs, Steps, FileTree } from "nextra/components";
+import { FaPlugCircleCheck, FaGifts, FaFileCircleCheck } from "react-icons/fa6";
+
+
+<Callout type=".">
+<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 'bold' }}>
+  <FaGifts size="1rem" />
+  <span>Visualização dos presentes:</span>
+</div>
+
+  geralemnte o `view();{:js}` é usado para fazer verificações como por exemplo:
+  
+  ```javascript filename="index.js" showLineNumbers copy
+    const { GiftManager } = require("atosjs");
+    const gift = new GiftManager();
+    
+    (async () => {
+    const invalidCode = 'UYFSGDYUTFGU';
+    const coin = await gift.generate({
+        type: "coin",
+        value: 30000,
+        edit: { expiration: '7d' }
+    });
+
+    const viewGift = await gift.view(coin);
+    const invalidGift = await gift.view(invalidCode);
+
+    if (viewGift.valid) {
+        console.log(`O gift ${coin} é um código válido.`)
+    } else {
+        console.log(`O gift ${coin} é um código inválido.`)
+    }
+
+    if (invalidGift.valid) {
+        console.log(`O gift ${invalidCode} é um código válido.`)
+    } else {
+        console.log(`O gift ${invalidCode} é um código inválido.`)
+    }
+
+    })();
+  ```
+  ---
+
+<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 'bold' }}>
+  <FaFileCircleCheck  size="1rem" />
+  <span>Resultado esperado:</span>
+</div>
+
+```bash filename="Terminal"
+✔ Connected to 🚀 AtosDB (json.sqlite)                                                                                                             3:20:09 PM
+O gift IYZTPY3BJSD89 é um código válido.
+O gift UYFSGDYUTFGU é um código inválido.
+```
+
+
+</Callout>
+
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager } = require("atosjs");
+const gift = new GiftManager();
+ 
+(async () => {
+  const coin = await gift.generate({
+    type: "coin",
+    value: 30000,
+    edit: { expiration: '7d' }
+  });
+ 
+  console.log({
+    geral: await gift.view(coin), // visualização geral do presente gerado.
+    valid: (await gift.view(coin)).valid, // veja se o presente é válido.
+    type: (await gift.view(coin)).type, // veja o tipo de presente.
+    value: (await gift.view(coin)).value, // veja o valor do presente.
+    redeemedCount: (await gift.view(coin)).edited.redeemedCount, // veja a quantidade de vezes que o presente foi resgatado.
+    edited: (await gift.view(coin)).edited, // veja os dados editados do presente.
+
+  });
+})();
+```
+
+<Callout type=".">
+<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 'bold' }}>
+  <FaPlugCircleCheck size="1rem" />
+  <span>Resultado esperado:</span>
+</div>
+
+```bash filename="Terminal"
+✔ Connected to 🚀 AtosDB (json.sqlite)                                                                                                             2:44:18 AM
+{
+  geral: {
+    valid: true,
+    type: 'coin',
+    value: 30000,
+    edited: {
+      maxRedeem: 1,
+      redeemedCount: 0,
+      expiresAt: '2025-05-04T14:44:18.318Z'
+    }
+  },
+  valid: true,
+  type: 'coin',
+  value: 30000,
+  redeemedCount: 0,
+  edited: {
+    maxRedeem: 1,
+    redeemedCount: 0,
+    expiresAt: '2025-05-04T14:44:18.318Z'
+  }
+}
+```
+</Callout>
+
+
+<Callout type=".">
+> Resumo geral do `await gift.view();{:js}`
+</Callout>
+
+
+| Opção            | Tipo        | Padrão       | Descrição                                                                 |
+| ---------------- | ----------- | ------------ | ------------------------------------------------------------------------- |
+| `valid`          | `boolean`   | `undefined`  | Indica se o presente ainda é válido para resgate. **Exemplo**: `true`.     |
+| `type`           | `string`    | `undefined`  | Tipo do presente. **Exemplo**: `'coin'`, `'premium'`.                      |
+| `value`          | `unknown`   | `undefined`  | Valor do presente. **Exemplo**: `30000`, `'VIP Access'`.                   |
+| `edited`         | `object`    | `undefined`  | Informações editáveis do presente.                                         |
+| `edited.maxRedeem` | `number`   | `1`          | Número máximo de resgates permitidos. **Exemplo**: `10`.                    |
+| `edited.redeemedCount` | `number` | `0`         | Quantidade de vezes que o presente já foi resgatado. **Exemplo**: `0`.     |
+| `edited.expiresAt` | `string`   | `'lifetime'` | Data de expiração do presente ou `'lifetime'` se não expirar. **Exemplo**: `'2025-05-04T14:44:18.318Z'`. |

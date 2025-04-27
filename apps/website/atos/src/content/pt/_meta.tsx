@@ -30,10 +30,12 @@ export default {
     type: 'page',
     display: 'hidden',
     theme: {
-      timestamp: false,
-      layout: 'full',
+      layout: "full",
+      breadcrumb: false, // trilha de navegação: home > docs > updates
+      sidebar: false,
+      pagination: false,
       toc: false,
-    },
+    }
   },
   docs: {
     type: 'page',
@@ -43,9 +45,11 @@ export default {
     type: 'page',
     title: updates,
     theme: {
-      timestamp: false,
-      layout: 'full',
+      layout: "full",
+      breadcrumb: false, // trilha de navegação: home > docs > updates
+      sidebar: false,
+      pagination: false,
       toc: false,
-    },
+    }
   },
 } satisfies MetaRecord

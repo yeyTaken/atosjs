@@ -13,9 +13,11 @@ export type Gift = {
 export type GenerateOptions = {
     type?: string;
     value?: GiftValue;
-    expiration?: string;
-    maxRedeem?: number;
-    edit?: { code: string };
+    edit?: {
+        code: string
+        maxRedeem?: number;
+        expiration?: string;
+    };
 };
 
 export type GiftManagerOptions = {

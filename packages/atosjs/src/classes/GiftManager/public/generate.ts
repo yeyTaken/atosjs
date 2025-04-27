@@ -6,10 +6,11 @@ export async function generateGift(
     db: dbHandler,
     options?: GenerateOptions
 ): Promise<string> {
-    const { type, value, expiration, maxRedeem = 1 } = options || {};
+    const { type, value } = options || {};
+    const { maxRedeem = 1, expiration } = options?.edit || {};
     const expiresAt = expiration ? calculateExpirationDate(expiration) : undefined;
 
-    const giftId = options?.edit?.code || generateUniqueId();
+    const giftId = options?.edit?.code || codeId();
 
     const newGift: Gift = {
         id: giftId,
@@ -68,7 +69,7 @@ function calculateExpirationDate(expiration: string): string {
 }
 
 
-export function generateUniqueId(): string {
+export function codeId(): string {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let uniqueId = '';
 

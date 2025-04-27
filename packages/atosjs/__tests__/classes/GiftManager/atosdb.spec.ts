@@ -36,7 +36,9 @@ describe('GiftManager', () => {
         const giftId = await gm.generate({
             type: 'test',
             value: { id: 1, wallet: { coins: 100, bank: true } },
-            expiration: '7d',
+            edit: {
+                expiration: '7d',
+            },
         });
 
         expect(giftId).toBeDefined();
@@ -60,7 +62,7 @@ describe('GiftManager', () => {
     });
 
     test('Deve respeitar o limite de resgates', async () => {
-        const giftId = await gm.generate({ type: 'coins', value: 500, maxRedeem: 2 });
+        const giftId = await gm.generate({ type: 'coins', value: 500, edit: { maxRedeem: 2 } });
 
         expect(await gm.redeem(giftId)).toEqual({ success: true });
         expect(await gm.redeem(giftId)).toEqual({ success: true });
@@ -74,7 +76,9 @@ describe('GiftManager', () => {
         const giftId = await gm.generate({
             type: 'coins',
             value: 500,
-            maxRedeem: 1, // Limite de 1 resgate
+            edit: {
+                maxRedeem: 1, // Limite de 1 resgate
+            },
         });
 
         const redeemResult1 = await gm.redeem(giftId);
@@ -88,7 +92,9 @@ describe('GiftManager', () => {
         const giftId = await gm.generate({
             type: 'test',
             value: { id: 1, wallet: { coins: 100, bank: true } },
-            expiration: '1s',
+            edit: {
+                expiration: '1s',
+            },
         });
 
         // Aguarda 2 segundos para que o código expire
@@ -115,7 +121,9 @@ describe('GiftManager', () => {
         const giftId = await gm.generate({
             type: 'coins',
             value: 100,
-            expiration: '1s',
+            edit: {
+                expiration: '1s',
+            },
         });
 
         // Aguarda 2 segundos para que o código expire

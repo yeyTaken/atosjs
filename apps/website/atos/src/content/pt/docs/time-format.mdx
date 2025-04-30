@@ -1,1 +1,198 @@
-# TimeFormat
+---
+title: "AtosJS - TimeFormat"
+---
+
+import { Callout } from "nextra/components";
+import {
+  FaClock,
+  FaPlayCircle,
+  FaListUl,
+  FaFileCircleCheck,
+} from "react-icons/fa6";
+
+<Callout type=".">
+  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 'bold' }}>
+    <FaClock size="1rem" />
+    <span>Utilitário de formatação e controle de tempo:</span>
+  </div>
+
+O `TimeFormat` permite lidar com conversão de tempo, delays, loops e filas de tarefas assíncronas.
+
+```js filename="index.js" showLineNumbers copy
+const { TimeFormat } = require("atosjs");
+const t = new TimeFormat();
+
+(async () => {
+  console.log(t.ms("1s")); // 1000
+  console.log(t.ms(1000)); // "1s"
+
+  t.time(1000, 3, (count) => {
+    console.log(`repeat ${count}.`);
+  });
+
+  t.time(t.ms("3.5s"), () => console.log("timeout."));
+
+  await t.sleep(t.ms("10s"));
+  console.log("10 seconds passed.");
+
+  const task1 = async () => {
+    console.log("Task 1 started");
+    await t.sleep(t.ms("1m"));
+    console.log("Task 1 finished");
+  };
+
+  const task2 = async () => {
+    console.log("Task 2 started");
+    await t.sleep(t.ms("5s"));
+    console.log("Task 2 finished");
+  };
+
+  t.queue([task1, task2])
+    .then(() => console.log("All tasks completed."))
+    .catch((error) => console.error("Error in tasks:", error));
+})();
+```
+
+---
+
+<div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
+    fontSize: "1rem",
+    fontWeight: "bold",
+  }}
+>
+  <FaFileCircleCheck size="1rem" />
+  <span>Resultado esperado:</span>
+</div>
+
+```bash filename="Terminal"
+1000
+1s
+repeat 1.
+repeat 2.
+repeat 3.
+timeout.
+10 seconds passed.
+Task 1 started
+Task 1 finished
+Task 2 started
+Task 2 finished
+All tasks completed.
+```
+
+</Callout>
+
+## `ms()`
+
+```js filename="ms-example.js" showLineNumbers copy
+const t = new TimeFormat();
+
+console.log(t.ms("1s")); // 1000
+console.log(t.ms(1000)); // "1s"
+```
+
+<Callout type=".">
+`ms()` converte valores de tempo entre **string** (`"1s"`, `"2.5m"`, `"3h"`, etc.) e **milissegundos**.
+
+- `t.ms("2.5s") → 2500`
+- `t.ms(60000) → "1m"`
+</Callout>
+
+---
+
+## `sleep()`
+
+```js filename="sleep-example.js" showLineNumbers copy
+const t = new TimeFormat();
+
+(async () => {
+  console.log("Esperando...");
+  await t.sleep(t.ms("3s"));
+  console.log("3 segundos se passaram.");
+})();
+```
+
+<Callout type=".">
+`sleep(ms)` é um **delay assíncrono**. Ideal para pausas temporizadas com `await`.
+</Callout>
+
+---
+
+## `time(ms, cb)`
+
+```js filename="timeout-example.js" showLineNumbers copy
+const t = new TimeFormat();
+
+t.time(t.ms("3.5s"), () => {
+  console.log("Executado após 3.5 segundos.");
+});
+```
+
+<Callout type=".">
+Executa uma **única vez** após o tempo definido (timeout).
+</Callout>
+
+---
+
+## `time(ms, times, cb)`
+
+```js filename="loop-time-example.js" showLineNumbers copy
+const t = new TimeFormat();
+
+t.time(1000, 3, (count) => {
+  console.log(`Repetição ${count}.`);
+});
+```
+
+<Callout type=".">
+Executa o `callback` múltiplas vezes com intervalo fixo.
+
+- Exemplo acima repete 3 vezes a cada 1 segundo.
+</Callout>
+
+---
+
+## `queue(tasks[])`
+
+```js filename="queue-example.js" showLineNumbers copy
+const t = new TimeFormat();
+
+const task1 = async () => {
+  console.log("Task 1 iniciada");
+  await t.sleep(t.ms("2s"));
+  console.log("Task 1 finalizada");
+};
+
+const task2 = async () => {
+  console.log("Task 2 iniciada");
+  await t.sleep(t.ms("1s"));
+  console.log("Task 2 finalizada");
+};
+
+t.queue([task1, task2])
+  .then(() => console.log("Todas as tarefas finalizadas"))
+  .catch(console.error);
+```
+
+<Callout type=".">
+Executa funções assíncronas **uma após a outra**, mesmo que tenham tempos diferentes.
+</Callout>
+
+---
+
+## 🧩 Tabela de métodos
+
+<Callout type=".">
+> Resumo geral do `new TimeFormat();{:js}`
+</Callout>
+
+| Método                | Tipo       | Exemplo                      | Descrição                                               |
+| --------------------- | ---------- | ---------------------------- | ------------------------------------------------------- |
+| `ms(value)`           | `function` | `t.ms("1m") → 60000`         | Converte string para milissegundos ou vice-versa.       |
+| `sleep(ms)`           | `Promise`  | `await t.sleep(1000)`        | Espera o tempo especificado em milissegundos.           |
+| `time(ms, cb)`        | `void`     | `t.time(3000, () => {})`     | Executa um callback após um tempo (timeout).            |
+| `time(ms, times, cb)` | `void`     | `t.time(1000, 3, (i) => {})` | Executa o callback em loop, `n` vezes a cada intervalo. |
+| `queue(tasks[])`      | `Promise`  | `await t.queue([...])`       | Executa funções assíncronas em ordem (em fila).         |

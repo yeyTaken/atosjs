@@ -1,4 +1,4 @@
-const { AtosDB } = require('../../../packages/database/dist/index.cjs');
+const { AtosDB } = require('@atosjs/database');
 
 (async () => {
     // Instantiate the AtosDB class to interact with the database.

@@ -9,13 +9,6 @@ const docs = (
   </span>
 )
 
-const updates = (
-  <span style={{ display: 'flex', alignItems: 'center' }}>
-    <FaNewspaper style={{ marginRight: '0.5em' }} />
-    Atualizações
-  </span>
-)
-
 export default {
   index: {
     type: 'page',
@@ -40,16 +33,5 @@ export default {
   docs: {
     type: 'page',
     title: docs,
-  },
-  updates: {
-    type: 'page',
-    title: updates,
-    theme: {
-      layout: "full",
-      breadcrumb: false, // trilha de navegação: home > docs > updates
-      sidebar: false,
-      pagination: false,
-      toc: false,
-    }
   },
 } satisfies MetaRecord

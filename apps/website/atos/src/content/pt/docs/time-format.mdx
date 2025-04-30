@@ -18,7 +18,7 @@ import {
 
 O `TimeFormat` permite lidar com conversão de tempo, delays, loops e filas de tarefas assíncronas.
 
-```js filename="index.js" showLineNumbers copy
+```javascript filename="index.js" showLineNumbers copy
 const { TimeFormat } = require("atosjs");
 const t = new TimeFormat();
 
@@ -87,7 +87,7 @@ All tasks completed.
 
 ## `ms()`
 
-```js filename="ms-example.js" showLineNumbers copy
+```javascript filename="ms-example.js" showLineNumbers copy
 const t = new TimeFormat();
 
 console.log(t.ms("1s")); // 1000
@@ -105,7 +105,7 @@ console.log(t.ms(1000)); // "1s"
 
 ## `sleep()`
 
-```js filename="sleep-example.js" showLineNumbers copy
+```javascript filename="sleep-example.js" showLineNumbers copy
 const t = new TimeFormat();
 
 (async () => {
@@ -123,7 +123,7 @@ const t = new TimeFormat();
 
 ## `time(ms, cb)`
 
-```js filename="timeout-example.js" showLineNumbers copy
+```javascript filename="timeout-example.js" showLineNumbers copy
 const t = new TimeFormat();
 
 t.time(t.ms("3.5s"), () => {
@@ -139,7 +139,7 @@ Executa uma **única vez** após o tempo definido (timeout).
 
 ## `time(ms, times, cb)`
 
-```js filename="loop-time-example.js" showLineNumbers copy
+```javascript filename="loop-time-example.js" showLineNumbers copy
 const t = new TimeFormat();
 
 t.time(1000, 3, (count) => {
@@ -157,7 +157,7 @@ Executa o `callback` múltiplas vezes com intervalo fixo.
 
 ## `queue(tasks[])`
 
-```js filename="queue-example.js" showLineNumbers copy
+```javascript filename="queue-example.js" showLineNumbers copy
 const t = new TimeFormat();
 
 const task1 = async () => {

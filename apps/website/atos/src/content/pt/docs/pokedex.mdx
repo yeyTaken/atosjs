@@ -3,7 +3,7 @@
 title: "AtosJS - PokeDex"
 ---
 
-import { Callout } from "nextra/components";
+import { Callout, Tabs } from "nextra/components";
 import {
   FaBookOpen,
   FaSearch,
@@ -11,6 +11,33 @@ import {
   FaBug,
   FaDatabase,
 } from "react-icons/fa6";
+
+
+<Callout type="info">
+Instalação da `@atosjs/pokemon{:bash}`
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    npm install @atosjs/pokemon
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    pnpm add @atosjs/pokemon
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    yarn add @atosjs/pokemon
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    bun add @atosjs/pokemon
+    ```
+  </Tabs.Tab>
+</Tabs>
+</Callout>
 
 <Callout type=".">
   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 'bold' }}>

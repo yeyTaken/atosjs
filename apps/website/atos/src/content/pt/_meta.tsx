@@ -1,6 +1,5 @@
 import type { MetaRecord } from 'nextra'
 import { FaBook } from 'react-icons/fa'
-import { FaNewspaper } from "react-icons/fa6";
 
 const docs = (
   <span style={{ display: 'flex', alignItems: 'center' }}>

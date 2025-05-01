@@ -1,1 +1,22 @@
-<h1>Olá, mundo!</h1>
+---
+title: "AtosJS - Sobre"
+---
+
+import { Callout, Steps, Tabs, FileTree } from "nextra/components";
+import { FaFeatherAlt, FaCogs, FaBookOpen } from "react-icons/fa";
+
+import About from "@/components/pt/About";
+
+<Callout type=".">
+  <div className="flex items-center gap-2">
+    <FaBookOpen size="1.5rem" />
+    <h2 className="text-2xl font-bold">Conheça nossa equipe!</h2>
+  </div>
+  <p className="text-gray-600 dark:text-gray-300">
+    A AtosJS é uma equipe de desenvolvedores apaixonados por tecnologia e
+    inovação. Nossa missão é criar soluções que façam a diferença no mundo.
+    Conheça nossa equipe e saiba mais sobre nossos projetos!
+  </p>
+</Callout>
+
+<About />

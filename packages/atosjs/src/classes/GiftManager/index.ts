@@ -81,21 +81,25 @@ export class GiftManager {
    *
    * @example
    * // Generate a new gift
-   * const code = await generate({
+   * const code = await gift.generate({
    *   type: 'discount',
    *   value: '10%',
-   *   expiration: '7d', // Expires in 7 days
-   *   maxRedeem: 5, // Can be redeemed up to 5 times
+   *   edit: {
+   *     maxRedeem: 5, // Optional: Can be redeemed up to 5 times
+   *     expiration: '7d', // Expires in 7 days
+   *   },
    * });
    * console.log(`Generated gift code: ${code}`);
    *
    * @example
    * // Edit an existing gift
-   * const code = await generate({
-   *   edit: { code: 'existing-code' },
+   * const code = await gift.generate({
    *   type: 'voucher',
    *   value: 'FREE_SHIPPING',
-   *   expiration: '1h', // Expires in 1 hour
+   *   edit: { 
+   *     code: 'existing-code'
+   *     expiration: '1h', // Expires in 1 hour
+   *   },
    * });
    * console.log(`Edited gift code: ${code}`);
    */
@@ -111,7 +115,7 @@ export class GiftManager {
    *   - `success`: Whether the redemption was successful.
    *
    * @example
-   * const result = await redeem('gift-123');
+   * const result = await gift.redeem('gift-123');
    * if (result.success) {
    *   console.log('Gift redeemed successfully!');
    * } else {
@@ -132,7 +136,7 @@ export class GiftManager {
    *   - `value`: The value of the gift (if valid).
    *
    * @example
-   * const result = await view('gift-123');
+   * const result = await gift.view('gift-123');
    * if (result.valid) {
    *   console.log(`Gift type: ${result.type}, value: ${result.value}`);
    * } else {

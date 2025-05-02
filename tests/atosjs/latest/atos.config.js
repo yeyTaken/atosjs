@@ -1,4 +1,4 @@
-const { GiftManager, TimeFormat } = require('../../../packages/atosjs/dist/index.cjs');
+const { GiftManager, TimeFormat } = require('atosjs');
 
 module.exports = { 
   // GiftManager instance:

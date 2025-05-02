@@ -108,7 +108,7 @@ export default function Card({
 
         <div className="flex items-center gap-2">
           <IoMdInformationCircleOutline size="1.25rem" />
-          <h2 className="text-lg">sobre:</h2>
+          <h2 className="text-lg">Sobre:</h2>
         </div>
 
         

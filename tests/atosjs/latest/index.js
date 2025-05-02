@@ -53,9 +53,9 @@ const { t, gift } = require("./atos.config");
   const PROMOTION = await gift.generate({
     type: "CUPOM",
     value: 30,
-    maxRedeem: 13,
     edit: {
-      code: "NATAL2026"
+      code: "NATAL2026",
+      maxRedeem: 13,
     }
   });
 

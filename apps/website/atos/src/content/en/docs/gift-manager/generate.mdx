@@ -1,0 +1,179 @@
+---
+title: "AtosJS - generate"
+---
+
+import { Callout, Tabs, Steps, FileTree } from "nextra/components";
+import { FaPlugCircleCheck } from "react-icons/fa6";
+
+<Tabs items={['Parameters', 'Example']}>
+
+<Tabs.Tab> <Steps>
+
+### `type`
+
+<Callout type=".">
+Defines the type of gift that will be generated, such as `coin`, `discount`, `premium`, etc.
+</Callout>
+
+```javascript filename="index.js" showLineNumbers copy 
+const { GiftManager } = require("atosjs");
+const gift = new GiftManager();
+
+(async () => {
+    const coin = await gift.generate({
+        type: 'coin', // The 'type' is usually used to define the gift's name.
+    });
+
+    console.log({
+        code: coin,
+    });
+
+})();
+```
+
+### `value`
+
+<Callout type=".">
+Determines the value associated with the gift. It can be a number, string, or even a custom object.
+</Callout>
+
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager } = require("atosjs");
+const gift = new GiftManager();
+
+(async () => {
+    const coin = await gift.generate({
+        value: 1500, // The 'value' is used to define the value of the gift.
+    });
+
+    console.log({
+        code: coin,
+    });
+
+})();
+```
+
+### `edit`
+
+<Callout type=".">
+Allows customization of the gift code instead of automatically generating a random code.
+</Callout>
+
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager } = require("atosjs");
+const gift = new GiftManager();
+
+(async () => {
+    const promotion = await gift.generate({
+        edit: {
+            code: "NATAL2025" // The 'edit' is used to set a specific code instead of generating a random code.
+            maxRedeem: 12, // 'maxRedeem' is used to set the number of times the gift can be used.
+            expiration: '30d', // 'expiration' is used to set the gift's validity period.
+        },
+    });
+
+    console.log({
+        code: promotion,
+    });
+
+})();
+```
+
+<Callout type="info">
+**What is `codeId();{:js}`?**
+
+`codeId` is the internal random code generator used by the `generate` method.
+For example, calling `codeId();{:js}` might give you a result like `6HFDB6RPYSCLR`. Here is a full example:
+
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager, codeId } = require("atosjs");
+const gift = new GiftManager();
+
+(async () => {
+    const editedCode = await gift.generate({
+        edit: {
+            code: "test-" + codeId()
+        },
+    });
+
+    console.log({
+        giftId: editedCode,
+    });
+
+})();
+```
+
+Expected result, after running the file:
+
+```bash filename="Terminal"
+✔ Connected to 🚀 AtosDB (json.sqlite)                                                                                                             2:24:20 AM
+{ giftId: 'test-RJASYXQTVBKK3' }
+```
+
+</Callout>
+
+</Steps>
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+<Callout type=".">
+General example of `await gift.generate();{:js}`
+</Callout>
+
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager } = require("atosjs");
+const gift = new GiftManager();
+
+(async () => {
+  const coin = await gift.generate({
+    type: "coin", // type of gift, in this case, coin.
+    value: 30000, // value of the gift, in this case, 100 coins.
+    edit: { expiration: '7d' } // 7-day duration.
+  });
+
+  console.log({
+    code: coin, // generated gift code.
+    log: await gift.view(coin) // view of the generated gift.
+  });
+})();
+```
+
+<Callout type=".">
+<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 'bold' }}>
+  <FaPlugCircleCheck size="1rem" />
+  <span>Expected result:</span>
+</div>
+
+```bash filename="Terminal"
+✔ Connected to 🚀 AtosDB (json.sqlite)                                                                                                             1:58:48 AM
+{
+  code: 'coin-6HFDB6RPYSCLR',
+  log: {
+    valid: true,
+    type: 'coin',
+    value: 30000,
+    edited: {
+      maxRedeem: 1,
+      redeemedCount: 0,
+      expiresAt: '2025-05-04T13:58:48.532Z'
+    }
+  }
+}
+```
+
+</Callout>
+
+</Tabs.Tab> </Tabs>
+
+<Callout type=".">
+> General summary of `await gift.generate();{:js}`
+</Callout>
+
+| Option            | Type                                                      | Default     | Description                                                                                                                                                                  |
+| ----------------- | --------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`            | `string`                                                  | `undefined` | Defines the type of the gift. **Example**: `discount`, `premium`, `coins`.                                                                                                   |
+| `value`           | `unknown`                                                 | `undefined` | Defines the value of the gift. **Example**: `100`, `'VIP Access'`, `{ wallet: { coins: 5000 } }`.                                                                            |
+| `edit`            | `{ code: string, expiration: string, maxRedeem: number }` | `undefined` | Allows customizing the code, setting expiration (`expiration`), and maximum redemptions (`maxRedeem`). **Example**: `{ code: 'NATAL2025', expiration: '7d', maxRedeem: 5 }`. |
+| `edit.expiration` | `string`                                                  | `undefined` | Defines the expiration date of the gift. **Example**: `'60s'`, `'7d'`, `'1y'`.                                                                                               |
+| `edit.maxRedeem`  | `number`                                                  | `undefined` | Limits the number of times the gift can be redeemed. Default is `1`. **Example**: `5`.                                                                                       |

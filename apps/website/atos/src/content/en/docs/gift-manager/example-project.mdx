@@ -1,0 +1,91 @@
+---
+title: "AtosJS - GiftManager"
+---
+
+import { Callout, Tabs, Steps, FileTree } from "nextra/components";
+
+<Steps>
+
+<Callout type="info">
+To install AtosJS, choose your preferred package manager:
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    npm install atosjs@latest
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    pnpm add atosjs@latest
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    yarn add atosjs@latest
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    bun add atosjs@latest
+    ```
+  </Tabs.Tab>
+</Tabs>
+</Callout>
+
+---
+
+### Main File (`index.js`)
+
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager } = require("atosjs");
+
+(async () => {
+  const gift = new GiftManager({
+    logging: true, // enables log messages (default is 'true')
+    atosdb: { filePath: "gifts.sqlite" }, // using AtosDB with a custom file
+  });
+
+  const coin = await gift.generate({
+    type: "coin",
+    value: 100,
+  });
+  
+  console.log({
+    GiftId: coin,
+    log: await gift.view(coin),
+  });
+})();
+```
+
+---
+
+### Expected Output
+
+After running the file:
+
+```bash filename="Terminal"
+✔ Connected to 🚀 AtosDB (gifts.sqlite)                                                                                                            2:19:32 AM
+{
+  GiftId: 'YAE81969XD4DG',
+  log: {
+    valid: true,
+    type: 'coin',
+    value: 100,
+    edited: { maxRedeem: 1, redeemedCount: 0, expiresAt: 'lifetime' }
+  }
+}
+```
+
+---
+
+### Project Structure
+
+<FileTree>
+  <FileTree.Folder name="example-project" defaultOpen>
+    <FileTree.File name="index.js" />
+    <FileTree.File name="gifts.sqlite" />
+    <FileTree.File name="package.json" />
+  </FileTree.Folder>
+</FileTree>
+
+</Steps>

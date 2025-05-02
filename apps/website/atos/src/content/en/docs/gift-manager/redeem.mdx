@@ -1,0 +1,118 @@
+---
+title: "AtosJS - redeem"
+---
+
+import { Callout, Tabs, Steps, FileTree } from "nextra/components";
+import { FaPlugCircleCheck, FaGifts, FaFileCircleCheck } from "react-icons/fa6";
+
+<Callout type=".">
+<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 'bold' }}>
+  <FaGifts size="1rem" />
+  <span>Redeeming gifts:</span>
+</div>
+
+The `redeem();{:js}` function is used to redeem gifts:
+
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager } = require("atosjs");
+const gift = new GiftManager();
+
+(async () => {
+  // Example of redeeming a gift
+  let user = {
+    id: 123,
+    name: "John Doe",
+    wallet: {
+      coins: 1000,
+    },
+  };
+  console.log(`\nInitial user:`, user);
+
+  // Generate a coin gift
+  const coin = await gift.generate({
+    type: "coin",
+    value: 1500,
+    edit: { expiration: "7d" },
+  });
+
+  const viewGift = await gift.view(coin);
+  const redeemGift = await gift.redeem(coin);
+
+  // Redeem the gift
+  if (redeemGift.success) {
+    console.log(`\nThe gift ${coin} was successfully redeemed!`);
+    console.log(
+      `User ${user.name} now has ${user.wallet.coins + viewGift.value} coins.`
+    );
+
+    user = {
+      ...user,
+      wallet: {
+        ...user.wallet,
+        coins: user.wallet.coins + viewGift.value,
+      },
+    };
+  } else {
+    console.log(`The gift ${coin} is an invalid code.`);
+  }
+
+  // Display the updated user
+  console.log("\nUpdated user:", user);
+})();
+```
+
+---
+
+<div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
+    fontSize: "1rem",
+    fontWeight: "bold",
+  }}
+>
+  <FaFileCircleCheck size="1rem" />
+  <span>Expected result:</span>
+</div>
+
+```bash filename="Terminal"
+✔ Connected to 🚀 AtosDB (json.sqlite)                                                                                                               12:13:54 AM
+
+Initial user: { id: 123, name: 'John Doe', wallet: { coins: 1000 } }
+
+The gift BUGQ8GTXV6PPP was successfully redeemed!
+User John Doe now has 2500 coins.
+
+Updated user: { id: 123, name: 'John Doe', wallet: { coins: 2500 } }
+```
+
+</Callout>
+
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager } = require("atosjs");
+const gift = new GiftManager();
+
+(async () => {
+  const coin = await gift.generate({
+    type: "coin",
+    value: 1500,
+    edit: { expiration: "7d" },
+  });
+
+  const result = await gift.redeem(coin);
+  if (result.success) {
+    console.log("Gift successfully redeemed!!");
+  } else {
+    console.log("Gift is invalid, expired, or has already been used.");
+  }
+})();
+```
+
+<Callout type=".">
+> General summary of `await gift.redeem();{:js}`
+</Callout>
+
+| Option    | Type      | Default | Description                                                               |
+| --------- | --------- | ------- | ------------------------------------------------------------------------- |
+| `success` | `boolean` | `true`  | Returns `false` if the gift was successfully redeemed; otherwise, `true`. |

@@ -1,6 +1,7 @@
 {
   "name": "@atosjs/root",
-  "version": "1.0.0",
+  "version": "0.0.0",
+  "description": "AtosJS monorepo root package.json",
   "private": true,
   "scripts": {
     "start": "turbo start",

@@ -1,0 +1,10 @@
+node_modules/
+package-lock.*
+bun.*
+dist/
+
+.npmrc
+.env
+test.json
+test.yaml
+atos.*

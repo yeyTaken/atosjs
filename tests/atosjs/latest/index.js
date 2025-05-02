@@ -1,0 +1,85 @@
+const { t, gift } = require("./atos.config");
+
+// TimeFormat
+(async () => {
+  console.log(t.ms("1s")); // 1000
+  console.log(t.ms(1000)); // 1s
+
+  t.time(1000, 3, (count) => {
+    console.log(`repeat ${count}.`);
+  });
+
+  t.time(t.ms("3.5s"), () => console.log("timeout."));
+
+  await t.sleep(t.ms("10s"));
+  console.log("10 seconds passed.");
+
+  const task1 = async () => {
+    console.log("Task 1 started");
+    await t.sleep(t.ms("1m"));
+    console.log("Task 1 finished");
+  };
+
+  const task2 = async () => {
+    console.log("Task 2 started");
+    await t.sleep(t.ms("5s"));
+    console.log("Task 2 finished");
+  };
+
+  // Execução na ordem:
+  // 1. Task1 (1 minuto)
+  // 2. Task2 (5 segundo)
+  // 3. "All tasks completed"
+  t.queue([task1, task2])
+    .then(() => console.log("All tasks completed."))
+    .catch((error) => console.error("Error in tasks:", error));
+})();
+
+// GiftManager
+(async () => {
+
+  // gift example one
+  const giftCoin = await gift.generate({
+    type: "coin",
+    value: 100
+  });
+
+  console.log({
+    GiftId: giftCoin,
+    log: await gift.view(giftCoin)
+  });
+
+  // gift example two
+  const PROMOTION = await gift.generate({
+    type: "CUPOM",
+    value: 30,
+    edit: {
+      code: "NATAL2026",
+      maxRedeem: 13,
+    }
+  });
+
+  console.log({
+    GiftId: PROMOTION,
+    log: await gift.view(PROMOTION)
+  });
+
+})();
+
+// const { GiftManager } = require("atosjs");
+// const gift = new GiftManager();
+
+// (async () => {
+//   const coin = await gift.generate({
+//     type: "coin",
+//     value: 1500,
+//     edit: { expiration: "7d" },
+//   });
+
+//   const result = await redeem(coin);
+//   if (result.success) {
+//     console.log("Gift redeemed successfully!");
+//   } else {
+//     console.log("Gift is invalid, expired, or already fully redeemed.");
+//   }
+// })();

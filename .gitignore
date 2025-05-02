@@ -1,11 +1,16 @@
 node_modules/
+
 package-lock.*
 yarn.*
-lib/
+bun.*
+
 dist/
 .env
 test.*
 tsconfig.tsbuildinfo
 dbLocal.*
+quickdb.*
+atosdb.*
 
-.turbo
+.turbo/
+.next/

@@ -1,0 +1,196 @@
+---
+
+title: "AtosJS - Database"
+
+---
+
+import { Callout, Tabs } from "nextra/components";
+import {
+  FaDatabase,
+  FaPlayCircle,
+  FaListUl,
+  FaFileCircleCheck,
+} from "react-icons/fa6";
+
+
+<Callout type="info">
+Instalação da `@atosjs/database{:bash}`
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    npm install @atosjs/database
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    pnpm add @atosjs/database
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    yarn add @atosjs/database
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    bun add @atosjs/database
+    ```
+  </Tabs.Tab>
+</Tabs>
+</Callout>
+
+
+<Callout type=".">
+  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 'bold' }}>
+    <FaDatabase size="1rem" />
+    <span>Utilitário de banco de dados simples, leve e baseado em JSON:</span>
+  </div>
+
+O `@atosjs/database{:bash}` é um sistema de armazenamento local baseado em arquivos `.json`, ideal para projetos pequenos e médios, bots ou CLIs.
+
+```javascript filename="index.js" showLineNumbers copy
+const { Database } = require("@atosjs/database");
+const db = new Database("db.json");
+
+(async () => {
+  await db.set("user.123", { name: "Alice", coins: 50 });
+  console.log(await db.get("user.123")); // { name: 'Alice', coins: 50 }
+
+  await db.update("user.123.coins", (value) => value + 10);
+  console.log(await db.get("user.123.coins")); // 60
+
+  await db.delete("user.123.name");
+  console.log(await db.get("user.123")); // { coins: 60 }
+
+  await db.push("user.123.inventory", "sword");
+  console.log(await db.get("user.123.inventory")); // ["sword"]
+})();
+```
+
+---
+
+<div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
+    fontSize: "1rem",
+    fontWeight: "bold",
+  }}
+>
+  <FaFileCircleCheck size="1rem" />
+  <span>Resultado esperado:</span>
+</div>
+
+```bash filename="Terminal"
+{ name: 'Alice', coins: 50 }
+60
+{ coins: 60 }
+["sword"]
+```
+
+</Callout>
+
+---
+
+## `set(path, value)`
+
+```javascript filename="set-example.js" showLineNumbers copy
+await db.set("config.prefix", "!");
+await db.set("user.1", { name: "João", vip: true });
+```
+
+<Callout type=".">
+Cria ou substitui um valor em um caminho específico.
+
+- Suporta estruturas aninhadas (`objeto.objeto.chave`)
+</Callout>
+
+---
+
+## `get(path)`
+
+```javascript filename="get-example.js" showLineNumbers copy
+const prefix = await db.get("config.prefix");
+console.log(prefix); // "!"
+```
+
+<Callout type=".">
+Recupera o valor armazenado no caminho fornecido.
+
+- Retorna `undefined` se não existir.
+</Callout>
+
+---
+
+## `update(path, callback)`
+
+```javascript filename="update-example.js" showLineNumbers copy
+await db.set("coins", 100);
+await db.update("coins", (val) => val + 50);
+```
+
+<Callout type=".">
+Altera um valor aplicando uma função de transformação.
+
+- Ideal para somas, subtrações ou modificações dinâmicas.
+</Callout>
+
+---
+
+## `delete(path)`
+
+```javascript filename="delete-example.js" showLineNumbers copy
+await db.delete("user.1.vip");
+```
+
+<Callout type=".">
+Remove a chave especificada do banco de dados.
+
+- Pode deletar valores aninhados.
+</Callout>
+
+---
+
+## `push(path, value)`
+
+```javascript filename="push-example.js" showLineNumbers copy
+await db.push("logins", "2025-04-29");
+```
+
+<Callout type=".">
+Adiciona um valor ao final de um array.
+
+- Cria o array se ele não existir.
+</Callout>
+
+---
+
+## `has(path)`
+
+```javascript filename="has-example.js" showLineNumbers copy
+if (await db.has("user.1")) {
+  console.log("Usuário existe.");
+}
+```
+
+<Callout type=".">
+Retorna `true` se o caminho existir, `false` caso contrário.
+</Callout>
+
+---
+
+## 🧩 Tabela de métodos
+
+<Callout type=".">
+> Resumo geral do `new Database(path);{:javascript}`
+</Callout>
+
+| Método              | Tipo         | Exemplo                              | Descrição                                                    |
+| ------------------- | ------------ | ------------------------------------ | ------------------------------------------------------------ |
+| `set(path, val)`    | `Promise`    | `db.set("x.y", 1)`                   | Cria ou sobrescreve um valor.                                |
+| `get(path)`         | `Promise`    | `db.get("x.y")`                      | Retorna o valor no caminho especificado.                     |
+| `update(path, cb)`  | `Promise`    | `db.update("x", (v) => v + 1)`       | Atualiza valor existente com base em uma função.             |
+| `delete(path)`      | `Promise`    | `db.delete("x.y")`                   | Remove uma chave ou valor específico.                        |
+| `push(path, val)`   | `Promise`    | `db.push("arr", "item")`            | Adiciona um item a um array.                                 |
+| `has(path)`         | `Promise`    | `db.has("x.y")`                      | Verifica se um caminho existe.                               |

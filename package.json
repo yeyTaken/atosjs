@@ -1,5 +1,7 @@
 {
   "name": "@atosjs/root",
+  "version": "1.0.0",
+  "description": "AtosJS monorepo root package.json",
   "private": true,
   "scripts": {
     "start": "turbo start",
@@ -9,16 +11,17 @@
   "devDependencies": {
     "better-commits": "^1.15.7",
     "prettier": "^3.4.2",
-    "turbo": "^2.2.3",
     "typescript": "5.5.4",
+    "turbo": "^2.4.4",
     "vitest": "^2.1.4"
   },
-  "packageManager": "npm@10.8.2",
   "engines": {
-    "node": ">=20"
+    "bun": ">=1"
   },
+  "packageManager": "bun@1.2.4",
   "workspaces": [
     "packages/*",
     "tests/*"
-  ]
+  ],
+  "dependencies": {}
 }

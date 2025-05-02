@@ -1,0 +1,52 @@
+{
+  "name": "@atosjs/database",
+  "version": "1.0.0",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "start": "bun run build && bun run dev",
+    "dev": "tsx src/index.ts",
+    "build": "unbuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yeyTaken/atosjs.git",
+    "directory": "packages/database"
+  },
+  "bugs": {
+    "url": "https://github.com/yeyTaken/atosjs/issues"
+  },
+  "homepage": "https://atos.js.org/",
+  "keywords": [
+    "database",
+    "db",
+    "SQLite",
+    "local"
+  ],
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "@atosjs/config": "workspace:*",
+    "tsx": "^4.19.2",
+    "unbuild": "^3.3.1"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  }
+}

@@ -1,0 +1,66 @@
+---
+
+title: "AtosJS - Azura"
+
+---
+
+import { Callout, Tabs, Cards } from "nextra/components";
+import { FaPager } from "react-icons/fa";
+import { SiGoogledocs, SiNpm  } from "react-icons/si";
+import {
+  FaCircleNotch,
+} from "react-icons/fa6";
+
+
+<Callout type="info">
+Instalação da `@atosjs/azura{:bash}`
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    npm install @atosjs/azura
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    pnpm add @atosjs/azura
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    yarn add @atosjs/azura
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    bun add @atosjs/azura
+    ```
+  </Tabs.Tab>
+</Tabs>
+</Callout>
+
+---
+
+<Cards>
+  <Cards.Card
+    icon={<FaPager />}
+    title="Website"
+    href="https://azurajs.vercel.app/"
+  />
+  <Cards.Card
+    icon={<SiGoogledocs />}
+    title="Documentação"
+    href="https://azurajs.vercel.app/docs"
+  />
+  <Cards.Card
+    icon={<SiNpm  />}
+    title="NPM"
+    href="https://www.npmjs.com/package/@atosjs/azura"
+  />
+</Cards>
+
+<Callout type=".">
+  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 'bold' }}>
+    <FaCircleNotch  size="1rem" />
+    <span>Pacote de recursos em desenvolvimento...</span>
+  </div>
+</Callout>

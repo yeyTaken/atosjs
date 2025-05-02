@@ -1,8 +1,10 @@
 node_modules/
-package-lock.json
+package-lock.*
+bun.*
 dist/
+
 .npmrc
 .env
-test.json
-test.yaml
 atos.*
+atosdb.sqlite
+atosdb.*

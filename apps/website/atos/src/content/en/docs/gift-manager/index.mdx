@@ -1,0 +1,103 @@
+---
+title: "AtosJS - GiftManager"
+---
+
+import { Callout, Tabs } from "nextra/components";
+
+<Callout type="info">
+Installation of `atosjs@latest{:bash}`
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    npm install atosjs@latest
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    pnpm add atosjs@latest
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    yarn add atosjs@latest
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    bun add atosjs@latest
+    ```
+  </Tabs.Tab>
+</Tabs>
+</Callout>
+
+---
+
+## Setting up the `new GiftManager();{:js}` class
+
+### What is `logging`?
+
+<Callout type=".">
+The `logging` option controls the display of log messages predefined by the `GiftManager` class.  
+> By default, `logging` is enabled (`true`).
+</Callout>
+
+```javascript filename="index.js" showLineNumbers copy 
+const { GiftManager } = require("atosjs");
+
+const gift = new GiftManager({
+  logging: false, // disables logs (default is true)
+});
+```
+
+---
+
+## Database connection
+
+<Callout type=".">
+If no database option is configured, the `GiftManager` will use **AtosDB** by default, with the `json.sqlite` file.
+</Callout>
+
+<Tabs items={['MongoDB', 'QuickDB', 'AtosDB']} defaultIndex="2">
+<Tabs.Tab>
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager } = require("atosjs");
+
+const gift = new GiftManager({
+mongodb: {
+connect: "mongodb://localhost:27017", // Connection URL
+dbName: "gifts", // Database name
+}
+});
+```
+</Tabs.Tab>
+
+<Tabs.Tab>
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager } = require("atosjs");
+
+const gift = new GiftManager({
+quickdb: { filePath: "source/to/path/test.sqlite" }, // SQLite file path
+});
+```
+</Tabs.Tab>
+
+<Tabs.Tab>
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager } = require("atosjs");
+
+const gift = new GiftManager({
+atosdb: { filePath: "source/to/path/test.sqlite" }, // SQLite file path
+});
+```
+</Tabs.Tab> </Tabs>
+
+---
+
+## Configuration Options
+
+| Option    | Type      | Default       | Description                               |
+| --------- | --------- | ------------- | ----------------------------------------- |
+| `logging` | `boolean` | `true`        | Enables or disables log messages.         |
+| `mongodb` | `object`  | `undefined`   | Configures the MongoDB connection.        |
+| `quickdb` | `object`  | `json.sqlite` | Configures the QuickDB (SQLite) database. |
+| `atosdb`  | `object`  | `json.sqlite` | Configures the AtosDB (SQLite) database.  |

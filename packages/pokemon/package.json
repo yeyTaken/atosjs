@@ -1,0 +1,37 @@
+{
+  "name": "@atosjs/pokemon",
+  "version": "1.0.0",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "start": "bun run build && bun run dev",
+    "dev": "tsx src/index.ts",
+    "build": "unbuild"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "@types/node-fetch": "^2.6.12",
+    "@atosjs/config": "workspace:*",
+    "tsx": "^4.19.2",
+    "unbuild": "^3.3.1"
+  },
+  "dependencies": {
+    "node-fetch": "2.7.0"
+  }
+}

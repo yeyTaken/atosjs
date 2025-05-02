@@ -1,0 +1,181 @@
+---
+title: "AtosJS - generate "
+---
+
+import { Callout, Tabs, Steps, FileTree } from "nextra/components";
+import { FaPlugCircleCheck } from "react-icons/fa6";
+
+<Tabs items={['Parâmetros', 'Exemplo']}>
+
+<Tabs.Tab>
+<Steps>
+
+### `type`
+
+<Callout type=".">
+Define o tipo do presente que será gerado, como por exemplo `coin`, `desconto`, `premium`, etc.
+</Callout>
+
+```javascript filename="index.js" showLineNumbers copy 
+const { GiftManager } = require("atosjs");
+const gift = new GiftManager();
+
+(async () => {
+    const coin = await gift.generate({
+        type: 'coin', // O 'type' geralmente é usado para definir o nome do presente.
+    });
+
+    console.log({
+        code: coin,
+    });
+
+})();
+```
+
+### `value`
+
+<Callout type=".">
+Determina o valor associado ao presente. Pode ser um número, string ou até mesmo um objeto personalizado.
+</Callout>
+
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager } = require("atosjs");
+const gift = new GiftManager();
+
+(async () => {
+    const coin = await gift.generate({
+        value: 1500, // O 'value' é usado para definir o valor do presente.
+    });
+
+    console.log({
+        code: coin,
+    });
+
+})();
+```
+
+### `edit`
+
+<Callout type=".">
+Permite personalizar o código do presente em vez de gerar um código aleatório automaticamente.
+</Callout>
+
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager } = require("atosjs");
+const gift = new GiftManager();
+
+(async () => {
+    const promotion = await gift.generate({
+        edit: {
+            code: "NATAL2025" // O 'edit' é usado para definir um código específico em vez de gerar um código aleatório.
+            maxRedeem: 12, // O 'maxRedeem' é usado para definir a quantidade de uso do presente.
+            expiration: '30d', // O 'expiration' é usado para definir o tempo de válidade do presente.
+        },
+    });
+
+    console.log({
+        code: promotion,
+    });
+
+})();
+```
+
+<Callout type="info">
+**O que é `codeId();{:js}`?**
+
+`codeId` é o gerador interno de códigos aleatórios utilizado pelo método `generate`.  
+Por exemplo, ao chamar `codeId();{:js}` você pode obter um resultado como `6HFDB6RPYSCLR`. Confira abaixo um exemplo completo:
+
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager, codeId } = require("atosjs");
+const gift = new GiftManager();
+
+(async () => {
+    const editedCode = await gift.generate({
+        edit: {
+            code: "test-" + codeId()
+        },
+    });
+
+    console.log({
+        giftId: editedCode,
+    });
+
+})();
+```
+
+Resultado esperado, Após a execução do arquivo:
+
+```bash filename="Terminal"
+✔ Connected to 🚀 AtosDB (json.sqlite)                                                                                                             2:24:20 AM
+{ giftId: 'test-RJASYXQTVBKK3' }
+```
+</Callout>
+
+
+</Steps>
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+<Callout type=".">
+Exemplo geral do `await gift.generate();{:js}`
+</Callout>
+
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager } = require("atosjs");
+const gift = new GiftManager();
+
+(async () => {
+  const coin = await gift.generate({
+    type: "coin", // tipo do presente, no caso, moeda.
+    value: 30000, // valor do presente, no caso, 100 moedas.
+    edit: { expiration: '7d' } // duração de 7 dias.
+  });
+
+  console.log({
+    code: coin, // código do presente gerado.
+    log: await gift.view(coin) // visualização do presente gerado.
+  });
+})();
+```
+
+<Callout type=".">
+<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 'bold' }}>
+  <FaPlugCircleCheck size="1rem" />
+  <span>Resultado esperado:</span>
+</div>
+
+```bash filename="Terminal"
+✔ Connected to 🚀 AtosDB (json.sqlite)                                                                                                             1:58:48 AM
+{
+  code: 'coin-6HFDB6RPYSCLR',
+  log: {
+    valid: true,
+    type: 'coin',
+    value: 30000,
+    edited: {
+      maxRedeem: 1,
+      redeemedCount: 0,
+      expiresAt: '2025-05-04T13:58:48.532Z'
+    }
+  }
+}
+```
+</Callout>
+
+</Tabs.Tab>
+</Tabs>
+
+
+<Callout type=".">
+> Resumo geral do `await gift.generate();{:js}`
+</Callout>
+
+| Opção       | Tipo       | Padrão        | Descrição                                |
+| ----------- | ---------- | ------------- | ---------------------------------------- |
+| `type`   | `string`   | `undefined`         | Define o tipo do presente. **Exemplo**: `desconto`, `premium`, `moedas`. |
+| `value`   | `unknown`    | `undefined`    | Define o valor do presente. **Exemplo**: `100`, `'VIP Access'`, `{ wallet: { coins: 5000 } }`. |
+| `edit`    | `{ code: string, expiration: string, maxRedeem: number }`    | `undefined`  | Permite customizar o código, definir validade (`expiration`) e máximo de resgates (`maxRedeem`). **Exemplo**: `{ code: 'NATAL2025', expiration: '7d', maxRedeem: 5 }`. |
+| `edit.expiration`   | `string`    | `undefined`  | Define a data de expiração do presente. **Exemplo**: `'60s'`, `'7d'`, `'1y'`. |
+| `edit.maxRedeem`    | `number`    | `undefined`  | Limita o número de vezes que o presente pode ser resgatado. Padrão é `1`. **Exemplo**: `5`. |

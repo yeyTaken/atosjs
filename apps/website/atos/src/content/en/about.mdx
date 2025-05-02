@@ -1,0 +1,30 @@
+---
+
+title: "AtosJS - About"
+
+---
+
+import { Callout, Steps, Tabs, FileTree } from "nextra/components";
+import { FaFeatherAlt, FaCogs, FaBookOpen } from "react-icons/fa";
+import { LuContact } from "react-icons/lu";
+
+import Devs from "@/components/en/About/devs";
+import Contact from "@/components/en/Contact";
+
+<Callout type=".">
+  <div className="flex items-center gap-2">
+    <FaBookOpen size="1.5rem" />
+    <h2 className="text-2xl font-bold">Meet our team!</h2>
+  </div>
+  <p className="text-gray-600 dark:text-gray-300">
+    AtosJS is a team of developers passionate about technology and innovation.
+    Our mission is to create solutions that make a difference in the world.
+    Meet our team and learn more about our projects!
+  </p>
+</Callout>
+
+<Devs />
+
+---
+
+<Contact />

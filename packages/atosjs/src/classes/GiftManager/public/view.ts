@@ -1,10 +1,10 @@
-import { dbHandler } from '../@types/db';
-import { GiftValue } from '../@types/gifts';
+import { dbHandler } from '../types/db';
+import { GiftValue } from '../types/gifts';
 
 export async function viewGift(
     db: dbHandler,
     giftId: string
-): Promise<{ valid: boolean; type?: string; value?: GiftValue }> {
+): Promise<{ valid: boolean; type?: string; value?: GiftValue; maxRedeem?: number; redeemedCount?: number; expiresAt?: string; edited?: { maxRedeem: number; redeemedCount: number; expiresAt: string } }> {
     const gift = await db.get(`gifts.${giftId}`);
 
     if (!gift) return { valid: false };
@@ -21,5 +21,10 @@ export async function viewGift(
         valid: !isFullyRedeemed,
         type: gift.type,
         value: gift.value,
+        edited: {
+            maxRedeem: gift.maxRedeem,
+            redeemedCount: gift.redeemedCount,
+            expiresAt: gift.expiresAt || 'lifetime',
+        },
     };
 }

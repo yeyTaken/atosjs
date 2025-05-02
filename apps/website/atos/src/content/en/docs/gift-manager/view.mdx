@@ -1,0 +1,129 @@
+---
+title: "AtosJS - view"
+---
+
+import { Callout, Tabs, Steps, FileTree } from "nextra/components";
+import { FaPlugCircleCheck, FaGifts, FaFileCircleCheck } from "react-icons/fa6";
+
+<Callout type=".">
+<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 'bold' }}>
+  <FaGifts size="1rem" />
+  <span>Gift Visualization:</span>
+</div>
+
+Generally, the `view();{:js}` function is used for checks such as:
+
+```javascript filename="index.js" showLineNumbers copy
+  const { GiftManager } = require("atosjs");
+  const gift = new GiftManager();
+  
+  (async () => {
+    const invalidCode = 'UYFSGDYUTFGU';
+    const coin = await gift.generate({
+        type: "coin",
+        value: 30000,
+        edit: { expiration: '7d' }
+    });
+
+    const viewGift = await gift.view(coin);
+    const invalidGift = await gift.view(invalidCode);
+
+    if (viewGift.valid) {
+        console.log(`The gift ${coin} is a valid code.`)
+    } else {
+        console.log(`The gift ${coin} is an invalid code.`)
+    }
+
+    if (invalidGift.valid) {
+        console.log(`The gift ${invalidCode} is a valid code.`)
+    } else {
+        console.log(`The gift ${invalidCode} is an invalid code.`)
+    }
+
+  })();
+```
+
+---
+
+<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 'bold' }}>
+  <FaFileCircleCheck  size="1rem" />
+  <span>Expected Result:</span>
+</div>
+
+```bash filename="Terminal"
+✔ Connected to 🚀 AtosDB (json.sqlite)                                                                                                             3:20:09 PM
+The gift IYZTPY3BJSD89 is a valid code.
+The gift UYFSGDYUTFGU is an invalid code.
+```
+
+</Callout>
+
+```javascript filename="index.js" showLineNumbers copy
+const { GiftManager } = require("atosjs");
+const gift = new GiftManager();
+
+(async () => {
+  const coin = await gift.generate({
+    type: "coin",
+    value: 30000,
+    edit: { expiration: '7d' }
+  });
+
+  console.log({
+    general: await gift.view(coin), // general view of the generated gift.
+    valid: (await gift.view(coin)).valid, // check if the gift is valid.
+    type: (await gift.view(coin)).type, // check the gift type.
+    value: (await gift.view(coin)).value, // check the gift value.
+    redeemedCount: (await gift.view(coin)).edited.redeemedCount, // check how many times the gift has been redeemed.
+    edited: (await gift.view(coin)).edited, // check the edited data of the gift.
+
+  });
+})();
+```
+
+<Callout type=".">
+<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 'bold' }}>
+  <FaPlugCircleCheck size="1rem" />
+  <span>Expected Result:</span>
+</div>
+
+```bash filename="Terminal"
+✔ Connected to 🚀 AtosDB (json.sqlite)                                                                                                             2:44:18 AM
+{
+  general: {
+    valid: true,
+    type: 'coin',
+    value: 30000,
+    edited: {
+      maxRedeem: 1,
+      redeemedCount: 0,
+      expiresAt: '2025-05-04T14:44:18.318Z'
+    }
+  },
+  valid: true,
+  type: 'coin',
+  value: 30000,
+  redeemedCount: 0,
+  edited: {
+    maxRedeem: 1,
+    redeemedCount: 0,
+    expiresAt: '2025-05-04T14:44:18.318Z'
+  }
+}
+```
+
+</Callout>
+
+<Callout type=".">
+> General Summary of `await gift.view();{:js}`
+</Callout>
+
+| Option                 | Type      | Default      | Description                                                                                                  |
+| ---------------------- | --------- | ------------ | ------------------------------------------------------------------------------------------------------------ |
+| `valid`                | `boolean` | `undefined`  | Indicates whether the gift is still valid for redemption. **Example**: `true`.                               |
+| `type`                 | `string`  | `undefined`  | Gift type. **Example**: `'coin'`, `'premium'`.                                                               |
+| `value`                | `unknown` | `undefined`  | Gift value. **Example**: `30000`, `'VIP Access'`.                                                            |
+| `edited`               | `object`  | `undefined`  | Editable information of the gift.                                                                            |
+| `edited.maxRedeem`     | `number`  | `1`          | Maximum number of redemptions allowed. **Example**: `10`.                                                    |
+| `edited.redeemedCount` | `number`  | `0`          | Number of times the gift has been redeemed. **Example**: `0`.                                                |
+| `edited.expiresAt`     | `string`  | `'lifetime'` | Expiration date of the gift or `'lifetime'` if it doesn't expire. **Example**: `'2025-05-04T14:44:18.318Z'`. |

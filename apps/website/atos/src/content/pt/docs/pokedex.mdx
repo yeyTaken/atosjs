@@ -1,0 +1,144 @@
+---
+
+title: "AtosJS - PokeDex"
+---
+
+import { Callout, Tabs } from "nextra/components";
+import {
+  FaBookOpen,
+  FaSearch,
+  FaList,
+  FaBug,
+  FaDatabase,
+} from "react-icons/fa6";
+
+
+<Callout type="info">
+Instalação da `@atosjs/pokemon{:bash}`
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    npm install @atosjs/pokemon
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    pnpm add @atosjs/pokemon
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    yarn add @atosjs/pokemon
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash filename="Terminal" copy
+    bun add @atosjs/pokemon
+    ```
+  </Tabs.Tab>
+</Tabs>
+</Callout>
+
+<Callout type=".">
+  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 'bold' }}>
+    <FaBookOpen size="1rem" />
+    <span>Interface com a PokéAPI para coleta de dados:</span>
+  </div>
+  
+  A classe `PokeDex` do pacote de recursos `@atosjs/pokemon{:bash}` permite buscar dados completos de Pokémon utilizando `id` ou `name`. Ela estrutura a resposta da API para facilitar o consumo das informações, retornando dados como nome, tipos, habilidades, estatísticas, imagem (sprite), altura, peso, cadeia evolutiva e uma descrição.
+</Callout>
+
+---
+
+## Uso básico
+
+```javascript filename="index.js" showLineNumbers copy
+const { PokeDex } = require("@atosjs/pokemon");
+
+const pokedex = new PokeDex();
+
+(async () => {
+  // Buscando o Pokémon pelo nome
+  const pikachu = await pokedex.fetch({ name: "pikachu" });
+  
+  // Todas as informações do Pokémon
+  console.log("Pikachu:", pikachu);
+  
+  // Exibindo a sprite
+  console.log("Sprite:", pikachu.sprite);
+})();
+```
+
+<Callout type=".">
+O exemplo acima demonstra como instanciar a classe `PokeDex` e realizar uma busca pelo Pokémon "pikachu". Também é possível buscar utilizando `id` ou até mesmo arrays de valores.
+</Callout>
+
+---
+
+## Resultado esperado
+
+```bash filename="Terminal"
+Pikachu: {
+  name: 'pikachu',
+  id: 25,
+  type: [ 'electric' ],
+  abilities: [ 'static', 'lightning-rod' ],
+  sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png',
+  height: 4,
+  weight: 60,
+  base_stats: {
+    hp: 35,
+    attack: 55,
+    defense: 40,
+    'special-attack': 50,
+    'special-defense': 50,
+    speed: 90
+  },
+  evolution_chain: { url: 'https://pokeapi.co/api/v2/evolution-chain/10/' },
+  description: 'When several of these POKéMON gather, their electricity could build and cause lightning storms.'
+}
+Sprite: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png
+```
+
+---
+
+## Consultas múltiplas
+
+```javascript filename="multi-fetch.js" showLineNumbers copy
+const { PokeDex } = require("@atosjs/pokemon");
+
+const pokedex = new PokeDex();
+
+(async () => {
+  // Buscando vários Pokémon utilizando id
+  const pokemonList = await pokedex.fetch({ id: [1, 4, 7] });
+  console.log("Pokémon list:", pokemonList);
+  
+  // Ou utilizando nomes
+  const anotherList = await pokedex.fetch({ name: ["bulbasaur", "charmander", "squirtle"] });
+  console.log("Another list:", anotherList);
+})();
+```
+
+<Callout type=".">
+Também é possível passar arrays com múltiplos valores para `id` ou `name` e obter, como resultado, um array com os dados estruturados de cada Pokémon.
+</Callout>
+
+---
+
+## 🧩 Estrutura de retorno (`PokeData`)
+
+A resposta estruturada retornada pela classe `PokeDex` possui o seguinte formato:
+
+| Campo              | Tipo                   | Descrição                                               |
+| ------------------ | ---------------------- | ------------------------------------------------------- |
+| `name`             | `string`               | Nome do Pokémon.                                       |
+| `id`               | `number`               | ID nacional do Pokémon.                                |
+| `type`             | `string[]`             | Tipos do Pokémon.                                      |
+| `abilities`        | `string[]`             | Habilidades do Pokémon.                                |
+| `sprite`           | `string`               | URL da imagem frontal (sprite).                        |
+| `height`           | `number`               | Altura em decímetros.                                  |
+| `weight`           | `number`               | Peso em hectogramas.                                   |
+| `base_stats`       | `Record<string,number>`| Estatísticas básicas (HP, ataque, defesa etc.).         |
+| `evolution_chain`  | `{ url: string }`      | URL da cadeia evolutiva.                               |
+| `description`      | `string`               | Texto descritivo retirado da API (em inglês).          |

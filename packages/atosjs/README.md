@@ -16,17 +16,17 @@
 </div>
 
 ## About
-AtosJS is a powerful and easy-to-use package, built with [Node.js](https://nodejs.org/), and supporting ESLint to ensure proper import usage. It offers useful systems for daily tasks, optimizing your workflow. Visit the [website](https://atos.js.org/).
+AtosJS is a powerful and easy-to-use package, built with [Node.js](https://nodejs.org/), and supporting `.ts`, `.js`, `.mjs`, `.cjs` to ensure proper import usage. It offers useful systems for daily tasks, optimizing your workflow. Visit the [website](https://atos.js.org/).
 
 ## Classes
-- `GiftManager` Is a tools for creating, managing, and redeeming reward codes  integrated with APIs like Discord Bot. It facilitates community engagement.
-- `TimeFormat` Is a class for scheduling and repeating task at specific intervals or times.
-
+- [`GiftManager`](https://atos.js.org/docs/gift-manager/)
+- [`TimeFormat`](https://atos.js.org/docs/time-format/)
+
+
 ## Links
-- AtosJS [website](https://atos.js.org/) Oficial.
-- [GitHub](https://github.com/yeyTaken/atosjs)
-- AtosJS [docs](https://atos.js.org/docs)
-- [npm](https://www.npmjs.com/package/atosjs), latest version: `v2.1`
+- AtosJS [website](https://atos.js.org/) | [Documentation](https://atos.js.org/docs).
+- [GitHub](https://github.com/yeyTaken/atosjs) monorep.
+- [NPM](https://www.npmjs.com/package/atosjs), Latest version: `v3.0.10`.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true"></img>

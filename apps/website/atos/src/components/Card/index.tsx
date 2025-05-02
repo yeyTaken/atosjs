@@ -6,6 +6,7 @@ import { MdFiberNew } from "react-icons/md";
 import { TiPinOutline } from "react-icons/ti";
 import { FiCode, FiUsers, FiTrendingUp, FiGithub } from "react-icons/fi";
 import { TfiCrown } from "react-icons/tfi";
+import { IoMdInformationCircleOutline } from "react-icons/io";
 
 interface ButtonProps {
   href: string;
@@ -105,6 +106,12 @@ export default function Card({
 
         <p className="text-gray-600 dark:text-gray-300">{description}</p>
 
+        <div className="flex items-center gap-2">
+          <IoMdInformationCircleOutline size="1.25rem" />
+          <h2 className="text-lg">sobre:</h2>
+        </div>
+
+        
         <div className="flex flex-wrap gap-2">
           {tags
             .sort((a, b) => a - b)
@@ -121,6 +128,7 @@ export default function Card({
               );
             })}
         </div>
+
 
         {/* Botões */}
         <div className="flex items-center gap-4 mt-6">

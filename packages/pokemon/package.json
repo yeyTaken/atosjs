@@ -27,7 +27,7 @@
   "description": "",
   "devDependencies": {
     "@types/node-fetch": "^2.6.12",
-    "@atosjs/config": "workspace:*",
+    "@atosjs/config": "*",
     "tsx": "^4.19.2",
     "unbuild": "^3.3.1"
   },

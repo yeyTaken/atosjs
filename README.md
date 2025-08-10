@@ -10,19 +10,19 @@
 </div>
 
 
-## 🚀 **Get Started**: Project built with [`Bun`](https://bun.sh/).
+## 🚀 **Get Started**: Project built with [`Yarn`](https://yarn.sh/).
 
 ### 1. **Installation**  
-Ensure you have Bun installed on your system. If you don’t have it yet, install it globally:  
+Ensure you have Yarn installed on your system. If you don’t have it yet, install it globally:  
 
 ```bash
-npm install -g bun
+npm install -g yarn
 ```  
 
 Then, install the project dependencies:  
 
 ```bash
-bun install
+yarn install
 ```  
 ---
 
@@ -49,13 +49,13 @@ To run the complete project, we use the `turbo.json` file. Follow the steps belo
 
 ```bash
 # Run tests
-bun run test
+yarn run test
 
 # Build the project
-bun run build
+yarn run build
 
 # Start the project
-bun start
+yarn start
 ```
 
 ---
@@ -67,18 +67,17 @@ bun start
 The `turbo.json` file is configured to apply only to the following directories:  
 
 - `packages/*`  
-- `tests/*`  
 
 The `apps/*` directory uses **Webpack**, so the option to use `turbopack` has been removed.  
 
 ---
 
-### ⚡ Package Management with `bun`  
+### ⚡ Package Management with `Yarn`  
 
-The project uses **Bun** to efficiently manage local packages. This allows referencing internal dependencies directly, for example:  
+The project uses **Yarn** to efficiently manage local packages. This allows referencing internal dependencies directly, for example:  
 
 ```json
-"@atosjs/config": "workspace:*"
+"@atosjs/config": "*"
 ```
 
 This way, any package with `"name": "@atosjs/config"` will be used locally without needing to be published to NPM.  
@@ -114,8 +113,12 @@ The versioning format follows this structure:
 </p>
 
 <p align="center">
-  Copyright &copy; 2025, Israel R. Jatobá & TakenStudios.
+  Copyright &copy; 2025, 
+  <a href="https://github.com/yeyTaken" target="_blank">Israel R. Jatobá</a> 
+  &amp; 
+  <a href="https://www.arcstudio.online/" target="_blank">ARC Studio, Inc</a>.
 </p>
+
 
 <p align="center">
   <a href="https://github.com/yeyTaken/atosjs/blob/master/LICENSE">

@@ -34,8 +34,12 @@ AtosJS is a powerful and easy-to-use package, built with [Node.js](https://nodej
 
 
 <p align="center">
-  Copyright &copy; 2025, Israel R. Jatobá & TakenStudios.
+  Copyright &copy; 2025, 
+  <a href="https://github.com/yeyTaken" target="_blank">Israel R. Jatobá</a> 
+  &amp; 
+  <a href="https://www.arcstudio.online/" target="_blank">ARC Studio, Inc</a>.
 </p>
+
 
 <p align="center">
   <a href="https://github.com/yeyTaken/atosjs/blob/master/LICENSE">

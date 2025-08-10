@@ -131,8 +131,12 @@ const { AtosDB } = require('@atosjs/database');
 </p>
 
 <p align="center">
-  &copy; 2025, Israel R. Jatobá & TakenStudios.
+  Copyright &copy; 2025, 
+  <a href="https://github.com/yeyTaken" target="_blank">Israel R. Jatobá</a> 
+  &amp; 
+  <a href="https://www.arcstudio.online/" target="_blank">ARC Studio, Inc</a>.
 </p>
+
 
 <p align="center">
   <a href="https://github.com/yeyTaken/atosjs/blob/master/LICENSE">

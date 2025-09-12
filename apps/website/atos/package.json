@@ -1,7 +1,7 @@
 {
   "name": "@atosjs/website",
   "type": "module",
-  "version": "3.0.10",
+  "version": "1.0.1",
   "description": "Website for AtosJS.",
   "author": "Rabi",
   "license": "MIT",

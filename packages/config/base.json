@@ -21,7 +21,8 @@
 
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Node",
-    "moduleDetection": "force"
+    "moduleResolution": "node",
+    "moduleDetection": "force",
+    "ignoreDeprecations": "6.0"
   }
 }

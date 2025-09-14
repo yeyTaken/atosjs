@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./assets/images/atosPNG.png" width="456" alt="AtosJS"></img>
-  
-  <p>
+
+<p>
   <!-- AtosJS badges -->
   <a href="https://atos.js.org/discord">
     <img src="https://img.shields.io/badge/discord-atosjs-8da6ce?style=for-the-badge" />
@@ -9,24 +9,26 @@
 </p>
 </div>
 
-
 ## 🚀 **Get Started**: Project built with [`Yarn`](https://yarn.sh/).
 
-### 1. **Installation**  
+### 1. **Installation**
+
 Ensure you have Yarn installed on your system. If you don’t have it yet, install it globally:  
 
 ```bash
 npm install -g yarn
-```  
+```
 
 Then, install the project dependencies:  
 
 ```bash
 yarn install
-```  
+```
+
 ---
 
-### 2. **Project Structure**  
+### 2. **Project Structure**
+
 The project structure is organized as follows:  
 
 ```
@@ -42,9 +44,11 @@ atosjs/
 ├── tests/            # Test files
 │   └── atosjs/       # Tests for specific packages (e.g., `atosjs-auth`, `atosjs-user-management`)
 ```
+
 ---
 
-### 3. **Run the Global Project**  
+### 3. **Run the Global Project**
+
 To run the complete project, we use the `turbo.json` file. Follow the steps below:  
 
 ```bash
@@ -60,9 +64,9 @@ yarn start
 
 ---
 
-## 🏗️ AtosJS Monorepo Structure  
+## 🏗️ AtosJS Monorepo Structure
 
-### 🚀 `turbo.json` Configuration  
+### 🚀 `turbo.json` Configuration
 
 The `turbo.json` file is configured to apply only to the following directories:  
 
@@ -72,7 +76,7 @@ The `apps/*` directory uses **Webpack**, so the option to use `turbopack` has be
 
 ---
 
-### ⚡ Package Management with `Yarn`  
+### ⚡ Package Management with `Yarn`
 
 The project uses **Yarn** to efficiently manage local packages. This allows referencing internal dependencies directly, for example:  
 
@@ -84,7 +88,7 @@ This way, any package with `"name": "@atosjs/config"` will be used locally witho
 
 ---
 
-### 🏷️ Versioning System  
+### 🏷️ Versioning System
 
 Currently, the project is at version **v1.0.0**.  
 
@@ -93,19 +97,23 @@ The versioning format follows this structure:
 > `X.Y.Z` (Example: **2.16.22**)  
 
 - **X (Major Changes)** → Significant changes, such as restructurings or major overhauls.  
+  
   - Example: If the number is `2`, it means there have been **two major restructurings**.  
 
 - **Y (New Features and Improvements)** → Addition/modification of packages, new systems, or websites.  
+  
   - Example: The number `16` indicates **16 improvements and additions** in the current version.  
   - If a major version (`X`) change occurs, the improvements count (`Y`) resets to `0`.  
 
 - **Z (Bug Fixes)** → Number of bugs fixed within an improvement (`Y`).  
+  
   - Example: The number `22` means that **22 bugs were fixed** in change `16`.  
   - When `Y` increases (e.g., `16` → `17`), the bug counter (`Z`) resets to `0`.
 
 ---
 
 ## 🔗 Links:
+
 - [Website](https://atos.js.org/en) | [Documentation](https://atos.js.org/en/docs) | [Discord](https://atos.js.org/discord)
 
 <p align="center">
@@ -113,12 +121,11 @@ The versioning format follows this structure:
 </p>
 
 <p align="center">
-  Copyright &copy; 2025, 
+  Copyright © 2025, 
   <a href="https://github.com/yeyTaken" target="_blank">Israel R. Jatobá</a> 
-  &amp; 
+  & 
   <a href="https://www.arcstudio.online/" target="_blank">ARC Studio, Inc</a>.
 </p>
-
 
 <p align="center">
   <a href="https://github.com/yeyTaken/atosjs/blob/master/LICENSE">
